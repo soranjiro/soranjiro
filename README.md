@@ -1,10 +1,15 @@
-# Hi👋
+ <h1 align="center">Hello World<img width="30px" src="https://raw.githubusercontent.com/iampavangandhi/iampavangandhi/master/gifs/Hi.gif"></h1>
 
+<!--
 ![Foo_name's GitHub stats](https://github-readme-stats.vercel.app/api?username=soranjiro&show_icons=true&theme=vue-dark)
 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=soranjiro&layout=compact&theme=vue-dark)](https://github.com/anuraghazra/github-readme-stats)
 
-[![trophy](https://github-profile-trophy.vercel.app/?username=soranjiro&theme=discord)](https://github.com/ryo-ma/github-profile-trophy)
+[![trophy](https://github-profile-trophy.vercel.app/?username=soranjiro&theme=discord)](https://github.com/ryo-ma/github-profile-trophy) -->
+
+# Wanna play a game?
+
+[![Rotanika](./images/rotanika.png "Rotanika")](https://soranjiro.github.io/rotanika/)
 
 
 
@@ -13,16 +18,13 @@
   ※Another skill and tools
   Codeigniter, Virtual Box, CakePHP, CircleCI and so on. -->
 
-<br><br>
-
 # NOW TRAINING
 
 <img src="https://skillicons.dev/icons?i=html,css,js,typescript,react,vue,next,php,python,go,ruby,rails,mysql,github,vscode,docker,aws" /> <br /><br />
 
 
-<!-- --------------------------------- :) ---------------------------------- -->
+<img alt="Coding" width="300" src="https://i.pinimg.com/originals/81/17/8b/81178b47a8598f0c81c4799f2cdd4057.gif"> <img width=200px height=200px alt="side_sticker" src="https://media.giphy.com/media/TEnXkcsHrP4YedChhA/giphy.gif" />
 
-<br><br>
 
 <div align="center">
     <h1>
