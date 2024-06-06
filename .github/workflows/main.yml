@@ -16,6 +16,13 @@ jobs:
   github-metrics:
     runs-on: ubuntu-latest
     steps:
+    - name: Check if PERSONAL_ACCESS_TOKEN is set
+      run: |
+        if [[ -z "${{ secrets.PERSONAL_ACCESS_TOKEN }}" ]]; then
+          echo "PERSONAL_ACCESS_TOKEN is not set"
+        else
+          echo "PERSONAL_ACCESS_TOKEN is set"
+        fi
     - name: Default metrics
       uses: lowlighter/metrics@latest
       with:

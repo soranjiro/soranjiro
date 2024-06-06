@@ -1,6 +1,8 @@
 ![](https://komarev.com/ghpvc/?username=soranjiro&color=blue)
-### Hi there 👋
-### こんちくわ〜
+### Hi 👋
+### Wanna play a game?
+
+[![Rotanika](./images/rotanika.png "Rotanika")](https://soranjiro.github.io/rotanika/)
 
 <!--
 **soranjiro/soranjiro** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
