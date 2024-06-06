@@ -1,53 +1,43 @@
-![](https://komarev.com/ghpvc/?username=soranjiro&color=blue)
-### Hi 👋
-### Wanna play a game?
+ <h1 align="center">Hello World<img width="30px" src="https://raw.githubusercontent.com/iampavangandhi/iampavangandhi/master/gifs/Hi.gif"></h1>
+
+
+<!-- <p>
+    <img src="https://github-readme-stats-lovat-rho.vercel.app/api?username=soranjiro&theme=vue-dark&show_icons=true" alt="Foo_name's GitHub stats" />
+    <img src="https://github-readme-stats-lovat-rho.vercel.app/api/top-langs/?username=soranjiro&count_private=true&layout=compact&theme=vue-dark" alt="Top Langs" />
+</p>
+
+<p>
+    <img src="https://github-readme-stats.vercel.app/api?username=soranjiro&theme=vue-dark&count_private=true&show_icons=true&include_all_commits=true" alt="Foo_name's GitHub stats" />
+    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=soranjiro&count_private=true&layout=compact&theme=vue-dark" alt="Top Langs" />
+</p>
+
+[![trophy](https://github-profile-trophy.vercel.app/?username=soranjiro&count_private=true&theme=discord)](https://github.com/ryo-ma/github-profile-trophy) -->
+
+
+# Wanna play a game?
 
 [![Rotanika](./images/rotanika.png "Rotanika")](https://soranjiro.github.io/rotanika/)
 
-<!--
-**soranjiro/soranjiro** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+<!-- # My Skill (Programming Languages, Frameworks and Tools)
 
-Here are some ideas to get you started:
+  ※Another skill and tools
+  Codeigniter, Virtual Box, CakePHP, CircleCI and so on. -->
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+# NOW TRAINING
 
-<p align="left">
-  <picture>
-        <source media="(prefers-color-scheme: dark)"  srcset="output/metrics.base.svg" width="400" />
-	<source media="(prefers-color-scheme: light)" srcset="output/metrics.base.svg" width="400" />
-	<img alt="github profile contributions chart"    src="https://raw.githubusercontent.com/soranjiro/soranjiro/output-3d-contrib/day.svg" />
-  </picture>
-  <picture>
-   	<source media="(prefers-color-scheme: dark)"  srcset="output/details.svg" width="400" />
-	<source media="(prefers-color-scheme: light)" srcset="output/details.svg" width="400" />
-	<img alt="github profile contributions chart"    src="https://raw.githubusercontent.com/soranjiro/soranjiro/output-3d-contrib/day.svg" />
-  </picture>
-</p>
+<img src="https://skillicons.dev/icons?i=html,css,js,typescript,react,vue,next,php,python,go,ruby,rails,mysql,github,vscode,docker,aws" /> <br /><br />
 
-<p align="left" >
-	<picture>
-	  <source media="(prefers-color-scheme: dark)"  srcset="profile-3d-contrib/profile-night-view.svg" width="700" />
-	  <source media="(prefers-color-scheme: light)" srcset="profile-3d-contrib/profile-season-animate.svg" width="700" />
-	  <img alt="github profile contributions chart"    src="https://raw.githubusercontent.com/soranjiro/soranjiro/output-3d-contrib/day.svg" />
-	</picture>
-</p>　
 
-<p align="left">
-<picture>
-  <source media="(prefers-color-scheme: light)"  srcset="output/metrics.plugin.achievements.compact.svg" width="400" />
-  <source media="(prefers-color-scheme: dark)"  srcset="output/metrics.plugin.achievements.compact.svg" width="400" />
- <img alt="github profile contributions chart"    src="https://raw.githubusercontent.com/soranjiro/soranjiro/output-3d-contrib/day.svg" />
-</picture>
+<img alt="Coding" width="300" src="https://i.pinimg.com/originals/81/17/8b/81178b47a8598f0c81c4799f2cdd4057.gif"> <img width=200px height=200px alt="side_sticker" src="https://media.giphy.com/media/TEnXkcsHrP4YedChhA/giphy.gif" />
 
-<picture>
-  <img src="https://skillicons.dev/icons?i=c,cpp,java,python,go,r,fortran,aws,terraform,mysql,graphql,git,github,docker,latex,dynamodb,fastapi,flask,linux,md,vim,emacs,vscode,pycharm,idea,clion,ubuntu,discord" /> <br /><br />
-</picture>
-</p>　
+
+<div align="center">
+    <h1>
+        <img src="https://user-images.githubusercontent.com/44926913/175852850-3fb6c715-1856-41ff-8c1f-94ce3b03b458.gif">・・
+        <img src="https://user-images.githubusercontent.com/44926913/175853109-f8850656-6704-4a8a-bee6-9aca154d929b.gif">・・
+        <img src="https://user-images.githubusercontent.com/44926913/175853154-5449d974-975e-44a6-ab84-a86031265e40.gif">・・・・
+        <img src="https://user-images.githubusercontent.com/44926913/175853109-f8850656-6704-4a8a-bee6-9aca154d929b.gif">・
+        <img src="https://user-images.githubusercontent.com/44926913/175853154-5449d974-975e-44a6-ab84-a86031265e40.gif">・・・・
+    </h1>
+</div>
+<br><br><br>
