@@ -1,35 +1,37 @@
- <h1 align="center">Hello World<img width="30px" src="https://raw.githubusercontent.com/iampavangandhi/iampavangandhi/master/gifs/Hi.gif"></h1>
+![](https://komarev.com/ghpvc/?username=soranjiro&color=blue)
+### Hi 👋
+### Wanna play a game?
 
-
-<!-- <p>
-    <img src="https://github-readme-stats-lovat-rho.vercel.app/api?username=soranjiro&theme=vue-dark&show_icons=true" alt="Foo_name's GitHub stats" />
-    <img src="https://github-readme-stats-lovat-rho.vercel.app/api/top-langs/?username=soranjiro&count_private=true&layout=compact&theme=vue-dark" alt="Top Langs" />
+<a href="https://soranjiro.github.io/rotanika/">
+	<img src="./images/rotanika.png" alt="Rotanika" title="Rotanika">
+</a>
+<p align="left">
+  <picture>
+        <source media="(prefers-color-scheme: dark)"  srcset="output/metrics.base.svg" width="400" />
+	<source media="(prefers-color-scheme: light)" srcset="output/metrics.base.svg" width="400" />
+	<img alt="github profile contributions chart"    src="https://raw.githubusercontent.com/ogiogidayo/ogiogidayo/output-3d-contrib/day.svg" />
+  </picture>
+  <picture>
+   	<source media="(prefers-color-scheme: dark)"  srcset="output/details.svg" width="400" />
+	<source media="(prefers-color-scheme: light)" srcset="output/details.svg" width="400" />
+	<img alt="github profile contributions chart"    src="https://raw.githubusercontent.com/ogiogidayo/ogiogidayo/output-3d-contrib/day.svg" />
+  </picture>
 </p>
 
-<p>
-    <img src="https://github-readme-stats.vercel.app/api?username=soranjiro&theme=vue-dark&count_private=true&show_icons=true&include_all_commits=true" alt="Foo_name's GitHub stats" />
-    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=soranjiro&count_private=true&layout=compact&theme=vue-dark" alt="Top Langs" />
-</p>
+<p align="left" >
+	<picture>
+	  <source media="(prefers-color-scheme: dark)"  srcset="profile-3d-contrib/profile-night-view.svg" width="700" />
+	  <source media="(prefers-color-scheme: light)" srcset="profile-3d-contrib/profile-season-animate.svg" width="700" />
+	  <img alt="github profile contributions chart"    src="https://raw.githubusercontent.com/ogiogidayo/ogiogidayo/output-3d-contrib/day.svg" />
+	</picture>
+</p>　
 
-[![trophy](https://github-profile-trophy.vercel.app/?username=soranjiro&count_private=true&theme=discord)](https://github.com/ryo-ma/github-profile-trophy) -->
-
-
-# Wanna play a game?
-
-[![Rotanika](./images/rotanika.png "Rotanika")](https://soranjiro.github.io/rotanika/)
-
-<!-- # My Skill (Programming Languages, Frameworks and Tools)
-
-  ※Another skill and tools
-  Codeigniter, Virtual Box, CakePHP, CircleCI and so on. -->
-
-# NOW TRAINING
-
-<img src="https://skillicons.dev/icons?i=html,css,js,typescript,react,vue,next,php,python,go,ruby,rails,mysql,github,vscode,docker,aws" /> <br /><br />
-
-
-<img alt="Coding" width="300" src="https://i.pinimg.com/originals/81/17/8b/81178b47a8598f0c81c4799f2cdd4057.gif"> <img width=200px height=200px alt="side_sticker" src="https://media.giphy.com/media/TEnXkcsHrP4YedChhA/giphy.gif" />
-
+<p align="left">
+<picture>
+  <source media="(prefers-color-scheme: light)"  srcset="output/metrics.plugin.achievements.compact.svg" width="400" />
+  <source media="(prefers-color-scheme: dark)"  srcset="output/metrics.plugin.achievements.compact.svg" width="400" />
+ <img alt="github profile contributions chart"    src="https://raw.githubusercontent.com/ogiogidayo/ogiogidayo/output-3d-contrib/day.svg" />
+</picture>
 
 <div align="center">
     <h1>
@@ -40,4 +42,8 @@
         <img src="https://user-images.githubusercontent.com/44926913/175853154-5449d974-975e-44a6-ab84-a86031265e40.gif">・・・・
     </h1>
 </div>
-<br><br><br>
+
+<picture>
+  <img src="https://skillicons.dev/icons?i=html,css,js,typescript,react,vue,next,nodejs,php,python,ruby,rails,c,cpp,java,go,r,mysql,mongodb,git,github,docker,latex,aws,terraform,dynamodb,linux,md,vim,vscode" /> <br /><br />
+</picture>
+</p>　
