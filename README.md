@@ -2,7 +2,7 @@
 # Hi 👋  Wanna play a game?
 
 <a href="https://soranjiro.github.io/rotanika/">
-	<img src="./images/rotanika.png" alt="Rotanika" title="Rotanika">
+	<img src="./images/rotanika.png" alt="Rotanika" title="Rotanika" width="800">
 </a>
 
 <div align="center">
@@ -30,8 +30,8 @@
 
 <p align="left" >
 	<picture>
-	  <source media="(prefers-color-scheme: dark)"  srcset="profile-3d-contrib/profile-night-rainbow.svg" />
-	  <source media="(prefers-color-scheme: light)" srcset="profile-3d-contrib/profile-season-animate.svg" />
+	  <source media="(prefers-color-scheme: dark)"  srcset="profile-3d-contrib/profile-night-rainbow.svg" width="800" />
+	  <source media="(prefers-color-scheme: light)" srcset="profile-3d-contrib/profile-season-animate.svg" width="800" />
 	  <img alt="github profile contributions chart"    src="https://raw.githubusercontent.com/soranjiro/soranjiro/output-3d-contrib/day.svg" />
 	</picture>
 </p>　
@@ -68,11 +68,9 @@
     <img src="https://cultofthepartyparrot.com/parrots/hd/illuminatiparrot.gif" width="30" height="30"/>
     <img src="https://cultofthepartyparrot.com/parrots/hd/hypnoparrotdark.gif" width="30" height="30"/>
     <img src="https://cultofthepartyparrot.com/parrots/hd/mustacheparrot.gif" width="30" height="30"/>
-    <img src="https://cultofthepartyparrot.com/parrots/hd/soccerparrot.gif" width="30" height="30"/>
-    <img src="https://cultofthepartyparrot.com/parrots/hd/thefastestparrot.gif" width="30" height="30"/>
 </div>
 
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="850">
 
 <picture>
   <img src="https://skillicons.dev/icons?i=html,css,js,typescript,react,vue,next,nodejs,php,python,ruby,rails,c,cpp,java,go,r,mysql,mongodb,git,github,docker,latex,aws,terraform,dynamodb,linux,md,vim,vscode" />
