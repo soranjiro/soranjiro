@@ -202,14 +202,14 @@
                         <rect x="0" y="0" width="460" height="8" fill="white" rx="5"/>
                     </mask>
                     <rect mask="url(#languages-bar)" x="0" y="0" width="0" height="8" fill="#d1d5da"/>
-                    <rect mask="url(#languages-bar)" x="0" y="0" width="192.1860473928262" height="8" fill="#DA5B0B"/>
-                    <rect mask="url(#languages-bar)" x="192.1860473928262" y="0" width="79.86777751990489" height="8" fill="#e34c26"/>
-                    <rect mask="url(#languages-bar)" x="272.0538249127311" y="0" width="51.15909230849386" height="8" fill="#555555"/>
-                    <rect mask="url(#languages-bar)" x="323.2129172212249" y="0" width="50.05838136873665" height="8" fill="#563d7c"/>
-                    <rect mask="url(#languages-bar)" x="373.2712985899616" y="0" width="44.24500660733485" height="8" fill="#f1e05a"/>
-                    <rect mask="url(#languages-bar)" x="417.51630519729645" y="0" width="20.37317469414434" height="8" fill="#3572A5"/>
-                    <rect mask="url(#languages-bar)" x="437.8894798914408" y="0" width="12.586276636558692" height="8" fill="#f34b7d"/>
-                    <rect mask="url(#languages-bar)" x="450.47575652799947" y="0" width="9.524243472000531" height="8" fill="#3178c6"/>
+                    <rect mask="url(#languages-bar)" x="0" y="0" width="189.7634133429113" height="8" fill="#DA5B0B"/>
+                    <rect mask="url(#languages-bar)" x="189.7634133429113" y="0" width="78.86099060724594" height="8" fill="#e34c26"/>
+                    <rect mask="url(#languages-bar)" x="268.6244039501572" y="0" width="50.51419763132739" height="8" fill="#555555"/>
+                    <rect mask="url(#languages-bar)" x="319.13860158148464" y="0" width="50.050377786632396" height="8" fill="#563d7c"/>
+                    <rect mask="url(#languages-bar)" x="369.188979368117" y="0" width="43.68726861854868" height="8" fill="#f1e05a"/>
+                    <rect mask="url(#languages-bar)" x="412.87624798666565" y="0" width="20.116357160361492" height="8" fill="#3572A5"/>
+                    <rect mask="url(#languages-bar)" x="432.9926051470271" y="0" width="14.579776676562638" height="8" fill="#3178c6"/>
+                    <rect mask="url(#languages-bar)" x="447.57238182358975" y="0" width="12.427618176410176" height="8" fill="#f34b7d"/>
                 </svg>
                 <div class="row fill-width">
                     <section>
@@ -222,7 +222,7 @@
                             </div>
                             <small>
                                 <div>441 kB</div>
-                                <div>41.78%</div>
+                                <div>41.25%</div>
                             </small>
                         </div>
                         <div class="field language details">
@@ -234,7 +234,7 @@
                             </div>
                             <small>
                                 <div>117 kB</div>
-                                <div>11.12%</div>
+                                <div>10.98%</div>
                             </small>
                         </div>
                         <div class="field language details">
@@ -246,19 +246,19 @@
                             </div>
                             <small>
                                 <div>101 kB</div>
-                                <div>9.62%</div>
+                                <div>9.5%</div>
                             </small>
                         </div>
                         <div class="field language details">
                             <div class="field">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
-                                    <path fill="#f34b7d" fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"/>
+                                    <path fill="#3178c6" fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"/>
                                 </svg>
-                                C++
+                                TypeScript
                             </div>
                             <small>
-                                <div>28.8 kB</div>
-                                <div>2.74%</div>
+                                <div>33.8 kB</div>
+                                <div>3.17%</div>
                             </small>
                         </div>
                     </section>
@@ -272,7 +272,7 @@
                             </div>
                             <small>
                                 <div>183 kB</div>
-                                <div>17.36%</div>
+                                <div>17.14%</div>
                             </small>
                         </div>
                         <div class="field language details">
@@ -283,7 +283,7 @@
                                 CSS
                             </div>
                             <small>
-                                <div>114 kB</div>
+                                <div>116 kB</div>
                                 <div>10.88%</div>
                             </small>
                         </div>
@@ -296,19 +296,19 @@
                             </div>
                             <small>
                                 <div>46.7 kB</div>
-                                <div>4.43%</div>
+                                <div>4.37%</div>
                             </small>
                         </div>
                         <div class="field language details">
                             <div class="field">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
-                                    <path fill="#3178c6" fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"/>
+                                    <path fill="#f34b7d" fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"/>
                                 </svg>
-                                TypeScript
+                                C++
                             </div>
                             <small>
-                                <div>21.8 kB</div>
-                                <div>2.07%</div>
+                                <div>28.8 kB</div>
+                                <div>2.7%</div>
                             </small>
                         </div>
                     </section>
