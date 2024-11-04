@@ -1,26 +1,9 @@
 ![](https://komarev.com/ghpvc/?username=soranjiro&color=blue)
 # Hi 👋  Wanna play a game?
 
-<script>
-  // 言語を判定する変数（例: 'ja', 'en', 'fr'）
-  var language = navigator.language || navigator.userLanguage;
-
-  // 言語に応じたURLと画像パスを設定
-  var url, imgSrc;
-  if (language.startsWith('ja')) {
-    url = "https://rotanika-next.vercel.app/";
-    imgSrc = "./images/rotanika.png";
-  } else if (language.startsWith('en')) {
-    url = "https://rotanika-next-3jd9hm06f-soranjiros-projects.vercel.app/";
-    imgSrc = "./images/rotanika_en.png";
-  } else {
-    url = "https://rotanika-next.vercel.app";
-    imgSrc = "./images/rotanika.png";
-  }
-
-  // HTMLのリンクタグと画像タグを生成
-  document.write('<a href="' + url + '"><img src="' + imgSrc + '" alt="Rotanika" title="Rotanika"></a>');
-</script>
+<a href="https://vercel.com/soranjiros-projects/rotanika-next/AR9CXJFgmeZDSJch2vXQERMTMcfZ">
+	<img src="./images/rotanika-en.png" alt="Rotanika" title="Rotanika">
+</a>
 
 <div align="center">
     <h1>
