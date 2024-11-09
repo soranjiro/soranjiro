@@ -2,7 +2,7 @@
 # Hi 👋  Wanna play a game?
 
 <a href="https://rotanika-next.vercel.app/">
-	<img src="./images/rotanika-en.png" alt="Rotanika" title="Rotanika">
+	<img src="./images/rotanika.png" alt="Rotanika" title="Rotanika">
 </a>
 
 <div align="center">
