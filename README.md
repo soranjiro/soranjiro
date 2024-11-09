@@ -1,7 +1,7 @@
 ![](https://komarev.com/ghpvc/?username=soranjiro&color=blue)
 # Hi 👋  Wanna play a game?
 
-<a href="https://vercel.com/soranjiros-projects/rotanika-next/AR9CXJFgmeZDSJch2vXQERMTMcfZ">
+<a href="https://rotanika-next-pak7yaffv-soranjiros-projects.vercel.app/">
 	<img src="./images/rotanika-en.png" alt="Rotanika" title="Rotanika">
 </a>
 
