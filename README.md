@@ -28,14 +28,6 @@
   </picture>
 </p>
 
-<p align="left" >
-	<picture>
-	  <source media="(prefers-color-scheme: dark)"  srcset="profile-3d-contrib/profile-night-rainbow.svg" width="800" />
-	  <source media="(prefers-color-scheme: light)" srcset="profile-3d-contrib/profile-season-animate.svg" width="800" />
-	  <img alt="github profile contributions chart"    src="https://raw.githubusercontent.com/soranjiro/soranjiro/output-3d-contrib/day.svg" />
-	</picture>
-</p>　
-
 <p align="left">
 <picture>
   <source media="(prefers-color-scheme: light)"  srcset="output/metrics.plugin.achievements.compact.svg" width="400" />
@@ -43,6 +35,13 @@
  <img alt="github profile contributions chart"    src="https://raw.githubusercontent.com/soranjiro/soranjiro/output-3d-contrib/day.svg" />
 </picture>
 
+<p align="left" >
+	<picture>
+	  <source media="(prefers-color-scheme: dark)"  srcset="profile-3d-contrib/profile-night-rainbow.svg" width="800" />
+	  <source media="(prefers-color-scheme: light)" srcset="profile-3d-contrib/profile-season-animate.svg" width="800" />
+	  <img alt="github profile contributions chart"    src="https://raw.githubusercontent.com/soranjiro/soranjiro/output-3d-contrib/day.svg" />
+	</picture>
+</p>　
 <!-- <div>
     <img src="https://cultofthepartyparrot.com/parrots/hd/githubparrot.gif" width="30" height="30"/>
     <img src="https://cultofthepartyparrot.com/flags/hd/indiaparrot.gif" width="30" height="30"/>
