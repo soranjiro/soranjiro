@@ -1,5 +1,5 @@
 ![](https://komarev.com/ghpvc/?username=soranjiro&color=blue)
-# Hi 👋  Wanna play a game?
+<!-- # Hi 👋  Wanna play a game?
 
 <a href="https://rotanika-next.vercel.app/">
 	<img src="./images/rotanika.png" alt="Rotanika" title="Rotanika">
@@ -13,7 +13,7 @@
         <img src="https://user-images.githubusercontent.com/44926913/175853109-f8850656-6704-4a8a-bee6-9aca154d929b.gif">・
         <img src="https://user-images.githubusercontent.com/44926913/175853154-5449d974-975e-44a6-ab84-a86031265e40.gif">・・・・
     </h1>
-</div>
+</div> -->
 
 <p align="left">
   <picture>
@@ -43,7 +43,7 @@
  <img alt="github profile contributions chart"    src="https://raw.githubusercontent.com/soranjiro/soranjiro/output-3d-contrib/day.svg" />
 </picture>
 
-<div>
+<!-- <div>
     <img src="https://cultofthepartyparrot.com/parrots/hd/githubparrot.gif" width="30" height="30"/>
     <img src="https://cultofthepartyparrot.com/flags/hd/indiaparrot.gif" width="30" height="30"/>
     <img src="https://cultofthepartyparrot.com/parrots/asyncparrot.gif" width="36" height="30"/>
@@ -75,4 +75,4 @@
 <picture>
   <img src="https://skillicons.dev/icons?i=html,css,js,typescript,react,vue,next,nodejs,php,python,ruby,rails,c,cpp,java,go,r,mysql,mongodb,git,github,docker,latex,aws,terraform,dynamodb,linux,md,vim,vscode" />
 </picture>
-</p>　
+</p>　 -->
