@@ -27,6 +27,16 @@ export function renderStyles() {
       --rose-soft: rgba(251,113,133,0.12);
       --cyan: #22d3ee;
       --cyan-soft: rgba(34,211,238,0.12);
+      --noise-opacity: 0.6;
+      --ring-track: rgba(255,255,255,0.04);
+      --chart-grid: rgba(255,255,255,0.04);
+      --chart-tick: #4a4742;
+      --chart-label: #8a8680;
+      --chart-tooltip-bg: #1a1c22;
+      --chart-tooltip-title: #f0ede6;
+      --chart-tooltip-body: #8a8680;
+      --chart-tooltip-border: rgba(255,255,255,0.08);
+      --chart-point-border: #08090c;
       --radius: 20px;
       --radius-sm: 12px;
       --radius-xs: 8px;
@@ -35,6 +45,42 @@ export function renderStyles() {
       --font-mono: 'Geist Mono', 'SF Mono', monospace;
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8f7f4;
+      --bg-elevated: #ffffff;
+      --card-bg: #ffffff;
+      --card-bg-hover: #f5f4f1;
+      --card-inner: #f0efec;
+      --text-primary: #1a1a1a;
+      --text-secondary: #5a5a5a;
+      --text-dim: #9a9a9a;
+      --border: rgba(0,0,0,0.08);
+      --border-hover: rgba(0,0,0,0.16);
+      --accent: #c98b2f;
+      --accent-soft: rgba(201,139,47,0.10);
+      --accent-glow: rgba(201,139,47,0.06);
+      --green: #22c55e;
+      --green-soft: rgba(34,197,94,0.10);
+      --blue: #3b82f6;
+      --blue-soft: rgba(59,130,246,0.10);
+      --purple: #a855f7;
+      --purple-soft: rgba(168,85,247,0.10);
+      --rose: #f43f5e;
+      --rose-soft: rgba(244,63,94,0.10);
+      --cyan: #06b6d4;
+      --cyan-soft: rgba(6,182,212,0.10);
+      --noise-opacity: 0.15;
+      --ring-track: rgba(0,0,0,0.05);
+      --chart-grid: rgba(0,0,0,0.06);
+      --chart-tick: #9a9a9a;
+      --chart-label: #5a5a5a;
+      --chart-tooltip-bg: #ffffff;
+      --chart-tooltip-title: #1a1a1a;
+      --chart-tooltip-body: #5a5a5a;
+      --chart-tooltip-border: rgba(0,0,0,0.1);
+      --chart-point-border: #ffffff;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -50,6 +96,7 @@ export function renderStyles() {
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
     }
 
     .page-bg {
@@ -58,6 +105,14 @@ export function renderStyles() {
         radial-gradient(ellipse 60% 50% at 20% 0%, rgba(232,168,73,0.04) 0%, transparent 60%),
         radial-gradient(ellipse 40% 50% at 80% 100%, rgba(96,165,250,0.03) 0%, transparent 50%),
         var(--bg);
+      transition: background 0.3s;
+    }
+
+    [data-theme="light"] .page-bg {
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 0%, rgba(201,139,47,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 50% at 80% 100%, rgba(59,130,246,0.04) 0%, transparent 50%),
+        var(--bg);
     }
 
     .page-bg::after {
@@ -65,7 +120,24 @@ export function renderStyles() {
       position: absolute; inset: 0;
       background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.015'/%3E%3C/svg%3E");
       background-size: 200px;
-      opacity: 0.6;
+      opacity: var(--noise-opacity);
+    }
+
+    .theme-toggle {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text-secondary);
+      font-size: 18px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.3s, background 0.3s, transform 0.25s var(--ease-out);
+      flex-shrink: 0;
+    }
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      transform: scale(1.08);
     }
 
     .container {
@@ -88,6 +160,12 @@ export function renderStyles() {
       border-color: var(--border-hover);
       transform: translateY(-2px);
       box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    [data-theme="light"] .card:hover {
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+    [data-theme="light"] .card {
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
 
     .card-label {
@@ -185,5 +263,7 @@ export function renderStyles() {
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--text-dim); border-radius: 3px; }
+
+    [data-theme="light"] ::-webkit-scrollbar-thumb { background: #ccc; }
   </style>`;
 }

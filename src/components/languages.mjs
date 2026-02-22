@@ -48,10 +48,25 @@ export function renderLanguages(data) {
     </div>
     <script>
     (function() {
-      const fontMono = "'Geist Mono','SF Mono',monospace";
-      const fontSans = "'DM Sans',-apple-system,sans-serif";
-      const tc = '#4a4742', gc = 'rgba(255,255,255,0.04)';
-      new Chart(document.getElementById('langTrendChart'), {
+      var fontMono = "'Geist Mono','SF Mono',monospace";
+      var fontSans = "'DM Sans',-apple-system,sans-serif";
+
+      function getChartColors() {
+        var s = getComputedStyle(document.documentElement);
+        return {
+          grid: s.getPropertyValue('--chart-grid').trim() || 'rgba(255,255,255,0.04)',
+          tick: s.getPropertyValue('--chart-tick').trim() || '#4a4742',
+          label: s.getPropertyValue('--chart-label').trim() || '#8a8680',
+          ttBg: s.getPropertyValue('--chart-tooltip-bg').trim() || '#1a1c22',
+          ttTitle: s.getPropertyValue('--chart-tooltip-title').trim() || '#f0ede6',
+          ttBody: s.getPropertyValue('--chart-tooltip-body').trim() || '#8a8680',
+          ttBorder: s.getPropertyValue('--chart-tooltip-border').trim() || 'rgba(255,255,255,0.08)',
+          pointBorder: s.getPropertyValue('--chart-point-border').trim() || '#08090c',
+        };
+      }
+
+      var c = getChartColors();
+      var langChart = new Chart(document.getElementById('langTrendChart'), {
         type: 'line',
         data: {
           labels: ${JSON.stringify(periodLabels)},
@@ -61,7 +76,6 @@ export function renderLanguages(data) {
             borderColor: d.color,
             backgroundColor: 'transparent',
             pointBackgroundColor: d.color,
-            pointBorderColor: '#08090c',
             pointBorderWidth: 2,
             pointRadius: 3,
             pointHoverRadius: 5,
@@ -74,19 +88,37 @@ export function renderLanguages(data) {
           responsive: true, maintainAspectRatio: false,
           interaction: { mode: 'index', intersect: false },
           plugins: {
-            legend: { position: 'bottom', labels: { boxWidth: 6, usePointStyle: true, pointStyle: 'circle', color: '#8a8680', font: { size: 10, family: fontSans }, padding: 14 } },
+            legend: { position: 'bottom', labels: { boxWidth: 6, usePointStyle: true, pointStyle: 'circle', color: c.label, font: { size: 10, family: fontSans }, padding: 14 } },
             tooltip: {
-              backgroundColor: '#1a1c22', titleColor: '#f0ede6', bodyColor: '#8a8680',
-              borderColor: 'rgba(255,255,255,0.08)', borderWidth: 1, cornerRadius: 8, padding: 10,
+              backgroundColor: c.ttBg, titleColor: c.ttTitle, bodyColor: c.ttBody,
+              borderColor: c.ttBorder, borderWidth: 1, cornerRadius: 8, padding: 10,
               bodyFont: { family: fontMono, size: 11 },
-              callbacks: { label: ctx => ' ' + ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) }
+              callbacks: { label: function(ctx) { return ' ' + ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1); } }
             }
           },
           scales: {
-            x: { grid: { display: false }, ticks: { color: '#8a8680', font: { family: fontMono, size: 11 } }, border: { display: false } },
-            y: { grid: { color: gc, lineWidth: 1 }, ticks: { color: '#4a4742', font: { family: fontMono, size: 10 } }, border: { display: false }, title: { display: true, text: 'Score', color: '#4a4742', font: { size: 10, family: fontSans } } }
+            x: { grid: { display: false }, ticks: { color: c.label, font: { family: fontMono, size: 11 } }, border: { display: false } },
+            y: { grid: { color: c.grid, lineWidth: 1 }, ticks: { color: c.tick, font: { family: fontMono, size: 10 } }, border: { display: false }, title: { display: true, text: 'Score', color: c.tick, font: { size: 10, family: fontSans } } }
           }
         }
+      });
+
+      langChart.data.datasets.forEach(function(ds) { ds.pointBorderColor = c.pointBorder; });
+      langChart.update('none');
+
+      window.addEventListener('themechange', function() {
+        var c = getChartColors();
+        langChart.options.scales.x.ticks.color = c.label;
+        langChart.options.scales.y.grid.color = c.grid;
+        langChart.options.scales.y.ticks.color = c.tick;
+        langChart.options.scales.y.title.color = c.tick;
+        langChart.options.plugins.legend.labels.color = c.label;
+        langChart.options.plugins.tooltip.backgroundColor = c.ttBg;
+        langChart.options.plugins.tooltip.titleColor = c.ttTitle;
+        langChart.options.plugins.tooltip.bodyColor = c.ttBody;
+        langChart.options.plugins.tooltip.borderColor = c.ttBorder;
+        langChart.data.datasets.forEach(function(ds) { ds.pointBorderColor = c.pointBorder; });
+        langChart.update('none');
       });
     })();
     </script>
@@ -104,7 +136,7 @@ export function renderLanguages(data) {
       }
       .lang-bar-track {
         flex: 1; height: 4px;
-        background: rgba(255,255,255,0.04);
+        background: var(--ring-track);
         border-radius: 2px; overflow: hidden;
       }
       .lang-bar-fill {

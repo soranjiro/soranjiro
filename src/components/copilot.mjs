@@ -15,7 +15,7 @@ export function renderCopilot(data) {
       <div class="copilot-layout">
         <div class="copilot-ring-wrap">
           <svg class="copilot-ring" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="4"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="var(--ring-track)" stroke-width="4"/>
             <circle cx="50" cy="50" r="40" fill="none" stroke="var(--purple)" stroke-width="4"
               stroke-linecap="round" stroke-dasharray="${circumference.toFixed(1)}"
               stroke-dashoffset="${dashOffset.toFixed(1)}"

@@ -57,17 +57,17 @@ export function renderTechStack(data) {
       <div class="tech-grid">${sections}</div>
     </div>
     <style>
-      .tech-grid { display: flex; gap: 32px; flex-wrap: wrap; }
-      .tech-category { flex: 1; min-width: 160px; }
+      .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 24px; }
+      .tech-category { }
       .tech-cat-label {
         font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
-        text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px;
+        text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px;
       }
-      .tech-icons { display: flex; flex-wrap: wrap; gap: 10px; }
+      .tech-icons { display: flex; flex-wrap: wrap; gap: 8px; }
       .tech-item {
-        display: flex; flex-direction: column; align-items: center; gap: 6px;
-        width: 62px; padding: 10px 4px;
-        border-radius: var(--radius-sm);
+        display: flex; flex-direction: column; align-items: center; gap: 5px;
+        width: 56px; padding: 8px 2px;
+        border-radius: var(--radius-xs);
         background: var(--bg-elevated);
         border: 1px solid var(--border);
         transition: border-color 0.25s, transform 0.25s var(--ease-out);
@@ -77,9 +77,9 @@ export function renderTechStack(data) {
         border-color: var(--accent);
         transform: translateY(-3px);
       }
-      .tech-item i { font-size: 26px; }
+      .tech-item i { font-size: 22px; }
       .tech-item span {
-        font-size: 9px; font-weight: 600;
+        font-size: 8px; font-weight: 600;
         color: var(--text-secondary); text-align: center;
         font-family: var(--font-mono);
       }

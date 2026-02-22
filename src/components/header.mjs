@@ -19,6 +19,7 @@ export function renderHeader(data) {
           </div>
         </div>
         <div class="hero-right">
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀</button>
           <div class="hero-badges">
             <div class="hero-badge"><span class="hero-badge-val">${d.joinedYearsAgo}+</span><span class="hero-badge-label">Years</span></div>
             <div class="badge-divider"></div>

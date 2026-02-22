@@ -1,6 +1,5 @@
 export function renderRepos(data) {
   const pinned = data.pinnedRepos || [];
-  const overview = data.reposOverview || '';
 
   const cards = pinned.map((r, i) => {
     const langs = (r.languages || []).slice(0, 5);
@@ -17,7 +16,7 @@ export function renderRepos(data) {
     const desc = r.aiDescription || r.description || '';
     const starsHtml = r.stars > 0 ? `<span class="repo-stars">&#9733; ${r.stars}</span>` : '';
 
-    return `<div class="repo-card card anim d${8 + i}">
+    return `<div class="repo-card card anim d${3 + i}">
       <div class="repo-header">
         <a href="https://github.com/${r.nameWithOwner}" class="repo-name" target="_blank" rel="noopener">${r.name}</a>
         ${starsHtml}
@@ -28,32 +27,26 @@ export function renderRepos(data) {
     </div>`;
   }).join('');
 
-  const overviewHtml = overview
-    ? `<div class="repos-overview card anim d8">
-        <div class="card-label">Repositories Overview</div>
-        <p class="repos-overview-text">${overview}</p>
-      </div>`
-    : '';
-
   return `
-    ${overviewHtml}
     <div class="repos-section">
-      <div class="repos-section-title anim d8">
-        <div class="card-label">Pinned Repositories</div>
+      <div class="repos-section-title anim d3">
+        <div class="card-label">Featured Projects</div>
       </div>
       <div class="repos-grid">${cards}</div>
     </div>
     <style>
-      .repos-overview {
-        grid-column: span 12;
-        border-left: 3px solid var(--accent);
-      }
-      .repos-overview-text { font-size: 13px; color: var(--text-secondary); line-height: 1.8; }
       .repos-section { grid-column: span 12; }
       .repos-section-title { margin-bottom: 6px; padding: 0 4px; }
       .repos-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
       @media (max-width: 640px) { .repos-grid { grid-template-columns: 1fr; } }
-      .repo-card { padding: 22px; }
+      .repo-card {
+        padding: 22px;
+        border-left: 3px solid transparent;
+        transition: border-color 0.3s, border-left-color 0.3s, transform 0.4s var(--ease-out), box-shadow 0.4s;
+      }
+      .repo-card:hover {
+        border-left-color: var(--accent);
+      }
       .repo-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
       .repo-name {
         font-size: 15px; font-weight: 700; color: var(--accent);
@@ -67,8 +60,8 @@ export function renderRepos(data) {
       }
       .repo-desc { font-size: 12px; color: var(--text-secondary); margin-bottom: 14px; line-height: 1.6; }
       .repo-lang-bar {
-        display: flex; height: 3px; border-radius: 2px; overflow: hidden;
-        margin-bottom: 10px; background: rgba(255,255,255,0.03);
+        display: flex; height: 5px; border-radius: 3px; overflow: hidden;
+        margin-bottom: 10px; background: var(--ring-track);
       }
       .repo-lang-seg { height: 100%; min-width: 2px; }
       .repo-lang-list { display: flex; gap: 10px; flex-wrap: wrap; }
