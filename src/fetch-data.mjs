@@ -166,9 +166,9 @@ async function fetchPinnedRepos() {
       }
     }}}
   }`);
-  
+
   const repos = d.viewer.pinnedItems.nodes;
-  
+
   console.log("  Generating AI summaries for pinned repos...");
   for (const repo of repos) {
     const readme = repo.object?.text || "";
@@ -199,7 +199,7 @@ ${readme.slice(0, 1000)}
       repo.aiDescription = repo.description;
     }
   }
-  
+
   return repos;
 }
 
