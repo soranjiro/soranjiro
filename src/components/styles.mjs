@@ -1,0 +1,189 @@
+export function renderStyles() {
+  return `
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+    :root {
+      --bg: #08090c;
+      --bg-elevated: #0e1015;
+      --card-bg: #12141a;
+      --card-bg-hover: #181b23;
+      --card-inner: #0c0d11;
+      --text-primary: #f0ede6;
+      --text-secondary: #8a8680;
+      --text-dim: #4a4742;
+      --border: rgba(255,255,255,0.06);
+      --border-hover: rgba(255,255,255,0.12);
+      --accent: #e8a849;
+      --accent-soft: rgba(232,168,73,0.12);
+      --accent-glow: rgba(232,168,73,0.06);
+      --green: #4ade80;
+      --green-soft: rgba(74,222,128,0.12);
+      --blue: #60a5fa;
+      --blue-soft: rgba(96,165,250,0.12);
+      --purple: #c084fc;
+      --purple-soft: rgba(192,132,252,0.12);
+      --rose: #fb7185;
+      --rose-soft: rgba(251,113,133,0.12);
+      --cyan: #22d3ee;
+      --cyan-soft: rgba(34,211,238,0.12);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --radius-xs: 8px;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-sans: 'DM Sans', -apple-system, sans-serif;
+      --font-mono: 'Geist Mono', 'SF Mono', monospace;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    .page-bg {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 0%, rgba(232,168,73,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 50% at 80% 100%, rgba(96,165,250,0.03) 0%, transparent 50%),
+        var(--bg);
+    }
+
+    .page-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.015'/%3E%3C/svg%3E");
+      background-size: 200px;
+      opacity: 0.6;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 56px 28px 80px;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.4s, transform 0.4s var(--ease-out), box-shadow 0.4s;
+    }
+    .card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+
+    .card-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-label::before {
+      content: '';
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    /* ── Bento Grid ── */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-5 { grid-column: span 5; }
+    .span-6 { grid-column: span 6; }
+    .span-7 { grid-column: span 7; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+
+    @media (max-width: 1024px) {
+      .container { padding: 32px 20px 60px; }
+      .span-3, .span-4, .span-5 { grid-column: span 6; }
+      .span-7, .span-8 { grid-column: span 12; }
+    }
+    @media (max-width: 640px) {
+      .bento { gap: 12px; }
+      .span-3, .span-4, .span-5, .span-6, .span-7, .span-8, .span-12 { grid-column: span 12; }
+      .card { padding: 20px; border-radius: 16px; }
+    }
+
+    /* ── Animations ── */
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(24px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideRight {
+      from { opacity: 0; transform: translateX(-12px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .anim { animation: reveal 0.7s var(--ease-out) both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.12s; }
+    .d3 { animation-delay: 0.18s; }
+    .d4 { animation-delay: 0.24s; }
+    .d5 { animation-delay: 0.30s; }
+    .d6 { animation-delay: 0.36s; }
+    .d7 { animation-delay: 0.42s; }
+    .d8 { animation-delay: 0.48s; }
+    .d9 { animation-delay: 0.54s; }
+    .d10 { animation-delay: 0.60s; }
+    .d11 { animation-delay: 0.66s; }
+    .d12 { animation-delay: 0.72s; }
+
+    /* ── Chart canvas ── */
+    .chart-wrap {
+      position: relative;
+      width: 100%;
+    }
+
+    /* ── Section divider ── */
+    .section-gap { margin-top: 16px; }
+
+    /* ── Selection color ── */
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--text-dim); border-radius: 3px; }
+  </style>`;
+}
