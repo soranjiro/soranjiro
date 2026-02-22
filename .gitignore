@@ -1,5 +1,43 @@
-venv/*
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
 
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# macOS
 .DS_Store
+.AppleDouble
+.LSOverride
 
-.playwright-mcp
+# Generated outputs (optional: commit if you want to deploy directly)
+output/data.json
+output/full_history_data.json
+output/assets/screenshots/*.png
+output/assets/svg/*.svg
+
+# Temporary files
+.playwright-mcp/
+*.tmp
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment variables
+.env
+.env.local
+
+# Archive (old files, not needed in repo)
+archive/
