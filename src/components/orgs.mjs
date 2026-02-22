@@ -57,7 +57,7 @@ export function renderOrgs(data) {
       }
       .org-bar-wrap {
         height: 6px; display: flex; border-radius: 3px; overflow: hidden;
-        background: rgba(255,255,255,0.03);
+        background: var(--ring-track);
       }
       .org-bar-segment { height: 100%; }
       .org-breakdown {
