@@ -362,7 +362,7 @@ Chart.js はインスタンス生成時に色が固定されるため、テー�
 
 ```html
 <script>
-  const t = localStorage.getItem('theme') || 
+  const t = localStorage.getItem('theme') ||
     (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
   document.documentElement.setAttribute('data-theme', t);
 </script>
