@@ -1,0 +1,54 @@
+# Display Configuration
+# Languages/items listed here will be excluded from charts and displays.
+# To hide a language, add it to excludeLanguages.
+# To hide a section, add it to excludeSections.
+
+excludeLanguages:
+  - HTML
+  - CSS
+
+excludeSections: []
+# Available sections to exclude:
+# - radar
+# - stacked-bar
+# - language-evolution
+# - language-context
+# - tech-stack
+# - pinned-projects
+# - overview
+# - ai-summary
+# - copilot-usage
+
+# Tech stack categories (override auto-detection)
+techStack:
+  languages:
+    - ts
+    - js
+    - go
+    - py
+    - ruby
+    - cpp
+    - c
+    - rust
+    - java
+    - svelte
+    - vue
+  frameworks:
+    - svelte
+    - vue
+    - tauri
+  infrastructure:
+    - docker
+    - aws
+    - terraform
+    - linux
+    - postgres
+  tools:
+    - git
+    - github
+    - vscode
+    - latex
+    - bash
+
+# Theme preference for SVGs (dark / light / both)
+svgTheme: both

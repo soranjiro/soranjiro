@@ -1,0 +1,33 @@
+# User Profile
+# This file is used by the AI summary generator to produce a more accurate profile description.
+# Edit the fields below to reflect your actual background and interests.
+
+bio: |
+  Backend engineer working with infrastructure and frontend in a full-stack capacity.
+  Recently exploring machine learning and Kaggle competitions.
+
+keywords:
+  - backend engineer
+  - full-stack
+  - infrastructure
+  - machine learning
+  - Kaggle
+
+roles:
+  - Backend Engineer
+  - Full-Stack Developer
+  - Infrastructure Engineer
+
+interests:
+  - Machine Learning
+  - Kaggle
+  - DevOps / Infrastructure
+  - Web Application Development
+
+techHighlights:
+  - Ruby on Rails (work)
+  - TypeScript / Svelte (personal)
+  - Go (infrastructure tooling)
+  - Python (ML / data science)
+  - AWS / Terraform
+  - Docker / CI/CD

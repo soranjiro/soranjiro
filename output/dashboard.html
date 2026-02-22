@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>soranjiro — GitHub Profile Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+    :root {
+      --bg: #08090c;
+      --bg-elevated: #0e1015;
+      --card-bg: #12141a;
+      --card-bg-hover: #181b23;
+      --card-inner: #0c0d11;
+      --text-primary: #f0ede6;
+      --text-secondary: #8a8680;
+      --text-dim: #4a4742;
+      --border: rgba(255,255,255,0.06);
+      --border-hover: rgba(255,255,255,0.12);
+      --accent: #e8a849;
+      --accent-soft: rgba(232,168,73,0.12);
+      --accent-glow: rgba(232,168,73,0.06);
+      --green: #4ade80;
+      --green-soft: rgba(74,222,128,0.12);
+      --blue: #60a5fa;
+      --blue-soft: rgba(96,165,250,0.12);
+      --purple: #c084fc;
+      --purple-soft: rgba(192,132,252,0.12);
+      --rose: #fb7185;
+      --rose-soft: rgba(251,113,133,0.12);
+      --cyan: #22d3ee;
+      --cyan-soft: rgba(34,211,238,0.12);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --radius-xs: 8px;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-sans: 'DM Sans', -apple-system, sans-serif;
+      --font-mono: 'Geist Mono', 'SF Mono', monospace;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    .page-bg {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 0%, rgba(232,168,73,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 50% at 80% 100%, rgba(96,165,250,0.03) 0%, transparent 50%),
+        var(--bg);
+    }
+
+    .page-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.015'/%3E%3C/svg%3E");
+      background-size: 200px;
+      opacity: 0.6;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 56px 28px 80px;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.4s, transform 0.4s var(--ease-out), box-shadow 0.4s;
+    }
+    .card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+
+    .card-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-label::before {
+      content: '';
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    /* ── Bento Grid ── */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-5 { grid-column: span 5; }
+    .span-6 { grid-column: span 6; }
+    .span-7 { grid-column: span 7; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+
+    @media (max-width: 1024px) {
+      .container { padding: 32px 20px 60px; }
+      .span-3, .span-4, .span-5 { grid-column: span 6; }
+      .span-7, .span-8 { grid-column: span 12; }
+    }
+    @media (max-width: 640px) {
+      .bento { gap: 12px; }
+      .span-3, .span-4, .span-5, .span-6, .span-7, .span-8, .span-12 { grid-column: span 12; }
+      .card { padding: 20px; border-radius: 16px; }
+    }
+
+    /* ── Animations ── */
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(24px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideRight {
+      from { opacity: 0; transform: translateX(-12px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .anim { animation: reveal 0.7s var(--ease-out) both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.12s; }
+    .d3 { animation-delay: 0.18s; }
+    .d4 { animation-delay: 0.24s; }
+    .d5 { animation-delay: 0.30s; }
+    .d6 { animation-delay: 0.36s; }
+    .d7 { animation-delay: 0.42s; }
+    .d8 { animation-delay: 0.48s; }
+    .d9 { animation-delay: 0.54s; }
+    .d10 { animation-delay: 0.60s; }
+    .d11 { animation-delay: 0.66s; }
+    .d12 { animation-delay: 0.72s; }
+
+    /* ── Chart canvas ── */
+    .chart-wrap {
+      position: relative;
+      width: 100%;
+    }
+
+    /* ── Section divider ── */
+    .section-gap { margin-top: 16px; }
+
+    /* ── Selection color ── */
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--text-dim); border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <div class="page-bg"></div>
+  <div class="container">
+    
+    <header class="hero anim d1">
+      <div class="hero-top">
+        <div class="hero-identity">
+          <div class="avatar-wrap">
+            <img src="https://avatars.githubusercontent.com/u/122503868?u=8c474175f2a640545318dd067c4c41dddd8f42a0&v=4" alt="soranjiro" class="avatar" />
+            <div class="avatar-ring"></div>
+            <span class="status-dot"></span>
+          </div>
+          <div class="hero-meta">
+            <p class="hero-greeting">Hello, I'm</p>
+            <h1 class="hero-name">soranjiro</h1>
+            <div class="hero-roles"><span class="role-tag">Backend Engineer</span><span class="role-tag">Full-Stack Developer</span><span class="role-tag">Infrastructure Engineer</span></div>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="hero-badges">
+            <div class="hero-badge"><span class="hero-badge-val">3+</span><span class="hero-badge-label">Years</span></div>
+            <div class="badge-divider"></div>
+            <div class="hero-badge"><span class="hero-badge-val">60</span><span class="hero-badge-label">Repos</span></div>
+            <div class="badge-divider"></div>
+            <div class="hero-badge"><span class="hero-badge-val">8</span><span class="hero-badge-label">Followers</span></div>
+          </div>
+          <p class="llm-note">This portfolio is auto-generated from GitHub data using LLM</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="summary-block anim d2">
+      <div class="summary-accent"></div>
+      <div class="summary-content">
+        <p class="summary-label">Profile</p>
+        <p class="summary-text">Soranjiro is an experienced backend engineer and full-stack developer with over three years of GitHub activity, including 4,779 commits and contributions to 16 repositories. With a strong focus on infrastructure, he is proficient in Ruby on Rails, TypeScript, and Go, and is currently exploring machine learning through Kaggle competitions. He is passionate about web application development and DevOps practices, utilizing tools such as AWS, Terraform, and Docker in his projects.</p>
+      </div>
+    </div>
+
+    <style>
+      .hero {
+        margin-bottom: 20px;
+        padding: 0 4px;
+      }
+      .hero-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 32px;
+      }
+      .hero-identity { display: flex; align-items: center; gap: 24px; }
+      .avatar-wrap {
+        position: relative;
+        width: 80px; height: 80px;
+        flex-shrink: 0;
+      }
+      .avatar {
+        width: 80px; height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        position: relative; z-index: 1;
+      }
+      .avatar-ring {
+        position: absolute; inset: -3px;
+        border-radius: 50%;
+        border: 1.5px solid var(--accent);
+        opacity: 0.4;
+      }
+      .status-dot {
+        position: absolute; bottom: 4px; right: 4px;
+        width: 12px; height: 12px;
+        border-radius: 50%;
+        background: var(--green);
+        border: 2.5px solid var(--bg);
+        z-index: 2;
+        animation: pulse 2.5s ease-in-out infinite;
+      }
+      .hero-greeting {
+        font-size: 12px;
+        color: var(--accent);
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 2px;
+      }
+      .hero-name {
+        font-family: var(--font-serif);
+        font-size: 44px;
+        font-weight: 400;
+        line-height: 1.1;
+        letter-spacing: -0.5px;
+        color: var(--text-primary);
+      }
+      .hero-roles {
+        display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap;
+      }
+      .role-tag {
+        font-size: 11px;
+        font-weight: 500;
+        padding: 4px 12px;
+        border-radius: 100px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        border: 1px solid rgba(232,168,73,0.15);
+        letter-spacing: 0.3px;
+      }
+      .hero-right {
+        display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
+        flex-shrink: 0;
+      }
+      .hero-badges {
+        display: flex; align-items: center; gap: 0;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        padding: 12px 0;
+      }
+      .hero-badge {
+        display: flex; flex-direction: column; align-items: center; gap: 1px;
+        padding: 0 20px;
+      }
+      .hero-badge-val {
+        font-size: 20px; font-weight: 700;
+        font-family: var(--font-mono);
+        color: var(--text-primary);
+        line-height: 1;
+      }
+      .hero-badge-label {
+        font-size: 9px; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 1.5px;
+        color: var(--text-dim);
+      }
+      .badge-divider {
+        width: 1px; height: 28px;
+        background: var(--border);
+      }
+      .llm-note {
+        font-size: 9px;
+        color: var(--text-dim);
+        letter-spacing: 0.5px;
+        text-align: right;
+        opacity: 0.6;
+        max-width: 200px;
+      }
+      .summary-block {
+        display: flex;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        margin-bottom: 20px;
+        transition: border-color 0.3s;
+      }
+      .summary-block:hover { border-color: var(--border-hover); }
+      .summary-accent {
+        width: 3px; flex-shrink: 0;
+        background: linear-gradient(180deg, var(--accent), var(--accent-soft));
+      }
+      .summary-content { padding: 24px 28px; }
+      .summary-label {
+        font-size: 10px; font-weight: 600;
+        letter-spacing: 2px; text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 8px;
+      }
+      .summary-text {
+        font-size: 14px;
+        color: var(--text-secondary);
+        line-height: 1.8;
+      }
+      @media (max-width: 768px) {
+        .hero-top { flex-direction: column; gap: 20px; }
+        .hero-right { align-items: flex-start; }
+        .hero-name { font-size: 36px; }
+      }
+    </style>
+    
+    <div class="metrics-strip">
+    <div class="metric anim d3">
+      <div class="metric-icon" style="color:var(--green);background:var(--green)11">M</div>
+      <div class="metric-body">
+        <span class="metric-value" style="color:var(--green)">4.8k</span>
+        <span class="metric-label">Commits</span>
+      </div>
+    </div>
+    <div class="metric anim d4">
+      <div class="metric-icon" style="color:var(--blue);background:var(--blue)11">⇅</div>
+      <div class="metric-body">
+        <span class="metric-value" style="color:var(--blue)">577</span>
+        <span class="metric-label">Pull Requests</span>
+      </div>
+    </div>
+    <div class="metric anim d5">
+      <div class="metric-icon" style="color:var(--purple);background:var(--purple)11">◎</div>
+      <div class="metric-body">
+        <span class="metric-value" style="color:var(--purple)">171</span>
+        <span class="metric-label">Reviews</span>
+      </div>
+    </div>
+    <div class="metric anim d6">
+      <div class="metric-icon" style="color:var(--rose);background:var(--rose)11">◈</div>
+      <div class="metric-body">
+        <span class="metric-value" style="color:var(--rose)">194</span>
+        <span class="metric-label">Issues</span>
+      </div>
+    </div>
+    <div class="metric anim d7">
+      <div class="metric-icon" style="color:var(--cyan);background:var(--cyan)11">⬡</div>
+      <div class="metric-body">
+        <span class="metric-value" style="color:var(--cyan)">16</span>
+        <span class="metric-label">Contributed To</span>
+      </div>
+    </div>
+    <div class="metric anim d8">
+      <div class="metric-icon" style="color:var(--accent);background:var(--accent)11">⊞</div>
+      <div class="metric-body">
+        <span class="metric-value" style="color:var(--accent)">4</span>
+        <span class="metric-label">Organizations</span>
+      </div>
+    </div></div>
+    <style>
+      .metrics-strip {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      @media (max-width: 1024px) { .metrics-strip { grid-template-columns: repeat(3, 1fr); } }
+      @media (max-width: 640px) { .metrics-strip { grid-template-columns: repeat(2, 1fr); } }
+
+      .metric {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        padding: 18px 16px;
+        display: flex; align-items: center; gap: 14px;
+        transition: border-color 0.3s, transform 0.3s var(--ease-out);
+        cursor: default;
+      }
+      .metric:hover {
+        border-color: var(--border-hover);
+        transform: translateY(-2px);
+      }
+      .metric-icon {
+        width: 36px; height: 36px;
+        border-radius: var(--radius-xs);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 16px; font-weight: 700;
+        flex-shrink: 0;
+      }
+      .metric-body { display: flex; flex-direction: column; }
+      .metric-value {
+        font-size: 22px;
+        font-weight: 700;
+        font-family: var(--font-mono);
+        line-height: 1;
+        letter-spacing: -0.5px;
+      }
+      .metric-label {
+        font-size: 10px;
+        font-weight: 500;
+        color: var(--text-dim);
+        letter-spacing: 0.5px;
+        margin-top: 3px;
+      }
+    </style>
+    <div class="bento">
+      
+    <div class="card span-5 anim d3">
+      <div class="card-label">Activity Radar</div>
+      <div class="chart-wrap" style="height:280px">
+        <canvas id="radarChart"></canvas>
+      </div>
+    </div>
+    <div class="card span-7 anim d4">
+      <div class="card-label">Yearly Contributions</div>
+      <div class="chart-wrap" style="height:280px">
+        <canvas id="yearlyChart"></canvas>
+      </div>
+    </div>
+    <script>
+    (function() {
+      const fontMono = "'Geist Mono','SF Mono',monospace";
+      const fontSans = "'DM Sans',-apple-system,sans-serif";
+      const tc = '#4a4742', gc = 'rgba(255,255,255,0.04)';
+      const radarRaw = [4779,577,171,194,359];
+
+      Chart.defaults.font.family = fontSans;
+
+      new Chart(document.getElementById('radarChart'), {
+        type: 'radar',
+        data: {
+          labels: ["Commits","PRs","Reviews","Issues","Comments"],
+          datasets: [{
+            data: [3.6794278966121188,2.761927838420529,2.2355284469075487,2.290034611362518,2.5563025007672873],
+            backgroundColor: 'rgba(232,168,73,0.08)',
+            borderColor: '#e8a849',
+            pointBackgroundColor: '#e8a849',
+            pointBorderColor: '#08090c',
+            pointBorderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            borderWidth: 1.5,
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false },
+            tooltip: {
+              backgroundColor: '#1a1c22', titleColor: '#f0ede6', bodyColor: '#8a8680',
+              borderColor: 'rgba(255,255,255,0.08)', borderWidth: 1,
+              cornerRadius: 8, padding: 10, displayColors: false,
+              bodyFont: { family: fontMono, size: 12 },
+              callbacks: { label: ctx => radarRaw[ctx.dataIndex].toLocaleString() }
+            }
+          },
+          scales: {
+            r: {
+              angleLines: { color: gc },
+              grid: { color: gc, lineWidth: 1 },
+              pointLabels: { color: '#8a8680', font: { size: 11, weight: '500', family: fontSans } },
+              ticks: {
+                display: true, color: '#3a3835', backdropColor: 'transparent', stepSize: 1,
+                font: { size: 8, family: fontMono },
+                callback: v => v===0?'1':v===1?'10':v===2?'100':v===3?'1k':v===4?'10k':''
+              },
+              min: 0, max: 4
+            }
+          }
+        }
+      });
+
+      new Chart(document.getElementById('yearlyChart'), {
+        type: 'bar',
+        data: {
+          labels: ["2023","2024","2025","2026"],
+          datasets: [
+            { label: 'Private', data: [388,800,1619,273], backgroundColor: 'rgba(255,255,255,0.06)', borderRadius: { topLeft: 0, topRight: 0, bottomLeft: 4, bottomRight: 4 }, borderSkipped: false },
+            { label: 'Commits', data: [20,360,1210,109], backgroundColor: '#4ade8066', borderRadius: 4, borderSkipped: false },
+            { label: 'PRs', data: [5,8,137,19], backgroundColor: '#60a5fa66', borderRadius: 4, borderSkipped: false },
+            { label: 'Reviews', data: [0,3,15,1], backgroundColor: '#c084fc66', borderRadius: { topLeft: 4, topRight: 4, bottomLeft: 0, bottomRight: 0 }, borderSkipped: false },
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { boxWidth: 8, usePointStyle: true, pointStyle: 'circle', color: '#8a8680', font: { size: 10, family: fontSans }, padding: 16 }
+            },
+            tooltip: {
+              backgroundColor: '#1a1c22', titleColor: '#f0ede6', bodyColor: '#8a8680',
+              borderColor: 'rgba(255,255,255,0.08)', borderWidth: 1, cornerRadius: 8, padding: 10,
+              bodyFont: { family: fontMono, size: 11 },
+            }
+          },
+          scales: {
+            x: { stacked: true, grid: { display: false }, ticks: { color: '#8a8680', font: { family: fontMono, size: 11 } }, border: { display: false } },
+            y: { stacked: true, grid: { color: gc, lineWidth: 1 }, ticks: { color: '#4a4742', font: { family: fontMono, size: 10 } }, border: { display: false } }
+          }
+        }
+      });
+    })();
+    </script>
+      
+    <div class="card span-7 anim d5">
+      <div class="card-label">Language Evolution</div>
+      <div class="chart-wrap" style="height:260px">
+        <canvas id="langTrendChart"></canvas>
+      </div>
+    </div>
+    <div class="card span-5 anim d6">
+      <div class="card-label">Language Distribution</div>
+      <div class="lang-list"><div class="lang-row" style="animation: slideRight 0.4s var(--ease-out) 0s both">
+      <span class="lang-indicator" style="background:#3572A5"></span>
+      <span class="lang-name">Python</span>
+      <span class="lang-bar-track"><span class="lang-bar-fill" style="width:100.1%;background:#3572A5"></span></span>
+      <span class="lang-pct">42.7%</span>
+    </div><div class="lang-row" style="animation: slideRight 0.4s var(--ease-out) 0.06s both">
+      <span class="lang-indicator" style="background:#f1e05a"></span>
+      <span class="lang-name">JavaScript</span>
+      <span class="lang-bar-track"><span class="lang-bar-fill" style="width:52.0%;background:#f1e05a"></span></span>
+      <span class="lang-pct">22.2%</span>
+    </div><div class="lang-row" style="animation: slideRight 0.4s var(--ease-out) 0.12s both">
+      <span class="lang-indicator" style="background:#00ADD8"></span>
+      <span class="lang-name">Go</span>
+      <span class="lang-bar-track"><span class="lang-bar-fill" style="width:29.8%;background:#00ADD8"></span></span>
+      <span class="lang-pct">12.7%</span>
+    </div><div class="lang-row" style="animation: slideRight 0.4s var(--ease-out) 0.18s both">
+      <span class="lang-indicator" style="background:#DA5B0B"></span>
+      <span class="lang-name">Jupyter Notebook</span>
+      <span class="lang-bar-track"><span class="lang-bar-fill" style="width:20.9%;background:#DA5B0B"></span></span>
+      <span class="lang-pct">8.9%</span>
+    </div><div class="lang-row" style="animation: slideRight 0.4s var(--ease-out) 0.24s both">
+      <span class="lang-indicator" style="background:#ffcc33"></span>
+      <span class="lang-name">Fluent</span>
+      <span class="lang-bar-track"><span class="lang-bar-fill" style="width:13.8%;background:#ffcc33"></span></span>
+      <span class="lang-pct">5.9%</span>
+    </div><div class="lang-row" style="animation: slideRight 0.4s var(--ease-out) 0.3s both">
+      <span class="lang-indicator" style="background:#3178c6"></span>
+      <span class="lang-name">TypeScript</span>
+      <span class="lang-bar-track"><span class="lang-bar-fill" style="width:12.7%;background:#3178c6"></span></span>
+      <span class="lang-pct">5.4%</span>
+    </div><div class="lang-row" style="animation: slideRight 0.4s var(--ease-out) 0.36s both">
+      <span class="lang-indicator" style="background:#701516"></span>
+      <span class="lang-name">Ruby</span>
+      <span class="lang-bar-track"><span class="lang-bar-fill" style="width:5.2%;background:#701516"></span></span>
+      <span class="lang-pct">2.2%</span>
+    </div></div>
+    </div>
+    <script>
+    (function() {
+      const fontMono = "'Geist Mono','SF Mono',monospace";
+      const fontSans = "'DM Sans',-apple-system,sans-serif";
+      const tc = '#4a4742', gc = 'rgba(255,255,255,0.04)';
+      new Chart(document.getElementById('langTrendChart'), {
+        type: 'line',
+        data: {
+          labels: ["2023","2024","2025","2026"],
+          datasets: [{"label":"TypeScript","data":[0,23.19,382.62,11.99],"borderColor":"#3178c6","backgroundColor":"transparent","pointBackgroundColor":"#3178c6","pointBorderColor":"#08090c","pointBorderWidth":2,"pointRadius":3,"pointHoverRadius":5,"borderWidth":1.5,"tension":0.4,"fill":false},{"label":"Ruby","data":[0,61.34,276.27,28.69],"borderColor":"#701516","backgroundColor":"transparent","pointBackgroundColor":"#701516","pointBorderColor":"#08090c","pointBorderWidth":2,"pointRadius":3,"pointHoverRadius":5,"borderWidth":1.5,"tension":0.4,"fill":false},{"label":"Go","data":[75.89,74.94,202.56,0],"borderColor":"#00ADD8","backgroundColor":"transparent","pointBackgroundColor":"#00ADD8","pointBorderColor":"#08090c","pointBorderWidth":2,"pointRadius":3,"pointHoverRadius":5,"borderWidth":1.5,"tension":0.4,"fill":false},{"label":"Svelte","data":[0,0,220.74,32.51],"borderColor":"#ff3e00","backgroundColor":"transparent","pointBackgroundColor":"#ff3e00","pointBorderColor":"#08090c","pointBorderWidth":2,"pointRadius":3,"pointHoverRadius":5,"borderWidth":1.5,"tension":0.4,"fill":false},{"label":"JavaScript","data":[0.01,58.36,47.06,6.21],"borderColor":"#f1e05a","backgroundColor":"transparent","pointBackgroundColor":"#f1e05a","pointBorderColor":"#08090c","pointBorderWidth":2,"pointRadius":3,"pointHoverRadius":5,"borderWidth":1.5,"tension":0.4,"fill":false},{"label":"Python","data":[17.73,34.05,6.36,0.26],"borderColor":"#3572A5","backgroundColor":"transparent","pointBackgroundColor":"#3572A5","pointBorderColor":"#08090c","pointBorderWidth":2,"pointRadius":3,"pointHoverRadius":5,"borderWidth":1.5,"tension":0.4,"fill":false}]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 6, usePointStyle: true, pointStyle: 'circle', color: '#8a8680', font: { size: 10, family: fontSans }, padding: 14 } },
+            tooltip: {
+              backgroundColor: '#1a1c22', titleColor: '#f0ede6', bodyColor: '#8a8680',
+              borderColor: 'rgba(255,255,255,0.08)', borderWidth: 1, cornerRadius: 8, padding: 10,
+              bodyFont: { family: fontMono, size: 11 },
+              callbacks: { label: ctx => ' ' + ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) }
+            }
+          },
+          scales: {
+            x: { grid: { display: false }, ticks: { color: '#8a8680', font: { family: fontMono, size: 11 } }, border: { display: false } },
+            y: { grid: { color: gc, lineWidth: 1 }, ticks: { color: '#4a4742', font: { family: fontMono, size: 10 } }, border: { display: false }, title: { display: true, text: 'Score', color: '#4a4742', font: { size: 10, family: fontSans } } }
+          }
+        }
+      });
+    })();
+    </script>
+    <style>
+      .lang-list { display: flex; flex-direction: column; gap: 11px; }
+      .lang-row {
+        display: flex; align-items: center; gap: 10px; font-size: 12px;
+      }
+      .lang-indicator {
+        width: 3px; height: 18px; border-radius: 2px; flex-shrink: 0;
+      }
+      .lang-name {
+        width: 110px; font-weight: 500; color: var(--text-primary);
+        white-space: nowrap; font-size: 12px;
+      }
+      .lang-bar-track {
+        flex: 1; height: 4px;
+        background: rgba(255,255,255,0.04);
+        border-radius: 2px; overflow: hidden;
+      }
+      .lang-bar-fill {
+        height: 100%; border-radius: 2px;
+        transition: width 0.8s var(--ease-out);
+      }
+      .lang-pct {
+        width: 42px; text-align: right;
+        font-family: var(--font-mono);
+        color: var(--text-secondary);
+        font-weight: 500; font-size: 11px;
+      }
+    </style>
+      
+    <div class="card span-8 anim d7">
+      <div class="card-label">Organizations</div>
+      <div class="org-legend">
+        <span class="org-legend-item"><span class="org-legend-dot" style="background:var(--accent)"></span>PRs</span>
+        <span class="org-legend-item"><span class="org-legend-dot" style="background:var(--purple)"></span>Reviews</span>
+        <span class="org-legend-item"><span class="org-legend-dot" style="background:var(--cyan)"></span>Issues</span>
+      </div>
+      <div class="org-chart"><div class="org-row anim" style="animation-delay:0.7s">
+      <div class="org-meta">
+        <div class="org-name">nagaseengineer</div>
+        <div class="org-total">227</div>
+      </div>
+      <div class="org-bar-wrap">
+        <div class="org-bar-segment" style="width:59.5%;background:var(--accent)"></div>
+        <div class="org-bar-segment" style="width:30.8%;background:var(--purple)"></div>
+        <div class="org-bar-segment" style="width:9.7%;background:var(--cyan)"></div>
+      </div>
+      <div class="org-breakdown">
+        <span>135 PRs</span><span>70 Reviews</span><span>22 Issues</span>
+      </div>
+    </div><div class="org-row anim" style="animation-delay:0.7799999999999999s">
+      <div class="org-meta">
+        <div class="org-name">nagaseitteam</div>
+        <div class="org-total">197</div>
+      </div>
+      <div class="org-bar-wrap">
+        <div class="org-bar-segment" style="width:36.6%;background:var(--accent)"></div>
+        <div class="org-bar-segment" style="width:25.1%;background:var(--purple)"></div>
+        <div class="org-bar-segment" style="width:25.1%;background:var(--cyan)"></div>
+      </div>
+      <div class="org-breakdown">
+        <span>83 PRs</span><span>57 Reviews</span><span>57 Issues</span>
+      </div>
+    </div><div class="org-row anim" style="animation-delay:0.86s">
+      <div class="org-meta">
+        <div class="org-name">Engineer Guild Hackathon</div>
+        <div class="org-total">85</div>
+      </div>
+      <div class="org-bar-wrap">
+        <div class="org-bar-segment" style="width:14.5%;background:var(--accent)"></div>
+        <div class="org-bar-segment" style="width:3.5%;background:var(--purple)"></div>
+        <div class="org-bar-segment" style="width:19.4%;background:var(--cyan)"></div>
+      </div>
+      <div class="org-breakdown">
+        <span>33 PRs</span><span>8 Reviews</span><span>44 Issues</span>
+      </div>
+    </div></div>
+    </div>
+    <style>
+      .org-legend { display: flex; gap: 16px; margin-bottom: 20px; }
+      .org-legend-item { font-size: 10px; color: var(--text-dim); display: flex; align-items: center; gap: 5px; letter-spacing: 0.3px; }
+      .org-legend-dot { width: 6px; height: 6px; border-radius: 1px; }
+      .org-chart { display: flex; flex-direction: column; gap: 18px; }
+      .org-row { display: flex; flex-direction: column; gap: 6px; }
+      .org-meta { display: flex; justify-content: space-between; align-items: baseline; }
+      .org-name {
+        font-size: 13px; font-weight: 600;
+        color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      }
+      .org-total {
+        font-size: 14px; font-family: var(--font-mono); font-weight: 700;
+        color: var(--text-secondary);
+      }
+      .org-bar-wrap {
+        height: 6px; display: flex; border-radius: 3px; overflow: hidden;
+        background: rgba(255,255,255,0.03);
+      }
+      .org-bar-segment { height: 100%; }
+      .org-breakdown {
+        display: flex; gap: 12px;
+        font-size: 10px; color: var(--text-dim); font-family: var(--font-mono);
+      }
+    </style>
+      
+    <div class="card span-4 anim d7">
+      <div class="card-label">AI Collaboration</div>
+      <div class="copilot-layout">
+        <div class="copilot-ring-wrap">
+          <svg class="copilot-ring" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="4"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="var(--purple)" stroke-width="4"
+              stroke-linecap="round" stroke-dasharray="251.3"
+              stroke-dashoffset="216.6"
+              transform="rotate(-90 50 50)" style="transition: stroke-dashoffset 1.2s var(--ease-out)"/>
+          </svg>
+          <div class="copilot-ring-center">
+            <span class="copilot-ring-val">33</span>
+            <span class="copilot-ring-sub">mentions</span>
+          </div>
+        </div>
+        <div class="copilot-details">
+          <div class="copilot-stat">
+            <span class="copilot-stat-val">8</span>
+            <span class="copilot-stat-label">Co-authored commits</span>
+          </div>
+          <div class="copilot-divider"></div>
+          <div class="copilot-stat">
+            <span class="copilot-stat-val">0.17%</span>
+            <span class="copilot-stat-label">AI co-authored rate</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <style>
+      .copilot-layout { display: flex; align-items: center; gap: 24px; }
+      .copilot-ring-wrap {
+        position: relative; width: 100px; height: 100px; flex-shrink: 0;
+      }
+      .copilot-ring { width: 100%; height: 100%; }
+      .copilot-ring-center {
+        position: absolute; inset: 0;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+      }
+      .copilot-ring-val {
+        font-size: 24px; font-weight: 700;
+        font-family: var(--font-mono);
+        color: var(--purple); line-height: 1;
+      }
+      .copilot-ring-sub { font-size: 9px; color: var(--text-dim); margin-top: 2px; letter-spacing: 0.5px; }
+      .copilot-details { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+      .copilot-stat { }
+      .copilot-stat-val {
+        font-size: 18px; font-weight: 700;
+        font-family: var(--font-mono); color: var(--text-primary);
+        display: block; line-height: 1;
+      }
+      .copilot-stat-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; display: block; }
+      .copilot-divider { height: 1px; background: var(--border); }
+    </style>
+      
+    <div class="card span-12 anim d8">
+      <div class="card-label">Tech Stack</div>
+      <div class="tech-grid"><div class="tech-category">
+      <div class="tech-cat-label">Languages</div>
+      <div class="tech-icons"><div class="tech-item">
+        <i class="devicon-ruby-plain colored"></i>
+        <span>Ruby</span>
+      </div><div class="tech-item">
+        <i class="devicon-python-plain colored"></i>
+        <span>Python</span>
+      </div><div class="tech-item">
+        <i class="devicon-go-original-wordmark colored"></i>
+        <span>Go</span>
+      </div><div class="tech-item">
+        <i class="devicon-typescript-plain colored"></i>
+        <span>TypeScript</span>
+      </div><div class="tech-item">
+        <i class="devicon-javascript-plain colored"></i>
+        <span>JavaScript</span>
+      </div><div class="tech-item">
+        <i class="devicon-rust-original colored"></i>
+        <span>Rust</span>
+      </div><div class="tech-item">
+        <i class="devicon-cplusplus-plain colored"></i>
+        <span>C++</span>
+      </div><div class="tech-item">
+        <i class="devicon-java-plain colored"></i>
+        <span>Java</span>
+      </div></div>
+    </div><div class="tech-category">
+      <div class="tech-cat-label">Frameworks</div>
+      <div class="tech-icons"><div class="tech-item">
+        <i class="devicon-svelte-plain colored"></i>
+        <span>Svelte</span>
+      </div><div class="tech-item">
+        <i class="devicon-rails-plain colored"></i>
+        <span>Rails</span>
+      </div></div>
+    </div><div class="tech-category">
+      <div class="tech-cat-label">DevOps</div>
+      <div class="tech-icons"><div class="tech-item">
+        <i class="devicon-terraform-plain colored"></i>
+        <span>Terraform</span>
+      </div><div class="tech-item">
+        <i class="devicon-docker-plain colored"></i>
+        <span>Docker</span>
+      </div><div class="tech-item">
+        <i class="devicon-amazonwebservices-plain-wordmark colored"></i>
+        <span>AWS</span>
+      </div></div>
+    </div><div class="tech-category">
+      <div class="tech-cat-label">Tools</div>
+      <div class="tech-icons"><div class="tech-item">
+        <i class="devicon-bash-plain colored"></i>
+        <span>Shell</span>
+      </div><div class="tech-item">
+        <i class="devicon-github-original colored"></i>
+        <span>GitHub</span>
+      </div><div class="tech-item">
+        <i class="devicon-postgresql-plain colored"></i>
+        <span>PostgreSQL</span>
+      </div><div class="tech-item">
+        <i class="devicon-linux-plain colored"></i>
+        <span>Linux</span>
+      </div></div>
+    </div><div class="tech-category">
+      <div class="tech-cat-label">ML/Data</div>
+      <div class="tech-icons"><div class="tech-item">
+        <i class="devicon-kaggle-original colored"></i>
+        <span>Kaggle</span>
+      </div></div>
+    </div></div>
+    </div>
+    <style>
+      .tech-grid { display: flex; gap: 32px; flex-wrap: wrap; }
+      .tech-category { flex: 1; min-width: 160px; }
+      .tech-cat-label {
+        font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+        text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px;
+      }
+      .tech-icons { display: flex; flex-wrap: wrap; gap: 10px; }
+      .tech-item {
+        display: flex; flex-direction: column; align-items: center; gap: 6px;
+        width: 62px; padding: 10px 4px;
+        border-radius: var(--radius-sm);
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        transition: border-color 0.25s, transform 0.25s var(--ease-out);
+        cursor: default;
+      }
+      .tech-item:hover {
+        border-color: var(--accent);
+        transform: translateY(-3px);
+      }
+      .tech-item i { font-size: 26px; }
+      .tech-item span {
+        font-size: 9px; font-weight: 600;
+        color: var(--text-secondary); text-align: center;
+        font-family: var(--font-mono);
+      }
+    </style>
+      
+    <div class="repos-overview card anim d8">
+        <div class="card-label">Repositories Overview</div>
+        <p class="repos-overview-text">The collection of repositories showcases the developer's versatility and proficiency in multiple programming languages, including Svelte, Rust, C++, and TypeScript, as well as their capability to create diverse applications ranging from a travel planning web app to command-line tools. This indicates a strong foundation in both front-end and back-end development, highlighting their ability to tackle various software development challenges.</p>
+      </div>
+    <div class="repos-section">
+      <div class="repos-section-title anim d8">
+        <div class="card-label">Pinned Repositories</div>
+      </div>
+      <div class="repos-grid"><div class="repo-card card anim d8">
+      <div class="repo-header">
+        <a href="https://github.com/soranjiro/tabitabi" class="repo-name" target="_blank" rel="noopener">tabitabi</a>
+        <span class="repo-stars">&#9733; 4</span>
+      </div>
+      <p class="repo-desc">This repository is a web application for creating and sharing travel itineraries.</p>
+      <div class="repo-lang-bar"><div class="repo-lang-seg" style="width:58.3%;background:#ff3e00"></div><div class="repo-lang-seg" style="width:21.5%;background:#3178c6"></div><div class="repo-lang-seg" style="width:17.5%;background:#663399"></div><div class="repo-lang-seg" style="width:2.2%;background:#f1e05a"></div><div class="repo-lang-seg" style="width:0.5%;background:#3572A5"></div></div>
+      <div class="repo-lang-list"><span class="repo-lang-dot"><span class="lang-dot" style="background:#ff3e00"></span>Svelte</span><span class="repo-lang-dot"><span class="lang-dot" style="background:#3178c6"></span>TypeScript</span><span class="repo-lang-dot"><span class="lang-dot" style="background:#663399"></span>CSS</span></div>
+    </div><div class="repo-card card anim d9">
+      <div class="repo-header">
+        <a href="https://github.com/soranjiro/aws-auth-command" class="repo-name" target="_blank" rel="noopener">aws-auth-command</a>
+        
+      </div>
+      <p class="repo-desc">This repository provides a command-line tool for executing AWS commands with profile management.</p>
+      <div class="repo-lang-bar"><div class="repo-lang-seg" style="width:86.2%;background:#dea584"></div><div class="repo-lang-seg" style="width:8.0%;background:#f1e05a"></div><div class="repo-lang-seg" style="width:3.2%;background:#89e051"></div><div class="repo-lang-seg" style="width:2.0%;background:#701516"></div><div class="repo-lang-seg" style="width:0.6%;background:#427819"></div></div>
+      <div class="repo-lang-list"><span class="repo-lang-dot"><span class="lang-dot" style="background:#dea584"></span>Rust</span><span class="repo-lang-dot"><span class="lang-dot" style="background:#f1e05a"></span>JavaScript</span><span class="repo-lang-dot"><span class="lang-dot" style="background:#89e051"></span>Shell</span></div>
+    </div><div class="repo-card card anim d10">
+      <div class="repo-header">
+        <a href="https://github.com/soranjiro/mybrowser" class="repo-name" target="_blank" rel="noopener">mybrowser</a>
+        
+      </div>
+      <p class="repo-desc">MyBrowser is a modern Qt-based web browser with advanced features like PiP and workspace management.</p>
+      <div class="repo-lang-bar"><div class="repo-lang-seg" style="width:39.1%;background:#f34b7d"></div><div class="repo-lang-seg" style="width:34.8%;background:#f1e05a"></div><div class="repo-lang-seg" style="width:17.9%;background:#e34c26"></div><div class="repo-lang-seg" style="width:4.2%;background:#663399"></div><div class="repo-lang-seg" style="width:4.0%;background:#6866fb"></div></div>
+      <div class="repo-lang-list"><span class="repo-lang-dot"><span class="lang-dot" style="background:#f34b7d"></span>C++</span><span class="repo-lang-dot"><span class="lang-dot" style="background:#f1e05a"></span>JavaScript</span><span class="repo-lang-dot"><span class="lang-dot" style="background:#e34c26"></span>HTML</span></div>
+    </div><div class="repo-card card anim d11">
+      <div class="repo-header">
+        <a href="https://github.com/soranjiro/clozy" class="repo-name" target="_blank" rel="noopener">clozy</a>
+        <span class="repo-stars">&#9733; 1</span>
+      </div>
+      <p class="repo-desc">Clozy is an application for managing and organizing your clothing items.</p>
+      <div class="repo-lang-bar"><div class="repo-lang-seg" style="width:97.2%;background:#3178c6"></div><div class="repo-lang-seg" style="width:1.8%;background:#663399"></div><div class="repo-lang-seg" style="width:0.7%;background:#427819"></div><div class="repo-lang-seg" style="width:0.4%;background:#f1e05a"></div></div>
+      <div class="repo-lang-list"><span class="repo-lang-dot"><span class="lang-dot" style="background:#3178c6"></span>TypeScript</span><span class="repo-lang-dot"><span class="lang-dot" style="background:#663399"></span>CSS</span><span class="repo-lang-dot"><span class="lang-dot" style="background:#427819"></span>Makefile</span></div>
+    </div></div>
+    </div>
+    <style>
+      .repos-overview {
+        grid-column: span 12;
+        border-left: 3px solid var(--accent);
+      }
+      .repos-overview-text { font-size: 13px; color: var(--text-secondary); line-height: 1.8; }
+      .repos-section { grid-column: span 12; }
+      .repos-section-title { margin-bottom: 6px; padding: 0 4px; }
+      .repos-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      @media (max-width: 640px) { .repos-grid { grid-template-columns: 1fr; } }
+      .repo-card { padding: 22px; }
+      .repo-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+      .repo-name {
+        font-size: 15px; font-weight: 700; color: var(--accent);
+        text-decoration: none; transition: color 0.2s;
+        font-family: var(--font-mono);
+      }
+      .repo-name:hover { color: var(--text-primary); }
+      .repo-stars {
+        font-size: 11px; color: var(--accent); font-family: var(--font-mono);
+        font-weight: 600; opacity: 0.8;
+      }
+      .repo-desc { font-size: 12px; color: var(--text-secondary); margin-bottom: 14px; line-height: 1.6; }
+      .repo-lang-bar {
+        display: flex; height: 3px; border-radius: 2px; overflow: hidden;
+        margin-bottom: 10px; background: rgba(255,255,255,0.03);
+      }
+      .repo-lang-seg { height: 100%; min-width: 2px; }
+      .repo-lang-list { display: flex; gap: 10px; flex-wrap: wrap; }
+      .repo-lang-dot {
+        display: flex; align-items: center; gap: 4px;
+        font-size: 10px; color: var(--text-dim); font-weight: 500;
+        font-family: var(--font-mono);
+      }
+    </style>
+    </div>
+    <footer class="footer">
+      <p>Last updated: February 23, 2026</p>
+    </footer>
+  </div>
+  <style>
+    .footer {
+      text-align: center; padding: 40px 0 0; margin-top: 20px;
+      font-size: 11px; color: var(--text-dim); letter-spacing: 0.5px;
+    }
+  </style>
+</body>
+</html>
