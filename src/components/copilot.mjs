@@ -5,64 +5,75 @@ export function renderCopilot(data) {
   const total = data.activity.totalCommits || 1;
   const aiPct = ((coauthored / total) * 100).toFixed(2);
 
-  const ringPct = Math.min((mentions / total) * 100 * 20, 100);
-  const circumference = 2 * Math.PI * 40;
-  const dashOffset = circumference * (1 - ringPct / 100);
+  const outerR = 44;
+  const innerR = 36;
+  const outerC = 2 * Math.PI * outerR;
+  const innerC = 2 * Math.PI * innerR;
+  const outerPct = Math.min((mentions / total) * 100 * 20, 100);
+  const innerPct = Math.min((coauthored / total) * 100, 100);
 
   return `
-    <div class="card span-4 anim d7">
-      <div class="card-label">AI Collaboration</div>
-      <div class="copilot-layout">
-        <div class="copilot-ring-wrap">
-          <svg class="copilot-ring" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="40" fill="none" stroke="var(--ring-track)" stroke-width="4"/>
-            <circle cx="50" cy="50" r="40" fill="none" stroke="var(--purple)" stroke-width="4"
-              stroke-linecap="round" stroke-dasharray="${circumference.toFixed(1)}"
-              stroke-dashoffset="${dashOffset.toFixed(1)}"
+    <div class="ai-area">
+      <div class="sub-label">AI Collaboration</div>
+      <div class="ai-layout">
+        <div class="ai-ring-wrap">
+          <svg class="ai-ring" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="${outerR}" fill="none" stroke="var(--ring-track)" stroke-width="3"/>
+            <circle cx="50" cy="50" r="${outerR}" fill="none" stroke="var(--fuji)" stroke-width="3"
+              stroke-linecap="round" stroke-dasharray="${outerC.toFixed(1)}"
+              stroke-dashoffset="${(outerC * (1 - outerPct / 100)).toFixed(1)}"
               transform="rotate(-90 50 50)" style="transition: stroke-dashoffset 1.2s var(--ease-out)"/>
+            <circle cx="50" cy="50" r="${innerR}" fill="none" stroke="var(--ring-track)" stroke-width="2"/>
+            <circle cx="50" cy="50" r="${innerR}" fill="none" stroke="var(--sora)" stroke-width="2"
+              stroke-linecap="round" stroke-dasharray="${innerC.toFixed(1)}"
+              stroke-dashoffset="${(innerC * (1 - innerPct / 100)).toFixed(1)}"
+              transform="rotate(-90 50 50)" style="transition: stroke-dashoffset 1.2s var(--ease-out) 0.3s"/>
           </svg>
-          <div class="copilot-ring-center">
-            <span class="copilot-ring-val">${mentions}</span>
-            <span class="copilot-ring-sub">mentions</span>
+          <div class="ai-ring-label">
+            <span class="ai-ring-val">${mentions}</span>
+            <span class="ai-ring-sub">AI mentions</span>
           </div>
         </div>
-        <div class="copilot-details">
-          <div class="copilot-stat">
-            <span class="copilot-stat-val">${coauthored}</span>
-            <span class="copilot-stat-label">Co-authored commits</span>
+        <div class="ai-stats">
+          <div class="ai-stat-item">
+            <span class="ai-stat-num">${coauthored}</span>
+            <span class="ai-stat-text">co-authored commits</span>
           </div>
-          <div class="copilot-divider"></div>
-          <div class="copilot-stat">
-            <span class="copilot-stat-val">${aiPct}%</span>
-            <span class="copilot-stat-label">AI co-authored rate</span>
+          <div class="ai-stat-item">
+            <span class="ai-stat-num">${aiPct}%</span>
+            <span class="ai-stat-text">AI collaboration rate</span>
+          </div>
+          <div class="ai-stat-item">
+            <span class="ai-stat-num">${total.toLocaleString()}</span>
+            <span class="ai-stat-text">total commits</span>
           </div>
         </div>
       </div>
     </div>
     <style>
-      .copilot-layout { display: flex; align-items: center; gap: 24px; }
-      .copilot-ring-wrap {
-        position: relative; width: 100px; height: 100px; flex-shrink: 0;
-      }
-      .copilot-ring { width: 100%; height: 100%; }
-      .copilot-ring-center {
+      .ai-layout { display: flex; align-items: center; gap: 28px; }
+      .ai-ring-wrap { position: relative; width: 120px; height: 120px; flex-shrink: 0; }
+      .ai-ring { width: 100%; height: 100%; }
+      .ai-ring-label {
         position: absolute; inset: 0;
         display: flex; flex-direction: column; align-items: center; justify-content: center;
       }
-      .copilot-ring-val {
-        font-size: 24px; font-weight: 700;
+      .ai-ring-val {
+        font-size: 26px; font-weight: 700;
         font-family: var(--font-mono);
-        color: var(--purple); line-height: 1;
+        color: var(--fuji); line-height: 1;
       }
-      .copilot-ring-sub { font-size: 9px; color: var(--text-dim); margin-top: 2px; letter-spacing: 0.5px; }
-      .copilot-details { flex: 1; display: flex; flex-direction: column; gap: 10px; }
-      .copilot-stat { }
-      .copilot-stat-val {
-        font-size: 18px; font-weight: 700;
+      .ai-ring-sub { font-size: 8px; color: var(--text-dim); margin-top: 3px; letter-spacing: 0.5px; font-weight: 500; }
+      .ai-stats { display: flex; flex-direction: column; gap: 14px; }
+      .ai-stat-num {
+        font-size: 20px; font-weight: 700;
         font-family: var(--font-mono); color: var(--text-primary);
         display: block; line-height: 1;
       }
-      .copilot-stat-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; display: block; }
-      .copilot-divider { height: 1px; background: var(--border); }
+      .ai-stat-text { font-size: 10px; color: var(--text-dim); margin-top: 2px; display: block; letter-spacing: 0.3px; }
+      @media (max-width: 640px) {
+        .ai-layout { flex-direction: column; text-align: center; }
+        .ai-stats { align-items: center; }
+      }
     </style>`;
 }

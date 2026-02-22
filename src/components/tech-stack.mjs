@@ -11,7 +11,14 @@ export function renderTechStack(data) {
     'Rust':       { icon: 'rust-original', label: 'Rust', cat: 'Languages' },
     'C++':        { icon: 'cplusplus-plain', label: 'C++', cat: 'Languages' },
     'Java':       { icon: 'java-plain', label: 'Java', cat: 'Languages' },
+    'C':          { icon: 'c-plain', label: 'C', cat: 'Languages' },
+    'C#':         { icon: 'csharp-plain', label: 'C#', cat: 'Languages' },
+    'PHP':        { icon: 'php-plain', label: 'PHP', cat: 'Languages' },
+    'Swift':      { icon: 'swift-plain', label: 'Swift', cat: 'Languages' },
+    'Kotlin':     { icon: 'kotlin-plain', label: 'Kotlin', cat: 'Languages' },
+    'Dart':       { icon: 'dart-plain', label: 'Dart', cat: 'Languages' },
     'Svelte':     { icon: 'svelte-plain', label: 'Svelte', cat: 'Frameworks' },
+    'Vue':        { icon: 'vuejs-plain', label: 'Vue', cat: 'Frameworks' },
     'HCL':        { icon: 'terraform-plain', label: 'Terraform', cat: 'DevOps' },
     'Dockerfile': { icon: 'docker-plain', label: 'Docker', cat: 'DevOps' },
     'Shell':      { icon: 'bash-plain', label: 'Shell', cat: 'Tools' },
@@ -52,34 +59,34 @@ export function renderTechStack(data) {
   }).join('');
 
   return `
-    <div class="card span-12 anim d8">
-      <div class="card-label">Tech Stack</div>
+    <div class="tech-area anim d8">
       <div class="tech-grid">${sections}</div>
     </div>
     <style>
-      .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 24px; }
-      .tech-category { }
+      .tech-grid { display: flex; gap: 32px; flex-wrap: wrap; }
+      .tech-category { min-width: 120px; }
       .tech-cat-label {
-        font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+        font-size: 8px; font-weight: 700; letter-spacing: 1.5px;
         text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px;
       }
       .tech-icons { display: flex; flex-wrap: wrap; gap: 8px; }
       .tech-item {
-        display: flex; flex-direction: column; align-items: center; gap: 5px;
-        width: 56px; padding: 8px 2px;
+        display: flex; flex-direction: column; align-items: center; gap: 4px;
+        width: 52px; padding: 8px 2px;
         border-radius: var(--radius-xs);
-        background: var(--bg-elevated);
+        background: var(--card-bg-solid);
+        backdrop-filter: blur(4px);
         border: 1px solid var(--border);
-        transition: border-color 0.25s, transform 0.25s var(--ease-out);
+        transition: border-color 0.25s, transform 0.3s var(--ease-out);
         cursor: default;
       }
       .tech-item:hover {
         border-color: var(--accent);
         transform: translateY(-3px);
       }
-      .tech-item i { font-size: 22px; }
+      .tech-item i { font-size: 20px; }
       .tech-item span {
-        font-size: 8px; font-weight: 600;
+        font-size: 7px; font-weight: 600;
         color: var(--text-secondary); text-align: center;
         font-family: var(--font-mono);
       }

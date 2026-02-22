@@ -1,4 +1,34 @@
-export function renderActivity(data) {
+function aggregateMonthly(data) {
+  const yearly = data.yearlyContributions || [];
+  const monthMap = {};
+  yearly.forEach(y => {
+    (y.calendar || []).forEach(day => {
+      const key = day.date.slice(0, 7);
+      if (!monthMap[key]) monthMap[key] = { commits: 0, prs: 0, reviews: 0 };
+      monthMap[key].commits += day.count || 0;
+    });
+    const from = new Date(y.from);
+    const to = new Date(y.to);
+    const months = (to.getFullYear() - from.getFullYear()) * 12 + (to.getMonth() - from.getMonth()) + 1;
+    const prsPerMonth = (y.stats.prs || 0) / months;
+    const reviewsPerMonth = (y.stats.reviews || 0) / months;
+    for (let d = new Date(from); d <= to; d.setMonth(d.getMonth() + 1)) {
+      const key = d.toISOString().slice(0, 7);
+      if (!monthMap[key]) monthMap[key] = { commits: 0, prs: 0, reviews: 0 };
+      monthMap[key].prs += prsPerMonth;
+      monthMap[key].reviews += reviewsPerMonth;
+    }
+  });
+  const sorted = Object.keys(monthMap).sort();
+  return {
+    labels: sorted,
+    commits: sorted.map(m => monthMap[m].commits),
+    prs: sorted.map(m => Math.round(monthMap[m].prs)),
+    reviews: sorted.map(m => Math.round(monthMap[m].reviews)),
+  };
+}
+
+export function renderActivityRadar(data) {
   const radarLabels = ["Commits", "PRs", "Reviews", "Issues", "Comments"];
   const radarRaw = [
     data.activity.totalCommits,
@@ -9,246 +39,253 @@ export function renderActivity(data) {
   ];
   const radarPlot = radarRaw.map(v => Math.log10(v + 1));
 
-  const yearly = data.yearlyContributions || [];
-  const monthMap = {};
-  yearly.forEach(y => {
-    (y.calendar || []).forEach(day => {
-      const key = day.date.slice(0, 7);
-      if (!monthMap[key]) monthMap[key] = { commits: 0, prs: 0, reviews: 0, restricted: 0 };
-      monthMap[key].commits += day.count || 0;
-    });
-    const from = new Date(y.from);
-    const to = new Date(y.to);
-    const months = (to.getFullYear() - from.getFullYear()) * 12 + (to.getMonth() - from.getMonth()) + 1;
-    const prsPerMonth = (y.stats.prs || 0) / months;
-    const reviewsPerMonth = (y.stats.reviews || 0) / months;
-    const restrictedPerMonth = (y.stats.restricted || 0) / months;
-    for (let d = new Date(from); d <= to; d.setMonth(d.getMonth() + 1)) {
-      const key = d.toISOString().slice(0, 7);
-      if (!monthMap[key]) monthMap[key] = { commits: 0, prs: 0, reviews: 0, restricted: 0 };
-      monthMap[key].prs += prsPerMonth;
-      monthMap[key].reviews += reviewsPerMonth;
-      monthMap[key].restricted += restrictedPerMonth;
-    }
-  });
-
-  const sortedMonths = Object.keys(monthMap).sort();
-  const monthLabels = sortedMonths.map(m => {
-    const [y, mo] = m.split('-');
-    return `${y}-${mo}`;
-  });
-  const monthCommits = sortedMonths.map(m => monthMap[m].commits);
-  const monthPrs = sortedMonths.map(m => Math.round(monthMap[m].prs));
-  const monthReviews = sortedMonths.map(m => Math.round(monthMap[m].reviews));
-
   return `
-    <div class="card span-5 anim d5">
-      <div class="card-label">Activity Radar</div>
-      <div class="chart-wrap" style="height:280px">
+    <div class="activity-radar anim d5">
+      <div class="sub-label">Activity Radar</div>
+      <div class="chart-wrap" style="height:260px">
         <canvas id="radarChart"></canvas>
       </div>
     </div>
-    <div class="card span-7 anim d6">
-      <div class="card-label">Monthly Contributions</div>
-      <div class="chart-wrap" style="height:280px">
+    <script>
+    (function() {
+      var fontMono = "'Geist Mono','SF Mono',monospace";
+      var fontSans = "'M PLUS Rounded 1c',-apple-system,sans-serif";
+      var radarRaw = ${JSON.stringify(radarRaw)};
+      function cc() {
+        var s = getComputedStyle(document.documentElement);
+        return {
+          grid: s.getPropertyValue('--chart-grid').trim(),
+          tick: s.getPropertyValue('--chart-tick').trim(),
+          label: s.getPropertyValue('--chart-label').trim(),
+          ttBg: s.getPropertyValue('--chart-tooltip-bg').trim(),
+          ttTitle: s.getPropertyValue('--chart-tooltip-title').trim(),
+          ttBody: s.getPropertyValue('--chart-tooltip-body').trim(),
+          ttBorder: s.getPropertyValue('--chart-tooltip-border').trim(),
+          pb: s.getPropertyValue('--chart-point-border').trim(),
+          accent: s.getPropertyValue('--accent').trim(),
+        };
+      }
+      var c = cc();
+      var radarChart = new Chart(document.getElementById('radarChart'), {
+        type: 'radar',
+        data: {
+          labels: ${JSON.stringify(radarLabels)},
+          datasets: [{
+            data: [0,0,0,0,0],
+            backgroundColor: c.accent + '14',
+            borderColor: c.accent,
+            pointBackgroundColor: c.accent,
+            pointBorderColor: c.pb,
+            pointBorderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            borderWidth: 1.5,
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          animation: { duration: 1500, easing: 'easeOutQuart' },
+          plugins: { legend: { display: false },
+            tooltip: {
+              backgroundColor: c.ttBg, titleColor: c.ttTitle, bodyColor: c.ttBody,
+              borderColor: c.ttBorder, borderWidth: 1,
+              cornerRadius: 10, padding: 10, displayColors: false,
+              bodyFont: { family: fontMono, size: 11 },
+              callbacks: { label: function(ctx) { return radarRaw[ctx.dataIndex].toLocaleString(); } }
+            }
+          },
+          scales: {
+            r: {
+              angleLines: { color: c.grid },
+              grid: { color: c.grid, lineWidth: 1 },
+              pointLabels: { color: c.label, font: { size: 11, weight: '500', family: fontSans } },
+              ticks: {
+                display: true, color: c.tick, backdropColor: 'transparent', stepSize: 1,
+                font: { size: 8, family: fontMono },
+                callback: function(v) { return v===0?'1':v===1?'10':v===2?'100':v===3?'1k':v===4?'10k':''; }
+              },
+              min: 0, max: 4
+            }
+          }
+        }
+      });
+      var revealed = false;
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting && !revealed) {
+            revealed = true;
+            radarChart.data.datasets[0].data = ${JSON.stringify(radarPlot)};
+            radarChart.update();
+            obs.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+      obs.observe(document.getElementById('radarChart'));
+      window.addEventListener('themechange', function() {
+        var c = cc();
+        radarChart.options.scales.r.angleLines.color = c.grid;
+        radarChart.options.scales.r.grid.color = c.grid;
+        radarChart.options.scales.r.pointLabels.color = c.label;
+        radarChart.options.scales.r.ticks.color = c.tick;
+        radarChart.data.datasets[0].pointBorderColor = c.pb;
+        radarChart.data.datasets[0].borderColor = c.accent;
+        radarChart.data.datasets[0].pointBackgroundColor = c.accent;
+        radarChart.data.datasets[0].backgroundColor = c.accent + '14';
+        radarChart.options.plugins.tooltip.backgroundColor = c.ttBg;
+        radarChart.options.plugins.tooltip.titleColor = c.ttTitle;
+        radarChart.options.plugins.tooltip.bodyColor = c.ttBody;
+        radarChart.options.plugins.tooltip.borderColor = c.ttBorder;
+        radarChart.update('none');
+      });
+    })();
+    </script>`;
+}
+
+export function renderActivityTimeline(data) {
+  const m = aggregateMonthly(data);
+
+  return `
+    <div class="activity-timeline anim d6" style="margin-top:28px">
+      <div class="sub-label">Monthly Contributions</div>
+      <div class="chart-wrap" style="height:200px">
         <canvas id="monthlyChart"></canvas>
       </div>
     </div>
     <script>
     (function() {
       var fontMono = "'Geist Mono','SF Mono',monospace";
-      var fontSans = "'DM Sans',-apple-system,sans-serif";
-      var radarRaw = ${JSON.stringify(radarRaw)};
-
-      Chart.defaults.font.family = fontSans;
-
-      function getChartColors() {
+      var fontSans = "'M PLUS Rounded 1c',-apple-system,sans-serif";
+      var allLabels = ${JSON.stringify(m.labels)};
+      var displayLabels = allLabels.map(function(l, i) { return (i % 3 === 0) ? l.slice(2) : ''; });
+      function cc() {
         var s = getComputedStyle(document.documentElement);
         return {
-          grid: s.getPropertyValue('--chart-grid').trim() || 'rgba(255,255,255,0.04)',
-          tick: s.getPropertyValue('--chart-tick').trim() || '#4a4742',
-          label: s.getPropertyValue('--chart-label').trim() || '#8a8680',
-          ttBg: s.getPropertyValue('--chart-tooltip-bg').trim() || '#1a1c22',
-          ttTitle: s.getPropertyValue('--chart-tooltip-title').trim() || '#f0ede6',
-          ttBody: s.getPropertyValue('--chart-tooltip-body').trim() || '#8a8680',
-          ttBorder: s.getPropertyValue('--chart-tooltip-border').trim() || 'rgba(255,255,255,0.08)',
-          pointBorder: s.getPropertyValue('--chart-point-border').trim() || '#08090c',
+          grid: s.getPropertyValue('--chart-grid').trim(),
+          tick: s.getPropertyValue('--chart-tick').trim(),
+          label: s.getPropertyValue('--chart-label').trim(),
+          ttBg: s.getPropertyValue('--chart-tooltip-bg').trim(),
+          ttTitle: s.getPropertyValue('--chart-tooltip-title').trim(),
+          ttBody: s.getPropertyValue('--chart-tooltip-body').trim(),
+          ttBorder: s.getPropertyValue('--chart-tooltip-border').trim(),
+          pb: s.getPropertyValue('--chart-point-border').trim(),
+          matcha: s.getPropertyValue('--matcha').trim(),
+          sora: s.getPropertyValue('--sora').trim(),
+          fuji: s.getPropertyValue('--fuji').trim(),
         };
       }
-
-      var radarCanvas = document.getElementById('radarChart');
-      var radarChart = null;
-      var radarRevealed = false;
-
-      function createRadar() {
-        var c = getChartColors();
-        radarChart = new Chart(radarCanvas, {
-          type: 'radar',
-          data: {
-            labels: ${JSON.stringify(radarLabels)},
-            datasets: [{
-              data: [0,0,0,0,0],
-              backgroundColor: 'rgba(232,168,73,0.08)',
-              borderColor: '#e8a849',
-              pointBackgroundColor: '#e8a849',
-              pointBorderColor: c.pointBorder,
-              pointBorderWidth: 2,
-              pointRadius: 4,
-              pointHoverRadius: 6,
+      var c = cc();
+      var chart = new Chart(document.getElementById('monthlyChart'), {
+        type: 'line',
+        data: {
+          labels: displayLabels,
+          datasets: [
+            {
+              label: 'Commits',
+              data: ${JSON.stringify(m.commits)},
+              borderColor: c.matcha,
+              backgroundColor: c.matcha + '12',
+              pointBackgroundColor: c.matcha,
+              pointBorderColor: c.pb,
+              pointBorderWidth: 1.5,
+              pointRadius: 0,
+              pointHoverRadius: 4,
+              borderWidth: 2,
+              tension: 0.4,
+              fill: true,
+              yAxisID: 'y',
+            },
+            {
+              label: 'PRs',
+              data: ${JSON.stringify(m.prs)},
+              borderColor: c.sora,
+              backgroundColor: 'transparent',
+              pointBackgroundColor: c.sora,
+              pointBorderColor: c.pb,
+              pointBorderWidth: 1.5,
+              pointRadius: 0,
+              pointHoverRadius: 4,
               borderWidth: 1.5,
-            }]
-          },
-          options: {
-            responsive: true, maintainAspectRatio: false,
-            animation: { duration: 1500, easing: 'easeOutQuart' },
-            plugins: { legend: { display: false },
-              tooltip: {
-                backgroundColor: c.ttBg, titleColor: c.ttTitle, bodyColor: c.ttBody,
-                borderColor: c.ttBorder, borderWidth: 1,
-                cornerRadius: 8, padding: 10, displayColors: false,
-                bodyFont: { family: fontMono, size: 12 },
-                callbacks: { label: function(ctx) { return radarRaw[ctx.dataIndex].toLocaleString(); } }
-              }
+              tension: 0.4,
+              fill: false,
+              yAxisID: 'y1',
+              borderDash: [4, 2],
             },
-            scales: {
-              r: {
-                angleLines: { color: c.grid },
-                grid: { color: c.grid, lineWidth: 1 },
-                pointLabels: { color: c.label, font: { size: 11, weight: '500', family: fontSans } },
-                ticks: {
-                  display: true, color: c.tick, backdropColor: 'transparent', stepSize: 1,
-                  font: { size: 8, family: fontMono },
-                  callback: function(v) { return v===0?'1':v===1?'10':v===2?'100':v===3?'1k':v===4?'10k':''; }
-                },
-                min: 0, max: 4
-              }
+            {
+              label: 'Reviews',
+              data: ${JSON.stringify(m.reviews)},
+              borderColor: c.fuji,
+              backgroundColor: 'transparent',
+              pointBackgroundColor: c.fuji,
+              pointBorderColor: c.pb,
+              pointBorderWidth: 1.5,
+              pointRadius: 0,
+              pointHoverRadius: 4,
+              borderWidth: 1.5,
+              tension: 0.4,
+              fill: false,
+              yAxisID: 'y1',
+              borderDash: [2, 2],
+            }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { boxWidth: 8, usePointStyle: true, pointStyle: 'circle', color: c.label, font: { size: 10, family: fontSans }, padding: 14 }
+            },
+            tooltip: {
+              backgroundColor: c.ttBg, titleColor: c.ttTitle, bodyColor: c.ttBody,
+              borderColor: c.ttBorder, borderWidth: 1, cornerRadius: 10, padding: 10,
+              bodyFont: { family: fontMono, size: 11 },
+              callbacks: { title: function(items) { return allLabels[items[0].dataIndex]; } }
+            }
+          },
+          scales: {
+            x: { grid: { display: false }, ticks: { color: c.label, font: { family: fontMono, size: 9 }, maxRotation: 0 }, border: { display: false } },
+            y: {
+              position: 'left',
+              grid: { color: c.grid, lineWidth: 1 },
+              ticks: { color: c.matcha, font: { family: fontMono, size: 9 } },
+              border: { display: false },
+              title: { display: true, text: 'Commits', color: c.matcha, font: { size: 9, family: fontSans } }
+            },
+            y1: {
+              position: 'right',
+              grid: { drawOnChartArea: false },
+              ticks: { color: c.sora, font: { family: fontMono, size: 9 } },
+              border: { display: false },
+              title: { display: true, text: 'PRs / Reviews', color: c.sora, font: { size: 9, family: fontSans } }
             }
           }
-        });
-      }
-
-      createRadar();
-
-      var radarObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting && !radarRevealed) {
-            radarRevealed = true;
-            radarChart.data.datasets[0].data = ${JSON.stringify(radarPlot)};
-            radarChart.update();
-            radarObserver.disconnect();
-          }
-        });
-      }, { threshold: 0.3 });
-      radarObserver.observe(radarCanvas);
-
-      var monthlyCanvas = document.getElementById('monthlyChart');
-      var monthlyLabels = ${JSON.stringify(monthLabels)};
-      var displayLabels = monthlyLabels.map(function(l, i) {
-        return (i % 3 === 0) ? l : '';
+        }
       });
-
-      function createMonthly() {
-        var c = getChartColors();
-        return new Chart(monthlyCanvas, {
-          type: 'line',
-          data: {
-            labels: displayLabels,
-            datasets: [
-              {
-                label: 'Commits',
-                data: ${JSON.stringify(monthCommits)},
-                borderColor: '#4ade80',
-                backgroundColor: 'rgba(74,222,128,0.08)',
-                pointBackgroundColor: '#4ade80',
-                pointBorderColor: c.pointBorder,
-                pointBorderWidth: 2,
-                pointRadius: 2,
-                pointHoverRadius: 5,
-                borderWidth: 2,
-                tension: 0.35,
-                fill: true,
-              },
-              {
-                label: 'PRs',
-                data: ${JSON.stringify(monthPrs)},
-                borderColor: '#60a5fa',
-                backgroundColor: 'transparent',
-                pointBackgroundColor: '#60a5fa',
-                pointBorderColor: c.pointBorder,
-                pointBorderWidth: 2,
-                pointRadius: 2,
-                pointHoverRadius: 5,
-                borderWidth: 1.5,
-                tension: 0.35,
-                fill: false,
-              },
-              {
-                label: 'Reviews',
-                data: ${JSON.stringify(monthReviews)},
-                borderColor: '#c084fc',
-                backgroundColor: 'transparent',
-                pointBackgroundColor: '#c084fc',
-                pointBorderColor: c.pointBorder,
-                pointBorderWidth: 2,
-                pointRadius: 2,
-                pointHoverRadius: 5,
-                borderWidth: 1.5,
-                tension: 0.35,
-                fill: false,
-              }
-            ]
-          },
-          options: {
-            responsive: true, maintainAspectRatio: false,
-            interaction: { mode: 'index', intersect: false },
-            plugins: {
-              legend: {
-                position: 'bottom',
-                labels: { boxWidth: 8, usePointStyle: true, pointStyle: 'circle', color: c.label, font: { size: 10, family: fontSans }, padding: 16 }
-              },
-              tooltip: {
-                backgroundColor: c.ttBg, titleColor: c.ttTitle, bodyColor: c.ttBody,
-                borderColor: c.ttBorder, borderWidth: 1, cornerRadius: 8, padding: 10,
-                bodyFont: { family: fontMono, size: 11 },
-                callbacks: { title: function(items) { return monthlyLabels[items[0].dataIndex]; } }
-              }
-            },
-            scales: {
-              x: { grid: { display: false }, ticks: { color: c.label, font: { family: fontMono, size: 10 }, maxRotation: 45 }, border: { display: false } },
-              y: { grid: { color: c.grid, lineWidth: 1 }, ticks: { color: c.tick, font: { family: fontMono, size: 10 } }, border: { display: false } }
-            }
-          }
-        });
-      }
-
-      var monthlyChart = createMonthly();
-
       window.addEventListener('themechange', function() {
-        var c = getChartColors();
-        if (radarChart) {
-          radarChart.options.scales.r.angleLines.color = c.grid;
-          radarChart.options.scales.r.grid.color = c.grid;
-          radarChart.options.scales.r.pointLabels.color = c.label;
-          radarChart.options.scales.r.ticks.color = c.tick;
-          radarChart.data.datasets[0].pointBorderColor = c.pointBorder;
-          radarChart.options.plugins.tooltip.backgroundColor = c.ttBg;
-          radarChart.options.plugins.tooltip.titleColor = c.ttTitle;
-          radarChart.options.plugins.tooltip.bodyColor = c.ttBody;
-          radarChart.options.plugins.tooltip.borderColor = c.ttBorder;
-          radarChart.update('none');
-        }
-        if (monthlyChart) {
-          monthlyChart.options.scales.x.ticks.color = c.label;
-          monthlyChart.options.scales.y.grid.color = c.grid;
-          monthlyChart.options.scales.y.ticks.color = c.tick;
-          monthlyChart.options.plugins.legend.labels.color = c.label;
-          monthlyChart.options.plugins.tooltip.backgroundColor = c.ttBg;
-          monthlyChart.options.plugins.tooltip.titleColor = c.ttTitle;
-          monthlyChart.options.plugins.tooltip.bodyColor = c.ttBody;
-          monthlyChart.options.plugins.tooltip.borderColor = c.ttBorder;
-          monthlyChart.data.datasets.forEach(function(ds) { ds.pointBorderColor = c.pointBorder; });
-          monthlyChart.update('none');
-        }
+        var c = cc();
+        chart.options.scales.x.ticks.color = c.label;
+        chart.options.scales.y.grid.color = c.grid;
+        chart.options.scales.y.ticks.color = c.matcha;
+        chart.options.scales.y.title.color = c.matcha;
+        chart.options.scales.y1.ticks.color = c.sora;
+        chart.options.scales.y1.title.color = c.sora;
+        chart.options.plugins.legend.labels.color = c.label;
+        chart.options.plugins.tooltip.backgroundColor = c.ttBg;
+        chart.options.plugins.tooltip.titleColor = c.ttTitle;
+        chart.options.plugins.tooltip.bodyColor = c.ttBody;
+        chart.options.plugins.tooltip.borderColor = c.ttBorder;
+        chart.data.datasets[0].borderColor = c.matcha;
+        chart.data.datasets[0].backgroundColor = c.matcha + '12';
+        chart.data.datasets[0].pointBackgroundColor = c.matcha;
+        chart.data.datasets[0].pointBorderColor = c.pb;
+        chart.data.datasets[1].borderColor = c.sora;
+        chart.data.datasets[1].pointBackgroundColor = c.sora;
+        chart.data.datasets[1].pointBorderColor = c.pb;
+        chart.data.datasets[2].borderColor = c.fuji;
+        chart.data.datasets[2].pointBackgroundColor = c.fuji;
+        chart.data.datasets[2].pointBorderColor = c.pb;
+        chart.update('none');
       });
     })();
     </script>`;

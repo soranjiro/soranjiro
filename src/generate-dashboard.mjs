@@ -4,7 +4,7 @@ import { dirname, join } from "path";
 
 import { renderStyles } from "./components/styles.mjs";
 import { renderHeader } from "./components/header.mjs";
-import { renderActivity } from "./components/activity.mjs";
+import { renderActivityRadar, renderActivityTimeline } from "./components/activity.mjs";
 import { renderLanguages } from "./components/languages.mjs";
 import { renderTechStack } from "./components/tech-stack.mjs";
 import { renderCopilot } from "./components/copilot.mjs";
@@ -38,14 +38,46 @@ function generateDashboard() {
   <div class="page-bg"></div>
   <div class="container">
     ${renderHeader(data)}
-    <div class="bento">
+
+    <div class="section-divider"></div>
+
+    <section class="page-section">
+      <h2 class="section-title">Featured Projects</h2>
       ${renderRepos(data)}
-      ${renderActivity(data)}
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="page-section">
+      <h2 class="section-title">Activity & Craft</h2>
+      <div class="flow-row">
+        <div class="flow-col-main">
+          ${renderActivityRadar(data)}
+        </div>
+        <div class="flow-col-side">
+          ${renderCopilot(data)}
+        </div>
+      </div>
+      ${renderActivityTimeline(data)}
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="page-section">
+      <h2 class="section-title">Languages & Tools</h2>
       ${renderLanguages(data)}
+      <div style="margin-top:28px">
+        ${renderTechStack(data)}
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="page-section">
+      <h2 class="section-title">Community</h2>
       ${renderOrgs(data)}
-      ${renderCopilot(data)}
-      ${renderTechStack(data)}
-    </div>
+    </section>
+
     <footer class="footer">
       <p>Last updated: ${new Date(data.fetchedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
     </footer>
@@ -75,8 +107,8 @@ function generateDashboard() {
   </script>
   <style>
     .footer {
-      text-align: center; padding: 40px 0 0; margin-top: 20px;
-      font-size: 11px; color: var(--text-dim); letter-spacing: 0.5px;
+      text-align: center; padding: 48px 0 0; margin-top: 24px;
+      font-size: 10px; color: var(--text-dim); letter-spacing: 0.5px;
     }
   </style>
 </body>
