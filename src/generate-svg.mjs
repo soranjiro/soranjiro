@@ -8,7 +8,7 @@ const SVG_DIR = join(ROOT, "output/assets/svg");
 mkdirSync(SVG_DIR, { recursive: true });
 const data = JSON.parse(readFileSync(join(ROOT, "output/data.json"), "utf-8"));
 
-const SVG_W = 480;
+const SVG_W = 400;
 
 function esc(s) {
   return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
