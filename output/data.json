@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-02-23T03:48:02.798Z",
+  "fetchedAt": "2026-02-23T05:42:56.006Z",
   "config": {
     "excludeLanguages": [
       "HTML",
@@ -73,12 +73,12 @@
   "copilot": {
     "copilotMentions": 33,
     "coauthoredCommits": 8,
-    "premiumRequests": 917
+    "premiumRequests": 692
   },
-  "aiSummary": "Soranjiro is a skilled backend engineer with over three years of experience in full-stack development, specializing in infrastructure. With a strong background in Ruby on Rails and proficiency in TypeScript and Go, they are currently exploring machine learning through Kaggle competitions. Their expertise is further complemented by a solid understanding of AWS, Terraform, and Docker, making them well-versed in modern DevOps practices.",
-  "reposOverview": "The collection of repositories showcases the developer's proficiency in multiple programming languages, including Svelte, Rust, C++, and TypeScript, indicating a versatile skill set in web application development and system programming. Additionally, the presence of a travel itinerary application suggests a focus on creating user-centric solutions.",
+  "aiSummary": "Soranjiro is a backend engineer with a full-stack expertise in infrastructure and web application development. With over three years on GitHub and nearly 5,000 commits, he actively contributes to various projects while exploring machine learning through Kaggle competitions, focusing on mitigating popularity bias in recommender systems. His technical proficiency includes Ruby on Rails, Go, TypeScript, and Python, complemented by experience in AWS, Terraform, and Docker.",
+  "reposOverview": "The pinned GitHub repositories illustrate the developer's proficiency in multiple programming languages, including Svelte, Rust, C++, and TypeScript, as well as their ability to create functional web applications and tools. The presence of a travel itinerary application suggests a focus on user-centric design and practical functionality in their projects.",
   "userProfile": {
-    "bio": "Backend engineer working with infrastructure and frontend in a full-stack capacity. Recently exploring machine learning and Kaggle competitions. keywords: - backend engineer - full-stack - infrastructure - machine learning - Kaggle roles: - Backend Engineer - Full-Stack Developer - Infrastructure Engineer interests: - Machine Learning - Kaggle - DevOps / Infrastructure - Web Application Development techHighlights: - Ruby on Rails (work) - TypeScript / Svelte (personal) - Go (infrastructure tooling) - Python (ML / data science) - AWS / Terraform - Docker / CI/CD",
+    "bio": "Backend engineer working with infrastructure and frontend in a full-stack capacity. Recently exploring machine learning and Kaggle competitions. Currently researching popularity bias in recommender systems and ways to mitigate it. keywords: - backend engineer - full-stack - infrastructure - machine learning - Kaggle roles: - Backend Engineer - Full-Stack Developer - Infrastructure Engineer interests: - Machine Learning - Kaggle - DevOps / Infrastructure - Web Application Development techHighlights: - Ruby on Rails (work) - Go (work) - TypeScript / Svelte (personal) - Python (ML / data science) - AWS / Terraform - Docker / CI/CD",
     "keywords": [
       "backend engineer",
       "full-stack",
@@ -99,8 +99,8 @@
     ],
     "techHighlights": [
       "Ruby on Rails (work)",
+      "Go (work)",
       "TypeScript / Svelte (personal)",
-      "Go (infrastructure tooling)",
       "Python (ML / data science)",
       "AWS / Terraform",
       "Docker / CI/CD"
@@ -5960,7 +5960,7 @@
       "label": "2026-01-12 ~ 2026-02-23",
       "yearLabel": "2026",
       "from": "2026-01-12T02:54:52.000Z",
-      "to": "2026-02-23T03:47:06.999Z",
+      "to": "2026-02-23T05:41:56.627Z",
       "stats": {
         "commits": 111,
         "prs": 19,
@@ -12211,7 +12211,7 @@
     {
       "period": "2026-01-12 ~ 2026-02-23",
       "from": "2026-01-12T02:54:52.000Z",
-      "to": "2026-02-23T03:47:06.999Z",
+      "to": "2026-02-23T05:41:56.627Z",
       "languages": [
         {
           "name": "Svelte",
@@ -12502,7 +12502,7 @@
       "name": "tabitabi",
       "nameWithOwner": "soranjiro/tabitabi",
       "description": "旅のしおりを作成・共有できる多機能Webアプリケーション",
-      "aiDescription": "Tabitabi is a web application for creating and sharing travel itineraries.",
+      "aiDescription": "Tabitabi is a web application for creating and sharing travel itineraries with customizable themes.",
       "stars": 4,
       "forks": 0,
       "isPrivate": false,
@@ -12552,7 +12552,7 @@
       "name": "aws-auth-command",
       "nameWithOwner": "soranjiro/aws-auth-command",
       "description": null,
-      "aiDescription": "This repository provides a command-line tool for managing AWS authentication profiles and commands.",
+      "aiDescription": "This repository provides a command-line tool for AWS authentication and command execution.",
       "stars": 0,
       "forks": 0,
       "isPrivate": false,
@@ -12592,7 +12592,7 @@
       "name": "mybrowser",
       "nameWithOwner": "soranjiro/mybrowser",
       "description": null,
-      "aiDescription": "MyBrowser is a Qt-based web browser featuring advanced functionality like PiP video support and workspace management.",
+      "aiDescription": "MyBrowser is a modern Qt-based web browser with advanced features like PiP video support and workspace management.",
       "stars": 0,
       "forks": 0,
       "isPrivate": false,
@@ -12647,7 +12647,7 @@
       "name": "clozy",
       "nameWithOwner": "soranjiro/clozy",
       "description": null,
-      "aiDescription": "Clozy is a web application for managing and organizing your clothing items.",
+      "aiDescription": "Clozy is an application for managing and organizing your clothing inventory.",
       "stars": 1,
       "forks": 0,
       "isPrivate": false,

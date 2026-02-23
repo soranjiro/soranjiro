@@ -72,7 +72,7 @@ const ICONS = {
   repo: "M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 010-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5zm-3 2a.75.75 0 01.75.75v2a.75.75 0 01-1.5 0v-2a.75.75 0 01.75-.75z",
   org: "M1.75 16A1.75 1.75 0 010 14.25V1.75C0 .784.784 0 1.75 0h8.5C11.216 0 12 .784 12 1.75v12.5c0 .085-.006.168-.018.25h2.268a.25.25 0 00.25-.25V8.285a.25.25 0 00-.111-.208l-1.055-.703a.75.75 0 11.832-1.248l1.055.703c.487.325.779.871.779 1.456v5.965A1.75 1.75 0 0114.25 16h-3.5a.75.75 0 01-.197-.026c-.099.017-.2.026-.303.026h-3a.75.75 0 01-.75-.75V14h-1v1.25a.75.75 0 01-.75.75h-3zM3 3.75A.75.75 0 013.75 3h.5a.75.75 0 010 1.5h-.5A.75.75 0 013 3.75zM3.75 6a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5zM3 9.75A.75.75 0 013.75 9h.5a.75.75 0 010 1.5h-.5A.75.75 0 013 9.75zM7.75 9a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5zM7 6.75A.75.75 0 017.75 6h.5a.75.75 0 010 1.5h-.5A.75.75 0 017 6.75zM7.75 3a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5z",
   clock: "M1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM8 0a8 8 0 100 16A8 8 0 008 0zm.5 4.75a.75.75 0 00-1.5 0v3.5a.75.75 0 00.471.696l2.5 1a.75.75 0 00.557-1.392L8.5 7.742V4.75z",
-  copilot: "M7.998 15.035c-4.405 0-7.998-3.592-7.998-8s3.593-8 7.998-8C12.407-.965 16 2.627 16 7.035s-3.593 8-8.002 8zM12.5 10c0-1.5-1-2.5-2.5-2.5S7.5 8.5 7.5 10h5zM5.5 6.5a1 1 0 100 2 1 1 0 000-2zm5 0a1 1 0 100 2 1 1 0 000-2z",
+  copilot: "M7.53 1.282a.5.5 0 01.94 0l1.478 4.007a.5.5 0 00.312.312l4.007 1.478a.5.5 0 010 .94l-4.007 1.478a.5.5 0 00-.312.312L8.47 14.816a.5.5 0 01-.94 0L6.052 10.81a.5.5 0 00-.312-.312L1.733 9.019a.5.5 0 010-.94L5.74 6.601a.5.5 0 00.312-.312z",
   contrib: "M1 2.5A2.5 2.5 0 013.5 0h8.75a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0V1.5h-8a1 1 0 00-1 1v6.708A2.492 2.492 0 013.5 9h3.25a.75.75 0 010 1.5H3.5a1 1 0 100 2h5.75a.75.75 0 010 1.5H3.5A2.5 2.5 0 011 11.5v-9zm13.23 7.79a.75.75 0 001.06-1.06l-2.505-2.505a.75.75 0 00-1.06 0L9.22 9.229a.75.75 0 001.06 1.061l1.225-1.224v6.184a.75.75 0 001.5 0V9.066l1.224 1.224z",
 };
 
@@ -125,7 +125,7 @@ function generateOverviewSVG() {
     </div>
   `;
 
-  return wrapSVG(220, body);
+  return wrapSVG(260, body);
 }
 
 // ─── Languages & Tech Stack SVG ──────────────────────────────────────
@@ -241,22 +241,13 @@ function generateLanguagesSVG() {
     <h2 class="anim">${iconSVG(ICONS.repo, 16)} Languages &amp; Tech Stack</h2>
     <div class="lang-bar anim anim-d1">${barSegments}</div>
     <div class="lang-legend anim anim-d2">${legend}</div>
-    <div style="margin-top: 14px;" class="anim anim-d3">
-      <div style="font-size: 11px; color: var(--muted); margin-bottom: 6px;">Language Evolution</div>
-      <svg xmlns="http://www.w3.org/2000/svg" width="${trendWidth + 20}" height="${trendHeight + 18}" style="overflow:visible;">
-        <line x1="0" y1="${trendHeight}" x2="${trendWidth}" y2="${trendHeight}" stroke="var(--border)" stroke-width="1"/>
-        ${trendLines}
-        ${xLabels}
-      </svg>
-      <div class="lang-legend" style="margin-top: 4px;">${trendLegend}</div>
-    </div>
-    <div style="margin-top:14px;padding-top:10px;border-top:1px solid var(--border);" class="anim anim-d4">
+    <div style="margin-top:14px;padding-top:10px;border-top:1px solid var(--border);" class="anim anim-d3">
       <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">Skill Stack</div>
       ${stackSections}
     </div>
   `;
 
-  return wrapSVG(440, body);
+  return wrapSVG(310, body);
 }
 
 // ─── Activity SVG ────────────────────────────────────────────────────
@@ -474,8 +465,9 @@ function ceilNice(v) {
 }
 
 // ─── Combined Charts SVG ─────────────────────────────────────────────
-function generateChartsSVG() {
-  const W = 840, H = 600;
+async function generateChartsSVG() {
+  const W = 840, PAD_L = 25, PAD_R = 10, PAD_T = 5, PAD_B = 5;
+  const H = 660;
   const fx = v => v.toFixed(1);
 
   const monthly = aggregateMonthly();
@@ -523,7 +515,7 @@ function generateChartsSVG() {
   });
 
   // ── Monthly Chart ──
-  const mcL = 345, mcR = 812, mcT = 44, mcB = 222;
+  const mcL = 345, mcR = 795, mcT = 44, mcB = 222;
   const mcW = mcR - mcL, mcH = mcB - mcT;
   const cMax = ceilNice(Math.max(...mC));
   const pMax = ceilNice(Math.max(...mP, ...mR));
@@ -557,8 +549,8 @@ function generateChartsSVG() {
     if (i % 6 === 0) mc += `<text x="${fx(xS(i))}" y="${mcB + 14}" text-anchor="middle" style="fill:var(--muted);font-size:8px">${m.slice(2)}</text>\n`;
   });
   const mlY = mcB + 30;
-  mc += `<text x="${mcL - 8}" y="38" text-anchor="end" style="fill:var(--matcha);font-size:8px">Commits</text>\n`;
-  mc += `<text x="${mcR + 5}" y="38" text-anchor="start" style="fill:var(--sora);font-size:8px">PRs / Reviews</text>\n`;
+  mc += `<text x="${mcL - 6}" y="38" text-anchor="end" style="fill:var(--matcha);font-size:8px">Commits</text>\n`;
+  mc += `<text x="${mcR}" y="38" text-anchor="end" style="fill:var(--sora);font-size:8px">PRs / Reviews</text>\n`;
   mc += `<line x1="${mcL}" y1="${mlY}" x2="${mcL + 14}" y2="${mlY}" stroke="var(--matcha)" stroke-width="2"/><text x="${mcL + 18}" y="${mlY + 3}" style="fill:var(--muted);font-size:9px">Commits</text>\n`;
   mc += `<line x1="${mcL + 80}" y1="${mlY}" x2="${mcL + 94}" y2="${mlY}" stroke="var(--sora)" stroke-width="1.5" stroke-dasharray="4,2"/><text x="${mcL + 98}" y="${mlY + 3}" style="fill:var(--muted);font-size:9px">PRs</text>\n`;
   mc += `<line x1="${mcL + 128}" y1="${mlY}" x2="${mcL + 142}" y2="${mlY}" stroke="var(--fuji)" stroke-width="1.5" stroke-dasharray="2,2"/><text x="${mcL + 146}" y="${mlY + 3}" style="fill:var(--muted);font-size:9px">Reviews</text>\n`;
@@ -610,52 +602,57 @@ function generateChartsSVG() {
     llX += ds.name.length * 6 + 22;
   });
 
-  // ── Skill Stack ──
+  // ── Skill Stack (skillicons.dev) ──
+  const skillIconMap = {
+    'TypeScript': 'ts', 'JavaScript': 'js', 'Go': 'go', 'Python': 'py',
+    'Ruby': 'ruby', 'C++': 'cpp', 'C': 'c', 'Rust': 'rust', 'Java': 'java',
+    'Svelte': 'svelte', 'Vue': 'vue', 'Tauri': 'tauri', 'React': 'react',
+    'Next.js': 'nextjs', 'Rails': 'rails',
+    'Docker': 'docker', 'AWS': 'aws', 'Terraform': 'terraform',
+    'Linux': 'linux', 'PostgreSQL': 'postgres',
+    'Git': 'git', 'GitHub': 'github', 'VS Code': 'vscode',
+    'LaTeX': 'latex', 'Bash': 'bash',
+  };
+
   const skillCategories = [
-    { label: 'LANGUAGES', items: [
-      { name: 'TypeScript', color: '#3178c6' }, { name: 'JavaScript', color: '#f1e05a' },
-      { name: 'Go', color: '#00ADD8' }, { name: 'Python', color: '#3572A5' },
-      { name: 'Ruby', color: '#CC342D' }, { name: 'C++', color: '#f34b7d' },
-      { name: 'C', color: '#555' }, { name: 'Rust', color: '#dea584' }, { name: 'Java', color: '#b07219' },
-    ]},
-    { label: 'FRAMEWORKS', items: [
-      { name: 'Svelte', color: '#ff3e00' }, { name: 'Vue', color: '#41b883' },
-      { name: 'Tauri', color: '#ffc131' }, { name: 'React', color: '#61dafb' },
-      { name: 'Next.js', color: '#888' }, { name: 'Rails', color: '#cc0000' },
-    ]},
-    { label: 'INFRA', items: [
-      { name: 'Docker', color: '#2496ed' }, { name: 'AWS', color: '#ff9900' },
-      { name: 'Terraform', color: '#7b42bc' }, { name: 'Linux', color: '#fcc624' },
-      { name: 'PostgreSQL', color: '#336791' },
-    ]},
-    { label: 'TOOLS', items: [
-      { name: 'Git', color: '#f05032' }, { name: 'GitHub', color: '#888' },
-      { name: 'VS Code', color: '#007acc' }, { name: 'LaTeX', color: '#008080' },
-      { name: 'Bash', color: '#89e051' },
-    ]},
+    { label: 'LANGUAGES', items: ['TypeScript', 'JavaScript', 'Go', 'Python', 'Ruby', 'C++', 'C', 'Rust', 'Java'] },
+    { label: 'FRAMEWORKS', items: ['Svelte', 'Vue', 'Tauri', 'React', 'Next.js', 'Rails'] },
+    { label: 'INFRA', items: ['Docker', 'AWS', 'Terraform', 'Linux', 'PostgreSQL'] },
+    { label: 'TOOLS', items: ['Git', 'GitHub', 'VS Code', 'LaTeX', 'Bash'] },
   ];
 
+  const iconDataURIs = {};
+  for (const cat of skillCategories) {
+    const ids = cat.items.map(name => skillIconMap[name]).join(',');
+    const url = `https://skillicons.dev/icons?i=${ids}&theme=dark`;
+    try {
+      const res = await fetch(url);
+      const svgText = await res.text();
+      iconDataURIs[cat.label] = `data:image/svg+xml;base64,${Buffer.from(svgText).toString('base64')}`;
+    } catch {
+      iconDataURIs[cat.label] = null;
+    }
+  }
+
   const skY0 = 478;
+  const iconH = 36;
+  const rowGap = 6;
   let sk = '';
-  sk += `<line x1="26" y1="${skY0}" x2="812" y2="${skY0}" stroke="var(--grid)" stroke-width="0.5"/>\n`;
+  sk += `<line x1="26" y1="${skY0}" x2="${mcR}" y2="${skY0}" stroke="var(--grid)" stroke-width="0.5"/>\n`;
   sk += `<text x="26" y="${skY0 + 16}" style="fill:var(--accent);font-size:9px;font-weight:700;letter-spacing:1.5px">SKILL STACK</text>\n`;
 
-  const badgeStartX = 26;
-  let rowY = skY0 + 30;
+  let rowY = skY0 + 26;
+  for (const cat of skillCategories) {
+    sk += `<text x="26" y="${rowY + iconH / 2 + 3}" style="fill:var(--dim);font-size:7px;font-weight:700;letter-spacing:1px">${cat.label}</text>\n`;
+    const dataURI = iconDataURIs[cat.label];
+    if (dataURI) {
+      const iconW = cat.items.length * (iconH + 12);
+      sk += `<image x="105" y="${rowY}" width="${iconW}" height="${iconH}" href="${dataURI}"/>\n`;
+    }
+    rowY += iconH + rowGap;
+  }
 
-  skillCategories.forEach(cat => {
-    let x = badgeStartX;
-    sk += `<text x="${x}" y="${rowY + 10}" style="fill:var(--dim);font-size:7px;font-weight:700;letter-spacing:1px">${cat.label}</text>\n`;
-    x += cat.label.length * 5 + 12;
-    cat.items.forEach(item => {
-      sk += `<circle cx="${x}" cy="${rowY + 7}" r="3" fill="${item.color}"/>\n`;
-      sk += `<text x="${x + 7}" y="${rowY + 10}" style="fill:var(--muted);font-size:9px">${esc(item.name)}</text>\n`;
-      x += 7 + item.name.length * 5.4 + 12;
-    });
-    rowY += 22;
-  });
-
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="${-PAD_L} ${-PAD_T} ${W + PAD_L + PAD_R} ${H + PAD_T + PAD_B}">
 <defs>
 <style>
 svg{--text:#e6edf3;--muted:#8b949e;--dim:#656d76;--grid:rgba(139,148,158,0.15);--accent:#58a6ff;--accent-fill:rgba(88,166,255,0.12);--matcha:#3fb950;--matcha-fill:rgba(63,185,80,0.10);--sora:#58a6ff;--fuji:#bc8cff}
@@ -697,7 +694,7 @@ console.log("  copilot.svg");
 writeFileSync(join(SVG_DIR, "repos.svg"), generateReposSVG());
 console.log("  repos.svg");
 
-writeFileSync(join(SVG_DIR, "charts.svg"), generateChartsSVG());
+writeFileSync(join(SVG_DIR, "charts.svg"), await generateChartsSVG());
 console.log("  charts.svg");
 
 console.log("Done.");
