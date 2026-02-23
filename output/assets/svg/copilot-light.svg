@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="200">
+  <foreignObject x="0" y="0" width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="auto">
+      <style>
+    .auto { --text: #24292f; --muted: #656d76; --accent: #0969da; --border: #d0d7de; --bar-bg: #eaeef2; --sub: #8957e5; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .auto { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13px; color: var(--text); background: transparent; }
+    .card { background: transparent; padding: 16px; }
+    h2 { font-size: 14px; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; color: var(--text); }
+    h2 svg { fill: var(--accent); flex-shrink: 0; }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .stat { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+    .stat svg { fill: var(--muted); flex-shrink: 0; }
+    .stat strong { color: var(--text); font-weight: 600; }
+    .lang-bar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin: 8px 0; }
+    .lang-bar span { display: block; height: 100%; }
+    .lang-legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 11px; color: var(--muted); }
+    .lang-legend .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 3px; vertical-align: middle; }
+    .section-label { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sub); margin-bottom: 6px; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    .anim { animation: fadeIn 0.4s ease both; }
+    .anim-d1 { animation-delay: 0.05s; } .anim-d2 { animation-delay: 0.1s; } .anim-d3 { animation-delay: 0.15s; }
+    .anim-d4 { animation-delay: 0.2s; } .anim-d5 { animation-delay: 0.25s; } .anim-d6 { animation-delay: 0.3s; }
+  </style>
+      <div class="card">
+    <h2 class="anim"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M7.53 1.282a.5.5 0 01.94 0l1.478 4.007a.5.5 0 00.312.312l4.007 1.478a.5.5 0 010 .94l-4.007 1.478a.5.5 0 00-.312.312L8.47 14.816a.5.5 0 01-.94 0L6.052 10.81a.5.5 0 00-.312-.312L1.733 9.019a.5.5 0 010-.94L5.74 6.601a.5.5 0 00.312-.312z"/></svg> AI Collaboration</h2>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <div style="position:relative;width:80px;height:80px;flex-shrink:0;" class="anim anim-d1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+          <circle cx="40" cy="40" r="30" fill="none" stroke="var(--bar-bg)" stroke-width="4"/>
+          <circle cx="40" cy="40" r="30" fill="none" stroke="var(--sub, #8957e5)" stroke-width="4"
+            stroke-linecap="round" stroke-dasharray="188.5"
+            stroke-dashoffset="162.5"
+            transform="rotate(-90 40 40)"/>
+          <circle cx="40" cy="40" r="22" fill="none" stroke="var(--bar-bg)" stroke-width="3"/>
+          <circle cx="40" cy="40" r="22" fill="none" stroke="var(--accent, #58a6ff)" stroke-width="3"
+            stroke-linecap="round" stroke-dasharray="138.2"
+            stroke-dashoffset="42.6"
+            transform="rotate(-90 40 40)"/>
+          <text x="40" y="36" text-anchor="middle" fill="var(--text)" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="13" font-weight="600">692</text>
+          <text x="40" y="48" text-anchor="middle" fill="var(--muted)" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="7">premium</text>
+        </svg>
+      </div>
+      <div style="flex:1;">
+        <div class="stat anim anim-d1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14"><path fill-rule="evenodd" d="M7.53 1.282a.5.5 0 01.94 0l1.478 4.007a.5.5 0 00.312.312l4.007 1.478a.5.5 0 010 .94l-4.007 1.478a.5.5 0 00-.312.312L8.47 14.816a.5.5 0 01-.94 0L6.052 10.81a.5.5 0 00-.312-.312L1.733 9.019a.5.5 0 010-.94L5.74 6.601a.5.5 0 00.312-.312z"/></svg> <strong>692</strong> Premium requests</div>
+        <div class="stat anim anim-d2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14"><path fill-rule="evenodd" d="M7.53 1.282a.5.5 0 01.94 0l1.478 4.007a.5.5 0 00.312.312l4.007 1.478a.5.5 0 010 .94l-4.007 1.478a.5.5 0 00-.312.312L8.47 14.816a.5.5 0 01-.94 0L6.052 10.81a.5.5 0 00-.312-.312L1.733 9.019a.5.5 0 010-.94L5.74 6.601a.5.5 0 00.312-.312z"/></svg> <strong>33</strong> Copilot mentions</div>
+        <div class="stat anim anim-d3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14"><path fill-rule="evenodd" d="M10.5 7.75a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm1.43.75a4.002 4.002 0 01-7.86 0H.75a.75.75 0 110-1.5h3.32a4.001 4.001 0 017.86 0h3.32a.75.75 0 110 1.5h-3.32z"/></svg> <strong>8</strong> Co-authored commits</div>
+        <div class="stat anim anim-d4"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14"><path fill-rule="evenodd" d="M10.5 7.75a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm1.43.75a4.002 4.002 0 01-7.86 0H.75a.75.75 0 110-1.5h3.32a4.001 4.001 0 017.86 0h3.32a.75.75 0 110 1.5h-3.32z"/></svg> <strong>0.17%</strong> AI collaboration rate</div>
+      </div>
+    </div>
+    <div class="anim anim-d5" style="margin-top:10px;font-size:10px;color:var(--muted);padding:6px 10px;background:var(--bar-bg);border-radius:4px;">
+      <strong style="color:var(--text);">GitHub Copilot</strong> — account: <strong style="color:var(--text);">marronee</strong> · Chat, completions, co-authoring
+    </div>
+  </div>
+    </div>
+  </foreignObject>
+</svg>
