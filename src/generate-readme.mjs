@@ -32,24 +32,18 @@ const readme = `![](https://komarev.com/ghpvc/?username=soranjiro&color=blue) <i
 
 > ${summary || ""}
 
-<table align="center">
-  <tr>
-    <td>
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/overview-dark.svg">
-        <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/overview-light.svg">
-        <img src="./output/assets/svg/overview-dark.svg" alt="Overview" width="480" />
-      </picture>
-    </td>
-    <td>
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/copilot-dark.svg">
-        <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/copilot-light.svg">
-        <img src="./output/assets/svg/copilot-dark.svg" alt="AI Collaboration" width="480" />
-      </picture>
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/overview-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/overview-light.svg">
+    <img src="./output/assets/svg/overview-dark.svg" alt="Overview" width="480" />
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/copilot-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/copilot-light.svg">
+    <img src="./output/assets/svg/copilot-dark.svg" alt="AI Collaboration" width="480" />
+  </picture>
+</p>
 
 <div align="center">
 
