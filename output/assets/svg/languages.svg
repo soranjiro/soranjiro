@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="310">
+  <foreignObject x="0" y="0" width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="auto">
+      <style>
+    @media (prefers-color-scheme: light) {
+      .auto { --text: #24292f; --muted: #656d76; --accent: #0969da; --border: #d0d7de; --bar-bg: #eaeef2; --sub: #8957e5; }
+    }
+    @media (prefers-color-scheme: dark) {
+      .auto { --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff; --border: #30363d; --bar-bg: #21262d; --sub: #a371f7; }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13px; color: var(--text); background: transparent; }
+    .card { background: transparent; padding: 16px; }
+    h2 { font-size: 14px; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    h2 svg { fill: var(--accent); flex-shrink: 0; }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .stat { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+    .stat svg { fill: var(--muted); flex-shrink: 0; }
+    .stat strong { color: var(--text); font-weight: 600; }
+    .lang-bar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin: 8px 0; }
+    .lang-bar span { display: block; height: 100%; }
+    .lang-legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 11px; color: var(--muted); }
+    .lang-legend .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 3px; vertical-align: middle; }
+    .section-label { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sub); margin-bottom: 6px; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    .anim { animation: fadeIn 0.4s ease both; }
+    .anim-d1 { animation-delay: 0.05s; } .anim-d2 { animation-delay: 0.1s; } .anim-d3 { animation-delay: 0.15s; }
+    .anim-d4 { animation-delay: 0.2s; } .anim-d5 { animation-delay: 0.25s; } .anim-d6 { animation-delay: 0.3s; }
+  </style>
+      <div class="card">
+    <h2 class="anim"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 010-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5zm-3 2a.75.75 0 01.75.75v2a.75.75 0 01-1.5 0v-2a.75.75 0 01.75-.75z"/></svg> Languages &amp; Tech Stack</h2>
+    <div class="lang-bar anim anim-d1"><span style="width:41.769682607971575%;background:#3572A5;"></span><span style="width:21.765919371140455%;background:#f1e05a;"></span><span style="width:12.397170495744689%;background:#00ADD8;"></span><span style="width:8.709500489083204%;background:#DA5B0B;"></span><span style="width:5.768974466219761%;background:#ffcc33;"></span><span style="width:5.283923088555644%;background:#3178c6;"></span><span style="width:2.175950673422587%;background:#701516;"></span><span style="width:2.128878807862084%;background:#ff3e00;"></span></div>
+    <div class="lang-legend anim anim-d2"><span><span class="dot" style="background:#3572A5;"></span>Python 41.8%</span> <span><span class="dot" style="background:#f1e05a;"></span>JavaScript 21.8%</span> <span><span class="dot" style="background:#00ADD8;"></span>Go 12.4%</span> <span><span class="dot" style="background:#DA5B0B;"></span>Jupyter Notebook 8.7%</span> <span><span class="dot" style="background:#ffcc33;"></span>Fluent 5.8%</span> <span><span class="dot" style="background:#3178c6;"></span>TypeScript 5.3%</span> <span><span class="dot" style="background:#701516;"></span>Ruby 2.2%</span> <span><span class="dot" style="background:#ff3e00;"></span>Svelte 2.1%</span></div>
+    <div style="margin-top:14px;padding-top:10px;border-top:1px solid var(--border);" class="anim anim-d3">
+      <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">Skill Stack</div>
+      
+      <div style="margin-bottom:6px;">
+        <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">Languages</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;"><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#CC342D;flex-shrink:0;"></span>Ruby</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#3572A5;flex-shrink:0;"></span>Python</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#00ADD8;flex-shrink:0;"></span>Go</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#3178C6;flex-shrink:0;"></span>TypeScript</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#F1E05A;flex-shrink:0;"></span>JavaScript</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#DEA584;flex-shrink:0;"></span>Rust</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#F34B7D;flex-shrink:0;"></span>C++</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#B07219;flex-shrink:0;"></span>Java</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#555555;flex-shrink:0;"></span>C</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#178600;flex-shrink:0;"></span>C#</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#4F5D95;flex-shrink:0;"></span>PHP</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#F05138;flex-shrink:0;"></span>Swift</span></div>
+      </div>
+    
+      <div style="margin-bottom:6px;">
+        <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">Frameworks</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;"><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#FF3E00;flex-shrink:0;"></span>Svelte</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#41B883;flex-shrink:0;"></span>Vue</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#CC0000;flex-shrink:0;"></span>Rails</span></div>
+      </div>
+    
+      <div style="margin-bottom:6px;">
+        <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">DevOps</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;"><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#7B42BC;flex-shrink:0;"></span>Terraform</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#2496ED;flex-shrink:0;"></span>Docker</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#FF9900;flex-shrink:0;"></span>AWS</span></div>
+      </div>
+    
+      <div style="margin-bottom:6px;">
+        <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">Tools</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;"><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#89E051;flex-shrink:0;"></span>Shell</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#8b949e;flex-shrink:0;"></span>GitHub</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#336791;flex-shrink:0;"></span>PostgreSQL</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#FCC624;flex-shrink:0;"></span>Linux</span></div>
+      </div>
+    
+    </div>
+  </div>
+    </div>
+  </foreignObject>
+</svg>
