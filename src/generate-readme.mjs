@@ -28,14 +28,9 @@ const allSkillIds = [
 const uniqueSkillIds = [...new Set(allSkillIds)];
 const skillIconsUrl = `https://skillicons.dev/icons?i=${uniqueSkillIds.join(',')}&perline=${Math.min(uniqueSkillIds.length, 15)}`;
 
-const readme = `<div align="center">
+const readme = `![](https://komarev.com/ghpvc/?username=soranjiro&color=blue) <img src="./output/assets/svg/ai-badge.svg" alt="AI Generated" height="20" />
 
-<img src="./output/assets/svg/ai-badge.svg" alt="AI Generated" height="28" />
-
-<br>
-
-${summary ? `> *${summary}*\n` : ""}
-</div>
+${summary || ""}
 
 <table align="center">
   <tr>
@@ -47,30 +42,6 @@ ${summary ? `> *${summary}*\n` : ""}
 <div align="center">
 
 <img src="./output/assets/svg/charts.svg" alt="Dashboard Charts" width="840" />
-
-<br>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="${skillIconsUrl}&theme=dark">
-  <source media="(prefers-color-scheme: light)" srcset="${skillIconsUrl}&theme=light">
-  <img alt="Skills" src="${skillIconsUrl}&theme=dark" height="48" />
-</picture>
-
-</div>
-
----
-
-### 📌 Pinned Repositories
-
-| Repository | Description | Language |
-|:-----------|:------------|:---------|
-${pinned}
-
----
-
-<div align="center">
-
-<img src="./archive/profile-3d-contrib/profile-green-animate.svg" alt="3D Contributions" width="720" />
 
 </div>
 
