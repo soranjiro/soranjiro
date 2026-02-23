@@ -35,8 +35,9 @@ export function renderHeader(data) {
     <div class="summary-block anim d2">
       <div class="summary-accent"></div>
       <div class="summary-content">
-        <p class="summary-label">Profile</p>
+        <p class="summary-label">Profile <span class="ai-badge">AI Generated</span></p>
         <p class="summary-text">${data.aiSummary || d.bio || ''}</p>
+        <p class="summary-research">His current research focuses on popularity bias in recommender systems, exploring how algorithmic recommendations can amplify visibility gaps between popular and long-tail items.</p>
       </div>
     </div>
 

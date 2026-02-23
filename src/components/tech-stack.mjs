@@ -25,12 +25,14 @@ export function renderTechStack(data) {
   };
 
   const extraTools = [
+    { icon: 'react-original', label: 'React', cat: 'Frameworks' },
+    { icon: 'nextjs-plain', label: 'Next.js', cat: 'Frameworks' },
     { icon: 'rails-plain', label: 'Rails', cat: 'Frameworks' },
     { icon: 'amazonwebservices-plain-wordmark', label: 'AWS', cat: 'DevOps' },
     { icon: 'github-original', label: 'GitHub', cat: 'Tools' },
     { icon: 'postgresql-plain', label: 'PostgreSQL', cat: 'Tools' },
     { icon: 'linux-plain', label: 'Linux', cat: 'Tools' },
-    { icon: 'kaggle-original', label: 'Kaggle', cat: 'ML/Data' },
+    { icon: 'kaggle-original', label: 'Kaggle', cat: 'ML/Data', link: 'https://www.kaggle.com/magixe' },
   ];
 
   const allIcons = [];
@@ -46,12 +48,13 @@ export function renderTechStack(data) {
   });
 
   const sections = Object.entries(categories).map(([cat, tools]) => {
-    const icons = tools.map(t =>
-      `<div class="tech-item">
-        <i class="devicon-${t.icon} colored"></i>
-        <span>${t.label}</span>
-      </div>`
-    ).join('');
+    const icons = tools.map(t => {
+      const inner = `<i class="devicon-${t.icon} colored"></i><span>${t.label}</span>`;
+      if (t.link) {
+        return `<a href="${t.link}" target="_blank" rel="noopener" class="tech-item">${inner}</a>`;
+      }
+      return `<div class="tech-item">${inner}</div>`;
+    }).join('');
     return `<div class="tech-category">
       <div class="tech-cat-label">${cat}</div>
       <div class="tech-icons">${icons}</div>
@@ -79,7 +82,9 @@ export function renderTechStack(data) {
         border: 1px solid var(--border);
         transition: border-color 0.25s, transform 0.3s var(--ease-out);
         cursor: default;
+        text-decoration: none;
       }
+      a.tech-item { cursor: pointer; }
       .tech-item:hover {
         border-color: var(--accent);
         transform: translateY(-3px);

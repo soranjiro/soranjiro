@@ -7,7 +7,6 @@ import { renderHeader } from "./components/header.mjs";
 import { renderActivityRadar, renderActivityTimeline } from "./components/activity.mjs";
 import { renderLanguages } from "./components/languages.mjs";
 import { renderTechStack } from "./components/tech-stack.mjs";
-import { renderCopilot } from "./components/copilot.mjs";
 import { renderOrgs } from "./components/orgs.mjs";
 import { renderRepos } from "./components/repos.mjs";
 
@@ -36,45 +35,37 @@ function generateDashboard() {
 </head>
 <body>
   <div class="page-bg"></div>
+  <div class="scroll-progress" id="scrollProgress"></div>
   <div class="container">
     ${renderHeader(data)}
 
     <div class="section-divider"></div>
 
     <section class="page-section">
-      <h2 class="section-title">Featured Projects</h2>
+      <h2 class="section-title">Featured Projects <span class="section-jp">\u2500 \u4F5C\u54C1</span></h2>
       ${renderRepos(data)}
     </section>
 
     <div class="section-divider"></div>
 
     <section class="page-section">
-      <h2 class="section-title">Activity & Craft</h2>
-      <div class="flow-row">
-        <div class="flow-col-main">
-          ${renderActivityRadar(data)}
-        </div>
-        <div class="flow-col-side">
-          ${renderCopilot(data)}
-        </div>
-      </div>
+      <h2 class="section-title">Activity <span class="section-jp">\u2500 \u6D3B\u52D5</span></h2>
+      ${renderActivityRadar(data)}
       ${renderActivityTimeline(data)}
     </section>
 
     <div class="section-divider"></div>
 
     <section class="page-section">
-      <h2 class="section-title">Languages & Tools</h2>
+      <h2 class="section-title">Languages & Tools <span class="section-jp">\u2500 \u9053\u5177</span></h2>
       ${renderLanguages(data)}
-      <div style="margin-top:28px">
-        ${renderTechStack(data)}
-      </div>
+      ${renderTechStack(data)}
     </section>
 
     <div class="section-divider"></div>
 
     <section class="page-section">
-      <h2 class="section-title">Community</h2>
+      <h2 class="section-title">Community <span class="section-jp">\u2500 \u4EF2\u9593</span></h2>
       ${renderOrgs(data)}
     </section>
 
@@ -82,6 +73,15 @@ function generateDashboard() {
       <p>Last updated: ${new Date(data.fetchedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
     </footer>
   </div>
+  <script>
+    (function(){
+      var sp = document.getElementById('scrollProgress');
+      window.addEventListener('scroll', function() {
+        var pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+        sp.style.height = Math.min(pct, 100) + '%';
+      }, { passive: true });
+    })();
+  </script>
   <script>
     (function(){
       var btn = document.getElementById('themeToggle');
