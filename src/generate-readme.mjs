@@ -30,18 +30,34 @@ const skillIconsUrl = `https://skillicons.dev/icons?i=${uniqueSkillIds.join(',')
 
 const readme = `![](https://komarev.com/ghpvc/?username=soranjiro&color=blue) <img src="./output/assets/svg/ai-badge.svg" alt="AI Generated" height="20" />
 
-${summary || ""}
+> ${summary || ""}
 
 <table align="center">
   <tr>
-    <td><img src="./output/assets/svg/overview.svg" alt="Overview" width="480" /></td>
-    <td><img src="./output/assets/svg/copilot.svg" alt="AI Collaboration" width="480" /></td>
+    <td>
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/overview-dark.svg">
+        <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/overview-light.svg">
+        <img src="./output/assets/svg/overview-dark.svg" alt="Overview" width="480" />
+      </picture>
+    </td>
+    <td>
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/copilot-dark.svg">
+        <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/copilot-light.svg">
+        <img src="./output/assets/svg/copilot-dark.svg" alt="AI Collaboration" width="480" />
+      </picture>
+    </td>
   </tr>
 </table>
 
 <div align="center">
 
-<img src="./output/assets/svg/charts.svg" alt="Dashboard Charts" width="840" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/charts-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/charts-light.svg">
+  <img src="./output/assets/svg/charts-dark.svg" alt="Dashboard Charts" width="840" />
+</picture>
 
 </div>
 

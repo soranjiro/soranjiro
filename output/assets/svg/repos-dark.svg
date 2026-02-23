@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="260">
+  <foreignObject x="0" y="0" width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="auto">
+      <style>
+    .auto { --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff; --border: #30363d; --bar-bg: #21262d; --sub: #a371f7; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13px; color: var(--text); background: transparent; }
+    .card { background: transparent; padding: 16px; }
+    h2 { font-size: 14px; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    h2 svg { fill: var(--accent); flex-shrink: 0; }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .stat { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+    .stat svg { fill: var(--muted); flex-shrink: 0; }
+    .stat strong { color: var(--text); font-weight: 600; }
+    .lang-bar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin: 8px 0; }
+    .lang-bar span { display: block; height: 100%; }
+    .lang-legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 11px; color: var(--muted); }
+    .lang-legend .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 3px; vertical-align: middle; }
+    .section-label { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sub); margin-bottom: 6px; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    .anim { animation: fadeIn 0.4s ease both; }
+    .anim-d1 { animation-delay: 0.05s; } .anim-d2 { animation-delay: 0.1s; } .anim-d3 { animation-delay: 0.15s; }
+    .anim-d4 { animation-delay: 0.2s; } .anim-d5 { animation-delay: 0.25s; } .anim-d6 { animation-delay: 0.3s; }
+  </style>
+      <div class="card">
+    <h2 class="anim"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 010-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5zm-3 2a.75.75 0 01.75.75v2a.75.75 0 01-1.5 0v-2a.75.75 0 01.75-.75z"/></svg> Featured Projects</h2>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      
+      <div style="flex:1;min-width:200px;padding:10px 12px;border:1px solid var(--border);border-radius:6px;" class="anim anim-d1">
+        <div style="font-size:12px;font-weight:600;color:var(--accent);margin-bottom:4px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12"><path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 010-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5zm-3 2a.75.75 0 01.75.75v2a.75.75 0 01-1.5 0v-2a.75.75 0 01.75-.75z"/></svg> tabitabi</div>
+        <div style="font-size:10px;color:var(--muted);margin-bottom:6px;line-height:1.4;">Tabitabi is a web application for creating and sharing travel itineraries with customizable themes.</div>
+        <div style="display:flex;align-items:center;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#ff3e00;margin-right:3px;vertical-align:middle;"></span><span style="font-size:10px;color:var(--muted);">Svelte</span><span style="font-size:10px;color:var(--muted);margin-left:8px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="10" height="10"><path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg> 4</span></div>
+      </div>
+    
+      <div style="flex:1;min-width:200px;padding:10px 12px;border:1px solid var(--border);border-radius:6px;" class="anim anim-d2">
+        <div style="font-size:12px;font-weight:600;color:var(--accent);margin-bottom:4px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12"><path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 010-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5zm-3 2a.75.75 0 01.75.75v2a.75.75 0 01-1.5 0v-2a.75.75 0 01.75-.75z"/></svg> aws-auth-command</div>
+        <div style="font-size:10px;color:var(--muted);margin-bottom:6px;line-height:1.4;">This repository provides a command-line tool for AWS authentication and command execution.</div>
+        <div style="display:flex;align-items:center;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#dea584;margin-right:3px;vertical-align:middle;"></span><span style="font-size:10px;color:var(--muted);">Rust</span></div>
+      </div>
+    
+      <div style="flex:1;min-width:200px;padding:10px 12px;border:1px solid var(--border);border-radius:6px;" class="anim anim-d3">
+        <div style="font-size:12px;font-weight:600;color:var(--accent);margin-bottom:4px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12"><path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 010-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5zm-3 2a.75.75 0 01.75.75v2a.75.75 0 01-1.5 0v-2a.75.75 0 01.75-.75z"/></svg> mybrowser</div>
+        <div style="font-size:10px;color:var(--muted);margin-bottom:6px;line-height:1.4;">MyBrowser is a modern Qt-based web browser with advanced features like PiP video support and workspace management.</div>
+        <div style="display:flex;align-items:center;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#f34b7d;margin-right:3px;vertical-align:middle;"></span><span style="font-size:10px;color:var(--muted);">C++</span></div>
+      </div>
+    
+      <div style="flex:1;min-width:200px;padding:10px 12px;border:1px solid var(--border);border-radius:6px;" class="anim anim-d4">
+        <div style="font-size:12px;font-weight:600;color:var(--accent);margin-bottom:4px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12"><path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 010-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5zm-3 2a.75.75 0 01.75.75v2a.75.75 0 01-1.5 0v-2a.75.75 0 01.75-.75z"/></svg> clozy</div>
+        <div style="font-size:10px;color:var(--muted);margin-bottom:6px;line-height:1.4;">Clozy is an application for managing and organizing your clothing inventory.</div>
+        <div style="display:flex;align-items:center;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#3178c6;margin-right:3px;vertical-align:middle;"></span><span style="font-size:10px;color:var(--muted);">TypeScript</span><span style="font-size:10px;color:var(--muted);margin-left:8px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="10" height="10"><path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg> 1</span></div>
+      </div>
+    
+    </div>
+  </div>
+    </div>
+  </foreignObject>
+</svg>

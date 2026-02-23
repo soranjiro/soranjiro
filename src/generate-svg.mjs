@@ -19,14 +19,12 @@ function fmtNum(n) {
   return String(n);
 }
 
-function themeCSS() {
+function themeCSS(theme) {
+  const vars = theme === 'light'
+    ? '.auto { --text: #24292f; --muted: #656d76; --accent: #0969da; --border: #d0d7de; --bar-bg: #eaeef2; --sub: #8957e5; }'
+    : '.auto { --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff; --border: #30363d; --bar-bg: #21262d; --sub: #a371f7; }';
   return `
-    @media (prefers-color-scheme: light) {
-      .auto { --text: #24292f; --muted: #656d76; --accent: #0969da; --border: #d0d7de; --bar-bg: #eaeef2; --sub: #8957e5; }
-    }
-    @media (prefers-color-scheme: dark) {
-      .auto { --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff; --border: #30363d; --bar-bg: #21262d; --sub: #a371f7; }
-    }
+    ${vars}
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13px; color: var(--text); background: transparent; }
     .card { background: transparent; padding: 16px; }
@@ -48,11 +46,11 @@ function themeCSS() {
   `;
 }
 
-function wrapSVG(height, body) {
+function wrapSVG(height, body, theme) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${SVG_W}" height="${height}">
   <foreignObject x="0" y="0" width="100%" height="100%">
     <div xmlns="http://www.w3.org/1999/xhtml" class="auto">
-      <style>${themeCSS()}</style>
+      <style>${themeCSS(theme)}</style>
       <div class="card">${body}</div>
     </div>
   </foreignObject>
@@ -77,7 +75,7 @@ const ICONS = {
 };
 
 // ─── Overview SVG (merged with Activity) ─────────────────────────────
-function generateOverviewSVG() {
+function generateOverviewSVG(theme) {
   const { profile, activity, repoStats, copilot } = data;
   const comments = activity.prComments + activity.issueComments;
 
@@ -125,11 +123,11 @@ function generateOverviewSVG() {
     </div>
   `;
 
-  return wrapSVG(260, body);
+  return wrapSVG(260, body, theme);
 }
 
 // ─── Languages & Tech Stack SVG ──────────────────────────────────────
-function generateLanguagesSVG() {
+function generateLanguagesSVG(theme) {
   const langs = data.overallLanguages.slice(0, 8);
   const totalBytes = langs.reduce((s, l) => s + l.bytes, 0);
 
@@ -247,11 +245,11 @@ function generateLanguagesSVG() {
     </div>
   `;
 
-  return wrapSVG(310, body);
+  return wrapSVG(310, body, theme);
 }
 
 // ─── Activity SVG ────────────────────────────────────────────────────
-function generateActivitySVG() {
+function generateActivitySVG(theme) {
   const { activity, copilot, profile, repoStats } = data;
 
   const stats = [
@@ -295,11 +293,11 @@ function generateActivitySVG() {
     </div>
   `;
 
-  return wrapSVG(230, body);
+  return wrapSVG(230, body, theme);
 }
 
 // ─── Copilot SVG ─────────────────────────────────────────────────────
-function generateCopilotSVG() {
+function generateCopilotSVG(theme) {
   const { copilot, activity } = data;
   const mentions = copilot.copilotMentions || 0;
   const coauthored = copilot.coauthoredCommits || 0;
@@ -345,11 +343,11 @@ function generateCopilotSVG() {
     </div>
   `;
 
-  return wrapSVG(200, body);
+  return wrapSVG(200, body, theme);
 }
 
 // ─── Repos SVG ───────────────────────────────────────────────────────
-function generateReposSVG() {
+function generateReposSVG(theme) {
   const { pinnedRepos } = data;
   if (!pinnedRepos || pinnedRepos.length === 0) return "";
 
@@ -379,7 +377,7 @@ function generateReposSVG() {
 
   const rows = Math.ceil(repos.length / 2);
   const height = 80 + rows * 90;
-  return wrapSVG(height, body);
+  return wrapSVG(height, body, theme);
 }
 
 // ─── Generate all ────────────────────────────────────────────────────
@@ -465,7 +463,7 @@ function ceilNice(v) {
 }
 
 // ─── Combined Charts SVG ─────────────────────────────────────────────
-async function generateChartsSVG() {
+async function generateChartsSVG(theme) {
   const W = 840, PAD_L = 25, PAD_R = 10, PAD_T = 5, PAD_B = 5;
   const H = 660;
   const fx = v => v.toFixed(1);
@@ -624,7 +622,7 @@ async function generateChartsSVG() {
   const iconDataURIs = {};
   for (const cat of skillCategories) {
     const ids = cat.items.map(name => skillIconMap[name]).join(',');
-    const url = `https://skillicons.dev/icons?i=${ids}&theme=dark`;
+    const url = `https://skillicons.dev/icons?i=${ids}&theme=${theme}`;
     try {
       const res = await fetch(url);
       const svgText = await res.text();
@@ -652,11 +650,14 @@ async function generateChartsSVG() {
     rowY += iconH + rowGap;
   }
 
+  const chartCSS = theme === 'light'
+    ? 'svg{--text:#24292f;--muted:#656d76;--dim:#8b949e;--grid:rgba(101,109,118,0.15);--accent:#0969da;--accent-fill:rgba(9,105,218,0.10);--matcha:#1a7f37;--matcha-fill:rgba(26,127,55,0.08);--sora:#0969da;--fuji:#8250df}'
+    : 'svg{--text:#e6edf3;--muted:#8b949e;--dim:#656d76;--grid:rgba(139,148,158,0.15);--accent:#58a6ff;--accent-fill:rgba(88,166,255,0.12);--matcha:#3fb950;--matcha-fill:rgba(63,185,80,0.10);--sora:#58a6ff;--fuji:#bc8cff}';
+
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="${-PAD_L} ${-PAD_T} ${W + PAD_L + PAD_R} ${H + PAD_T + PAD_B}">
 <defs>
 <style>
-svg{--text:#e6edf3;--muted:#8b949e;--dim:#656d76;--grid:rgba(139,148,158,0.15);--accent:#58a6ff;--accent-fill:rgba(88,166,255,0.12);--matcha:#3fb950;--matcha-fill:rgba(63,185,80,0.10);--sora:#58a6ff;--fuji:#bc8cff}
-@media(prefers-color-scheme:light){svg{--text:#24292f;--muted:#656d76;--dim:#8b949e;--grid:rgba(101,109,118,0.15);--accent:#0969da;--accent-fill:rgba(9,105,218,0.10);--matcha:#1a7f37;--matcha-fill:rgba(26,127,55,0.08);--sora:#0969da;--fuji:#8250df}}
+${chartCSS}
 text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
 </style>
 </defs>
@@ -679,22 +680,26 @@ ${sk}</g>
 
 console.log("Generating SVG cards...");
 
-writeFileSync(join(SVG_DIR, "overview.svg"), generateOverviewSVG());
-console.log("  overview.svg");
+for (const theme of ['dark', 'light']) {
+  console.log(`  theme: ${theme}`);
 
-writeFileSync(join(SVG_DIR, "languages.svg"), generateLanguagesSVG());
-console.log("  languages.svg");
+  writeFileSync(join(SVG_DIR, `overview-${theme}.svg`), generateOverviewSVG(theme));
+  console.log(`    overview-${theme}.svg`);
 
-writeFileSync(join(SVG_DIR, "activity.svg"), generateActivitySVG());
-console.log("  activity.svg");
+  writeFileSync(join(SVG_DIR, `languages-${theme}.svg`), generateLanguagesSVG(theme));
+  console.log(`    languages-${theme}.svg`);
 
-writeFileSync(join(SVG_DIR, "copilot.svg"), generateCopilotSVG());
-console.log("  copilot.svg");
+  writeFileSync(join(SVG_DIR, `activity-${theme}.svg`), generateActivitySVG(theme));
+  console.log(`    activity-${theme}.svg`);
 
-writeFileSync(join(SVG_DIR, "repos.svg"), generateReposSVG());
-console.log("  repos.svg");
+  writeFileSync(join(SVG_DIR, `copilot-${theme}.svg`), generateCopilotSVG(theme));
+  console.log(`    copilot-${theme}.svg`);
 
-writeFileSync(join(SVG_DIR, "charts.svg"), await generateChartsSVG());
-console.log("  charts.svg");
+  writeFileSync(join(SVG_DIR, `repos-${theme}.svg`), generateReposSVG(theme));
+  console.log(`    repos-${theme}.svg`);
+
+  writeFileSync(join(SVG_DIR, `charts-${theme}.svg`), await generateChartsSVG(theme));
+  console.log(`    charts-${theme}.svg`);
+}
 
 console.log("Done.");
