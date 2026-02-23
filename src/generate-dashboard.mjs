@@ -115,7 +115,8 @@ function generateDashboard() {
 </html>`;
 
   writeFileSync(join(ROOT, "output/dashboard.html"), html);
-  console.log("Generated output/dashboard.html");
+  writeFileSync(join(ROOT, "output/index.html"), html);
+  console.log("Generated output/dashboard.html and output/index.html");
 }
 
 generateDashboard();
