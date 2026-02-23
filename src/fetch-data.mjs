@@ -5,7 +5,7 @@ import { dirname, join } from "path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
-const TOKEN = execSync("gh auth token").toString().trim();
+const TOKEN = process.env.GH_TOKEN || process.env.GITHUB_TOKEN || execSync("gh auth token").toString().trim();
 const GQL_HEADERS = { Authorization: `bearer ${TOKEN}`, "Content-Type": "application/json" };
 const REST_HEADERS = { Authorization: `token ${TOKEN}`, Accept: "application/vnd.github.v3+json" };
 const USER_ID = "U_kgDOB01CvA";
