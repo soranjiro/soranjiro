@@ -6,38 +6,87 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const data = JSON.parse(readFileSync(join(ROOT, "output/data.json"), "utf-8"));
 
-const { profile, activity, repoStats, overallLanguages, pinnedRepos } = data;
+const { profile, pinnedRepos, aiSummary, userProfile } = data;
 
-const topLangs = overallLanguages
-  .slice(0, 5)
-  .map(l => l.name)
-  .join(" · ");
+const roles = (userProfile?.roles || []).map(r => `\`${r}\``).join(" · ");
+const summary = aiSummary || "";
 
 const pinned = pinnedRepos.map(r => {
   const lang = r.primaryLanguage?.name || "";
-  const desc = r.description ? ` - ${r.description}` : "";
-  return `- [**${r.name}**](https://github.com/${r.nameWithOwner})${desc} \`${lang}\``;
+  const desc = r.aiDescription || r.description || "";
+  const stars = r.stars > 0 ? ` ⭐ ${r.stars}` : "";
+  return `| [**${r.name}**](https://github.com/${r.nameWithOwner}) | ${desc} | \`${lang}\`${stars} |`;
 }).join("\n");
 
-const readme = `### Hi, I'm ${profile.login} 👋
+const techStack = data.config?.techStack || {};
+const allSkillIds = [
+  ...(techStack.languages || ['ts','js','go','py','ruby','cpp','c','rust','java','svelte','vue']),
+  ...(techStack.frameworks || ['svelte','vue','tauri']),
+  ...(techStack.infrastructure || ['docker','aws','terraform','linux','postgres']),
+  ...(techStack.tools || ['git','github','vscode','latex','bash']),
+];
+const uniqueSkillIds = [...new Set(allSkillIds)];
+const skillIconsUrl = `https://skillicons.dev/icons?i=${uniqueSkillIds.join(',')}&perline=${Math.min(uniqueSkillIds.length, 15)}`;
 
-<table>
+const readme = `<div align="center">
+
+<img src="./output/assets/svg/ai-badge.svg" alt="AI Generated" height="28" />
+
+<br>
+
+${summary ? `> *${summary}*\n` : ""}
+</div>
+
+<table align="center">
   <tr>
-    <td><img src="./output/overview.svg" alt="Overview" /></td>
-    <td><img src="./output/activity.svg" alt="Activity" /></td>
+    <td><img src="./output/assets/svg/overview.svg" alt="Overview" width="480" /></td>
+    <td><img src="./output/assets/svg/copilot.svg" alt="AI Collaboration" width="480" /></td>
   </tr>
 </table>
 
-<img src="./output/languages.svg" alt="Languages" />
+<div align="center">
 
-#### Pinned
+<img src="./output/assets/svg/charts.svg" alt="Dashboard Charts" width="840" />
 
+<br>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="${skillIconsUrl}&theme=dark">
+  <source media="(prefers-color-scheme: light)" srcset="${skillIconsUrl}&theme=light">
+  <img alt="Skills" src="${skillIconsUrl}&theme=dark" height="48" />
+</picture>
+
+</div>
+
+---
+
+### 📌 Pinned Repositories
+
+| Repository | Description | Language |
+|:-----------|:------------|:---------|
 ${pinned}
 
 ---
 
-<sub>Generated with GitHub API · ${new Date().toISOString().slice(0, 10)}</sub>
+<div align="center">
+
+<img src="./archive/profile-3d-contrib/profile-green-animate.svg" alt="3D Contributions" width="720" />
+
+</div>
+
+---
+
+<div align="center">
+  <sub>
+    Auto-generated daily via <a href="https://github.com/${profile.login}/${profile.login}/actions">GitHub Actions</a>
+    · Powered by <strong>GitHub Copilot SDK</strong> &amp; GitHub GraphQL API
+    · Last updated: ${new Date().toISOString().slice(0, 10)}
+  </sub>
+</div>
 `;
 
+writeFileSync(join(ROOT, "README.md"), readme);
+console.log("README.md written to root");
+
 writeFileSync(join(ROOT, "output/README.md"), readme);
-console.log("README.md written to output/README.md");
+console.log("README.md also written to output/README.md");

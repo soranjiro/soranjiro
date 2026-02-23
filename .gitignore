@@ -21,7 +21,7 @@ package-lock.json
 output/data.json
 output/full_history_data.json
 output/assets/screenshots/*.png
-output/assets/svg/*.svg
+
 
 # Temporary files
 .playwright-mcp/

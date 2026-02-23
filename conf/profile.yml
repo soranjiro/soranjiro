@@ -5,6 +5,7 @@
 bio: |
   Backend engineer working with infrastructure and frontend in a full-stack capacity.
   Recently exploring machine learning and Kaggle competitions.
+  Currently researching popularity bias in recommender systems and ways to mitigate it.
 
 keywords:
   - backend engineer
@@ -26,8 +27,8 @@ interests:
 
 techHighlights:
   - Ruby on Rails (work)
+  - Go (work)
   - TypeScript / Svelte (personal)
-  - Go (infrastructure tooling)
   - Python (ML / data science)
   - AWS / Terraform
   - Docker / CI/CD
