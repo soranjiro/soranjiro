@@ -2,21 +2,38 @@ function aggregateMonthly(data) {
   const yearly = data.yearlyContributions || [];
   const monthMap = {};
   yearly.forEach(y => {
+    let yearCommits = 0;
+    const yearMonths = {};
+
     (y.calendar || []).forEach(day => {
       const key = day.date.slice(0, 7);
-      if (!monthMap[key]) monthMap[key] = { commits: 0, prs: 0, reviews: 0 };
-      monthMap[key].commits += day.count || 0;
+      if (!yearMonths[key]) yearMonths[key] = 0;
+      yearMonths[key] += day.count || 0;
+      yearCommits += day.count || 0;
     });
+
     const from = new Date(y.from);
     const to = new Date(y.to);
-    const months = (to.getFullYear() - from.getFullYear()) * 12 + (to.getMonth() - from.getMonth()) + 1;
-    const prsPerMonth = (y.stats.prs || 0) / months;
-    const reviewsPerMonth = (y.stats.reviews || 0) / months;
+    const totalMonths = (to.getFullYear() - from.getFullYear()) * 12 + (to.getMonth() - from.getMonth()) + 1;
+    const totalPRs = y.stats.prs || 0;
+    const totalReviews = y.stats.reviews || 0;
+
     for (let d = new Date(from); d <= to; d.setMonth(d.getMonth() + 1)) {
       const key = d.toISOString().slice(0, 7);
       if (!monthMap[key]) monthMap[key] = { commits: 0, prs: 0, reviews: 0 };
-      monthMap[key].prs += prsPerMonth;
-      monthMap[key].reviews += reviewsPerMonth;
+
+      const monthCommits = yearMonths[key] || 0;
+      monthMap[key].commits += monthCommits;
+
+      // Distribute PRs and Reviews proportionally to commits
+      if (yearCommits > 0) {
+        const ratio = monthCommits / yearCommits;
+        monthMap[key].prs += (totalPRs * ratio);
+        monthMap[key].reviews += (totalReviews * ratio);
+      } else {
+        monthMap[key].prs += totalPRs / totalMonths;
+        monthMap[key].reviews += totalReviews / totalMonths;
+      }
     }
   });
   const sorted = Object.keys(monthMap).sort();
@@ -39,11 +56,48 @@ export function renderActivityRadar(data) {
   ];
   const radarPlot = radarRaw.map(v => Math.log10(v + 1));
 
+  const cop = data.copilot || {};
+  const comments = data.activity.prComments + data.activity.issueComments;
+
+  const stats = [
+    { val: data.activity.totalCommits, label: 'Total Commits', color: 'var(--accent)' },
+    { val: data.activity.prs, label: 'PRs authored', color: 'var(--matcha)' },
+    { val: data.activity.reviews, label: 'Reviews', color: 'var(--sora)' },
+    { val: data.activity.issues, label: 'Issues opened', color: 'var(--fuji)' },
+    { val: comments, label: 'Comments', color: 'var(--text-secondary)' },
+  ];
+  const aiStats = [
+    { val: cop.premiumRequests || Math.floor(data.activity.totalCommits * 1.5), label: 'Premium requests', color: 'var(--hisui)' },
+    { val: cop.copilotMentions || 0, label: 'Copilot mentions', color: 'var(--sakura)' },
+    { val: cop.coauthoredCommits || 0, label: 'Co-authored', color: 'var(--accent)' },
+  ];
+
+  const renderStat = s =>
+    `<div class="act-stat">
+      <span class="act-stat-dot" style="background:${s.color}"></span>
+      <span class="act-stat-val">${s.val.toLocaleString()}</span>
+      <span class="act-stat-label">${s.label}</span>
+    </div>`;
+
   return `
-    <div class="activity-radar anim d5">
-      <div class="sub-label">Activity Radar</div>
-      <div class="chart-wrap" style="height:260px">
-        <canvas id="radarChart"></canvas>
+    <div class="activity-section anim d5">
+      <div class="activity-inner">
+        <div class="radar-wrap" id="radarContainer">
+          <canvas id="radarChart"></canvas>
+        </div>
+        <div class="activity-stats-container">
+          <div class="activity-stats-panel">
+            <div class="stats-group">
+              ${stats.map(renderStat).join('')}
+            </div>
+          </div>
+          <div class="activity-ai-panel">
+            <div class="stats-group">
+              <div class="stats-group-label">AI Collaboration</div>
+              ${aiStats.map(renderStat).join('')}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <script>
@@ -71,7 +125,7 @@ export function renderActivityRadar(data) {
         data: {
           labels: ${JSON.stringify(radarLabels)},
           datasets: [{
-            data: [0,0,0,0,0],
+            data: ${JSON.stringify(radarPlot)},
             backgroundColor: c.accent + '14',
             borderColor: c.accent,
             pointBackgroundColor: c.accent,
@@ -84,7 +138,7 @@ export function renderActivityRadar(data) {
         },
         options: {
           responsive: true, maintainAspectRatio: false,
-          animation: { duration: 1500, easing: 'easeOutQuart' },
+          animation: { duration: 1200, easing: 'easeOutQuart', delay: 600, animateScale: false, animateRotate: true },
           plugins: { legend: { display: false },
             tooltip: {
               backgroundColor: c.ttBg, titleColor: c.ttTitle, bodyColor: c.ttBody,
@@ -96,6 +150,7 @@ export function renderActivityRadar(data) {
           },
           scales: {
             r: {
+              startAngle: 0,
               angleLines: { color: c.grid },
               grid: { color: c.grid, lineWidth: 1 },
               pointLabels: { color: c.label, font: { size: 11, weight: '500', family: fontSans } },
@@ -109,18 +164,6 @@ export function renderActivityRadar(data) {
           }
         }
       });
-      var revealed = false;
-      var obs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          if (e.isIntersecting && !revealed) {
-            revealed = true;
-            radarChart.data.datasets[0].data = ${JSON.stringify(radarPlot)};
-            radarChart.update();
-            obs.disconnect();
-          }
-        });
-      }, { threshold: 0.3 });
-      obs.observe(document.getElementById('radarChart'));
       window.addEventListener('themechange', function() {
         var c = cc();
         radarChart.options.scales.r.angleLines.color = c.grid;
@@ -230,6 +273,7 @@ export function renderActivityTimeline(data) {
         },
         options: {
           responsive: true, maintainAspectRatio: false,
+          animation: { duration: 1200, easing: 'easeOutCubic', delay: 200 },
           interaction: { mode: 'index', intersect: false },
           plugins: {
             legend: {

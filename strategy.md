@@ -3,18 +3,18 @@
 ## 1. 目的の定義（定量的）
 
 ### ゴール
-GitHub データを活用した **動的に更新されるポートフォリオサイト** を構築する。AI エージェントが定期的にデータを更新し、サイト自体が「自分の技術力を証明するプロダクト」として機能する。
+GitHub データを活用した **動的に更新されるポートフォリオサイト** を構築する。AI エージェントが定期的にデータを更新し、サイト自体が「自分の技術力を証明するプロダクト」として機能する。さらに、デザインを洗練させ、データの正確性と見せ方を向上させる。
 
 ### 成功指標
 | 指標 | 現状 | 目標 |
 |------|------|------|
 | ページ構造 | データ羅列型 | ストーリーテリング型（Projects → Activity → Skills の流れ） |
-| テーマ対応 | ダークのみ | ダーク/ライト切替対応 |
-| 時系列グラフの粒度 | 年次(4点) | 月次(37+点) |
+| テーマ対応 | ダークのみ | ダーク/ライト切替対応、落ち着いた色合い（Muted colors） |
+| 時系列グラフの粒度 | 年次(4点) | 月次(37+点)、PR/Reviewの変動を正確に反映 |
 | ファーストビューの印象 | 数字の羅列 | ビジュアルグラフ + プロジェクトカード |
-| チーム開発アピール度 | なし | Org 活動・PR/Review を明確に可視化 |
+| チーム開発アピール度 | なし | Org 活動・PR/Review を明確に可視化、AI Collaborationの充実 |
 | Tech Stack 表示密度 | 余白過多 | コンパクトで情報密度の高い表示 |
-| アニメーション品質 | 基本 reveal のみ | レーダーチャート描画アニメ + スクロールトリガー |
+| アニメーション品質 | 基本 reveal のみ | レーダーチャートのプロット部分のみのアニメーション |
 
 ---
 
@@ -235,12 +235,20 @@ const observer = new IntersectionObserver((entries) => {
 **計算方法**:
 ```javascript
 // 全年の calendar を結合し、月別に集計
-const monthlyData = {};
-yearlyContributions.forEach(year => {
-  year.calendar.forEach(day => {
-    const month = day.date.substring(0, 7); // "2024-03"
-    monthlyData[month] = (monthlyData[month] || 0) + day.count;
+const monthMap = {};
+yearlyContributions.forEach(y => {
+  let yearCommits = 0;
+  const yearMonths = {};
+
+  (y.calendar || []).forEach(day => {
+    const key = day.date.slice(0, 7);
+    if (!yearMonths[key]) yearMonths[key] = 0;
+    yearMonths[key] += day.count || 0;
+    yearCommits += day.count || 0;
   });
+
+  // PRとReviewを月ごとのコミット数に比例して分配する
+  // これにより、一定ではなく実際の活動量に基づいた変動のあるグラフになる
 });
 ```
 

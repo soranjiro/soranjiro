@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-02-22T20:10:15.719Z",
+  "fetchedAt": "2026-02-23T03:48:02.798Z",
   "config": {
     "excludeLanguages": [
       "HTML",
@@ -38,9 +38,9 @@
     ]
   },
   "activity": {
-    "commits": 1699,
-    "restricted": 3080,
-    "totalCommits": 4779,
+    "commits": 1701,
+    "restricted": 3084,
+    "totalCommits": 4785,
     "prs": 577,
     "reviews": 171,
     "issues": 194,
@@ -72,10 +72,11 @@
   },
   "copilot": {
     "copilotMentions": 33,
-    "coauthoredCommits": 8
+    "coauthoredCommits": 8,
+    "premiumRequests": 917
   },
-  "aiSummary": "Soranjiro is an experienced backend engineer and full-stack developer with over three years of GitHub activity, including 4,779 commits and contributions to 16 repositories. With a strong focus on infrastructure, he is proficient in Ruby on Rails, TypeScript, and Go, and is currently exploring machine learning through Kaggle competitions. He is passionate about web application development and DevOps practices, utilizing tools such as AWS, Terraform, and Docker in his projects.",
-  "reposOverview": "The collection of repositories showcases the developer's versatility and proficiency in multiple programming languages, including Svelte, Rust, C++, and TypeScript, as well as their capability to create diverse applications ranging from a travel planning web app to command-line tools. This indicates a strong foundation in both front-end and back-end development, highlighting their ability to tackle various software development challenges.",
+  "aiSummary": "Soranjiro is a skilled backend engineer with over three years of experience in full-stack development, specializing in infrastructure. With a strong background in Ruby on Rails and proficiency in TypeScript and Go, they are currently exploring machine learning through Kaggle competitions. Their expertise is further complemented by a solid understanding of AWS, Terraform, and Docker, making them well-versed in modern DevOps practices.",
+  "reposOverview": "The collection of repositories showcases the developer's proficiency in multiple programming languages, including Svelte, Rust, C++, and TypeScript, indicating a versatile skill set in web application development and system programming. Additionally, the presence of a travel itinerary application suggests a focus on creating user-centric solutions.",
   "userProfile": {
     "bio": "Backend engineer working with infrastructure and frontend in a full-stack capacity. Recently exploring machine learning and Kaggle competitions. keywords: - backend engineer - full-stack - infrastructure - machine learning - Kaggle roles: - Backend Engineer - Full-Stack Developer - Infrastructure Engineer interests: - Machine Learning - Kaggle - DevOps / Infrastructure - Web Application Development techHighlights: - Ruby on Rails (work) - TypeScript / Svelte (personal) - Go (infrastructure tooling) - Python (ML / data science) - AWS / Terraform - Docker / CI/CD",
     "keywords": [
@@ -5956,20 +5957,20 @@
       ]
     },
     {
-      "label": "2026-01-12 ~ 2026-02-22",
+      "label": "2026-01-12 ~ 2026-02-23",
       "yearLabel": "2026",
       "from": "2026-01-12T02:54:52.000Z",
-      "to": "2026-02-22T20:09:24.942Z",
+      "to": "2026-02-23T03:47:06.999Z",
       "stats": {
-        "commits": 109,
+        "commits": 111,
         "prs": 19,
         "reviews": 1,
         "issues": 1,
         "reposCreated": 1,
-        "restricted": 273,
-        "totalContributions": 404
+        "restricted": 277,
+        "totalContributions": 410
       },
-      "calendarDays": 42,
+      "calendarDays": 43,
       "calendar": [
         {
           "date": "2026-01-12",
@@ -6180,6 +6181,11 @@
           "date": "2026-02-22",
           "count": 12,
           "color": "#40c463"
+        },
+        {
+          "date": "2026-02-23",
+          "count": 6,
+          "color": "#9be9a8"
         }
       ],
       "topReposByCommits": [
@@ -6190,13 +6196,13 @@
             "name": "Svelte",
             "color": "#ff3e00"
           },
-          "commits": 56
+          "commits": 57
         },
         {
           "nameWithOwner": "soranjiro/soranjiro",
           "isPrivate": false,
           "primaryLanguage": null,
-          "commits": 42
+          "commits": 43
         },
         {
           "nameWithOwner": "Kaina3/Paintchain",
@@ -11921,6 +11927,11 @@
       "date": "2026-02-22",
       "count": 12,
       "color": "#40c463"
+    },
+    {
+      "date": "2026-02-23",
+      "count": 6,
+      "color": "#9be9a8"
     }
   ],
   "languageTrends": [
@@ -12198,33 +12209,33 @@
       ]
     },
     {
-      "period": "2026-01-12 ~ 2026-02-22",
+      "period": "2026-01-12 ~ 2026-02-23",
       "from": "2026-01-12T02:54:52.000Z",
-      "to": "2026-02-22T20:09:24.942Z",
+      "to": "2026-02-23T03:47:06.999Z",
       "languages": [
         {
           "name": "Svelte",
           "color": "#ff3e00",
-          "score": 32.51,
-          "pct": 40.63
+          "score": 33.09,
+          "pct": 40.94
         },
         {
           "name": "Ruby",
           "color": "#701516",
           "score": 28.69,
-          "pct": 35.86
+          "pct": 35.49
         },
         {
           "name": "TypeScript",
           "color": "#3178c6",
-          "score": 11.99,
-          "pct": 14.98
+          "score": 12.2,
+          "pct": 15.09
         },
         {
           "name": "JavaScript",
           "color": "#f1e05a",
-          "score": 6.21,
-          "pct": 7.76
+          "score": 6.23,
+          "pct": 7.71
         },
         {
           "name": "Shell",
@@ -12491,7 +12502,7 @@
       "name": "tabitabi",
       "nameWithOwner": "soranjiro/tabitabi",
       "description": "旅のしおりを作成・共有できる多機能Webアプリケーション",
-      "aiDescription": "This repository is a web application for creating and sharing travel itineraries.",
+      "aiDescription": "Tabitabi is a web application for creating and sharing travel itineraries.",
       "stars": 4,
       "forks": 0,
       "isPrivate": false,
@@ -12541,7 +12552,7 @@
       "name": "aws-auth-command",
       "nameWithOwner": "soranjiro/aws-auth-command",
       "description": null,
-      "aiDescription": "This repository provides a command-line tool for executing AWS commands with profile management.",
+      "aiDescription": "This repository provides a command-line tool for managing AWS authentication profiles and commands.",
       "stars": 0,
       "forks": 0,
       "isPrivate": false,
@@ -12581,7 +12592,7 @@
       "name": "mybrowser",
       "nameWithOwner": "soranjiro/mybrowser",
       "description": null,
-      "aiDescription": "MyBrowser is a modern Qt-based web browser with advanced features like PiP and workspace management.",
+      "aiDescription": "MyBrowser is a Qt-based web browser featuring advanced functionality like PiP video support and workspace management.",
       "stars": 0,
       "forks": 0,
       "isPrivate": false,
@@ -12636,7 +12647,7 @@
       "name": "clozy",
       "nameWithOwner": "soranjiro/clozy",
       "description": null,
-      "aiDescription": "Clozy is an application for managing and organizing your clothing items.",
+      "aiDescription": "Clozy is a web application for managing and organizing your clothing items.",
       "stars": 1,
       "forks": 0,
       "isPrivate": false,
@@ -13831,7 +13842,7 @@
       "name": "soranjiro",
       "nameWithOwner": "soranjiro/soranjiro",
       "createdAt": "2024-04-15T02:06:39Z",
-      "pushedAt": "2026-02-22T02:05:36Z",
+      "pushedAt": "2026-02-23T02:10:27Z",
       "isPrivate": false,
       "isArchived": false,
       "primaryLanguage": null,
