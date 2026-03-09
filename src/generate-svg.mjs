@@ -75,15 +75,13 @@ const ICONS = {
 };
 
 // ─── Overview SVG (GitHub Profile Summary style) ────────────────────
-function generateOverviewSVG(theme) {
+function generateOverviewSVG(theme, minH = 0) {
   const { profile, activity, repoStats, copilot, streak, allCalendar } = data;
   const isDark = theme === "dark";
-  const text = isDark ? "#e6edf3" : "#24292f";
   const muted = isDark ? "#8b949e" : "#656d76";
   const accent = isDark ? "#58a6ff" : "#0969da";
   const green = isDark ? "#3fb950" : "#1a7f37";
   const border = isDark ? "#30363d" : "#d0d7de";
-  const bg2 = isDark ? "#161b22" : "#f6f8fa";
   const streakData = streak || { current: 0, bestDay: 0, activeDays: 0, totalDays: 1 };
 
   const recentWeeks = [];
@@ -114,15 +112,7 @@ function generateOverviewSVG(theme) {
     `<rect x="${210 + i * 18}" y="22" width="14" height="14" rx="2" fill="${c}"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="${(i * 0.04).toFixed(2)}s" fill="freeze"/></rect>`
   ).join("\n    ");
 
-  const recentHalf = recentWeeks.slice(-7);
-  const olderHalf = recentWeeks.slice(0, 8);
-  const recentAvg = recentHalf.reduce((a, b) => a + b, 0) / recentHalf.length;
-  const olderAvg = olderHalf.reduce((a, b) => a + b, 0) / olderHalf.length;
-  const trendPct = olderAvg > 0 ? ((recentAvg - olderAvg) / olderAvg * 100).toFixed(0) : 0;
-  const trendUp = recentAvg >= olderAvg;
-  const trendColor = trendUp ? green : (isDark ? "#f85149" : "#cf222e");
-  const trendArrow = trendUp ? "▲" : "▼";
-  const trendLabel = `${trendArrow} ${Math.abs(trendPct)}%`;
+
 
   const W = 480, H = 400;
   const font = "-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif";
@@ -147,7 +137,6 @@ function generateOverviewSVG(theme) {
     <text x="24" y="74" fill="${muted}" font-size="11" font-family="${font}">Followed by ${profile.followers} users</text>
     ${contribBar}
     <text x="210" y="54" fill="${muted}" font-size="10" font-family="${font}">Contributed to ${activity.contributedTo} repositories</text>
-    <text x="${W - 24}" y="54" text-anchor="end" fill="${trendColor}" font-size="10" font-weight="600" font-family="${font}">${trendLabel}</text>
 
     <line x1="24" y1="92" x2="${W - 24}" y2="92" stroke="${border}" stroke-width="0.5"/>
 
@@ -180,7 +169,22 @@ function generateOverviewSVG(theme) {
 
   const pulseData = (allCalendar || []).slice(-60);
   const pMax = Math.max(...pulseData.map(d => d.count), 1);
-  const pW = W - 48, pH = 46, pY0 = 302;
+  const pW = W - 48, pY0 = 302;
+  const basePH = 46;
+
+  const badgeList = [];
+  if (activity.totalCommits >= 1000) badgeList.push({ label: `${fmtNum(activity.totalCommits)} Commits`, color: green });
+  if (streakData.current >= 365) badgeList.push({ label: `${streakData.current}d Streak`, color: isDark ? '#f0883e' : '#bf8700' });
+  if (activity.prs >= 100) badgeList.push({ label: `${fmtNum(activity.prs)} PRs`, color: accent });
+  if ((copilot.premiumRequests || 0) >= 100) badgeList.push({ label: `${fmtNum(copilot.premiumRequests)} AI`, color: isDark ? '#bc8cff' : '#8250df' });
+  if (repoStats.total >= 20) badgeList.push({ label: `${repoStats.total} Repos`, color: isDark ? '#79c0ff' : '#0550ae' });
+
+  const badgeH = 20;
+  const naturalH = pY0 + basePH + 28 + badgeH + 16;
+  const totalH = Math.max(naturalH, minH);
+  const extraH = totalH - naturalH;
+  const pH = basePH + extraH;
+
   const pPoints = pulseData.map((d, i) => {
     const x = 24 + (i / (pulseData.length - 1)) * pW;
     const y = pY0 + pH - (d.count / pMax) * pH;
@@ -205,17 +209,11 @@ function generateOverviewSVG(theme) {
   `;
 
   const badgeY = pY0 + pH + 28;
-  const badges = [];
-  if (activity.totalCommits >= 1000) badges.push({ label: `${fmtNum(activity.totalCommits)} Commits`, color: green });
-  if (streakData.current >= 365) badges.push({ label: `${streakData.current}d Streak`, color: isDark ? '#f0883e' : '#bf8700' });
-  if (activity.prs >= 100) badges.push({ label: `${fmtNum(activity.prs)} PRs`, color: accent });
-  if ((copilot.premiumRequests || 0) >= 100) badges.push({ label: `${fmtNum(copilot.premiumRequests)} AI`, color: isDark ? '#bc8cff' : '#8250df' });
-  if (repoStats.total >= 20) badges.push({ label: `${repoStats.total} Repos`, color: isDark ? '#79c0ff' : '#0550ae' });
 
   let badgeSvg = '';
-  const badgeH = 20, badgePad = 8, badgeGap = 6;
+  const badgePad = 8, badgeGap = 6;
   let bx = 24;
-  badges.forEach((b, i) => {
+  badgeList.forEach((b, i) => {
     const tw = b.label.length * 5.8 + badgePad * 2;
     badgeSvg += `<g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="${(0.5 + i * 0.1).toFixed(2)}s" fill="freeze"/>`;
     badgeSvg += `<rect x="${bx}" y="${badgeY}" width="${tw}" height="${badgeH}" rx="10" fill="${b.color}" opacity="0.15"/>`;
@@ -225,27 +223,6 @@ function generateOverviewSVG(theme) {
     bx += tw + badgeGap;
   });
 
-  const langs = (data.overallLanguages || []).slice(0, 7);
-  const langTotal = langs.reduce((s, l) => s + l.bytes, 0);
-  const langBarY = badgeY + badgeH + 10;
-  const langBarW = W - 48, langBarH = 4;
-  let langBar = `<clipPath id="lb"><rect x="24" y="${langBarY}" width="${langBarW}" height="${langBarH}" rx="2"/></clipPath>\n<g clip-path="url(#lb)">\n`;
-  let lx = 24;
-  langs.forEach(l => {
-    const w = (l.bytes / langTotal) * langBarW;
-    langBar += `<rect x="${lx.toFixed(1)}" y="${langBarY}" width="${w.toFixed(1)}" height="${langBarH}" fill="${l.color}"/>\n`;
-    lx += w;
-  });
-  langBar += `</g>\n`;
-  let llx = 24;
-  langs.slice(0, 5).forEach(l => {
-    const pct = ((l.bytes / langTotal) * 100).toFixed(0);
-    langBar += `<circle cx="${llx}" cy="${langBarY + 12}" r="2.5" fill="${l.color}"/>\n`;
-    langBar += `<text x="${llx + 6}" y="${langBarY + 15}" fill="${muted}" font-size="8" font-family="${font}">${l.name} ${pct}%</text>\n`;
-    llx += (l.name.length + pct.length + 2) * 5 + 14;
-  });
-
-  const totalH = langBarY + 24;
   const svgCSS = `text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}`;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${totalH}" viewBox="0 0 ${W} ${totalH}">
@@ -253,23 +230,20 @@ function generateOverviewSVG(theme) {
 <filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 </defs>
 <style>${svgCSS}</style>
-<rect x="0.5" y="0.5" width="${W - 1}" height="${totalH - 1}" rx="6" fill="${isDark ? '#0d1117' : '#ffffff'}" stroke="${border}"/>
+<rect x="0.5" y="0.5" width="${W - 1}" height="${totalH - 1}" rx="6" fill="none" stroke="${border}"/>
 ${sections}
 ${pulse}
 ${badgeSvg}
-${langBar}
 </svg>`;
 }
 
 // ─── Contribution Heatmap Calendar SVG ──────────────────────────────
-function generateHeatmapSVG(theme) {
+function generateHeatmapSVG(theme, minH = 0) {
   const isDark = theme === "dark";
-  const text = isDark ? "#e6edf3" : "#24292f";
   const muted = isDark ? "#8b949e" : "#656d76";
   const accent = isDark ? "#58a6ff" : "#0969da";
   const green = isDark ? "#3fb950" : "#1a7f37";
   const border = isDark ? "#30363d" : "#d0d7de";
-  const bg = isDark ? "#0d1117" : "#ffffff";
   const barBg = isDark ? "#21262d" : "#eaeef2";
   const font = "-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif";
 
@@ -397,11 +371,11 @@ function generateHeatmapSVG(theme) {
   });
 
   const totalH = yoyY + 18 + yearly.length * yGap + 12;
-  const H2 = Math.max(H, totalH);
+  const H2 = Math.max(H, totalH, minH);
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H2}" viewBox="0 0 ${W} ${H2}">
 <style>text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}</style>
-<rect x="0.5" y="0.5" width="${W - 1}" height="${H2 - 1}" rx="6" fill="${bg}" stroke="${border}"/>
+<rect x="0.5" y="0.5" width="${W - 1}" height="${H2 - 1}" rx="6" fill="none" stroke="${border}"/>
 <text x="${padL}" y="24" fill="${accent}" font-size="12" font-weight="600">${totalContribs.toLocaleString()} contributions in the last year</text>
 ${monthText}
 ${dayText}
@@ -772,7 +746,6 @@ async function generateChartsSVG(theme) {
     ? 'svg{--text:#24292f;--muted:#656d76;--dim:#8b949e;--grid:rgba(101,109,118,0.15);--accent:#0969da;--accent-fill:rgba(9,105,218,0.10);--matcha:#1a7f37;--matcha-fill:rgba(26,127,55,0.08);--sora:#0969da;--fuji:#8250df}'
     : 'svg{--text:#e6edf3;--muted:#8b949e;--dim:#656d76;--grid:rgba(139,148,158,0.15);--accent:#58a6ff;--accent-fill:rgba(88,166,255,0.12);--matcha:#3fb950;--matcha-fill:rgba(63,185,80,0.10);--sora:#58a6ff;--fuji:#bc8cff}';
 
-  const chartBg = theme === 'light' ? '#ffffff' : '#0d1117';
   const chartBorder = theme === 'light' ? '#d0d7de' : '#30363d';
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="${-PAD_L} ${-PAD_T} ${W + PAD_L + PAD_R} ${H + PAD_T + PAD_B}">
@@ -782,7 +755,7 @@ ${chartCSS}
 text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
 </style>
 </defs>
-<rect x="${-PAD_L + 0.5}" y="${-PAD_T + 0.5}" width="${W + PAD_L + PAD_R - 1}" height="${H + PAD_T + PAD_B - 1}" rx="6" fill="${chartBg}" stroke="${chartBorder}"/>
+<rect x="${-PAD_L + 0.5}" y="${-PAD_T + 0.5}" width="${W + PAD_L + PAD_R - 1}" height="${H + PAD_T + PAD_B - 1}" rx="6" fill="none" stroke="${chartBorder}"/>
 <text x="26" y="20" style="fill:var(--accent);font-size:9px;font-weight:700;letter-spacing:1.5px">ACTIVITY</text>
 <text x="310" y="20" style="fill:var(--accent);font-size:9px;font-weight:700;letter-spacing:1.5px">MONTHLY CONTRIBUTIONS</text>
 <text x="26" y="294" style="fill:var(--accent);font-size:9px;font-weight:700;letter-spacing:1.5px">LANGUAGES</text>
@@ -802,7 +775,11 @@ console.log("Generating SVG cards...");
 
 function generateTypingSVG(theme) {
   const summary = data.aiSummary || "";
-  const maxCharsPerLine = 70;
+  const svgW = 480;
+  const fontSize = 14;
+  const charW = fontSize * 0.62;
+  const padX = 16;
+  const maxCharsPerLine = Math.floor((svgW - padX * 2) / charW);
   const lines = [];
   const words = summary.split(/\s+/);
   let current = "";
@@ -816,10 +793,9 @@ function generateTypingSVG(theme) {
   }
   if (current.trim()) lines.push(current.trim());
 
-  const lineH = 24;
-  const topPad = 36;
-  const charW = 9.6;
-  const height = topPad + lines.length * lineH + 20;
+  const lineH = 22;
+  const topPad = 32;
+  const height = topPad + lines.length * lineH + 16;
   const textColor = theme === "light" ? "#24292f" : "#e6edf3";
   const mutedColor = theme === "light" ? "#656d76" : "#8b949e";
   const cursorColor = theme === "light" ? "#0969da" : "#58a6ff";
@@ -834,8 +810,8 @@ function generateTypingSVG(theme) {
     for (let ci = 0; ci < line.length; ci++) {
       const delay = (charIdx * charDur).toFixed(3);
       const ch = esc(line[ci]);
-      const x = 20 + ci * charW;
-      tspans += `<text class="c" x="${x.toFixed(1)}" y="${y}" fill="${textColor}" font-size="15" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:${delay}s">${ch}</text>\n`;
+      const x = padX + ci * charW;
+      tspans += `<text class="c" x="${x.toFixed(1)}" y="${y}" fill="${textColor}" font-size="${fontSize}" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:${delay}s">${ch}</text>\n`;
       charIdx++;
     }
   });
@@ -845,15 +821,15 @@ function generateTypingSVG(theme) {
   lines.forEach((line, li) => {
     for (let ci = 0; ci <= line.length; ci++) {
       const t = ((cIdx * charDur) / totalDur * 100).toFixed(2);
-      const cx = 20 + ci * charW;
+      const cx = padX + ci * charW;
       const cy = topPad + li * lineH - 14;
       cursorKeyframes.push(`${t}% { x: ${cx.toFixed(1)}px; y: ${cy}px; }`);
       if (ci < line.length) cIdx++;
     }
   });
-  cursorKeyframes.push(`100% { x: ${(20 + lines[lines.length - 1].length * charW).toFixed(1)}px; y: ${topPad + (lines.length - 1) * lineH - 14}px; }`);
+  cursorKeyframes.push(`100% { x: ${(padX + lines[lines.length - 1].length * charW).toFixed(1)}px; y: ${topPad + (lines.length - 1) * lineH - 14}px; }`);
 
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="${height}" viewBox="0 0 800 ${height}">
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${svgW}" height="${height}" viewBox="0 0 ${svgW} ${height}">
 <style>
   @keyframes reveal { from { opacity: 0; } to { opacity: 1; } }
   @keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
@@ -864,8 +840,8 @@ function generateTypingSVG(theme) {
   .cursor { fill: ${cursorColor}; animation: blink 0.7s step-end infinite, cursor-move ${totalDur.toFixed(2)}s steps(1,end) forwards; }
   @media (prefers-reduced-motion: reduce) { .c { animation: none; opacity: 1; } .cursor { animation: blink 0.7s step-end infinite; } }
 </style>
-<text x="20" y="18" fill="${mutedColor}" font-size="10" font-weight="600" letter-spacing="1.5" font-family="'Geist Mono','SF Mono',monospace">$ profile --summary</text>
-${tspans}<rect class="cursor" x="20" y="${topPad - 14}" width="2" height="18" rx="1"/>
+<text x="${padX}" y="16" fill="${mutedColor}" font-size="10" font-weight="600" letter-spacing="1.5" font-family="'Geist Mono','SF Mono',monospace">$ profile --summary</text>
+${tspans}<rect class="cursor" x="${padX}" y="${topPad - 14}" width="2" height="18" rx="1"/>
 </svg>`;
   return svg;
 }
@@ -873,10 +849,18 @@ ${tspans}<rect class="cursor" x="20" y="${topPad - 14}" width="2" height="18" rx
 for (const theme of ['dark', 'light']) {
   console.log(`  theme: ${theme}`);
 
-  writeFileSync(join(SVG_DIR, `overview-${theme}.svg`), generateOverviewSVG(theme));
+  let ovSvg = generateOverviewSVG(theme);
+  let hmSvg = generateHeatmapSVG(theme);
+  const ovH = parseInt(ovSvg.match(/height="(\d+)"/)[1]);
+  const hmH = parseInt(hmSvg.match(/height="(\d+)"/)[1]);
+  const matchH = Math.max(ovH, hmH);
+  if (ovH !== matchH) ovSvg = generateOverviewSVG(theme, matchH);
+  if (hmH !== matchH) hmSvg = generateHeatmapSVG(theme, matchH);
+
+  writeFileSync(join(SVG_DIR, `overview-${theme}.svg`), ovSvg);
   console.log(`    overview-${theme}.svg`);
 
-  writeFileSync(join(SVG_DIR, `heatmap-${theme}.svg`), generateHeatmapSVG(theme));
+  writeFileSync(join(SVG_DIR, `heatmap-${theme}.svg`), hmSvg);
   console.log(`    heatmap-${theme}.svg`);
 
   writeFileSync(join(SVG_DIR, `activity-${theme}.svg`), generateActivitySVG(theme));

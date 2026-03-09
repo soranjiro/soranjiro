@@ -17,7 +17,7 @@ const readme = `![](https://komarev.com/ghpvc/?username=soranjiro&color=blue) <i
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/typing-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/typing-light.svg">
-  <img src="./output/assets/svg/typing-dark.svg" alt="Profile" width="800" />
+  <img src="./output/assets/svg/typing-dark.svg" alt="Profile" width="480" />
 </picture>
 
 </div>

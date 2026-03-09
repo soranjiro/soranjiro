@@ -5,7 +5,7 @@ svg{--text:#24292f;--muted:#656d76;--dim:#8b949e;--grid:rgba(101,109,118,0.15);-
 text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
 </style>
 </defs>
-<rect x="-24.5" y="-4.5" width="874" height="539" rx="6" fill="#ffffff" stroke="#d0d7de"/>
+<rect x="-24.5" y="-4.5" width="874" height="539" rx="6" fill="none" stroke="#d0d7de"/>
 <text x="26" y="20" style="fill:var(--accent);font-size:9px;font-weight:700;letter-spacing:1.5px">ACTIVITY</text>
 <text x="310" y="20" style="fill:var(--accent);font-size:9px;font-weight:700;letter-spacing:1.5px">MONTHLY CONTRIBUTIONS</text>
 <text x="26" y="294" style="fill:var(--accent);font-size:9px;font-weight:700;letter-spacing:1.5px">LANGUAGES</text>
