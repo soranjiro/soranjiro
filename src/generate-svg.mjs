@@ -74,56 +74,49 @@ const ICONS = {
   contrib: "M1 2.5A2.5 2.5 0 013.5 0h8.75a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0V1.5h-8a1 1 0 00-1 1v6.708A2.492 2.492 0 013.5 9h3.25a.75.75 0 010 1.5H3.5a1 1 0 100 2h5.75a.75.75 0 010 1.5H3.5A2.5 2.5 0 011 11.5v-9zm13.23 7.79a.75.75 0 001.06-1.06l-2.505-2.505a.75.75 0 00-1.06 0L9.22 9.229a.75.75 0 001.06 1.061l1.225-1.224v6.184a.75.75 0 001.5 0V9.066l1.224 1.224z",
 };
 
-// ─── Overview SVG (merged with Activity) ─────────────────────────────
+// ─── Overview SVG (unified: metrics + streak + AI) ───────────────────
 function generateOverviewSVG(theme) {
-  const { profile, activity, repoStats, copilot } = data;
-  const comments = activity.prComments + activity.issueComments;
+  const { profile, activity, repoStats, copilot, streak } = data;
+  const streakData = streak || { current: 0, bestDay: 0, activeDays: 0, totalDays: 1 };
+  const activeRate = Math.round(streakData.activeDays / Math.max(streakData.totalDays, 1) * 100);
 
-  const stats = [
+  const left = [
     { icon: "commit", label: "Commits", value: fmtNum(activity.totalCommits) },
-    { icon: "pr", label: "PRs authored", value: fmtNum(activity.prs) },
+    { icon: "pr", label: "PRs", value: fmtNum(activity.prs) },
     { icon: "review", label: "Reviews", value: fmtNum(activity.reviews) },
     { icon: "issue", label: "Issues", value: fmtNum(activity.issues) },
     { icon: "star", label: "Stars", value: fmtNum(repoStats.stars) },
     { icon: "repo", label: "Repos", value: fmtNum(repoStats.total) },
   ];
 
-  const aiStats = [
-    { icon: "copilot", label: "Premium requests", value: fmtNum(copilot.premiumRequests || 0), bold: true },
-    { icon: "copilot", label: "Copilot mentions", value: String(copilot.copilotMentions || 0) },
-    { icon: "commit", label: "Co-authored", value: String(copilot.coauthoredCommits || 0) },
-    { icon: "commit", label: "Comments", value: fmtNum(comments) },
-  ];
-
   const body = `
     <h2 class="anim">${iconSVG(ICONS.contrib, 16)} ${esc(profile.login)}</h2>
     <div style="display:flex;gap:16px;">
       <div style="flex:1;">
-        ${stats.map((s, i) => `
+        ${left.map((s, i) => `
           <div class="stat anim anim-d${Math.min(i + 1, 6)}">
             ${iconSVG(ICONS[s.icon], 14)}
             <strong>${s.value}</strong> ${s.label}
           </div>
         `).join("")}
-        <div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border);">
-          <div class="stat anim anim-d4">${iconSVG(ICONS.clock, 14)} Joined ${profile.joinedYearsAgo}+ years ago</div>
-          <div class="stat anim anim-d5">${iconSVG(ICONS.org, 14)} ${profile.organizations} organizations</div>
-          <div class="stat anim anim-d6">${iconSVG(ICONS.contrib, 14)} ${activity.contributedTo} contributed to</div>
-        </div>
       </div>
       <div style="flex:0 0 auto;padding-left:16px;border-left:1px solid var(--border);">
-        <div class="section-label anim">AI Collaboration</div>
-        ${aiStats.map((s, i) => `
-          <div class="stat anim anim-d${Math.min(i + 1, 6)}">
-            ${iconSVG(ICONS[s.icon], 14)}
-            <strong>${s.value}</strong> ${s.label}
-          </div>
-        `).join("")}
+        <div class="section-label anim">STREAK</div>
+        <div class="stat anim anim-d1" style="font-size:16px;margin-bottom:4px;">
+          <strong style="color:var(--accent);font-size:22px;">${streakData.current}</strong>
+          <span style="font-size:10px;color:var(--muted);">day streak</span>
+        </div>
+        <div class="stat anim anim-d2">${iconSVG(ICONS.star, 14)} Best: ${streakData.bestDay}/day</div>
+        <div class="stat anim anim-d3">${iconSVG(ICONS.clock, 14)} ${activeRate}% active</div>
+        <div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border);">
+          <div class="stat anim anim-d4">${iconSVG(ICONS.org, 14)} ${profile.organizations} orgs</div>
+          <div class="stat anim anim-d5">${iconSVG(ICONS.copilot, 14)} ${fmtNum(copilot.premiumRequests || 0)} Copilot</div>
+        </div>
       </div>
     </div>
   `;
 
-  return wrapSVG(260, body, theme);
+  return wrapSVG(220, body, theme);
 }
 
 // ─── Languages & Tech Stack SVG ──────────────────────────────────────
@@ -409,41 +402,6 @@ function aggregateMonthly() {
   return { labels: sorted, commits: sorted.map(m => mm[m].c), prs: sorted.map(m => Math.round(mm[m].p)), reviews: sorted.map(m => Math.round(mm[m].r)) };
 }
 
-function interpolateLangMonthly() {
-  const trends = data.languageTrends || [];
-  const ltTot = {}, ltCol = {};
-  trends.forEach(t => t.languages.forEach(l => {
-    ltTot[l.name] = (ltTot[l.name] || 0) + l.score;
-    ltCol[l.name] = l.color;
-  }));
-  const topL = Object.entries(ltTot).sort((a, b) => b[1] - a[1]).slice(0, 6);
-  const rows = [];
-  for (let i = 0; i < trends.length; i++) {
-    const s = new Date(trends[i].from);
-    const e = i + 1 < trends.length ? new Date(trends[i + 1].from) : new Date(trends[i].to);
-    const cur = trends[i], nxt = i + 1 < trends.length ? trends[i + 1] : null;
-    for (let d = new Date(s); d < e; d.setMonth(d.getMonth() + 1)) {
-      const tM = (e.getFullYear() - s.getFullYear()) * 12 + (e.getMonth() - s.getMonth());
-      const el = (d.getFullYear() - s.getFullYear()) * 12 + (d.getMonth() - s.getMonth());
-      const t = tM > 0 ? el / tM : 0;
-      const sc = {};
-      topL.forEach(([n]) => {
-        const cv = (cur.languages.find(l => l.name === n) || {}).score || 0;
-        const nv = nxt ? ((nxt.languages.find(l => l.name === n) || {}).score || 0) : cv;
-        sc[n] = cv + (nv - cv) * t;
-      });
-      rows.push({ month: d.toISOString().slice(0, 7), scores: sc });
-    }
-  }
-  return {
-    labels: rows.map(r => r.month),
-    datasets: topL.map(([name]) => ({
-      name, color: ltCol[name] || '#888',
-      vals: rows.map(r => +(r.scores[name] || 0).toFixed(1))
-    }))
-  };
-}
-
 function smoothPath(pts, t = 0.4) {
   if (pts.length < 2) return '';
   const fx = v => v.toFixed(1);
@@ -465,7 +423,6 @@ function ceilNice(v) {
 // ─── Combined Charts SVG ─────────────────────────────────────────────
 async function generateChartsSVG(theme) {
   const W = 840, PAD_L = 25, PAD_R = 10, PAD_T = 5, PAD_B = 5;
-  const H = 660;
   const fx = v => v.toFixed(1);
 
   const monthly = aggregateMonthly();
@@ -476,7 +433,6 @@ async function generateChartsSVG(theme) {
     data.activity.issues, data.activity.prComments + data.activity.issueComments];
   const rNorm = rRaw.map(v => Math.log10(v + 1) / 4);
 
-  const lang = interpolateLangMonthly();
   const distLangs = (data.overallLanguages || []).slice(0, 7);
   const totalBytes = distLangs.reduce((s, l) => s + l.bytes, 0);
 
@@ -572,34 +528,6 @@ async function generateChartsSVG(theme) {
     dlX += label.length * 5.6 + 16;
   });
 
-  // ── Language Evolution Chart ──
-  const leL = 56, leR = 812, leT = 340, leB = 438;
-  const leW = leR - leL, leH = leB - leT;
-  const maxS = ceilNice(Math.max(...lang.datasets.flatMap(d => d.vals), 1));
-  const lxS = i => leL + (i / Math.max(1, lang.labels.length - 1)) * leW;
-  const lyS = v => leB - (v / maxS) * leH;
-
-  let le = '';
-  for (let i = 0; i <= 3; i++) {
-    const v = (maxS * i) / 3, y = lyS(v);
-    le += `<line x1="${leL}" y1="${fx(y)}" x2="${leR}" y2="${fx(y)}" stroke="var(--grid)" stroke-width="0.5"/>\n`;
-    le += `<text x="${leL - 6}" y="${fx(y + 3)}" text-anchor="end" style="fill:var(--dim);font-size:7px">${Math.round(v)}</text>\n`;
-  }
-  lang.datasets.forEach(ds => {
-    const pts = ds.vals.map((v, i) => [lxS(i), lyS(v)]);
-    le += `<path d="${smoothPath(pts, 0.35)}" fill="none" stroke="${ds.color}" stroke-width="1.5" opacity="0.85"/>\n`;
-  });
-  lang.labels.forEach((m, i) => {
-    if (i % 4 === 0) le += `<text x="${fx(lxS(i))}" y="${leB + 14}" text-anchor="middle" style="fill:var(--muted);font-size:8px">${m.slice(2)}</text>\n`;
-  });
-  let llX = leL;
-  const llY = leB + 28;
-  lang.datasets.forEach(ds => {
-    le += `<circle cx="${llX}" cy="${llY}" r="3" fill="${ds.color}"/>\n`;
-    le += `<text x="${llX + 7}" y="${llY + 3}" style="fill:var(--muted);font-size:9px">${esc(ds.name)}</text>\n`;
-    llX += ds.name.length * 6 + 22;
-  });
-
   // ── Skill Stack (skillicons.dev) ──
   const skillIconMap = {
     'TypeScript': 'ts', 'JavaScript': 'js', 'Go': 'go', 'Python': 'py',
@@ -632,7 +560,7 @@ async function generateChartsSVG(theme) {
     }
   }
 
-  const skY0 = 478;
+  const skY0 = 340;
   const iconH = 36;
   const rowGap = 6;
   let sk = '';
@@ -649,6 +577,8 @@ async function generateChartsSVG(theme) {
     }
     rowY += iconH + rowGap;
   }
+
+  const H = 530;
 
   const chartCSS = theme === 'light'
     ? 'svg{--text:#24292f;--muted:#656d76;--dim:#8b949e;--grid:rgba(101,109,118,0.15);--accent:#0969da;--accent-fill:rgba(9,105,218,0.10);--matcha:#1a7f37;--matcha-fill:rgba(26,127,55,0.08);--sora:#0969da;--fuji:#8250df}'
@@ -672,13 +602,78 @@ ${mc}</g>
 <g>
 ${dist}</g>
 <g>
-${le}</g>
-<g>
 ${sk}</g>
 </svg>`;
 }
 
 console.log("Generating SVG cards...");
+
+function generateTypingSVG(theme) {
+  const summary = data.aiSummary || "";
+  const maxCharsPerLine = 70;
+  const lines = [];
+  const words = summary.split(/\s+/);
+  let current = "";
+  for (const w of words) {
+    if ((current + " " + w).trim().length > maxCharsPerLine) {
+      lines.push(current.trim());
+      current = w;
+    } else {
+      current = current ? current + " " + w : w;
+    }
+  }
+  if (current.trim()) lines.push(current.trim());
+
+  const lineH = 24;
+  const topPad = 36;
+  const charW = 9.6;
+  const height = topPad + lines.length * lineH + 20;
+  const textColor = theme === "light" ? "#24292f" : "#e6edf3";
+  const mutedColor = theme === "light" ? "#656d76" : "#8b949e";
+  const cursorColor = theme === "light" ? "#0969da" : "#58a6ff";
+  const charDur = 0.045;
+  const totalChars = lines.reduce((s, l) => s + l.length, 0);
+  const totalDur = totalChars * charDur + 2;
+
+  let charIdx = 0;
+  let tspans = "";
+  lines.forEach((line, li) => {
+    const y = topPad + li * lineH;
+    for (let ci = 0; ci < line.length; ci++) {
+      const begin = (charIdx * charDur).toFixed(3);
+      const ch = esc(line[ci]);
+      const x = 20 + ci * charW;
+      tspans += `<text x="${x.toFixed(1)}" y="${y}" fill="${textColor}" font-size="15" font-family="'Geist Mono','SF Mono','Fira Code',monospace" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.01s" begin="${begin}s" fill="freeze"/>${ch}</text>\n`;
+      charIdx++;
+    }
+  });
+
+  const cursorKeyframes = [];
+  let cIdx = 0;
+  lines.forEach((line, li) => {
+    for (let ci = 0; ci <= line.length; ci++) {
+      const t = ((cIdx * charDur) / totalDur * 100).toFixed(2);
+      const cx = 20 + ci * charW;
+      const cy = topPad + li * lineH - 14;
+      cursorKeyframes.push(`${t}% { x: ${cx.toFixed(1)}px; y: ${cy}px; }`);
+      if (ci < line.length) cIdx++;
+    }
+  });
+  cursorKeyframes.push(`100% { x: ${(20 + lines[lines.length - 1].length * charW).toFixed(1)}px; y: ${topPad + (lines.length - 1) * lineH - 14}px; }`);
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="${height}" viewBox="0 0 800 ${height}">
+<style>
+  @keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+  @keyframes cursor-move {
+    ${cursorKeyframes.join("\n    ")}
+  }
+  .cursor { fill: ${cursorColor}; animation: blink 0.7s step-end infinite, cursor-move ${totalDur.toFixed(2)}s steps(1,end) forwards; }
+</style>
+<text x="20" y="18" fill="${mutedColor}" font-size="10" font-weight="600" letter-spacing="1.5" font-family="'Geist Mono','SF Mono',monospace">$ profile --summary</text>
+${tspans}<rect class="cursor" x="20" y="${topPad - 14}" width="2" height="18" rx="1"/>
+</svg>`;
+  return svg;
+}
 
 for (const theme of ['dark', 'light']) {
   console.log(`  theme: ${theme}`);
@@ -700,6 +695,9 @@ for (const theme of ['dark', 'light']) {
 
   writeFileSync(join(SVG_DIR, `charts-${theme}.svg`), await generateChartsSVG(theme));
   console.log(`    charts-${theme}.svg`);
+
+  writeFileSync(join(SVG_DIR, `typing-${theme}.svg`), generateTypingSVG(theme));
+  console.log(`    typing-${theme}.svg`);
 }
 
 console.log("Done.");
