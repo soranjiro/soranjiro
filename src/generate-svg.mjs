@@ -114,6 +114,16 @@ function generateOverviewSVG(theme) {
     `<rect x="${210 + i * 18}" y="22" width="14" height="14" rx="2" fill="${c}"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="${(i * 0.04).toFixed(2)}s" fill="freeze"/></rect>`
   ).join("\n    ");
 
+  const recentHalf = recentWeeks.slice(-7);
+  const olderHalf = recentWeeks.slice(0, 8);
+  const recentAvg = recentHalf.reduce((a, b) => a + b, 0) / recentHalf.length;
+  const olderAvg = olderHalf.reduce((a, b) => a + b, 0) / olderHalf.length;
+  const trendPct = olderAvg > 0 ? ((recentAvg - olderAvg) / olderAvg * 100).toFixed(0) : 0;
+  const trendUp = recentAvg >= olderAvg;
+  const trendColor = trendUp ? green : (isDark ? "#f85149" : "#cf222e");
+  const trendArrow = trendUp ? "▲" : "▼";
+  const trendLabel = `${trendArrow} ${Math.abs(trendPct)}%`;
+
   const W = 480, H = 400;
   const font = "-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif";
 
@@ -137,6 +147,7 @@ function generateOverviewSVG(theme) {
     <text x="24" y="74" fill="${muted}" font-size="11" font-family="${font}">Followed by ${profile.followers} users</text>
     ${contribBar}
     <text x="210" y="54" fill="${muted}" font-size="10" font-family="${font}">Contributed to ${activity.contributedTo} repositories</text>
+    <text x="${W - 24}" y="54" text-anchor="end" fill="${trendColor}" font-size="10" font-weight="600" font-family="${font}">${trendLabel}</text>
 
     <line x1="24" y1="92" x2="${W - 24}" y2="92" stroke="${border}" stroke-width="0.5"/>
 
@@ -193,16 +204,39 @@ function generateOverviewSVG(theme) {
     <text x="${W - 24}" y="${pY0 + pH + 14}" text-anchor="end" fill="${muted}" font-size="9" font-family="-apple-system,sans-serif">peak: ${pMax}</text>
   `;
 
+  const badgeY = pY0 + pH + 28;
+  const badges = [];
+  if (activity.totalCommits >= 1000) badges.push({ label: `${fmtNum(activity.totalCommits)} Commits`, color: green });
+  if (streakData.current >= 365) badges.push({ label: `${streakData.current}d Streak`, color: isDark ? '#f0883e' : '#bf8700' });
+  if (activity.prs >= 100) badges.push({ label: `${fmtNum(activity.prs)} PRs`, color: accent });
+  if ((copilot.premiumRequests || 0) >= 100) badges.push({ label: `${fmtNum(copilot.premiumRequests)} AI`, color: isDark ? '#bc8cff' : '#8250df' });
+  if (repoStats.total >= 20) badges.push({ label: `${repoStats.total} Repos`, color: isDark ? '#79c0ff' : '#0550ae' });
+
+  let badgeSvg = '';
+  const badgeH = 20, badgePad = 8, badgeGap = 6;
+  let bx = 24;
+  badges.forEach((b, i) => {
+    const tw = b.label.length * 5.8 + badgePad * 2;
+    badgeSvg += `<g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="${(0.5 + i * 0.1).toFixed(2)}s" fill="freeze"/>`;
+    badgeSvg += `<rect x="${bx}" y="${badgeY}" width="${tw}" height="${badgeH}" rx="10" fill="${b.color}" opacity="0.15"/>`;
+    badgeSvg += `<rect x="${bx}" y="${badgeY}" width="${tw}" height="${badgeH}" rx="10" fill="none" stroke="${b.color}" stroke-width="1" opacity="0.4"/>`;
+    badgeSvg += `<text x="${bx + tw / 2}" y="${badgeY + 13.5}" text-anchor="middle" fill="${b.color}" font-size="9" font-weight="600" font-family="${font}">${b.label}</text>`;
+    badgeSvg += `</g>\n`;
+    bx += tw + badgeGap;
+  });
+
+  const totalH = badgeY + badgeH + 16;
   const svgCSS = `text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}`;
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${totalH}" viewBox="0 0 ${W} ${totalH}">
 <defs>
 <filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 </defs>
 <style>${svgCSS}</style>
-<rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="6" fill="${isDark ? '#0d1117' : '#ffffff'}" stroke="${border}"/>
+<rect x="0.5" y="0.5" width="${W - 1}" height="${totalH - 1}" rx="6" fill="${isDark ? '#0d1117' : '#ffffff'}" stroke="${border}"/>
 ${sections}
 ${pulse}
+${badgeSvg}
 </svg>`;
 }
 
@@ -301,20 +335,52 @@ function generateHeatmapSVG(theme) {
 
   const dowBarY = statsY + 68;
   const dowMax = Math.max(...dowCounts, 1);
+  const dowTotal = dowCounts.reduce((a, b) => a + b, 0);
   const barW = 200, barH = 10;
-  let dowBars = `<text x="24" y="${dowBarY}" fill="${green}" font-size="11" font-weight="600" font-family="${font}">Day of Week Activity</text>\n`;
+  let dowBars = `<defs>`;
+  dowBars += `<linearGradient id="dowGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="${green}"/><stop offset="100%" stop-color="${accent}"/></linearGradient>`;
+  dowBars += `</defs>\n`;
+  dowBars += `<text x="24" y="${dowBarY}" fill="${green}" font-size="11" font-weight="600" font-family="${font}">Day of Week Activity</text>\n`;
   dayLabels.forEach((lab, i) => {
     const rowY = dowBarY + 16 + i * 18;
     const w = (dowCounts[i] / dowMax) * barW;
+    const pct = ((dowCounts[i] / dowTotal) * 100).toFixed(1);
     dowBars += `<text x="44" y="${rowY + 9}" text-anchor="end" fill="${muted}" font-size="9" font-family="${font}">${lab}</text>`;
     dowBars += `<rect x="50" y="${rowY}" width="${barW}" height="${barH}" rx="3" fill="${barBg}"/>`;
-    dowBars += `<rect x="50" y="${rowY}" width="0" height="${barH}" rx="3" fill="${green}"><animate attributeName="width" from="0" to="${w.toFixed(1)}" dur="0.5s" begin="${(0.3 + i * 0.06).toFixed(2)}s" fill="freeze"/></rect>`;
-    dowBars += `<text x="${50 + barW + 8}" y="${rowY + 9}" fill="${muted}" font-size="9" font-family="${font}">${dowCounts[i].toLocaleString()}</text>\n`;
+    dowBars += `<rect x="50" y="${rowY}" width="0" height="${barH}" rx="3" fill="url(#dowGrad)"><animate attributeName="width" from="0" to="${w.toFixed(1)}" dur="0.5s" begin="${(0.3 + i * 0.06).toFixed(2)}s" fill="freeze"/></rect>`;
+    dowBars += `<text x="${50 + barW + 8}" y="${rowY + 9}" fill="${muted}" font-size="9" font-family="${font}">${dowCounts[i].toLocaleString()} <tspan fill="${isDark ? '#484f58' : '#afb8c1'}">(${pct}%)</tspan></text>\n`;
   });
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+  const yoyY = dowBarY + 16 + 7 * 18 + 16;
+  const yearly = (data.yearlyContributions || []).filter(y => y.yearLabel);
+  const yMax = Math.max(...yearly.map(y => y.stats.totalContributions), 1);
+  const yBarMaxW = 120, yBarH = 12, yGap = 16;
+  let yoy = `<line x1="24" y1="${yoyY - 10}" x2="${W - 24}" y2="${yoyY - 10}" stroke="${border}" stroke-width="0.5"/>\n`;
+  yoy += `<text x="24" y="${yoyY + 6}" fill="${green}" font-size="11" font-weight="600" font-family="${font}">Yearly Growth</text>\n`;
+  yearly.forEach((y, i) => {
+    const rowY2 = yoyY + 18 + i * yGap;
+    const w = (y.stats.totalContributions / yMax) * yBarMaxW;
+    const isPartial = i === yearly.length - 1;
+    yoy += `<text x="64" y="${rowY2 + 9}" text-anchor="end" fill="${muted}" font-size="9" font-family="${font}">${y.yearLabel}${isPartial ? '*' : ''}</text>`;
+    yoy += `<rect x="70" y="${rowY2}" width="${yBarMaxW}" height="${yBarH}" rx="3" fill="${barBg}"/>`;
+    yoy += `<rect x="70" y="${rowY2}" width="0" height="${yBarH}" rx="3" fill="${isPartial ? accent : green}"><animate attributeName="width" from="0" to="${w.toFixed(1)}" dur="0.4s" begin="${(0.6 + i * 0.08).toFixed(2)}s" fill="freeze"/></rect>`;
+    yoy += `<text x="${70 + yBarMaxW + 8}" y="${rowY2 + 9}" fill="${muted}" font-size="9" font-family="${font}">${y.stats.totalContributions.toLocaleString()}</text>`;
+    if (i > 0) {
+      const prev = yearly[i - 1].stats.totalContributions;
+      const growth = prev > 0 ? (((y.stats.totalContributions - prev) / prev) * 100).toFixed(0) : '∞';
+      const gColor = y.stats.totalContributions >= prev ? green : (isDark ? '#f85149' : '#cf222e');
+      const gArrow = y.stats.totalContributions >= prev ? '▲' : '▼';
+      yoy += `<text x="${70 + yBarMaxW + 60}" y="${rowY2 + 9}" fill="${gColor}" font-size="8" font-weight="600" font-family="${font}">${gArrow}${Math.abs(growth)}%</text>`;
+    }
+    yoy += '\n';
+  });
+
+  const totalH = yoyY + 18 + yearly.length * yGap + 12;
+  const H2 = Math.max(H, totalH);
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H2}" viewBox="0 0 ${W} ${H2}">
 <style>text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}</style>
-<rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="6" fill="${bg}" stroke="${border}"/>
+<rect x="0.5" y="0.5" width="${W - 1}" height="${H2 - 1}" rx="6" fill="${bg}" stroke="${border}"/>
 <text x="${padL}" y="24" fill="${accent}" font-size="12" font-weight="600">${totalContribs.toLocaleString()} contributions in the last year</text>
 ${monthText}
 ${dayText}
@@ -324,6 +390,7 @@ ${legend}
 <text x="${W - 20}" y="${calH + 9}" fill="${muted}" font-size="7">More</text>
 ${stats}
 ${dowBars}
+${yoy}
 </svg>`;
 }
 
@@ -737,10 +804,10 @@ function generateTypingSVG(theme) {
   lines.forEach((line, li) => {
     const y = topPad + li * lineH;
     for (let ci = 0; ci < line.length; ci++) {
-      const begin = (charIdx * charDur).toFixed(3);
+      const delay = (charIdx * charDur).toFixed(3);
       const ch = esc(line[ci]);
       const x = 20 + ci * charW;
-      tspans += `<text x="${x.toFixed(1)}" y="${y}" fill="${textColor}" font-size="15" font-family="'Geist Mono','SF Mono','Fira Code',monospace" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.01s" begin="${begin}s" fill="freeze"/>${ch}</text>\n`;
+      tspans += `<text class="c" x="${x.toFixed(1)}" y="${y}" fill="${textColor}" font-size="15" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:${delay}s">${ch}</text>\n`;
       charIdx++;
     }
   });
@@ -760,11 +827,14 @@ function generateTypingSVG(theme) {
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="${height}" viewBox="0 0 800 ${height}">
 <style>
+  @keyframes reveal { from { opacity: 0; } to { opacity: 1; } }
   @keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
   @keyframes cursor-move {
     ${cursorKeyframes.join("\n    ")}
   }
+  .c { animation: reveal 0.01s both; }
   .cursor { fill: ${cursorColor}; animation: blink 0.7s step-end infinite, cursor-move ${totalDur.toFixed(2)}s steps(1,end) forwards; }
+  @media (prefers-reduced-motion: reduce) { .c { animation: none; opacity: 1; } .cursor { animation: blink 0.7s step-end infinite; } }
 </style>
 <text x="20" y="18" fill="${mutedColor}" font-size="10" font-weight="600" letter-spacing="1.5" font-family="'Geist Mono','SF Mono',monospace">$ profile --summary</text>
 ${tspans}<rect class="cursor" x="20" y="${topPad - 14}" width="2" height="18" rx="1"/>

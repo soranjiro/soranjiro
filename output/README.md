@@ -14,12 +14,12 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/overview-dark.svg">
     <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/overview-light.svg">
-    <img src="./output/assets/svg/overview-dark.svg" alt="Overview" width="480" />
+    <img src="./output/assets/svg/overview-dark.svg" alt="Overview" width="410" />
   </picture>
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/heatmap-dark.svg">
     <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/heatmap-light.svg">
-    <img src="./output/assets/svg/heatmap-dark.svg" alt="Contributions" width="480" />
+    <img src="./output/assets/svg/heatmap-dark.svg" alt="Contributions" width="410" />
   </picture>
 </p>
 
