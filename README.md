@@ -37,7 +37,7 @@
 
 <br>
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-soranjiro.github.io-blue?style=for-the-badge&logo=github)](https://soranjiro.github.io/soranjiro/)
+[![Dashboard](https://img.shields.io/badge/Dashboard-soranjiro.github.io-blue?style=for-the-badge&logo=github)](https://soranjiro.github.io/soranjiro/)
 
 ---
 
