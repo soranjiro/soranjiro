@@ -45,6 +45,19 @@ const readme = `![](https://komarev.com/ghpvc/?username=soranjiro&color=blue) <i
 
 </div>
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/copilot-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/copilot-light.svg">
+    <img src="./output/assets/svg/copilot-dark.svg" alt="AI Collaboration" width="410" />
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/repos-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/repos-light.svg">
+    <img src="./output/assets/svg/repos-dark.svg" alt="Featured Projects" width="410" />
+  </picture>
+</p>
+
 <div align="center">
 
 <br>
