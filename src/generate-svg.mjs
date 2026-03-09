@@ -74,171 +74,257 @@ const ICONS = {
   contrib: "M1 2.5A2.5 2.5 0 013.5 0h8.75a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0V1.5h-8a1 1 0 00-1 1v6.708A2.492 2.492 0 013.5 9h3.25a.75.75 0 010 1.5H3.5a1 1 0 100 2h5.75a.75.75 0 010 1.5H3.5A2.5 2.5 0 011 11.5v-9zm13.23 7.79a.75.75 0 001.06-1.06l-2.505-2.505a.75.75 0 00-1.06 0L9.22 9.229a.75.75 0 001.06 1.061l1.225-1.224v6.184a.75.75 0 001.5 0V9.066l1.224 1.224z",
 };
 
-// ─── Overview SVG (unified: metrics + streak + AI) ───────────────────
+// ─── Overview SVG (GitHub Profile Summary style) ────────────────────
 function generateOverviewSVG(theme) {
-  const { profile, activity, repoStats, copilot, streak } = data;
+  const { profile, activity, repoStats, copilot, streak, allCalendar } = data;
+  const isDark = theme === "dark";
+  const text = isDark ? "#e6edf3" : "#24292f";
+  const muted = isDark ? "#8b949e" : "#656d76";
+  const accent = isDark ? "#58a6ff" : "#0969da";
+  const green = isDark ? "#3fb950" : "#1a7f37";
+  const border = isDark ? "#30363d" : "#d0d7de";
+  const bg2 = isDark ? "#161b22" : "#f6f8fa";
   const streakData = streak || { current: 0, bestDay: 0, activeDays: 0, totalDays: 1 };
-  const activeRate = Math.round(streakData.activeDays / Math.max(streakData.totalDays, 1) * 100);
 
-  const left = [
-    { icon: "commit", label: "Commits", value: fmtNum(activity.totalCommits) },
-    { icon: "pr", label: "PRs", value: fmtNum(activity.prs) },
-    { icon: "review", label: "Reviews", value: fmtNum(activity.reviews) },
-    { icon: "issue", label: "Issues", value: fmtNum(activity.issues) },
-    { icon: "star", label: "Stars", value: fmtNum(repoStats.stars) },
-    { icon: "repo", label: "Repos", value: fmtNum(repoStats.total) },
+  const recentWeeks = [];
+  const cal = allCalendar || [];
+  const last105 = cal.slice(-105);
+  for (let w = 0; w < 15; w++) {
+    let sum = 0;
+    for (let d = 0; d < 7; d++) {
+      const idx = w * 7 + d;
+      if (idx < last105.length) sum += last105[idx].count;
+    }
+    recentWeeks.push(sum);
+  }
+  const wMax = Math.max(...recentWeeks, 1);
+  const levels = [
+    isDark ? "#161b22" : "#ebedf0",
+    isDark ? "#0e4429" : "#9be9a8",
+    isDark ? "#006d32" : "#40c463",
+    isDark ? "#26a641" : "#30a14e",
+    isDark ? "#39d353" : "#216e39",
   ];
+  const weekColors = recentWeeks.map(v => {
+    if (v === 0) return levels[0];
+    const lv = Math.min(4, Math.ceil((v / wMax) * 4));
+    return levels[lv];
+  });
+  const contribBar = weekColors.map((c, i) =>
+    `<rect x="${210 + i * 18}" y="22" width="14" height="14" rx="2" fill="${c}"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="${(i * 0.04).toFixed(2)}s" fill="freeze"/></rect>`
+  ).join("\n    ");
 
-  const body = `
-    <h2 class="anim">${iconSVG(ICONS.contrib, 16)} ${esc(profile.login)}</h2>
-    <div style="display:flex;gap:16px;">
-      <div style="flex:1;">
-        ${left.map((s, i) => `
-          <div class="stat anim anim-d${Math.min(i + 1, 6)}">
-            ${iconSVG(ICONS[s.icon], 14)}
-            <strong>${s.value}</strong> ${s.label}
-          </div>
-        `).join("")}
-      </div>
-      <div style="flex:0 0 auto;padding-left:16px;border-left:1px solid var(--border);">
-        <div class="section-label anim">STREAK</div>
-        <div class="stat anim anim-d1" style="font-size:16px;margin-bottom:4px;">
-          <strong style="color:var(--accent);font-size:22px;">${streakData.current}</strong>
-          <span style="font-size:10px;color:var(--muted);">day streak</span>
-        </div>
-        <div class="stat anim anim-d2">${iconSVG(ICONS.star, 14)} Best: ${streakData.bestDay}/day</div>
-        <div class="stat anim anim-d3">${iconSVG(ICONS.clock, 14)} ${activeRate}% active</div>
-        <div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border);">
-          <div class="stat anim anim-d4">${iconSVG(ICONS.org, 14)} ${profile.organizations} orgs</div>
-          <div class="stat anim anim-d5">${iconSVG(ICONS.copilot, 14)} ${fmtNum(copilot.premiumRequests || 0)} Copilot</div>
-        </div>
-      </div>
-    </div>
-  `;
+  const W = 480, H = 400;
+  const font = "-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif";
 
-  return wrapSVG(220, body, theme);
-}
-
-// ─── Languages & Tech Stack SVG ──────────────────────────────────────
-function generateLanguagesSVG(theme) {
-  const langs = data.overallLanguages.slice(0, 8);
-  const totalBytes = langs.reduce((s, l) => s + l.bytes, 0);
-
-  const barSegments = langs.map(l => {
-    const pct = l.bytes / totalBytes * 100;
-    return `<span style="width:${pct}%;background:${l.color};"></span>`;
-  }).join("");
-
-  const legend = langs.map(l => {
-    const pct = (l.bytes / totalBytes * 100).toFixed(1);
-    return `<span><span class="dot" style="background:${l.color};"></span>${esc(l.name)} ${pct}%</span>`;
-  }).join(" ");
-
-  const trends = data.languageTrends;
-  const allTrendLangs = new Set();
-  trends.forEach(t => t.languages.slice(0, 5).forEach(l => allTrendLangs.add(l.name)));
-  const trendLangList = [...allTrendLangs].slice(0, 5);
-
-  const trendHeight = 60;
-  const trendWidth = 420;
-
-  function trendPath(langName) {
-    const points = trends.map((t, i) => {
-      const lang = t.languages.find(l => l.name === langName);
-      const pct = lang ? lang.pct : 0;
-      const x = (i / (trends.length - 1)) * trendWidth;
-      const y = trendHeight - (pct / 100) * trendHeight;
-      return `${x},${y}`;
-    });
-    return points.join(" ");
+  function iconPath(pathD, x, y, fillColor, size = 12) {
+    const s = size / 16;
+    return `<path d="${pathD}" fill="${fillColor}" transform="translate(${x},${y}) scale(${s.toFixed(4)})"/>`;
   }
 
-  const langColor = (name) => {
-    const found = data.overallLanguages.find(l => l.name === name);
-    return found?.color || "#888";
-  };
+  function statRow(x, y, icon, label, fillColor, delay = 0) {
+    const anim = delay > 0 ? ` opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="${delay.toFixed(2)}s" fill="freeze"/` : '';
+    return `<g${delay > 0 ? ` opacity="0"` : ''}>${delay > 0 ? `<animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="${delay.toFixed(2)}s" fill="freeze"/>` : ''}${iconPath(ICONS[icon], x, y - 10, fillColor)}<text x="${x + 16}" y="${y}" fill="${fillColor}" font-size="11" font-family="${font}">${label}</text></g>`;
+  }
 
-  const trendLines = trendLangList.map(name => {
-    const pts = trendPath(name);
-    return `<polyline points="${pts}" fill="none" stroke="${langColor(name)}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>`;
-  }).join("");
+  function sectionHeader(x, y, icon, label) {
+    return `${iconPath(ICONS[icon], x, y - 12, green, 14)}<text x="${x + 20}" y="${y}" fill="${green}" font-size="12" font-weight="600" font-family="${font}">${label}</text>`;
+  }
 
-  const xLabels = trends.map((t, i) => {
-    const x = (i / (trends.length - 1)) * trendWidth;
-    return `<text x="${x}" y="${trendHeight + 12}" fill="var(--muted)" font-size="10" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,sans-serif">${t.period.split(" ~ ")[0].slice(0, 4)}</text>`;
-  }).join("");
+  const sections = `
+    <text x="24" y="38" fill="${accent}" font-size="16" font-weight="700" font-family="${font}">${esc(profile.login)}</text>
+    <text x="24" y="58" fill="${muted}" font-size="11" font-family="${font}">Joined GitHub ${profile.joinedYearsAgo} years ago</text>
+    <text x="24" y="74" fill="${muted}" font-size="11" font-family="${font}">Followed by ${profile.followers} users</text>
+    ${contribBar}
+    <text x="210" y="54" fill="${muted}" font-size="10" font-family="${font}">Contributed to ${activity.contributedTo} repositories</text>
 
-  const trendLegend = trendLangList.map(name =>
-    `<span><span class="dot" style="background:${langColor(name)};"></span>${esc(name)}</span>`
-  ).join(" ");
+    <line x1="24" y1="92" x2="${W - 24}" y2="92" stroke="${border}" stroke-width="0.5"/>
 
-  // ── Tech Stack ──
-  const langMap = {};
-  (data.overallLanguages || []).forEach(l => { langMap[l.name] = true; });
+    ${sectionHeader(24, 112, 'commit', 'Activity')}
+    ${statRow(24, 132, 'commit', `${activity.totalCommits.toLocaleString()} Commits`, muted, 0.15)}
+    ${statRow(24, 150, 'pr', `${activity.prs.toLocaleString()} Pull requests opened`, muted, 0.22)}
+    ${statRow(24, 168, 'review', `${activity.reviews.toLocaleString()} Pull requests reviewed`, muted, 0.29)}
+    ${statRow(24, 186, 'issue', `${activity.issues.toLocaleString()} Issues opened`, muted, 0.36)}
+    ${statRow(24, 204, 'contrib', `${(activity.issueComments + activity.prComments).toLocaleString()} Comments`, muted, 0.43)}
 
-  const iconMap = {
-    'Ruby':       { label: 'Ruby', cat: 'Languages', color: '#CC342D' },
-    'Python':     { label: 'Python', cat: 'Languages', color: '#3572A5' },
-    'Go':         { label: 'Go', cat: 'Languages', color: '#00ADD8' },
-    'TypeScript': { label: 'TypeScript', cat: 'Languages', color: '#3178C6' },
-    'JavaScript': { label: 'JavaScript', cat: 'Languages', color: '#F1E05A' },
-    'Rust':       { label: 'Rust', cat: 'Languages', color: '#DEA584' },
-    'C++':        { label: 'C++', cat: 'Languages', color: '#F34B7D' },
-    'Java':       { label: 'Java', cat: 'Languages', color: '#B07219' },
-    'C':          { label: 'C', cat: 'Languages', color: '#555555' },
-    'C#':         { label: 'C#', cat: 'Languages', color: '#178600' },
-    'PHP':        { label: 'PHP', cat: 'Languages', color: '#4F5D95' },
-    'Swift':      { label: 'Swift', cat: 'Languages', color: '#F05138' },
-    'Svelte':     { label: 'Svelte', cat: 'Frameworks', color: '#FF3E00' },
-    'Vue':        { label: 'Vue', cat: 'Frameworks', color: '#41B883' },
-    'HCL':        { label: 'Terraform', cat: 'DevOps', color: '#7B42BC' },
-    'Dockerfile': { label: 'Docker', cat: 'DevOps', color: '#2496ED' },
-    'Shell':      { label: 'Shell', cat: 'Tools', color: '#89E051' },
-  };
+    ${sectionHeader(260, 112, 'org', 'Community')}
+    ${statRow(260, 132, 'org', `Member of ${profile.organizations} organizations`, muted, 0.18)}
+    ${statRow(260, 150, 'star', `Starred ${repoStats.stars} repositories`, muted, 0.25)}
+    ${statRow(260, 168, 'copilot', `${fmtNum(copilot.premiumRequests || 0)} Copilot requests`, muted, 0.32)}
+    <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="0.39s" fill="freeze"/>
+      ${iconPath(ICONS.clock, 260, 176, muted)}<text x="276" y="186" fill="${muted}" font-size="11" font-family="${font}">${streakData.current}-day streak</text>
+      <circle cx="${276 + String(streakData.current).length * 6.5 + 72}" cy="182" r="3" fill="${green}"><animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/></circle>
+    </g>
+    ${statRow(260, 204, 'star', `Best: ${streakData.bestDay}/day`, muted, 0.46)}
 
-  const extraTools = [
-    { label: 'Rails', cat: 'Frameworks', color: '#CC0000' },
-    { label: 'AWS', cat: 'DevOps', color: '#FF9900' },
-    { label: 'GitHub', cat: 'Tools', color: '#8b949e' },
-    { label: 'PostgreSQL', cat: 'Tools', color: '#336791' },
-    { label: 'Linux', cat: 'Tools', color: '#FCC624' },
-  ];
+    <line x1="24" y1="218" x2="${W - 24}" y2="218" stroke="${border}" stroke-width="0.5"/>
 
-  const allTools = [];
-  Object.entries(iconMap).forEach(([lang, info]) => {
-    if (langMap[lang]) allTools.push(info);
-  });
-  extraTools.forEach(t => allTools.push(t));
+    ${sectionHeader(24, 240, 'repo', `${repoStats.total} Repositories`)}
+    <text x="24" y="260" fill="${muted}" font-size="11" font-family="${font}">Prefers ${repoStats.preferredLicense} license</text>
+    <text x="24" y="278" fill="${muted}" font-size="11" font-family="${font}">${repoStats.releases} Releases</text>
 
-  const categories = {};
-  allTools.forEach(t => {
-    if (!categories[t.cat]) categories[t.cat] = [];
-    categories[t.cat].push(t);
-  });
-
-  const stackSections = Object.entries(categories).map(([cat, tools]) => {
-    const badges = tools.map(t =>
-      `<span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border:1px solid var(--border);border-radius:10px;font-size:10px;color:var(--text);background:var(--bg);white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:${t.color};flex-shrink:0;"></span>${esc(t.label)}</span>`
-    ).join("");
-    return `
-      <div style="margin-bottom:6px;">
-        <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">${esc(cat)}</div>
-        <div style="display:flex;flex-wrap:wrap;gap:4px;">${badges}</div>
-      </div>
-    `;
-  }).join("");
-
-  const body = `
-    <h2 class="anim">${iconSVG(ICONS.repo, 16)} Languages &amp; Tech Stack</h2>
-    <div class="lang-bar anim anim-d1">${barSegments}</div>
-    <div class="lang-legend anim anim-d2">${legend}</div>
-    <div style="margin-top:14px;padding-top:10px;border-top:1px solid var(--border);" class="anim anim-d3">
-      <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">Skill Stack</div>
-      ${stackSections}
-    </div>
+    <text x="260" y="260" fill="${muted}" font-size="11" font-family="${font}">${repoStats.stars} Stargazers</text>
+    <text x="260" y="278" fill="${muted}" font-size="11" font-family="${font}">${repoStats.forks} Forkers</text>
   `;
 
-  return wrapSVG(310, body, theme);
+  const pulseData = (allCalendar || []).slice(-60);
+  const pMax = Math.max(...pulseData.map(d => d.count), 1);
+  const pW = W - 48, pH = 46, pY0 = 302;
+  const pPoints = pulseData.map((d, i) => {
+    const x = 24 + (i / (pulseData.length - 1)) * pW;
+    const y = pY0 + pH - (d.count / pMax) * pH;
+    return [x, y];
+  });
+  let pPath = `M${pPoints[0][0].toFixed(1)},${pPoints[0][1].toFixed(1)}`;
+  for (let i = 0; i < pPoints.length - 1; i++) {
+    const [a, b, c, e] = [pPoints[Math.max(0, i-1)], pPoints[i], pPoints[i+1], pPoints[Math.min(pPoints.length-1, i+2)]];
+    const t = 0.35;
+    pPath += ` C${(b[0]+(c[0]-a[0])*t/3).toFixed(1)},${(b[1]+(c[1]-a[1])*t/3).toFixed(1)} ${(c[0]-(e[0]-b[0])*t/3).toFixed(1)},${(c[1]-(e[1]-b[1])*t/3).toFixed(1)} ${c[0].toFixed(1)},${c[1].toFixed(1)}`;
+  }
+  const pArea = pPath + ` L${(24 + pW).toFixed(1)},${pY0 + pH} L24,${pY0 + pH} Z`;
+  const pLen = pulseData.length * 12;
+
+  const pulse = `
+    <text x="24" y="${pY0 - 6}" fill="${muted}" font-size="9" font-weight="600" letter-spacing="1" font-family="-apple-system,sans-serif">LAST 60 DAYS</text>
+    <path d="${pArea}" fill="${isDark ? 'rgba(63,185,80,0.08)' : 'rgba(26,127,55,0.06)'}"/>
+    <path d="${pPath}" fill="none" stroke="${green}" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="${pLen}" stroke-dashoffset="${pLen}" filter="url(#glow)">
+      <animate attributeName="stroke-dashoffset" from="${pLen}" to="0" dur="2s" fill="freeze" begin="0.3s"/>
+    </path>
+    <text x="${W - 24}" y="${pY0 + pH + 14}" text-anchor="end" fill="${muted}" font-size="9" font-family="-apple-system,sans-serif">peak: ${pMax}</text>
+  `;
+
+  const svgCSS = `text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}`;
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+<defs>
+<filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<style>${svgCSS}</style>
+<rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="6" fill="${isDark ? '#0d1117' : '#ffffff'}" stroke="${border}"/>
+${sections}
+${pulse}
+</svg>`;
+}
+
+// ─── Contribution Heatmap Calendar SVG ──────────────────────────────
+function generateHeatmapSVG(theme) {
+  const isDark = theme === "dark";
+  const text = isDark ? "#e6edf3" : "#24292f";
+  const muted = isDark ? "#8b949e" : "#656d76";
+  const accent = isDark ? "#58a6ff" : "#0969da";
+  const green = isDark ? "#3fb950" : "#1a7f37";
+  const border = isDark ? "#30363d" : "#d0d7de";
+  const bg = isDark ? "#0d1117" : "#ffffff";
+  const barBg = isDark ? "#21262d" : "#eaeef2";
+  const font = "-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif";
+
+  const levels = isDark
+    ? ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"]
+    : ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
+
+  const cal = data.allCalendar || [];
+  const today = cal.length > 0 ? new Date(cal[cal.length - 1].date) : new Date();
+  const startDay = new Date(today);
+  startDay.setDate(startDay.getDate() - 364);
+  const startDow = startDay.getDay();
+  if (startDow !== 0) startDay.setDate(startDay.getDate() - startDow);
+
+  const calMap = {};
+  cal.forEach(d => { calMap[d.date] = d.count; });
+
+  const cellSize = 7, gap = 2, total = cellSize + gap;
+  const padL = 24, padT = 40;
+  const W = 480, H = 400;
+  const maxCount = Math.max(...cal.slice(-371).map(d => d.count), 1);
+
+  let cells = "";
+  let totalContribs = 0;
+  const months = {};
+  const dowCounts = [0, 0, 0, 0, 0, 0, 0];
+  const d = new Date(startDay);
+  let weekIdx = 0;
+  while (d <= today) {
+    const dow = d.getDay();
+    if (dow === 0 && d > startDay) weekIdx++;
+    const ds = d.toISOString().slice(0, 10);
+    const count = calMap[ds] || 0;
+    totalContribs += count;
+    dowCounts[dow] += count;
+    const lv = count === 0 ? 0 : Math.min(4, Math.ceil((count / maxCount) * 4));
+    const x = padL + weekIdx * total;
+    const y = padT + dow * total;
+
+    const monthKey = ds.slice(0, 7);
+    if (!months[monthKey]) months[monthKey] = x;
+
+    cells += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="2" fill="${levels[lv]}">`;
+    cells += `<animate attributeName="opacity" from="0" to="1" dur="0.08s" begin="${(weekIdx * 0.015).toFixed(3)}s" fill="freeze"/>`;
+    cells += `</rect>\n`;
+    d.setDate(d.getDate() + 1);
+  }
+
+  const dayLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let dayText = "";
+  dayLabels.forEach((lab, i) => {
+    if (i % 2 === 1) dayText += `<text x="${padL - 4}" y="${padT + i * total + 6}" text-anchor="end" fill="${muted}" font-size="7" font-family="${font}">${lab}</text>\n`;
+  });
+
+  let monthText = "";
+  const seen = new Set();
+  Object.entries(months).forEach(([m, x]) => {
+    const label = new Date(m + "-15").toLocaleString("en", { month: "short" });
+    if (!seen.has(label)) {
+      seen.add(label);
+      monthText += `<text x="${x}" y="${padT - 6}" fill="${muted}" font-size="7" font-family="${font}">${label}</text>\n`;
+    }
+  });
+
+  const calH = padT + 7 * total + 8;
+  const legend = levels.map((c, i) =>
+    `<rect x="${W - 70 + i * 10}" y="${calH}" width="${cellSize}" height="${cellSize}" rx="2" fill="${c}"/>`
+  ).join("\n    ");
+
+  const streakData = data.streak || { current: 0, longest: 0, bestDay: 0, activeDays: 0, totalDays: 1 };
+  const avgPerDay = (totalContribs / 365).toFixed(1);
+
+  const statsY = calH + 28;
+  const stats = `
+    <line x1="24" y1="${statsY - 10}" x2="${W - 24}" y2="${statsY - 10}" stroke="${border}" stroke-width="0.5"/>
+    <text x="24" y="${statsY + 8}" fill="${green}" font-size="11" font-weight="600" font-family="${font}">Contribution Stats</text>
+    <text x="24" y="${statsY + 28}" fill="${muted}" font-size="10" font-family="${font}">Total: ${totalContribs.toLocaleString()}</text>
+    <text x="140" y="${statsY + 28}" fill="${muted}" font-size="10" font-family="${font}">Avg: ${avgPerDay}/day</text>
+    <text x="260" y="${statsY + 28}" fill="${muted}" font-size="10" font-family="${font}">Peak: ${maxCount}/day</text>
+    <text x="24" y="${statsY + 46}" fill="${muted}" font-size="10" font-family="${font}">Streak: ${streakData.current} days</text>
+    <text x="140" y="${statsY + 46}" fill="${muted}" font-size="10" font-family="${font}">Longest: ${streakData.longest || streakData.current} days</text>
+    <text x="260" y="${statsY + 46}" fill="${muted}" font-size="10" font-family="${font}">Active: ${streakData.activeDays} days</text>
+  `;
+
+  const dowBarY = statsY + 68;
+  const dowMax = Math.max(...dowCounts, 1);
+  const barW = 200, barH = 10;
+  let dowBars = `<text x="24" y="${dowBarY}" fill="${green}" font-size="11" font-weight="600" font-family="${font}">Day of Week Activity</text>\n`;
+  dayLabels.forEach((lab, i) => {
+    const rowY = dowBarY + 16 + i * 18;
+    const w = (dowCounts[i] / dowMax) * barW;
+    dowBars += `<text x="44" y="${rowY + 9}" text-anchor="end" fill="${muted}" font-size="9" font-family="${font}">${lab}</text>`;
+    dowBars += `<rect x="50" y="${rowY}" width="${barW}" height="${barH}" rx="3" fill="${barBg}"/>`;
+    dowBars += `<rect x="50" y="${rowY}" width="0" height="${barH}" rx="3" fill="${green}"><animate attributeName="width" from="0" to="${w.toFixed(1)}" dur="0.5s" begin="${(0.3 + i * 0.06).toFixed(2)}s" fill="freeze"/></rect>`;
+    dowBars += `<text x="${50 + barW + 8}" y="${rowY + 9}" fill="${muted}" font-size="9" font-family="${font}">${dowCounts[i].toLocaleString()}</text>\n`;
+  });
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+<style>text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}</style>
+<rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="6" fill="${bg}" stroke="${border}"/>
+<text x="${padL}" y="24" fill="${accent}" font-size="12" font-weight="600">${totalContribs.toLocaleString()} contributions in the last year</text>
+${monthText}
+${dayText}
+${cells}
+<text x="${W - 86}" y="${calH + 9}" fill="${muted}" font-size="7">Less</text>
+${legend}
+<text x="${W - 20}" y="${calH + 9}" fill="${muted}" font-size="7">More</text>
+${stats}
+${dowBars}
+</svg>`;
 }
 
 // ─── Activity SVG ────────────────────────────────────────────────────
@@ -451,8 +537,12 @@ async function generateChartsSVG(theme) {
     radar += `<line x1="${rcx}" y1="${rcy}" x2="${fx(x)}" y2="${fx(y)}" stroke="var(--grid)" stroke-width="0.7"/>\n`;
   }
   const dPts = rNorm.map((v, i) => rPt(i, v * rr));
-  radar += `<polygon points="${dPts.map(p => p.map(fx).join(',')).join(' ')}" fill="var(--accent-fill)" stroke="var(--accent)" stroke-width="1.5" stroke-linejoin="round"/>\n`;
-  dPts.forEach(p => { radar += `<circle cx="${fx(p[0])}" cy="${fx(p[1])}" r="3" fill="var(--accent)"/>\n`; });
+  const radarPoly = dPts.map(p => p.map(fx).join(',')).join(' ');
+  const zeroPoly = Array.from({length: N}, () => `${rcx},${rcy}`).join(' ');
+  radar += `<polygon points="${zeroPoly}" fill="var(--accent-fill)" stroke="var(--accent)" stroke-width="1.5" stroke-linejoin="round">
+    <animate attributeName="points" from="${zeroPoly}" to="${radarPoly}" dur="0.8s" fill="freeze" begin="0.2s" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+  </polygon>\n`;
+  dPts.forEach((p, i) => { radar += `<circle cx="${fx(p[0])}" cy="${fx(p[1])}" r="3" fill="var(--accent)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="${(0.8 + i * 0.08).toFixed(2)}s" fill="freeze"/></circle>\n`; });
 
   const lCfg = [
     { dx: 0, dy: -16, a: 'middle' }, { dx: 10, dy: 0, a: 'start' },
@@ -495,10 +585,11 @@ async function generateChartsSVG(theme) {
     const v = (pMax * i) / 2, y = yP(v);
     mc += `<text x="${mcR + 5}" y="${fx(y + 3)}" text-anchor="start" style="fill:var(--sora);font-size:8px">${Math.round(v)}</text>\n`;
   }
-  mc += `<path d="${cArea}" fill="var(--matcha-fill)"/>\n`;
-  mc += `<path d="${cLine}" fill="none" stroke="var(--matcha)" stroke-width="1.5"/>\n`;
-  mc += `<path d="${pLine}" fill="none" stroke="var(--sora)" stroke-width="1.5" stroke-dasharray="4,2"/>\n`;
-  mc += `<path d="${rvLine}" fill="none" stroke="var(--fuji)" stroke-width="1.5" stroke-dasharray="2,2"/>\n`;
+  mc += `<path d="${cArea}" fill="var(--matcha-fill)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="0.5s" fill="freeze"/></path>\n`;
+  const drawLen = 3000;
+  mc += `<path d="${cLine}" fill="none" stroke="var(--matcha)" stroke-width="1.5" stroke-dasharray="${drawLen}" stroke-dashoffset="${drawLen}"><animate attributeName="stroke-dashoffset" from="${drawLen}" to="0" dur="1.2s" begin="0.3s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/></path>\n`;
+  mc += `<path d="${pLine}" fill="none" stroke="var(--sora)" stroke-width="1.5" stroke-dasharray="4,2" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="1s" fill="freeze"/></path>\n`;
+  mc += `<path d="${rvLine}" fill="none" stroke="var(--fuji)" stroke-width="1.5" stroke-dasharray="2,2" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="1.2s" fill="freeze"/></path>\n`;
   mLabels.forEach((m, i) => {
     if (i % 6 === 0) mc += `<text x="${fx(xS(i))}" y="${mcB + 14}" text-anchor="middle" style="fill:var(--muted);font-size:8px">${m.slice(2)}</text>\n`;
   });
@@ -513,9 +604,11 @@ async function generateChartsSVG(theme) {
   const bY = 306, bH = 6, bW = 788;
   let bX = 26;
   let dist = `<clipPath id="bc"><rect x="26" y="${bY}" width="${bW}" height="${bH}" rx="3"/></clipPath>\n<g clip-path="url(#bc)">\n`;
+  let cumDelay = 0;
   distLangs.forEach(l => {
     const w = (l.bytes / totalBytes) * bW;
-    dist += `<rect x="${fx(bX)}" y="${bY}" width="${fx(w)}" height="${bH}" fill="${l.color}"/>\n`;
+    dist += `<rect x="${fx(bX)}" y="${bY}" width="0" height="${bH}" fill="${l.color}"><animate attributeName="width" from="0" to="${fx(w)}" dur="0.5s" begin="${(0.3 + cumDelay).toFixed(2)}s" fill="freeze"/></rect>\n`;
+    cumDelay += 0.06;
     bX += w;
   });
   dist += `</g>\n`;
@@ -584,6 +677,9 @@ async function generateChartsSVG(theme) {
     ? 'svg{--text:#24292f;--muted:#656d76;--dim:#8b949e;--grid:rgba(101,109,118,0.15);--accent:#0969da;--accent-fill:rgba(9,105,218,0.10);--matcha:#1a7f37;--matcha-fill:rgba(26,127,55,0.08);--sora:#0969da;--fuji:#8250df}'
     : 'svg{--text:#e6edf3;--muted:#8b949e;--dim:#656d76;--grid:rgba(139,148,158,0.15);--accent:#58a6ff;--accent-fill:rgba(88,166,255,0.12);--matcha:#3fb950;--matcha-fill:rgba(63,185,80,0.10);--sora:#58a6ff;--fuji:#bc8cff}';
 
+  const chartBg = theme === 'light' ? '#ffffff' : '#0d1117';
+  const chartBorder = theme === 'light' ? '#d0d7de' : '#30363d';
+
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="${-PAD_L} ${-PAD_T} ${W + PAD_L + PAD_R} ${H + PAD_T + PAD_B}">
 <defs>
 <style>
@@ -591,6 +687,7 @@ ${chartCSS}
 text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
 </style>
 </defs>
+<rect x="${-PAD_L + 0.5}" y="${-PAD_T + 0.5}" width="${W + PAD_L + PAD_R - 1}" height="${H + PAD_T + PAD_B - 1}" rx="6" fill="${chartBg}" stroke="${chartBorder}"/>
 <text x="26" y="20" style="fill:var(--accent);font-size:9px;font-weight:700;letter-spacing:1.5px">ACTIVITY</text>
 <text x="310" y="20" style="fill:var(--accent);font-size:9px;font-weight:700;letter-spacing:1.5px">MONTHLY CONTRIBUTIONS</text>
 <text x="26" y="294" style="fill:var(--accent);font-size:9px;font-weight:700;letter-spacing:1.5px">LANGUAGES</text>
@@ -681,8 +778,8 @@ for (const theme of ['dark', 'light']) {
   writeFileSync(join(SVG_DIR, `overview-${theme}.svg`), generateOverviewSVG(theme));
   console.log(`    overview-${theme}.svg`);
 
-  writeFileSync(join(SVG_DIR, `languages-${theme}.svg`), generateLanguagesSVG(theme));
-  console.log(`    languages-${theme}.svg`);
+  writeFileSync(join(SVG_DIR, `heatmap-${theme}.svg`), generateHeatmapSVG(theme));
+  console.log(`    heatmap-${theme}.svg`);
 
   writeFileSync(join(SVG_DIR, `activity-${theme}.svg`), generateActivitySVG(theme));
   console.log(`    activity-${theme}.svg`);
