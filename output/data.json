@@ -14758,5 +14758,13 @@
         }
       ]
     }
-  ]
+  ],
+  "streak": {
+    "current": 630,
+    "todayContribs": 0,
+    "bestDay": 118,
+    "bestDate": "2025-09-11",
+    "totalDays": 1152,
+    "activeDays": 806
+  }
 }

@@ -1,78 +1,64 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="220">
-  <foreignObject x="0" y="0" width="100%" height="100%">
-    <div xmlns="http://www.w3.org/1999/xhtml" class="auto">
-      <style>
-    .auto { --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff; --border: #30363d; --bar-bg: #21262d; --sub: #a371f7; }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    .auto { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13px; color: var(--text); background: transparent; }
-    .card { background: transparent; padding: 16px; }
-    h2 { font-size: 14px; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; color: var(--text); }
-    h2 svg { fill: var(--accent); flex-shrink: 0; }
-    .row { display: flex; gap: 12px; flex-wrap: wrap; }
-    .stat { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
-    .stat svg { fill: var(--muted); flex-shrink: 0; }
-    .stat strong { color: var(--text); font-weight: 600; }
-    .lang-bar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin: 8px 0; }
-    .lang-bar span { display: block; height: 100%; }
-    .lang-legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 11px; color: var(--muted); }
-    .lang-legend .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 3px; vertical-align: middle; }
-    .section-label { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sub); margin-bottom: 6px; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-    .anim { animation: fadeIn 0.4s ease both; }
-    .anim-d1 { animation-delay: 0.05s; } .anim-d2 { animation-delay: 0.1s; } .anim-d3 { animation-delay: 0.15s; }
-    .anim-d4 { animation-delay: 0.2s; } .anim-d5 { animation-delay: 0.25s; } .anim-d6 { animation-delay: 0.3s; }
-  </style>
-      <div class="card">
-    <h2 class="anim"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M1 2.5A2.5 2.5 0 013.5 0h8.75a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0V1.5h-8a1 1 0 00-1 1v6.708A2.492 2.492 0 013.5 9h3.25a.75.75 0 010 1.5H3.5a1 1 0 100 2h5.75a.75.75 0 010 1.5H3.5A2.5 2.5 0 011 11.5v-9zm13.23 7.79a.75.75 0 001.06-1.06l-2.505-2.505a.75.75 0 00-1.06 0L9.22 9.229a.75.75 0 001.06 1.061l1.225-1.224v6.184a.75.75 0 001.5 0V9.066l1.224 1.224z"/></svg> soranjiro</h2>
-    <div style="display:flex;gap:16px;">
-      <div style="flex:1;">
-        
-          <div class="stat anim anim-d1">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14"><path fill-rule="evenodd" d="M10.5 7.75a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm1.43.75a4.002 4.002 0 01-7.86 0H.75a.75.75 0 110-1.5h3.32a4.001 4.001 0 017.86 0h3.32a.75.75 0 110 1.5h-3.32z"/></svg>
-            <strong>4.8k</strong> Commits
-          </div>
-        
-          <div class="stat anim anim-d2">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14"><path fill-rule="evenodd" d="M7.177 3.073L9.573.677A.25.25 0 0110 .854v4.792a.25.25 0 01-.427.177L7.177 3.427a.25.25 0 010-.354zM3.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122v5.256a2.251 2.251 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25zM11 2.5h-1V4h1a1 1 0 011 1v5.628a2.251 2.251 0 101.5 0V5A2.5 2.5 0 0011 2.5zm1 10.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0zM3.75 12a.75.75 0 100 1.5.75.75 0 000-1.5z"/></svg>
-            <strong>577</strong> PRs
-          </div>
-        
-          <div class="stat anim anim-d3">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14"><path fill-rule="evenodd" d="M2.5 1.75a.25.25 0 01.25-.25h8.5a.25.25 0 01.25.25v7.736a.75.75 0 101.5 0V1.75A1.75 1.75 0 0011.25 0h-8.5A1.75 1.75 0 001 1.75v11.5c0 .966.784 1.75 1.75 1.75h3.17a.75.75 0 000-1.5H2.75a.25.25 0 01-.25-.25V1.75zM4.75 4a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-4.5zM4 7.75A.75.75 0 014.75 7h2a.75.75 0 010 1.5h-2A.75.75 0 014 7.75zm11.774 3.537a.75.75 0 00-1.048-1.074L10.7 14.145 9.281 12.72a.75.75 0 00-1.062 1.058l1.943 1.95a.75.75 0 001.055.008l4.557-4.45z"/></svg>
-            <strong>171</strong> Reviews
-          </div>
-        
-          <div class="stat anim anim-d4">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14"><path fill-rule="evenodd" d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"/></svg>
-            <strong>194</strong> Issues
-          </div>
-        
-          <div class="stat anim anim-d5">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14"><path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-            <strong>8</strong> Stars
-          </div>
-        
-          <div class="stat anim anim-d6">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14"><path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 010-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5zm-3 2a.75.75 0 01.75.75v2a.75.75 0 01-1.5 0v-2a.75.75 0 01.75-.75z"/></svg>
-            <strong>60</strong> Repos
-          </div>
-        
-      </div>
-      <div style="flex:0 0 auto;padding-left:16px;border-left:1px solid var(--border);">
-        <div class="section-label anim">STREAK</div>
-        <div class="stat anim anim-d1" style="font-size:16px;margin-bottom:4px;">
-          <strong style="color:var(--accent);font-size:22px;">630</strong>
-          <span style="font-size:10px;color:var(--muted);">day streak</span>
-        </div>
-        <div class="stat anim anim-d2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14"><path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg> Best: 118/day</div>
-        <div class="stat anim anim-d3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14"><path fill-rule="evenodd" d="M1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM8 0a8 8 0 100 16A8 8 0 008 0zm.5 4.75a.75.75 0 00-1.5 0v3.5a.75.75 0 00.471.696l2.5 1a.75.75 0 00.557-1.392L8.5 7.742V4.75z"/></svg> 70% active</div>
-        <div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border);">
-          <div class="stat anim anim-d4"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14"><path fill-rule="evenodd" d="M1.75 16A1.75 1.75 0 010 14.25V1.75C0 .784.784 0 1.75 0h8.5C11.216 0 12 .784 12 1.75v12.5c0 .085-.006.168-.018.25h2.268a.25.25 0 00.25-.25V8.285a.25.25 0 00-.111-.208l-1.055-.703a.75.75 0 11.832-1.248l1.055.703c.487.325.779.871.779 1.456v5.965A1.75 1.75 0 0114.25 16h-3.5a.75.75 0 01-.197-.026c-.099.017-.2.026-.303.026h-3a.75.75 0 01-.75-.75V14h-1v1.25a.75.75 0 01-.75.75h-3zM3 3.75A.75.75 0 013.75 3h.5a.75.75 0 010 1.5h-.5A.75.75 0 013 3.75zM3.75 6a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5zM3 9.75A.75.75 0 013.75 9h.5a.75.75 0 010 1.5h-.5A.75.75 0 013 9.75zM7.75 9a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5zM7 6.75A.75.75 0 017.75 6h.5a.75.75 0 010 1.5h-.5A.75.75 0 017 6.75zM7.75 3a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5z"/></svg> 4 orgs</div>
-          <div class="stat anim anim-d5"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14"><path fill-rule="evenodd" d="M7.53 1.282a.5.5 0 01.94 0l1.478 4.007a.5.5 0 00.312.312l4.007 1.478a.5.5 0 010 .94l-4.007 1.478a.5.5 0 00-.312.312L8.47 14.816a.5.5 0 01-.94 0L6.052 10.81a.5.5 0 00-.312-.312L1.733 9.019a.5.5 0 010-.94L5.74 6.601a.5.5 0 00.312-.312z"/></svg> 692 Copilot</div>
-        </div>
-      </div>
-    </div>
-  </div>
-    </div>
-  </foreignObject>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="400" viewBox="0 0 480 400">
+<defs>
+<filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<style>text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}</style>
+<rect x="0.5" y="0.5" width="479" height="399" rx="6" fill="#0d1117" stroke="#30363d"/>
+
+    <text x="24" y="38" fill="#58a6ff" font-size="16" font-weight="700" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">soranjiro</text>
+    <text x="24" y="58" fill="#8b949e" font-size="11" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">Joined GitHub 3 years ago</text>
+    <text x="24" y="74" fill="#8b949e" font-size="11" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">Followed by 8 users</text>
+    <rect x="210" y="22" width="14" height="14" rx="2" fill="#26a641"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="0.00s" fill="freeze"/></rect>
+    <rect x="228" y="22" width="14" height="14" rx="2" fill="#39d353"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="0.04s" fill="freeze"/></rect>
+    <rect x="246" y="22" width="14" height="14" rx="2" fill="#26a641"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="0.08s" fill="freeze"/></rect>
+    <rect x="264" y="22" width="14" height="14" rx="2" fill="#26a641"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="0.12s" fill="freeze"/></rect>
+    <rect x="282" y="22" width="14" height="14" rx="2" fill="#26a641"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="0.16s" fill="freeze"/></rect>
+    <rect x="300" y="22" width="14" height="14" rx="2" fill="#006d32"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="0.20s" fill="freeze"/></rect>
+    <rect x="318" y="22" width="14" height="14" rx="2" fill="#006d32"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="0.24s" fill="freeze"/></rect>
+    <rect x="336" y="22" width="14" height="14" rx="2" fill="#006d32"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="0.28s" fill="freeze"/></rect>
+    <rect x="354" y="22" width="14" height="14" rx="2" fill="#0e4429"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="0.32s" fill="freeze"/></rect>
+    <rect x="372" y="22" width="14" height="14" rx="2" fill="#006d32"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="0.36s" fill="freeze"/></rect>
+    <rect x="390" y="22" width="14" height="14" rx="2" fill="#006d32"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="0.40s" fill="freeze"/></rect>
+    <rect x="408" y="22" width="14" height="14" rx="2" fill="#0e4429"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="0.44s" fill="freeze"/></rect>
+    <rect x="426" y="22" width="14" height="14" rx="2" fill="#0e4429"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="0.48s" fill="freeze"/></rect>
+    <rect x="444" y="22" width="14" height="14" rx="2" fill="#006d32"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="0.52s" fill="freeze"/></rect>
+    <rect x="462" y="22" width="14" height="14" rx="2" fill="#006d32"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="0.56s" fill="freeze"/></rect>
+    <text x="210" y="54" fill="#8b949e" font-size="10" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">Contributed to 16 repositories</text>
+
+    <line x1="24" y1="92" x2="456" y2="92" stroke="#30363d" stroke-width="0.5"/>
+
+    <path d="M10.5 7.75a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm1.43.75a4.002 4.002 0 01-7.86 0H.75a.75.75 0 110-1.5h3.32a4.001 4.001 0 017.86 0h3.32a.75.75 0 110 1.5h-3.32z" fill="#3fb950" transform="translate(24,100) scale(0.8750)"/><text x="44" y="112" fill="#3fb950" font-size="12" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">Activity</text>
+    <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="0.15s" fill="freeze"/><path d="M10.5 7.75a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm1.43.75a4.002 4.002 0 01-7.86 0H.75a.75.75 0 110-1.5h3.32a4.001 4.001 0 017.86 0h3.32a.75.75 0 110 1.5h-3.32z" fill="#8b949e" transform="translate(24,122) scale(0.7500)"/><text x="40" y="132" fill="#8b949e" font-size="11" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">4,785 Commits</text></g>
+    <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="0.22s" fill="freeze"/><path d="M7.177 3.073L9.573.677A.25.25 0 0110 .854v4.792a.25.25 0 01-.427.177L7.177 3.427a.25.25 0 010-.354zM3.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122v5.256a2.251 2.251 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25zM11 2.5h-1V4h1a1 1 0 011 1v5.628a2.251 2.251 0 101.5 0V5A2.5 2.5 0 0011 2.5zm1 10.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0zM3.75 12a.75.75 0 100 1.5.75.75 0 000-1.5z" fill="#8b949e" transform="translate(24,140) scale(0.7500)"/><text x="40" y="150" fill="#8b949e" font-size="11" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">577 Pull requests opened</text></g>
+    <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="0.29s" fill="freeze"/><path d="M2.5 1.75a.25.25 0 01.25-.25h8.5a.25.25 0 01.25.25v7.736a.75.75 0 101.5 0V1.75A1.75 1.75 0 0011.25 0h-8.5A1.75 1.75 0 001 1.75v11.5c0 .966.784 1.75 1.75 1.75h3.17a.75.75 0 000-1.5H2.75a.25.25 0 01-.25-.25V1.75zM4.75 4a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-4.5zM4 7.75A.75.75 0 014.75 7h2a.75.75 0 010 1.5h-2A.75.75 0 014 7.75zm11.774 3.537a.75.75 0 00-1.048-1.074L10.7 14.145 9.281 12.72a.75.75 0 00-1.062 1.058l1.943 1.95a.75.75 0 001.055.008l4.557-4.45z" fill="#8b949e" transform="translate(24,158) scale(0.7500)"/><text x="40" y="168" fill="#8b949e" font-size="11" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">171 Pull requests reviewed</text></g>
+    <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="0.36s" fill="freeze"/><path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z" fill="#8b949e" transform="translate(24,176) scale(0.7500)"/><text x="40" y="186" fill="#8b949e" font-size="11" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">194 Issues opened</text></g>
+    <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="0.43s" fill="freeze"/><path d="M1 2.5A2.5 2.5 0 013.5 0h8.75a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0V1.5h-8a1 1 0 00-1 1v6.708A2.492 2.492 0 013.5 9h3.25a.75.75 0 010 1.5H3.5a1 1 0 100 2h5.75a.75.75 0 010 1.5H3.5A2.5 2.5 0 011 11.5v-9zm13.23 7.79a.75.75 0 001.06-1.06l-2.505-2.505a.75.75 0 00-1.06 0L9.22 9.229a.75.75 0 001.06 1.061l1.225-1.224v6.184a.75.75 0 001.5 0V9.066l1.224 1.224z" fill="#8b949e" transform="translate(24,194) scale(0.7500)"/><text x="40" y="204" fill="#8b949e" font-size="11" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">359 Comments</text></g>
+
+    <path d="M1.75 16A1.75 1.75 0 010 14.25V1.75C0 .784.784 0 1.75 0h8.5C11.216 0 12 .784 12 1.75v12.5c0 .085-.006.168-.018.25h2.268a.25.25 0 00.25-.25V8.285a.25.25 0 00-.111-.208l-1.055-.703a.75.75 0 11.832-1.248l1.055.703c.487.325.779.871.779 1.456v5.965A1.75 1.75 0 0114.25 16h-3.5a.75.75 0 01-.197-.026c-.099.017-.2.026-.303.026h-3a.75.75 0 01-.75-.75V14h-1v1.25a.75.75 0 01-.75.75h-3zM3 3.75A.75.75 0 013.75 3h.5a.75.75 0 010 1.5h-.5A.75.75 0 013 3.75zM3.75 6a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5zM3 9.75A.75.75 0 013.75 9h.5a.75.75 0 010 1.5h-.5A.75.75 0 013 9.75zM7.75 9a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5zM7 6.75A.75.75 0 017.75 6h.5a.75.75 0 010 1.5h-.5A.75.75 0 017 6.75zM7.75 3a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5z" fill="#3fb950" transform="translate(260,100) scale(0.8750)"/><text x="280" y="112" fill="#3fb950" font-size="12" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">Community</text>
+    <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="0.18s" fill="freeze"/><path d="M1.75 16A1.75 1.75 0 010 14.25V1.75C0 .784.784 0 1.75 0h8.5C11.216 0 12 .784 12 1.75v12.5c0 .085-.006.168-.018.25h2.268a.25.25 0 00.25-.25V8.285a.25.25 0 00-.111-.208l-1.055-.703a.75.75 0 11.832-1.248l1.055.703c.487.325.779.871.779 1.456v5.965A1.75 1.75 0 0114.25 16h-3.5a.75.75 0 01-.197-.026c-.099.017-.2.026-.303.026h-3a.75.75 0 01-.75-.75V14h-1v1.25a.75.75 0 01-.75.75h-3zM3 3.75A.75.75 0 013.75 3h.5a.75.75 0 010 1.5h-.5A.75.75 0 013 3.75zM3.75 6a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5zM3 9.75A.75.75 0 013.75 9h.5a.75.75 0 010 1.5h-.5A.75.75 0 013 9.75zM7.75 9a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5zM7 6.75A.75.75 0 017.75 6h.5a.75.75 0 010 1.5h-.5A.75.75 0 017 6.75zM7.75 3a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5z" fill="#8b949e" transform="translate(260,122) scale(0.7500)"/><text x="276" y="132" fill="#8b949e" font-size="11" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">Member of 4 organizations</text></g>
+    <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="0.25s" fill="freeze"/><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z" fill="#8b949e" transform="translate(260,140) scale(0.7500)"/><text x="276" y="150" fill="#8b949e" font-size="11" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">Starred 8 repositories</text></g>
+    <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="0.32s" fill="freeze"/><path d="M7.53 1.282a.5.5 0 01.94 0l1.478 4.007a.5.5 0 00.312.312l4.007 1.478a.5.5 0 010 .94l-4.007 1.478a.5.5 0 00-.312.312L8.47 14.816a.5.5 0 01-.94 0L6.052 10.81a.5.5 0 00-.312-.312L1.733 9.019a.5.5 0 010-.94L5.74 6.601a.5.5 0 00.312-.312z" fill="#8b949e" transform="translate(260,158) scale(0.7500)"/><text x="276" y="168" fill="#8b949e" font-size="11" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">692 Copilot requests</text></g>
+    <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="0.39s" fill="freeze"/>
+      <path d="M1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM8 0a8 8 0 100 16A8 8 0 008 0zm.5 4.75a.75.75 0 00-1.5 0v3.5a.75.75 0 00.471.696l2.5 1a.75.75 0 00.557-1.392L8.5 7.742V4.75z" fill="#8b949e" transform="translate(260,176) scale(0.7500)"/><text x="276" y="186" fill="#8b949e" font-size="11" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">630-day streak</text>
+      <circle cx="367.5" cy="182" r="3" fill="#3fb950"><animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/></circle>
+    </g>
+    <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="0.46s" fill="freeze"/><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z" fill="#8b949e" transform="translate(260,194) scale(0.7500)"/><text x="276" y="204" fill="#8b949e" font-size="11" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">Best: 118/day</text></g>
+
+    <line x1="24" y1="218" x2="456" y2="218" stroke="#30363d" stroke-width="0.5"/>
+
+    <path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 010-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5zm-3 2a.75.75 0 01.75.75v2a.75.75 0 01-1.5 0v-2a.75.75 0 01.75-.75z" fill="#3fb950" transform="translate(24,228) scale(0.8750)"/><text x="44" y="240" fill="#3fb950" font-size="12" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">60 Repositories</text>
+    <text x="24" y="260" fill="#8b949e" font-size="11" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">Prefers MIT license</text>
+    <text x="24" y="278" fill="#8b949e" font-size="11" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">40 Releases</text>
+
+    <text x="260" y="260" fill="#8b949e" font-size="11" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">8 Stargazers</text>
+    <text x="260" y="278" fill="#8b949e" font-size="11" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">5 Forkers</text>
+  
+
+    <text x="24" y="296" fill="#8b949e" font-size="9" font-weight="600" letter-spacing="1" font-family="-apple-system,sans-serif">LAST 60 DAYS</text>
+    <path d="M24.0,346.7 C24.9,343.4 29.6,320.7 31.3,318.6 C33.0,316.5 36.9,326.9 38.6,328.8 C40.4,330.8 44.3,337.6 46.0,335.2 C47.7,332.8 51.6,307.3 53.3,308.4 C55.0,309.4 58.9,339.7 60.6,344.2 C62.3,348.6 66.2,347.3 67.9,346.7 C69.6,346.1 73.5,339.1 75.3,339.1 C77.0,339.1 80.9,346.0 82.6,346.7 C84.3,347.5 88.2,347.5 89.9,345.4 C91.6,343.4 95.5,329.0 97.2,328.8 C98.9,328.7 102.8,342.1 104.5,344.2 C106.3,346.3 110.2,346.4 111.9,346.7 C113.6,347.0 117.5,346.7 119.2,346.7 C120.9,346.7 124.8,346.7 126.5,346.7 C128.2,346.7 132.1,346.7 133.8,346.7 C135.5,346.7 139.4,346.7 141.2,346.7 C142.9,346.7 146.8,349.9 148.5,346.7 C150.2,343.6 154.1,321.4 155.8,319.9 C157.5,318.4 161.4,331.1 163.1,333.9 C164.8,336.8 168.7,343.3 170.4,344.2 C172.1,345.1 176.1,342.4 177.8,341.6 C179.5,340.9 183.4,341.7 185.1,337.8 C186.8,333.9 190.7,307.9 192.4,308.4 C194.1,308.8 198.0,341.6 199.7,341.6 C201.4,341.6 205.3,309.4 207.1,308.4 C208.8,307.3 212.7,329.7 214.4,332.7 C216.1,335.6 220.0,333.1 221.7,333.9 C223.4,334.8 227.3,339.0 229.0,340.3 C230.7,341.7 234.6,345.7 236.3,345.4 C238.0,345.1 242.0,338.2 243.7,337.8 C245.4,337.3 249.3,340.7 251.0,341.6 C252.7,342.5 256.6,345.7 258.3,345.4 C260.0,345.1 263.9,338.9 265.6,339.1 C267.3,339.2 271.2,347.0 272.9,346.7 C274.7,346.4 278.6,336.9 280.3,336.5 C282.0,336.1 285.9,343.3 287.6,342.9 C289.3,342.4 293.2,333.4 294.9,332.7 C296.6,331.9 300.5,335.8 302.2,336.5 C303.9,337.2 307.9,338.0 309.6,339.1 C311.3,340.1 315.2,346.3 316.9,345.4 C318.6,344.6 322.5,333.3 324.2,331.4 C325.9,329.5 329.8,327.0 331.5,328.8 C333.2,330.6 337.1,344.6 338.8,346.7 C340.6,348.8 344.5,346.7 346.2,346.7 C347.9,346.7 351.8,346.7 353.5,346.7 C355.2,346.7 359.1,346.7 360.8,346.7 C362.5,346.7 366.4,351.9 368.1,346.7 C369.8,341.5 373.7,302.0 375.5,302.0 C377.2,302.0 381.1,346.4 382.8,346.7 C384.5,347.0 388.4,304.7 390.1,304.6 C391.8,304.4 395.7,341.9 397.4,345.4 C399.1,349.0 403.0,339.4 404.7,335.2 C406.5,331.0 410.4,309.2 412.1,309.7 C413.8,310.1 417.7,335.0 419.4,339.1 C421.1,343.1 425.0,343.9 426.7,344.2 C428.4,344.5 432.3,343.7 434.0,341.6 C435.7,339.5 439.6,327.3 441.4,326.3 C443.1,325.2 447.0,331.0 448.7,332.7 C450.4,334.3 455.1,339.4 456.0,340.3 L456.0,348 L24,348 Z" fill="rgba(63,185,80,0.08)"/>
+    <path d="M24.0,346.7 C24.9,343.4 29.6,320.7 31.3,318.6 C33.0,316.5 36.9,326.9 38.6,328.8 C40.4,330.8 44.3,337.6 46.0,335.2 C47.7,332.8 51.6,307.3 53.3,308.4 C55.0,309.4 58.9,339.7 60.6,344.2 C62.3,348.6 66.2,347.3 67.9,346.7 C69.6,346.1 73.5,339.1 75.3,339.1 C77.0,339.1 80.9,346.0 82.6,346.7 C84.3,347.5 88.2,347.5 89.9,345.4 C91.6,343.4 95.5,329.0 97.2,328.8 C98.9,328.7 102.8,342.1 104.5,344.2 C106.3,346.3 110.2,346.4 111.9,346.7 C113.6,347.0 117.5,346.7 119.2,346.7 C120.9,346.7 124.8,346.7 126.5,346.7 C128.2,346.7 132.1,346.7 133.8,346.7 C135.5,346.7 139.4,346.7 141.2,346.7 C142.9,346.7 146.8,349.9 148.5,346.7 C150.2,343.6 154.1,321.4 155.8,319.9 C157.5,318.4 161.4,331.1 163.1,333.9 C164.8,336.8 168.7,343.3 170.4,344.2 C172.1,345.1 176.1,342.4 177.8,341.6 C179.5,340.9 183.4,341.7 185.1,337.8 C186.8,333.9 190.7,307.9 192.4,308.4 C194.1,308.8 198.0,341.6 199.7,341.6 C201.4,341.6 205.3,309.4 207.1,308.4 C208.8,307.3 212.7,329.7 214.4,332.7 C216.1,335.6 220.0,333.1 221.7,333.9 C223.4,334.8 227.3,339.0 229.0,340.3 C230.7,341.7 234.6,345.7 236.3,345.4 C238.0,345.1 242.0,338.2 243.7,337.8 C245.4,337.3 249.3,340.7 251.0,341.6 C252.7,342.5 256.6,345.7 258.3,345.4 C260.0,345.1 263.9,338.9 265.6,339.1 C267.3,339.2 271.2,347.0 272.9,346.7 C274.7,346.4 278.6,336.9 280.3,336.5 C282.0,336.1 285.9,343.3 287.6,342.9 C289.3,342.4 293.2,333.4 294.9,332.7 C296.6,331.9 300.5,335.8 302.2,336.5 C303.9,337.2 307.9,338.0 309.6,339.1 C311.3,340.1 315.2,346.3 316.9,345.4 C318.6,344.6 322.5,333.3 324.2,331.4 C325.9,329.5 329.8,327.0 331.5,328.8 C333.2,330.6 337.1,344.6 338.8,346.7 C340.6,348.8 344.5,346.7 346.2,346.7 C347.9,346.7 351.8,346.7 353.5,346.7 C355.2,346.7 359.1,346.7 360.8,346.7 C362.5,346.7 366.4,351.9 368.1,346.7 C369.8,341.5 373.7,302.0 375.5,302.0 C377.2,302.0 381.1,346.4 382.8,346.7 C384.5,347.0 388.4,304.7 390.1,304.6 C391.8,304.4 395.7,341.9 397.4,345.4 C399.1,349.0 403.0,339.4 404.7,335.2 C406.5,331.0 410.4,309.2 412.1,309.7 C413.8,310.1 417.7,335.0 419.4,339.1 C421.1,343.1 425.0,343.9 426.7,344.2 C428.4,344.5 432.3,343.7 434.0,341.6 C435.7,339.5 439.6,327.3 441.4,326.3 C443.1,325.2 447.0,331.0 448.7,332.7 C450.4,334.3 455.1,339.4 456.0,340.3" fill="none" stroke="#3fb950" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="720" stroke-dashoffset="720" filter="url(#glow)">
+      <animate attributeName="stroke-dashoffset" from="720" to="0" dur="2s" fill="freeze" begin="0.3s"/>
+    </path>
+    <text x="456" y="362" text-anchor="end" fill="#8b949e" font-size="9" font-family="-apple-system,sans-serif">peak: 36</text>
+  
 </svg>

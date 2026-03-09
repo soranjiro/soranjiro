@@ -26,12 +26,12 @@ const readme = `![](https://komarev.com/ghpvc/?username=soranjiro&color=blue) <i
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/overview-dark.svg">
     <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/overview-light.svg">
-    <img src="./output/assets/svg/overview-dark.svg" alt="Overview" width="400" />
+    <img src="./output/assets/svg/overview-dark.svg" alt="Overview" width="480" />
   </picture>
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/languages-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/languages-light.svg">
-    <img src="./output/assets/svg/languages-dark.svg" alt="Languages" width="400" />
+    <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/heatmap-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/heatmap-light.svg">
+    <img src="./output/assets/svg/heatmap-dark.svg" alt="Contributions" width="480" />
   </picture>
 </p>
 
