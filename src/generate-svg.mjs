@@ -157,7 +157,7 @@ function generateOverviewSVG(theme, minH = 0) {
     if (i === 0) return 0;
     const dx = p[0] - pPoints[i - 1][0], dy = p[1] - pPoints[i - 1][1];
     return sum + Math.sqrt(dx * dx + dy * dy);
-  }, 0) * 1.3;
+  }, 0) * 3;
 
   const pulse = `
     <text x="24" y="${pY0 - 6}" fill="${muted}" font-size="9" font-weight="600" letter-spacing="1" font-family="-apple-system,sans-serif">LAST 60 DAYS</text>
