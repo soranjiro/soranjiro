@@ -479,7 +479,7 @@ async function generateChartsSVG(theme) {
   }
   mc += `<path d="${cArea}" fill="var(--matcha-fill)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="1.0s" begin="1.0s" fill="freeze"/></path>\n`;
   const drawLen = 3000;
-  mc += `<path d="${cLine}" fill="none" stroke="var(--matcha)" stroke-width="1.5" stroke-dasharray="${drawLen}" stroke-dashoffset="${drawLen}"><animate attributeName="stroke-dashoffset" from="${drawLen}" to="0" dur="2.5s" begin="0.5s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/></path>\n`;
+  mc += `<path d="${cLine}" fill="none" stroke="var(--matcha)" stroke-width="1.5" stroke-dasharray="${drawLen}" stroke-dashoffset="${drawLen}"><animate attributeName="stroke-dashoffset" from="${drawLen}" to="0" dur="5.5s" begin="0.5s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/></path>\n`;
   mc += `<path d="${pLine}" fill="none" stroke="var(--sora)" stroke-width="1.5" stroke-dasharray="4,2" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="2.5s" fill="freeze"/></path>\n`;
   mc += `<path d="${rvLine}" fill="none" stroke="var(--fuji)" stroke-width="1.5" stroke-dasharray="2,2" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="2.8s" fill="freeze"/></path>\n`;
   mLabels.forEach((m, i) => {
