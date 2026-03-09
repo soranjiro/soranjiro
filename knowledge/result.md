@@ -39,3 +39,34 @@
 - Current streak: 630 days
 - Best day: 118 contributions (2025-09-11)
 - Total days: 1152, Active days: 806 (70%)
+
+## 2026-03-10: Animation Timing Adjustment
+
+### Problem
+- Typing SVG (profile text) animation takes ~15s due to long text (0.045s/char)
+- Other SVGs (overview, heatmap, charts) finished in 1.4-2.3s, feeling too abrupt
+
+### Changes (generate-svg.mjs)
+| Parameter | Before | After |
+|-----------|--------|-------|
+| **Overview** contribBar dur/delay | 0.15s / i*0.04 | 0.3s / i*0.08 |
+| **Overview** statRow dur/delays | 0.3s / 0.15-0.46 | 0.5s / 0.4-1.3 |
+| **Overview** pulse line dur/begin | 2s / 0.3s | 3.5s / 0.8s |
+| **Overview** badges begin | 0.5+i*0.1 | 2.0+i*0.15 |
+| **Heatmap** cells dur/delay | 0.08s / wk*0.015 | 0.15s / wk*0.04 |
+| **Heatmap** DOW bars dur/begin | 0.5s / 0.3+i*0.06 | 0.8s / 1.0+i*0.12 |
+| **Heatmap** yearly bars dur/begin | 0.4s / 0.6+i*0.08 | 0.7s / 2.0+i*0.15 |
+| **Charts** radar polygon dur/begin | 0.8s / 0.2s | 1.5s / 0.5s |
+| **Charts** radar points begin | 0.8+i*0.08 | 1.8+i*0.15 |
+| **Charts** monthly line dur/begin | 1.2s / 0.3s | 2.5s / 0.5s |
+| **Charts** PR/review lines begin | 1.0s / 1.2s | 2.5s / 2.8s |
+| **Charts** area fill dur/begin | 0.6s / 0.5s | 1.0s / 1.0s |
+| **Charts** lang bars dur/cumDelay | 0.5s / 0.06 | 0.9s / 0.12 |
+
+### Result
+| SVG | Total Duration Before | Total Duration After |
+|-----|----------------------|---------------------|
+| Overview | ~2.3s | ~5.1s |
+| Heatmap | ~1.4s | ~3.2s |
+| Charts | ~1.6s | ~3.7s |
+| Typing | ~15s (unchanged) | ~15s (unchanged) |
