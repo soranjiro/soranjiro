@@ -303,7 +303,7 @@ function parseProfileConfig() {
 // ─── 10. AI-generated summary ──────────────────────────────────────
 async function generateAISummary(profileData) {
   const userProfile = parseProfileConfig();
-  const prompt = `You are writing a concise, professional, third-person profile summary in ENGLISH for a GitHub developer portfolio.
+  const prompt = `You are writing a concise, professional, third-person profile summary in ENGLISH for a GitHub developer profile.
 Write exactly 2-3 sentences. Be factual and specific based on the data below.
 Incorporate the developer's self-description naturally. Do NOT fabricate skills or claims not supported by the data.
 Do NOT use emoji.

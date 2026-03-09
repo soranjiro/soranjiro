@@ -8,8 +8,6 @@ const SVG_DIR = join(ROOT, "output/assets/svg");
 mkdirSync(SVG_DIR, { recursive: true });
 const data = JSON.parse(readFileSync(join(ROOT, "output/data.json"), "utf-8"));
 
-const SVG_W = 400;
-
 function esc(s) {
   return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
@@ -17,48 +15,6 @@ function esc(s) {
 function fmtNum(n) {
   if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, "") + "k";
   return String(n);
-}
-
-function themeCSS(theme) {
-  const vars = theme === 'light'
-    ? '.auto { --text: #24292f; --muted: #656d76; --accent: #0969da; --border: #d0d7de; --bar-bg: #eaeef2; --sub: #8957e5; }'
-    : '.auto { --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff; --border: #30363d; --bar-bg: #21262d; --sub: #a371f7; }';
-  return `
-    ${vars}
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    .auto { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13px; color: var(--text); background: transparent; }
-    .card { background: transparent; padding: 16px; }
-    h2 { font-size: 14px; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; color: var(--text); }
-    h2 svg { fill: var(--accent); flex-shrink: 0; }
-    .row { display: flex; gap: 12px; flex-wrap: wrap; }
-    .stat { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
-    .stat svg { fill: var(--muted); flex-shrink: 0; }
-    .stat strong { color: var(--text); font-weight: 600; }
-    .lang-bar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin: 8px 0; }
-    .lang-bar span { display: block; height: 100%; }
-    .lang-legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 11px; color: var(--muted); }
-    .lang-legend .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 3px; vertical-align: middle; }
-    .section-label { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sub); margin-bottom: 6px; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-    .anim { animation: fadeIn 0.4s ease both; }
-    .anim-d1 { animation-delay: 0.05s; } .anim-d2 { animation-delay: 0.1s; } .anim-d3 { animation-delay: 0.15s; }
-    .anim-d4 { animation-delay: 0.2s; } .anim-d5 { animation-delay: 0.25s; } .anim-d6 { animation-delay: 0.3s; }
-  `;
-}
-
-function wrapSVG(height, body, theme) {
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${SVG_W}" height="${height}">
-  <foreignObject x="0" y="0" width="100%" height="100%">
-    <div xmlns="http://www.w3.org/1999/xhtml" class="auto">
-      <style>${themeCSS(theme)}</style>
-      <div class="card">${body}</div>
-    </div>
-  </foreignObject>
-</svg>`;
-}
-
-function iconSVG(path, size = 16) {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="${size}" height="${size}"><path fill-rule="evenodd" d="${path}"/></svg>`;
 }
 
 const ICONS = {
@@ -197,7 +153,11 @@ function generateOverviewSVG(theme, minH = 0) {
     pPath += ` C${(b[0]+(c[0]-a[0])*t/3).toFixed(1)},${(b[1]+(c[1]-a[1])*t/3).toFixed(1)} ${(c[0]-(e[0]-b[0])*t/3).toFixed(1)},${(c[1]-(e[1]-b[1])*t/3).toFixed(1)} ${c[0].toFixed(1)},${c[1].toFixed(1)}`;
   }
   const pArea = pPath + ` L${(24 + pW).toFixed(1)},${pY0 + pH} L24,${pY0 + pH} Z`;
-  const pLen = pulseData.length * 12;
+  const pLen = pPoints.reduce((sum, p, i) => {
+    if (i === 0) return 0;
+    const dx = p[0] - pPoints[i - 1][0], dy = p[1] - pPoints[i - 1][1];
+    return sum + Math.sqrt(dx * dx + dy * dy);
+  }, 0) * 1.3;
 
   const pulse = `
     <text x="24" y="${pY0 - 6}" fill="${muted}" font-size="9" font-weight="600" letter-spacing="1" font-family="-apple-system,sans-serif">LAST 60 DAYS</text>
@@ -230,7 +190,7 @@ function generateOverviewSVG(theme, minH = 0) {
 <filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 </defs>
 <style>${svgCSS}</style>
-<rect x="0.5" y="0.5" width="${W - 1}" height="${totalH - 1}" rx="6" fill="none" stroke="${border}"/>
+
 ${sections}
 ${pulse}
 ${badgeSvg}
@@ -375,7 +335,7 @@ function generateHeatmapSVG(theme, minH = 0) {
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H2}" viewBox="0 0 ${W} ${H2}">
 <style>text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}</style>
-<rect x="0.5" y="0.5" width="${W - 1}" height="${H2 - 1}" rx="6" fill="none" stroke="${border}"/>
+
 <text x="${padL}" y="24" fill="${accent}" font-size="12" font-weight="600">${totalContribs.toLocaleString()} contributions in the last year</text>
 ${monthText}
 ${dayText}
@@ -389,137 +349,7 @@ ${yoy}
 </svg>`;
 }
 
-// ─── Activity SVG ────────────────────────────────────────────────────
-function generateActivitySVG(theme) {
-  const { activity, copilot, profile, repoStats } = data;
-
-  const stats = [
-    { icon: "commit", label: "Commits", value: fmtNum(activity.totalCommits) },
-    { icon: "pr", label: "PRs authored", value: fmtNum(activity.prs) },
-    { icon: "review", label: "Reviews", value: fmtNum(activity.reviews) },
-    { icon: "issue", label: "Issues", value: fmtNum(activity.issues) },
-    { icon: "star", label: "Stars", value: fmtNum(repoStats.stars) },
-    { icon: "repo", label: "Repos", value: fmtNum(repoStats.total) },
-  ];
-
-  const meta = [
-    { icon: "clock", label: `Joined ${profile.joinedYearsAgo}+ years ago` },
-    { icon: "org", label: `${profile.organizations} organizations` },
-    { icon: "contrib", label: `${activity.contributedTo} contributed to` },
-  ];
-
-  const body = `
-    <h2 class="anim">${iconSVG(ICONS.pr, 16)} Activity</h2>
-    <div class="row" style="margin-bottom: 10px;">
-      <div style="flex: 1;">
-        ${stats.map((s, i) => `
-          <div class="stat anim anim-d${i + 1}">
-            ${iconSVG(ICONS[s.icon], 14)}
-            <strong>${s.value}</strong> ${s.label}
-          </div>
-        `).join("")}
-      </div>
-      <div style="flex: 1;">
-        ${meta.map((m, i) => `
-          <div class="stat anim anim-d${i + 1}">
-            ${iconSVG(ICONS[m.icon], 14)} ${m.label}
-          </div>
-        `).join("")}
-        <div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border);">
-          <div class="stat anim anim-d4">${iconSVG(ICONS.copilot, 14)} <strong>${copilot.copilotMentions}</strong> Copilot commits</div>
-          <div class="stat anim anim-d5">${iconSVG(ICONS.commit, 14)} <strong>${copilot.coauthoredCommits}</strong> Co-authored</div>
-          <div class="stat anim anim-d6">${iconSVG(ICONS.commit, 14)} <strong>${activity.issueComments + activity.prComments}</strong> Comments</div>
-        </div>
-      </div>
-    </div>
-  `;
-
-  return wrapSVG(230, body, theme);
-}
-
-// ─── Copilot SVG ─────────────────────────────────────────────────────
-function generateCopilotSVG(theme) {
-  const { copilot, activity } = data;
-  const mentions = copilot.copilotMentions || 0;
-  const coauthored = copilot.coauthoredCommits || 0;
-  const premium = copilot.premiumRequests || 0;
-  const total = activity.totalCommits || 1;
-  const aiPct = ((coauthored / total) * 100).toFixed(2);
-
-  const outerR = 30;
-  const innerR = 22;
-  const outerC = 2 * Math.PI * outerR;
-  const innerC = 2 * Math.PI * innerR;
-  const outerPct = Math.min((mentions / total) * 100 * 20, 100);
-  const innerPct = Math.min((premium / 1000) * 100, 100);
-
-  const body = `
-    <h2 class="anim">${iconSVG(ICONS.copilot, 16)} AI Collaboration</h2>
-    <div style="display:flex;align-items:center;gap:20px;">
-      <div style="position:relative;width:80px;height:80px;flex-shrink:0;" class="anim anim-d1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
-          <circle cx="40" cy="40" r="${outerR}" fill="none" stroke="var(--bar-bg)" stroke-width="4"/>
-          <circle cx="40" cy="40" r="${outerR}" fill="none" stroke="var(--sub, #8957e5)" stroke-width="4"
-            stroke-linecap="round" stroke-dasharray="${outerC.toFixed(1)}"
-            stroke-dashoffset="${(outerC * (1 - outerPct / 100)).toFixed(1)}"
-            transform="rotate(-90 40 40)"/>
-          <circle cx="40" cy="40" r="${innerR}" fill="none" stroke="var(--bar-bg)" stroke-width="3"/>
-          <circle cx="40" cy="40" r="${innerR}" fill="none" stroke="var(--accent, #58a6ff)" stroke-width="3"
-            stroke-linecap="round" stroke-dasharray="${innerC.toFixed(1)}"
-            stroke-dashoffset="${(innerC * (1 - innerPct / 100)).toFixed(1)}"
-            transform="rotate(-90 40 40)"/>
-          <text x="40" y="36" text-anchor="middle" fill="var(--text)" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="13" font-weight="600">${fmtNum(premium)}</text>
-          <text x="40" y="48" text-anchor="middle" fill="var(--muted)" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="7">premium</text>
-        </svg>
-      </div>
-      <div style="flex:1;">
-        <div class="stat anim anim-d1">${iconSVG(ICONS.copilot, 14)} <strong>${fmtNum(premium)}</strong> Premium requests</div>
-        <div class="stat anim anim-d2">${iconSVG(ICONS.copilot, 14)} <strong>${mentions}</strong> Copilot mentions</div>
-        <div class="stat anim anim-d3">${iconSVG(ICONS.commit, 14)} <strong>${coauthored}</strong> Co-authored commits</div>
-        <div class="stat anim anim-d4">${iconSVG(ICONS.commit, 14)} <strong>${aiPct}%</strong> AI collaboration rate</div>
-      </div>
-    </div>
-    <div class="anim anim-d5" style="margin-top:10px;font-size:10px;color:var(--muted);padding:6px 10px;background:var(--bar-bg);border-radius:4px;">
-      <strong style="color:var(--text);">GitHub Copilot</strong> — account: <strong style="color:var(--text);">marronee</strong> · Chat, completions, co-authoring
-    </div>
-  `;
-
-  return wrapSVG(200, body, theme);
-}
-
-// ─── Repos SVG ───────────────────────────────────────────────────────
-function generateReposSVG(theme) {
-  const { pinnedRepos } = data;
-  if (!pinnedRepos || pinnedRepos.length === 0) return "";
-
-  const repos = pinnedRepos.slice(0, 4);
-
-  const repoCards = repos.map((r, i) => {
-    const desc = esc(r.aiDescription || r.description || "");
-    const lang = r.primaryLanguage;
-    const langDot = lang ? `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${lang.color};margin-right:3px;vertical-align:middle;"></span><span style="font-size:10px;color:var(--muted);">${esc(lang.name)}</span>` : "";
-    const stars = r.stars > 0 ? `<span style="font-size:10px;color:var(--muted);margin-left:8px;">${iconSVG(ICONS.star, 10)} ${r.stars}</span>` : "";
-
-    return `
-      <div style="flex:1;min-width:200px;padding:10px 12px;border:1px solid var(--border);border-radius:6px;" class="anim anim-d${i + 1}">
-        <div style="font-size:12px;font-weight:600;color:var(--accent);margin-bottom:4px;">${iconSVG(ICONS.repo, 12)} ${esc(r.name)}</div>
-        ${desc ? `<div style="font-size:10px;color:var(--muted);margin-bottom:6px;line-height:1.4;">${desc}</div>` : ""}
-        <div style="display:flex;align-items:center;">${langDot}${stars}</div>
-      </div>
-    `;
-  }).join("");
-
-  const body = `
-    <h2 class="anim">${iconSVG(ICONS.repo, 16)} Featured Projects</h2>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;">
-      ${repoCards}
-    </div>
-  `;
-
-  const rows = Math.ceil(repos.length / 2);
-  const height = 80 + rows * 90;
-  return wrapSVG(height, body, theme);
-}
+// ─── Generate all ────────────────────────────────────────────────────
 
 // ─── Generate all ────────────────────────────────────────────────────
 
@@ -746,7 +576,6 @@ async function generateChartsSVG(theme) {
     ? 'svg{--text:#24292f;--muted:#656d76;--dim:#8b949e;--grid:rgba(101,109,118,0.15);--accent:#0969da;--accent-fill:rgba(9,105,218,0.10);--matcha:#1a7f37;--matcha-fill:rgba(26,127,55,0.08);--sora:#0969da;--fuji:#8250df}'
     : 'svg{--text:#e6edf3;--muted:#8b949e;--dim:#656d76;--grid:rgba(139,148,158,0.15);--accent:#58a6ff;--accent-fill:rgba(88,166,255,0.12);--matcha:#3fb950;--matcha-fill:rgba(63,185,80,0.10);--sora:#58a6ff;--fuji:#bc8cff}';
 
-  const chartBorder = theme === 'light' ? '#d0d7de' : '#30363d';
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="${-PAD_L} ${-PAD_T} ${W + PAD_L + PAD_R} ${H + PAD_T + PAD_B}">
 <defs>
@@ -755,7 +584,7 @@ ${chartCSS}
 text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
 </style>
 </defs>
-<rect x="${-PAD_L + 0.5}" y="${-PAD_T + 0.5}" width="${W + PAD_L + PAD_R - 1}" height="${H + PAD_T + PAD_B - 1}" rx="6" fill="none" stroke="${chartBorder}"/>
+
 <text x="26" y="20" style="fill:var(--accent);font-size:9px;font-weight:700;letter-spacing:1.5px">ACTIVITY</text>
 <text x="310" y="20" style="fill:var(--accent);font-size:9px;font-weight:700;letter-spacing:1.5px">MONTHLY CONTRIBUTIONS</text>
 <text x="26" y="294" style="fill:var(--accent);font-size:9px;font-weight:700;letter-spacing:1.5px">LANGUAGES</text>
@@ -770,8 +599,6 @@ ${dist}</g>
 ${sk}</g>
 </svg>`;
 }
-
-console.log("Generating SVG cards...");
 
 function generateTypingSVG(theme) {
   const summary = data.aiSummary || "";
@@ -846,37 +673,32 @@ ${tspans}<rect class="cursor" x="${padX}" y="${topPad - 14}" width="2" height="1
   return svg;
 }
 
-for (const theme of ['dark', 'light']) {
-  console.log(`  theme: ${theme}`);
+async function main() {
+  console.log("Generating SVG cards...");
+  for (const theme of ['dark', 'light']) {
+    console.log(`  theme: ${theme}`);
 
-  let ovSvg = generateOverviewSVG(theme);
-  let hmSvg = generateHeatmapSVG(theme);
-  const ovH = parseInt(ovSvg.match(/height="(\d+)"/)[1]);
-  const hmH = parseInt(hmSvg.match(/height="(\d+)"/)[1]);
-  const matchH = Math.max(ovH, hmH);
-  if (ovH !== matchH) ovSvg = generateOverviewSVG(theme, matchH);
-  if (hmH !== matchH) hmSvg = generateHeatmapSVG(theme, matchH);
+    let ovSvg = generateOverviewSVG(theme);
+    let hmSvg = generateHeatmapSVG(theme);
+    const ovH = parseInt(ovSvg.match(/height="(\d+)"/)[1]);
+    const hmH = parseInt(hmSvg.match(/height="(\d+)"/)[1]);
+    const matchH = Math.max(ovH, hmH);
+    if (ovH !== matchH) ovSvg = generateOverviewSVG(theme, matchH);
+    if (hmH !== matchH) hmSvg = generateHeatmapSVG(theme, matchH);
 
-  writeFileSync(join(SVG_DIR, `overview-${theme}.svg`), ovSvg);
-  console.log(`    overview-${theme}.svg`);
+    writeFileSync(join(SVG_DIR, `overview-${theme}.svg`), ovSvg);
+    console.log(`    overview-${theme}.svg`);
 
-  writeFileSync(join(SVG_DIR, `heatmap-${theme}.svg`), hmSvg);
-  console.log(`    heatmap-${theme}.svg`);
+    writeFileSync(join(SVG_DIR, `heatmap-${theme}.svg`), hmSvg);
+    console.log(`    heatmap-${theme}.svg`);
 
-  writeFileSync(join(SVG_DIR, `activity-${theme}.svg`), generateActivitySVG(theme));
-  console.log(`    activity-${theme}.svg`);
+    writeFileSync(join(SVG_DIR, `charts-${theme}.svg`), await generateChartsSVG(theme));
+    console.log(`    charts-${theme}.svg`);
 
-  writeFileSync(join(SVG_DIR, `copilot-${theme}.svg`), generateCopilotSVG(theme));
-  console.log(`    copilot-${theme}.svg`);
-
-  writeFileSync(join(SVG_DIR, `repos-${theme}.svg`), generateReposSVG(theme));
-  console.log(`    repos-${theme}.svg`);
-
-  writeFileSync(join(SVG_DIR, `charts-${theme}.svg`), await generateChartsSVG(theme));
-  console.log(`    charts-${theme}.svg`);
-
-  writeFileSync(join(SVG_DIR, `typing-${theme}.svg`), generateTypingSVG(theme));
-  console.log(`    typing-${theme}.svg`);
+    writeFileSync(join(SVG_DIR, `typing-${theme}.svg`), generateTypingSVG(theme));
+    console.log(`    typing-${theme}.svg`);
+  }
+  console.log("Done.");
 }
 
-console.log("Done.");
+main().catch(console.error);

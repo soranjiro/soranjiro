@@ -42,7 +42,7 @@ jobs:
           git diff --cached --quiet && echo "No changes" && exit 0
           git commit -m "chore: update profile data [skip ci]"
           git push
-  
+
   deploy:
     needs: update
     runs-on: ubuntu-latest
@@ -53,15 +53,15 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
-      
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'output'
-      
+          path: "output"
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
