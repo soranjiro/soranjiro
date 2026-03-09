@@ -6,31 +6,21 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const data = JSON.parse(readFileSync(join(ROOT, "output/data.json"), "utf-8"));
 
-const { profile, pinnedRepos, aiSummary, userProfile } = data;
+const { profile } = data;
 
-const roles = (userProfile?.roles || []).map(r => `\`${r}\``).join(" · ");
-const summary = aiSummary || "";
-
-const pinned = pinnedRepos.map(r => {
-  const lang = r.primaryLanguage?.name || "";
-  const desc = r.aiDescription || r.description || "";
-  const stars = r.stars > 0 ? ` ⭐ ${r.stars}` : "";
-  return `| [**${r.name}**](https://github.com/${r.nameWithOwner}) | ${desc} | \`${lang}\`${stars} |`;
-}).join("\n");
-
-const techStack = data.config?.techStack || {};
-const allSkillIds = [
-  ...(techStack.languages || ['ts','js','go','py','ruby','cpp','c','rust','java','svelte','vue']),
-  ...(techStack.frameworks || ['svelte','vue','tauri']),
-  ...(techStack.infrastructure || ['docker','aws','terraform','linux','postgres']),
-  ...(techStack.tools || ['git','github','vscode','latex','bash']),
-];
-const uniqueSkillIds = [...new Set(allSkillIds)];
-const skillIconsUrl = `https://skillicons.dev/icons?i=${uniqueSkillIds.join(',')}&perline=${Math.min(uniqueSkillIds.length, 15)}`;
+const today = new Date().toISOString().slice(0, 10);
 
 const readme = `![](https://komarev.com/ghpvc/?username=soranjiro&color=blue) <img src="./output/assets/svg/ai-badge.svg" alt="AI Generated" height="20" />
 
-> ${summary || ""}
+<div align="center">
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/typing-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/typing-light.svg">
+  <img src="./output/assets/svg/typing-dark.svg" alt="Profile" width="800" />
+</picture>
+
+</div>
 
 <p align="center">
   <picture>
@@ -39,9 +29,9 @@ const readme = `![](https://komarev.com/ghpvc/?username=soranjiro&color=blue) <i
     <img src="./output/assets/svg/overview-dark.svg" alt="Overview" width="400" />
   </picture>
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/copilot-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/copilot-light.svg">
-    <img src="./output/assets/svg/copilot-dark.svg" alt="AI Collaboration" width="400" />
+    <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/languages-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/languages-light.svg">
+    <img src="./output/assets/svg/languages-dark.svg" alt="Languages" width="400" />
   </picture>
 </p>
 
@@ -50,19 +40,25 @@ const readme = `![](https://komarev.com/ghpvc/?username=soranjiro&color=blue) <i
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/charts-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/charts-light.svg">
-  <img src="./output/assets/svg/charts-dark.svg" alt="Dashboard Charts" width="840" />
+  <img src="./output/assets/svg/charts-dark.svg" alt="Charts" width="840" />
 </picture>
 
 </div>
 
+<div align="center">
+
+<br>
+
+[![Portfolio](https://img.shields.io/badge/Portfolio-soranjiro.github.io-blue?style=for-the-badge&logo=github)](https://soranjiro.github.io/soranjiro/)
+
 ---
 
-<div align="center">
-  <sub>
-    Auto-generated daily via <a href="https://github.com/${profile.login}/${profile.login}/actions">GitHub Actions</a>
-    · Powered by <strong>GitHub Copilot SDK</strong> &amp; GitHub GraphQL API
-    · Last updated: ${new Date().toISOString().slice(0, 10)}
-  </sub>
+<sub>
+  Auto-generated daily via <a href="https://github.com/${profile.login}/${profile.login}/actions">GitHub Actions</a>
+  · Powered by <strong>GitHub Copilot SDK</strong> &amp; GitHub GraphQL API
+  · Last updated: ${today}
+</sub>
+
 </div>
 `;
 
