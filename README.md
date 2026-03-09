@@ -5,7 +5,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/typing-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/typing-light.svg">
-  <img src="./output/assets/svg/typing-dark.svg" alt="Profile" width="800" />
+  <img src="./output/assets/svg/typing-dark.svg" alt="Profile" width="480" />
 </picture>
 
 </div>
@@ -32,19 +32,6 @@
 </picture>
 
 </div>
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/copilot-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/copilot-light.svg">
-    <img src="./output/assets/svg/copilot-dark.svg" alt="AI Collaboration" width="410" />
-  </picture>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/repos-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/repos-light.svg">
-    <img src="./output/assets/svg/repos-dark.svg" alt="Featured Projects" width="410" />
-  </picture>
-</p>
 
 <div align="center">
 
