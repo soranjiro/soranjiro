@@ -1,0 +1,952 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="268" viewBox="0 0 480 268">
+<style>
+  @keyframes reveal { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+  @keyframes cursor-move {
+    0.00% { x: 16.0px; y: 18px; }
+    0.20% { x: 24.7px; y: 18px; }
+    0.39% { x: 33.4px; y: 18px; }
+    0.59% { x: 42.0px; y: 18px; }
+    0.79% { x: 50.7px; y: 18px; }
+    0.98% { x: 59.4px; y: 18px; }
+    1.18% { x: 68.1px; y: 18px; }
+    1.38% { x: 76.8px; y: 18px; }
+    1.57% { x: 85.4px; y: 18px; }
+    1.77% { x: 94.1px; y: 18px; }
+    1.97% { x: 102.8px; y: 18px; }
+    2.16% { x: 111.5px; y: 18px; }
+    2.36% { x: 120.2px; y: 18px; }
+    2.56% { x: 128.8px; y: 18px; }
+    2.75% { x: 137.5px; y: 18px; }
+    2.95% { x: 146.2px; y: 18px; }
+    3.15% { x: 154.9px; y: 18px; }
+    3.34% { x: 163.6px; y: 18px; }
+    3.54% { x: 172.2px; y: 18px; }
+    3.74% { x: 180.9px; y: 18px; }
+    3.93% { x: 189.6px; y: 18px; }
+    4.13% { x: 198.3px; y: 18px; }
+    4.33% { x: 207.0px; y: 18px; }
+    4.52% { x: 215.6px; y: 18px; }
+    4.72% { x: 224.3px; y: 18px; }
+    4.92% { x: 233.0px; y: 18px; }
+    5.11% { x: 241.7px; y: 18px; }
+    5.31% { x: 250.4px; y: 18px; }
+    5.51% { x: 259.0px; y: 18px; }
+    5.70% { x: 267.7px; y: 18px; }
+    5.90% { x: 276.4px; y: 18px; }
+    6.10% { x: 285.1px; y: 18px; }
+    6.29% { x: 293.8px; y: 18px; }
+    6.49% { x: 302.4px; y: 18px; }
+    6.69% { x: 311.1px; y: 18px; }
+    6.88% { x: 319.8px; y: 18px; }
+    7.08% { x: 328.5px; y: 18px; }
+    7.28% { x: 337.2px; y: 18px; }
+    7.47% { x: 345.8px; y: 18px; }
+    7.67% { x: 354.5px; y: 18px; }
+    7.87% { x: 363.2px; y: 18px; }
+    8.06% { x: 371.9px; y: 18px; }
+    8.26% { x: 380.6px; y: 18px; }
+    8.46% { x: 389.2px; y: 18px; }
+    8.65% { x: 397.9px; y: 18px; }
+    8.85% { x: 406.6px; y: 18px; }
+    9.05% { x: 415.3px; y: 18px; }
+    9.24% { x: 424.0px; y: 18px; }
+    9.44% { x: 432.6px; y: 18px; }
+    9.64% { x: 441.3px; y: 18px; }
+    9.64% { x: 16.0px; y: 40px; }
+    9.83% { x: 24.7px; y: 40px; }
+    10.03% { x: 33.4px; y: 40px; }
+    10.23% { x: 42.0px; y: 40px; }
+    10.42% { x: 50.7px; y: 40px; }
+    10.62% { x: 59.4px; y: 40px; }
+    10.82% { x: 68.1px; y: 40px; }
+    11.01% { x: 76.8px; y: 40px; }
+    11.21% { x: 85.4px; y: 40px; }
+    11.41% { x: 94.1px; y: 40px; }
+    11.60% { x: 102.8px; y: 40px; }
+    11.80% { x: 111.5px; y: 40px; }
+    12.00% { x: 120.2px; y: 40px; }
+    12.19% { x: 128.8px; y: 40px; }
+    12.39% { x: 137.5px; y: 40px; }
+    12.59% { x: 146.2px; y: 40px; }
+    12.78% { x: 154.9px; y: 40px; }
+    12.98% { x: 163.6px; y: 40px; }
+    13.18% { x: 172.2px; y: 40px; }
+    13.37% { x: 180.9px; y: 40px; }
+    13.57% { x: 189.6px; y: 40px; }
+    13.77% { x: 198.3px; y: 40px; }
+    13.96% { x: 207.0px; y: 40px; }
+    14.16% { x: 215.6px; y: 40px; }
+    14.36% { x: 224.3px; y: 40px; }
+    14.55% { x: 233.0px; y: 40px; }
+    14.75% { x: 241.7px; y: 40px; }
+    14.95% { x: 250.4px; y: 40px; }
+    15.14% { x: 259.0px; y: 40px; }
+    15.34% { x: 267.7px; y: 40px; }
+    15.54% { x: 276.4px; y: 40px; }
+    15.73% { x: 285.1px; y: 40px; }
+    15.93% { x: 293.8px; y: 40px; }
+    16.13% { x: 302.4px; y: 40px; }
+    16.32% { x: 311.1px; y: 40px; }
+    16.52% { x: 319.8px; y: 40px; }
+    16.72% { x: 328.5px; y: 40px; }
+    16.91% { x: 337.2px; y: 40px; }
+    17.11% { x: 345.8px; y: 40px; }
+    17.31% { x: 354.5px; y: 40px; }
+    17.50% { x: 363.2px; y: 40px; }
+    17.70% { x: 371.9px; y: 40px; }
+    17.90% { x: 380.6px; y: 40px; }
+    18.09% { x: 389.2px; y: 40px; }
+    18.29% { x: 397.9px; y: 40px; }
+    18.49% { x: 406.6px; y: 40px; }
+    18.68% { x: 415.3px; y: 40px; }
+    18.88% { x: 424.0px; y: 40px; }
+    18.88% { x: 16.0px; y: 62px; }
+    19.08% { x: 24.7px; y: 62px; }
+    19.27% { x: 33.4px; y: 62px; }
+    19.47% { x: 42.0px; y: 62px; }
+    19.67% { x: 50.7px; y: 62px; }
+    19.86% { x: 59.4px; y: 62px; }
+    20.06% { x: 68.1px; y: 62px; }
+    20.26% { x: 76.8px; y: 62px; }
+    20.45% { x: 85.4px; y: 62px; }
+    20.65% { x: 94.1px; y: 62px; }
+    20.85% { x: 102.8px; y: 62px; }
+    21.04% { x: 111.5px; y: 62px; }
+    21.24% { x: 120.2px; y: 62px; }
+    21.44% { x: 128.8px; y: 62px; }
+    21.63% { x: 137.5px; y: 62px; }
+    21.83% { x: 146.2px; y: 62px; }
+    22.03% { x: 154.9px; y: 62px; }
+    22.22% { x: 163.6px; y: 62px; }
+    22.42% { x: 172.2px; y: 62px; }
+    22.62% { x: 180.9px; y: 62px; }
+    22.81% { x: 189.6px; y: 62px; }
+    23.01% { x: 198.3px; y: 62px; }
+    23.21% { x: 207.0px; y: 62px; }
+    23.40% { x: 215.6px; y: 62px; }
+    23.60% { x: 224.3px; y: 62px; }
+    23.80% { x: 233.0px; y: 62px; }
+    23.99% { x: 241.7px; y: 62px; }
+    24.19% { x: 250.4px; y: 62px; }
+    24.39% { x: 259.0px; y: 62px; }
+    24.58% { x: 267.7px; y: 62px; }
+    24.78% { x: 276.4px; y: 62px; }
+    24.98% { x: 285.1px; y: 62px; }
+    25.17% { x: 293.8px; y: 62px; }
+    25.37% { x: 302.4px; y: 62px; }
+    25.57% { x: 311.1px; y: 62px; }
+    25.76% { x: 319.8px; y: 62px; }
+    25.96% { x: 328.5px; y: 62px; }
+    26.16% { x: 337.2px; y: 62px; }
+    26.35% { x: 345.8px; y: 62px; }
+    26.55% { x: 354.5px; y: 62px; }
+    26.75% { x: 363.2px; y: 62px; }
+    26.94% { x: 371.9px; y: 62px; }
+    27.14% { x: 380.6px; y: 62px; }
+    27.34% { x: 389.2px; y: 62px; }
+    27.53% { x: 397.9px; y: 62px; }
+    27.73% { x: 406.6px; y: 62px; }
+    27.93% { x: 415.3px; y: 62px; }
+    28.13% { x: 424.0px; y: 62px; }
+    28.32% { x: 432.6px; y: 62px; }
+    28.32% { x: 16.0px; y: 84px; }
+    28.52% { x: 24.7px; y: 84px; }
+    28.72% { x: 33.4px; y: 84px; }
+    28.91% { x: 42.0px; y: 84px; }
+    29.11% { x: 50.7px; y: 84px; }
+    29.31% { x: 59.4px; y: 84px; }
+    29.50% { x: 68.1px; y: 84px; }
+    29.70% { x: 76.8px; y: 84px; }
+    29.90% { x: 85.4px; y: 84px; }
+    30.09% { x: 94.1px; y: 84px; }
+    30.29% { x: 102.8px; y: 84px; }
+    30.49% { x: 111.5px; y: 84px; }
+    30.68% { x: 120.2px; y: 84px; }
+    30.88% { x: 128.8px; y: 84px; }
+    31.08% { x: 137.5px; y: 84px; }
+    31.27% { x: 146.2px; y: 84px; }
+    31.47% { x: 154.9px; y: 84px; }
+    31.67% { x: 163.6px; y: 84px; }
+    31.86% { x: 172.2px; y: 84px; }
+    32.06% { x: 180.9px; y: 84px; }
+    32.26% { x: 189.6px; y: 84px; }
+    32.45% { x: 198.3px; y: 84px; }
+    32.65% { x: 207.0px; y: 84px; }
+    32.85% { x: 215.6px; y: 84px; }
+    33.04% { x: 224.3px; y: 84px; }
+    33.24% { x: 233.0px; y: 84px; }
+    33.44% { x: 241.7px; y: 84px; }
+    33.63% { x: 250.4px; y: 84px; }
+    33.83% { x: 259.0px; y: 84px; }
+    34.03% { x: 267.7px; y: 84px; }
+    34.22% { x: 276.4px; y: 84px; }
+    34.42% { x: 285.1px; y: 84px; }
+    34.62% { x: 293.8px; y: 84px; }
+    34.81% { x: 302.4px; y: 84px; }
+    35.01% { x: 311.1px; y: 84px; }
+    35.21% { x: 319.8px; y: 84px; }
+    35.40% { x: 328.5px; y: 84px; }
+    35.60% { x: 337.2px; y: 84px; }
+    35.80% { x: 345.8px; y: 84px; }
+    35.99% { x: 354.5px; y: 84px; }
+    36.19% { x: 363.2px; y: 84px; }
+    36.39% { x: 371.9px; y: 84px; }
+    36.58% { x: 380.6px; y: 84px; }
+    36.78% { x: 389.2px; y: 84px; }
+    36.98% { x: 397.9px; y: 84px; }
+    37.17% { x: 406.6px; y: 84px; }
+    37.37% { x: 415.3px; y: 84px; }
+    37.57% { x: 424.0px; y: 84px; }
+    37.76% { x: 432.6px; y: 84px; }
+    37.76% { x: 16.0px; y: 106px; }
+    37.96% { x: 24.7px; y: 106px; }
+    38.16% { x: 33.4px; y: 106px; }
+    38.35% { x: 42.0px; y: 106px; }
+    38.55% { x: 50.7px; y: 106px; }
+    38.75% { x: 59.4px; y: 106px; }
+    38.94% { x: 68.1px; y: 106px; }
+    39.14% { x: 76.8px; y: 106px; }
+    39.34% { x: 85.4px; y: 106px; }
+    39.53% { x: 94.1px; y: 106px; }
+    39.73% { x: 102.8px; y: 106px; }
+    39.93% { x: 111.5px; y: 106px; }
+    40.12% { x: 120.2px; y: 106px; }
+    40.32% { x: 128.8px; y: 106px; }
+    40.52% { x: 137.5px; y: 106px; }
+    40.71% { x: 146.2px; y: 106px; }
+    40.91% { x: 154.9px; y: 106px; }
+    41.11% { x: 163.6px; y: 106px; }
+    41.30% { x: 172.2px; y: 106px; }
+    41.50% { x: 180.9px; y: 106px; }
+    41.70% { x: 189.6px; y: 106px; }
+    41.89% { x: 198.3px; y: 106px; }
+    42.09% { x: 207.0px; y: 106px; }
+    42.29% { x: 215.6px; y: 106px; }
+    42.48% { x: 224.3px; y: 106px; }
+    42.68% { x: 233.0px; y: 106px; }
+    42.88% { x: 241.7px; y: 106px; }
+    43.07% { x: 250.4px; y: 106px; }
+    43.27% { x: 259.0px; y: 106px; }
+    43.47% { x: 267.7px; y: 106px; }
+    43.66% { x: 276.4px; y: 106px; }
+    43.86% { x: 285.1px; y: 106px; }
+    44.06% { x: 293.8px; y: 106px; }
+    44.25% { x: 302.4px; y: 106px; }
+    44.45% { x: 311.1px; y: 106px; }
+    44.65% { x: 319.8px; y: 106px; }
+    44.84% { x: 328.5px; y: 106px; }
+    45.04% { x: 337.2px; y: 106px; }
+    45.24% { x: 345.8px; y: 106px; }
+    45.43% { x: 354.5px; y: 106px; }
+    45.63% { x: 363.2px; y: 106px; }
+    45.83% { x: 371.9px; y: 106px; }
+    46.02% { x: 380.6px; y: 106px; }
+    46.22% { x: 389.2px; y: 106px; }
+    46.42% { x: 397.9px; y: 106px; }
+    46.61% { x: 406.6px; y: 106px; }
+    46.81% { x: 415.3px; y: 106px; }
+    47.01% { x: 424.0px; y: 106px; }
+    47.20% { x: 432.6px; y: 106px; }
+    47.40% { x: 441.3px; y: 106px; }
+    47.40% { x: 16.0px; y: 128px; }
+    47.60% { x: 24.7px; y: 128px; }
+    47.79% { x: 33.4px; y: 128px; }
+    47.99% { x: 42.0px; y: 128px; }
+    48.19% { x: 50.7px; y: 128px; }
+    48.38% { x: 59.4px; y: 128px; }
+    48.58% { x: 68.1px; y: 128px; }
+    48.78% { x: 76.8px; y: 128px; }
+    48.97% { x: 85.4px; y: 128px; }
+    49.17% { x: 94.1px; y: 128px; }
+    49.37% { x: 102.8px; y: 128px; }
+    49.56% { x: 111.5px; y: 128px; }
+    49.76% { x: 120.2px; y: 128px; }
+    49.96% { x: 128.8px; y: 128px; }
+    50.15% { x: 137.5px; y: 128px; }
+    50.35% { x: 146.2px; y: 128px; }
+    50.55% { x: 154.9px; y: 128px; }
+    50.74% { x: 163.6px; y: 128px; }
+    50.94% { x: 172.2px; y: 128px; }
+    51.14% { x: 180.9px; y: 128px; }
+    51.33% { x: 189.6px; y: 128px; }
+    51.53% { x: 198.3px; y: 128px; }
+    51.73% { x: 207.0px; y: 128px; }
+    51.92% { x: 215.6px; y: 128px; }
+    52.12% { x: 224.3px; y: 128px; }
+    52.32% { x: 233.0px; y: 128px; }
+    52.51% { x: 241.7px; y: 128px; }
+    52.71% { x: 250.4px; y: 128px; }
+    52.91% { x: 259.0px; y: 128px; }
+    53.10% { x: 267.7px; y: 128px; }
+    53.30% { x: 276.4px; y: 128px; }
+    53.50% { x: 285.1px; y: 128px; }
+    53.69% { x: 293.8px; y: 128px; }
+    53.89% { x: 302.4px; y: 128px; }
+    54.09% { x: 311.1px; y: 128px; }
+    54.28% { x: 319.8px; y: 128px; }
+    54.48% { x: 328.5px; y: 128px; }
+    54.68% { x: 337.2px; y: 128px; }
+    54.87% { x: 345.8px; y: 128px; }
+    55.07% { x: 354.5px; y: 128px; }
+    55.27% { x: 363.2px; y: 128px; }
+    55.46% { x: 371.9px; y: 128px; }
+    55.66% { x: 380.6px; y: 128px; }
+    55.86% { x: 389.2px; y: 128px; }
+    56.05% { x: 397.9px; y: 128px; }
+    56.25% { x: 406.6px; y: 128px; }
+    56.45% { x: 415.3px; y: 128px; }
+    56.64% { x: 424.0px; y: 128px; }
+    56.84% { x: 432.6px; y: 128px; }
+    57.04% { x: 441.3px; y: 128px; }
+    57.23% { x: 450.0px; y: 128px; }
+    57.43% { x: 458.7px; y: 128px; }
+    57.43% { x: 16.0px; y: 150px; }
+    57.63% { x: 24.7px; y: 150px; }
+    57.82% { x: 33.4px; y: 150px; }
+    58.02% { x: 42.0px; y: 150px; }
+    58.22% { x: 50.7px; y: 150px; }
+    58.41% { x: 59.4px; y: 150px; }
+    58.61% { x: 68.1px; y: 150px; }
+    58.81% { x: 76.8px; y: 150px; }
+    59.00% { x: 85.4px; y: 150px; }
+    59.20% { x: 94.1px; y: 150px; }
+    59.40% { x: 102.8px; y: 150px; }
+    59.59% { x: 111.5px; y: 150px; }
+    59.79% { x: 120.2px; y: 150px; }
+    59.99% { x: 128.8px; y: 150px; }
+    60.18% { x: 137.5px; y: 150px; }
+    60.38% { x: 146.2px; y: 150px; }
+    60.58% { x: 154.9px; y: 150px; }
+    60.77% { x: 163.6px; y: 150px; }
+    60.97% { x: 172.2px; y: 150px; }
+    61.17% { x: 180.9px; y: 150px; }
+    61.36% { x: 189.6px; y: 150px; }
+    61.56% { x: 198.3px; y: 150px; }
+    61.76% { x: 207.0px; y: 150px; }
+    61.95% { x: 215.6px; y: 150px; }
+    62.15% { x: 224.3px; y: 150px; }
+    62.35% { x: 233.0px; y: 150px; }
+    62.54% { x: 241.7px; y: 150px; }
+    62.74% { x: 250.4px; y: 150px; }
+    62.94% { x: 259.0px; y: 150px; }
+    63.13% { x: 267.7px; y: 150px; }
+    63.33% { x: 276.4px; y: 150px; }
+    63.53% { x: 285.1px; y: 150px; }
+    63.72% { x: 293.8px; y: 150px; }
+    63.92% { x: 302.4px; y: 150px; }
+    64.12% { x: 311.1px; y: 150px; }
+    64.31% { x: 319.8px; y: 150px; }
+    64.51% { x: 328.5px; y: 150px; }
+    64.71% { x: 337.2px; y: 150px; }
+    64.90% { x: 345.8px; y: 150px; }
+    65.10% { x: 354.5px; y: 150px; }
+    65.30% { x: 363.2px; y: 150px; }
+    65.49% { x: 371.9px; y: 150px; }
+    65.69% { x: 380.6px; y: 150px; }
+    65.89% { x: 389.2px; y: 150px; }
+    65.89% { x: 16.0px; y: 172px; }
+    66.08% { x: 24.7px; y: 172px; }
+    66.28% { x: 33.4px; y: 172px; }
+    66.48% { x: 42.0px; y: 172px; }
+    66.67% { x: 50.7px; y: 172px; }
+    66.87% { x: 59.4px; y: 172px; }
+    67.07% { x: 68.1px; y: 172px; }
+    67.26% { x: 76.8px; y: 172px; }
+    67.46% { x: 85.4px; y: 172px; }
+    67.66% { x: 94.1px; y: 172px; }
+    67.85% { x: 102.8px; y: 172px; }
+    68.05% { x: 111.5px; y: 172px; }
+    68.25% { x: 120.2px; y: 172px; }
+    68.44% { x: 128.8px; y: 172px; }
+    68.64% { x: 137.5px; y: 172px; }
+    68.84% { x: 146.2px; y: 172px; }
+    69.03% { x: 154.9px; y: 172px; }
+    69.23% { x: 163.6px; y: 172px; }
+    69.43% { x: 172.2px; y: 172px; }
+    69.62% { x: 180.9px; y: 172px; }
+    69.82% { x: 189.6px; y: 172px; }
+    70.02% { x: 198.3px; y: 172px; }
+    70.21% { x: 207.0px; y: 172px; }
+    70.41% { x: 215.6px; y: 172px; }
+    70.61% { x: 224.3px; y: 172px; }
+    70.80% { x: 233.0px; y: 172px; }
+    71.00% { x: 241.7px; y: 172px; }
+    71.20% { x: 250.4px; y: 172px; }
+    71.39% { x: 259.0px; y: 172px; }
+    71.59% { x: 267.7px; y: 172px; }
+    71.79% { x: 276.4px; y: 172px; }
+    71.98% { x: 285.1px; y: 172px; }
+    72.18% { x: 293.8px; y: 172px; }
+    72.38% { x: 302.4px; y: 172px; }
+    72.57% { x: 311.1px; y: 172px; }
+    72.77% { x: 319.8px; y: 172px; }
+    72.97% { x: 328.5px; y: 172px; }
+    73.16% { x: 337.2px; y: 172px; }
+    73.36% { x: 345.8px; y: 172px; }
+    73.56% { x: 354.5px; y: 172px; }
+    73.75% { x: 363.2px; y: 172px; }
+    73.95% { x: 371.9px; y: 172px; }
+    74.15% { x: 380.6px; y: 172px; }
+    74.34% { x: 389.2px; y: 172px; }
+    74.54% { x: 397.9px; y: 172px; }
+    74.74% { x: 406.6px; y: 172px; }
+    74.93% { x: 415.3px; y: 172px; }
+    75.13% { x: 424.0px; y: 172px; }
+    75.33% { x: 432.6px; y: 172px; }
+    75.52% { x: 441.3px; y: 172px; }
+    75.52% { x: 16.0px; y: 194px; }
+    75.72% { x: 24.7px; y: 194px; }
+    75.92% { x: 33.4px; y: 194px; }
+    76.11% { x: 42.0px; y: 194px; }
+    76.31% { x: 50.7px; y: 194px; }
+    76.51% { x: 59.4px; y: 194px; }
+    76.70% { x: 68.1px; y: 194px; }
+    76.90% { x: 76.8px; y: 194px; }
+    77.10% { x: 85.4px; y: 194px; }
+    77.29% { x: 94.1px; y: 194px; }
+    77.49% { x: 102.8px; y: 194px; }
+    77.69% { x: 111.5px; y: 194px; }
+    77.88% { x: 120.2px; y: 194px; }
+    78.08% { x: 128.8px; y: 194px; }
+    78.28% { x: 137.5px; y: 194px; }
+    78.47% { x: 146.2px; y: 194px; }
+    78.67% { x: 154.9px; y: 194px; }
+    78.87% { x: 163.6px; y: 194px; }
+    79.06% { x: 172.2px; y: 194px; }
+    79.26% { x: 180.9px; y: 194px; }
+    79.46% { x: 189.6px; y: 194px; }
+    79.65% { x: 198.3px; y: 194px; }
+    79.85% { x: 207.0px; y: 194px; }
+    80.05% { x: 215.6px; y: 194px; }
+    80.24% { x: 224.3px; y: 194px; }
+    80.44% { x: 233.0px; y: 194px; }
+    80.64% { x: 241.7px; y: 194px; }
+    80.83% { x: 250.4px; y: 194px; }
+    81.03% { x: 259.0px; y: 194px; }
+    81.23% { x: 267.7px; y: 194px; }
+    81.42% { x: 276.4px; y: 194px; }
+    81.62% { x: 285.1px; y: 194px; }
+    81.82% { x: 293.8px; y: 194px; }
+    82.01% { x: 302.4px; y: 194px; }
+    82.21% { x: 311.1px; y: 194px; }
+    82.41% { x: 319.8px; y: 194px; }
+    82.60% { x: 328.5px; y: 194px; }
+    82.80% { x: 337.2px; y: 194px; }
+    83.00% { x: 345.8px; y: 194px; }
+    83.19% { x: 354.5px; y: 194px; }
+    83.39% { x: 363.2px; y: 194px; }
+    83.59% { x: 371.9px; y: 194px; }
+    83.78% { x: 380.6px; y: 194px; }
+    83.98% { x: 389.2px; y: 194px; }
+    84.18% { x: 397.9px; y: 194px; }
+    84.38% { x: 406.6px; y: 194px; }
+    84.57% { x: 415.3px; y: 194px; }
+    84.77% { x: 424.0px; y: 194px; }
+    84.97% { x: 432.6px; y: 194px; }
+    85.16% { x: 441.3px; y: 194px; }
+    85.36% { x: 450.0px; y: 194px; }
+    85.36% { x: 16.0px; y: 216px; }
+    85.56% { x: 24.7px; y: 216px; }
+    85.75% { x: 33.4px; y: 216px; }
+    85.95% { x: 42.0px; y: 216px; }
+    86.15% { x: 50.7px; y: 216px; }
+    86.34% { x: 59.4px; y: 216px; }
+    86.54% { x: 68.1px; y: 216px; }
+    86.74% { x: 76.8px; y: 216px; }
+    86.93% { x: 85.4px; y: 216px; }
+    87.13% { x: 94.1px; y: 216px; }
+    87.33% { x: 102.8px; y: 216px; }
+    87.52% { x: 111.5px; y: 216px; }
+    87.72% { x: 120.2px; y: 216px; }
+    87.92% { x: 128.8px; y: 216px; }
+    88.11% { x: 137.5px; y: 216px; }
+    88.31% { x: 146.2px; y: 216px; }
+    88.51% { x: 154.9px; y: 216px; }
+    88.70% { x: 163.6px; y: 216px; }
+    88.90% { x: 172.2px; y: 216px; }
+    89.10% { x: 180.9px; y: 216px; }
+    89.29% { x: 189.6px; y: 216px; }
+    89.49% { x: 198.3px; y: 216px; }
+    89.69% { x: 207.0px; y: 216px; }
+    89.88% { x: 215.6px; y: 216px; }
+    90.08% { x: 224.3px; y: 216px; }
+    90.28% { x: 233.0px; y: 216px; }
+    90.47% { x: 241.7px; y: 216px; }
+    90.67% { x: 250.4px; y: 216px; }
+    90.87% { x: 259.0px; y: 216px; }
+    91.06% { x: 267.7px; y: 216px; }
+    91.26% { x: 276.4px; y: 216px; }
+    100% { x: 276.4px; y: 216px; }
+  }
+  .c { animation: reveal 0.01s both; }
+  .cursor { fill: #0969da; animation: blink 0.7s step-end infinite, cursor-move 22.88s steps(1,end) forwards; }
+  @media (prefers-reduced-motion: reduce) { .c { animation: none; opacity: 1; } .cursor { animation: blink 0.7s step-end infinite; } }
+</style>
+<text x="16" y="16" fill="#656d76" font-size="10" font-weight="600" letter-spacing="1.5" font-family="'Geist Mono','SF Mono',monospace">$ profile --summary</text>
+<text class="c" x="16.0" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.000s">S</text>
+<text class="c" x="24.7" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.045s">o</text>
+<text class="c" x="33.4" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.090s">r</text>
+<text class="c" x="42.0" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.135s">a</text>
+<text class="c" x="50.7" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.180s">n</text>
+<text class="c" x="59.4" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.225s">j</text>
+<text class="c" x="68.1" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.270s">i</text>
+<text class="c" x="76.8" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.315s">r</text>
+<text class="c" x="85.4" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.360s">o</text>
+<text class="c" x="94.1" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.405s"> </text>
+<text class="c" x="102.8" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.450s">i</text>
+<text class="c" x="111.5" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.495s">s</text>
+<text class="c" x="120.2" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.540s"> </text>
+<text class="c" x="128.8" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.585s">a</text>
+<text class="c" x="137.5" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.630s"> </text>
+<text class="c" x="146.2" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.675s">b</text>
+<text class="c" x="154.9" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.720s">a</text>
+<text class="c" x="163.6" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.765s">c</text>
+<text class="c" x="172.2" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.810s">k</text>
+<text class="c" x="180.9" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.855s">e</text>
+<text class="c" x="189.6" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.900s">n</text>
+<text class="c" x="198.3" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.945s">d</text>
+<text class="c" x="207.0" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:0.990s"> </text>
+<text class="c" x="215.6" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.035s">e</text>
+<text class="c" x="224.3" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.080s">n</text>
+<text class="c" x="233.0" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.125s">g</text>
+<text class="c" x="241.7" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.170s">i</text>
+<text class="c" x="250.4" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.215s">n</text>
+<text class="c" x="259.0" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.260s">e</text>
+<text class="c" x="267.7" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.305s">e</text>
+<text class="c" x="276.4" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.350s">r</text>
+<text class="c" x="285.1" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.395s"> </text>
+<text class="c" x="293.8" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.440s">w</text>
+<text class="c" x="302.4" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.485s">i</text>
+<text class="c" x="311.1" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.530s">t</text>
+<text class="c" x="319.8" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.575s">h</text>
+<text class="c" x="328.5" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.620s"> </text>
+<text class="c" x="337.2" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.665s">a</text>
+<text class="c" x="345.8" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.710s"> </text>
+<text class="c" x="354.5" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.755s">f</text>
+<text class="c" x="363.2" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.800s">u</text>
+<text class="c" x="371.9" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.845s">l</text>
+<text class="c" x="380.6" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.890s">l</text>
+<text class="c" x="389.2" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.935s">-</text>
+<text class="c" x="397.9" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:1.980s">s</text>
+<text class="c" x="406.6" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.025s">t</text>
+<text class="c" x="415.3" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.070s">a</text>
+<text class="c" x="424.0" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.115s">c</text>
+<text class="c" x="432.6" y="32" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.160s">k</text>
+<text class="c" x="16.0" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.205s">e</text>
+<text class="c" x="24.7" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.250s">x</text>
+<text class="c" x="33.4" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.295s">p</text>
+<text class="c" x="42.0" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.340s">e</text>
+<text class="c" x="50.7" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.385s">r</text>
+<text class="c" x="59.4" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.430s">t</text>
+<text class="c" x="68.1" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.475s">i</text>
+<text class="c" x="76.8" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.520s">s</text>
+<text class="c" x="85.4" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.565s">e</text>
+<text class="c" x="94.1" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.610s"> </text>
+<text class="c" x="102.8" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.655s">i</text>
+<text class="c" x="111.5" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.700s">n</text>
+<text class="c" x="120.2" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.745s"> </text>
+<text class="c" x="128.8" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.790s">i</text>
+<text class="c" x="137.5" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.835s">n</text>
+<text class="c" x="146.2" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.880s">f</text>
+<text class="c" x="154.9" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.925s">r</text>
+<text class="c" x="163.6" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:2.970s">a</text>
+<text class="c" x="172.2" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.015s">s</text>
+<text class="c" x="180.9" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.060s">t</text>
+<text class="c" x="189.6" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.105s">r</text>
+<text class="c" x="198.3" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.150s">u</text>
+<text class="c" x="207.0" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.195s">c</text>
+<text class="c" x="215.6" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.240s">t</text>
+<text class="c" x="224.3" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.285s">u</text>
+<text class="c" x="233.0" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.330s">r</text>
+<text class="c" x="241.7" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.375s">e</text>
+<text class="c" x="250.4" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.420s"> </text>
+<text class="c" x="259.0" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.465s">a</text>
+<text class="c" x="267.7" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.510s">n</text>
+<text class="c" x="276.4" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.555s">d</text>
+<text class="c" x="285.1" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.600s"> </text>
+<text class="c" x="293.8" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.645s">w</text>
+<text class="c" x="302.4" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.690s">e</text>
+<text class="c" x="311.1" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.735s">b</text>
+<text class="c" x="319.8" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.780s"> </text>
+<text class="c" x="328.5" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.825s">a</text>
+<text class="c" x="337.2" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.870s">p</text>
+<text class="c" x="345.8" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.915s">p</text>
+<text class="c" x="354.5" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:3.960s">l</text>
+<text class="c" x="363.2" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.005s">i</text>
+<text class="c" x="371.9" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.050s">c</text>
+<text class="c" x="380.6" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.095s">a</text>
+<text class="c" x="389.2" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.140s">t</text>
+<text class="c" x="397.9" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.185s">i</text>
+<text class="c" x="406.6" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.230s">o</text>
+<text class="c" x="415.3" y="54" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.275s">n</text>
+<text class="c" x="16.0" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.320s">d</text>
+<text class="c" x="24.7" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.365s">e</text>
+<text class="c" x="33.4" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.410s">v</text>
+<text class="c" x="42.0" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.455s">e</text>
+<text class="c" x="50.7" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.500s">l</text>
+<text class="c" x="59.4" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.545s">o</text>
+<text class="c" x="68.1" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.590s">p</text>
+<text class="c" x="76.8" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.635s">m</text>
+<text class="c" x="85.4" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.680s">e</text>
+<text class="c" x="94.1" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.725s">n</text>
+<text class="c" x="102.8" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.770s">t</text>
+<text class="c" x="111.5" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.815s">.</text>
+<text class="c" x="120.2" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.860s"> </text>
+<text class="c" x="128.8" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.905s">W</text>
+<text class="c" x="137.5" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.950s">i</text>
+<text class="c" x="146.2" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:4.995s">t</text>
+<text class="c" x="154.9" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.040s">h</text>
+<text class="c" x="163.6" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.085s"> </text>
+<text class="c" x="172.2" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.130s">o</text>
+<text class="c" x="180.9" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.175s">v</text>
+<text class="c" x="189.6" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.220s">e</text>
+<text class="c" x="198.3" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.265s">r</text>
+<text class="c" x="207.0" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.310s"> </text>
+<text class="c" x="215.6" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.355s">t</text>
+<text class="c" x="224.3" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.400s">h</text>
+<text class="c" x="233.0" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.445s">r</text>
+<text class="c" x="241.7" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.490s">e</text>
+<text class="c" x="250.4" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.535s">e</text>
+<text class="c" x="259.0" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.580s"> </text>
+<text class="c" x="267.7" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.625s">y</text>
+<text class="c" x="276.4" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.670s">e</text>
+<text class="c" x="285.1" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.715s">a</text>
+<text class="c" x="293.8" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.760s">r</text>
+<text class="c" x="302.4" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.805s">s</text>
+<text class="c" x="311.1" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.850s"> </text>
+<text class="c" x="319.8" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.895s">o</text>
+<text class="c" x="328.5" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.940s">n</text>
+<text class="c" x="337.2" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:5.985s"> </text>
+<text class="c" x="345.8" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.030s">G</text>
+<text class="c" x="354.5" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.075s">i</text>
+<text class="c" x="363.2" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.120s">t</text>
+<text class="c" x="371.9" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.165s">H</text>
+<text class="c" x="380.6" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.210s">u</text>
+<text class="c" x="389.2" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.255s">b</text>
+<text class="c" x="397.9" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.300s"> </text>
+<text class="c" x="406.6" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.345s">a</text>
+<text class="c" x="415.3" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.390s">n</text>
+<text class="c" x="424.0" y="76" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.435s">d</text>
+<text class="c" x="16.0" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.480s">n</text>
+<text class="c" x="24.7" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.525s">e</text>
+<text class="c" x="33.4" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.570s">a</text>
+<text class="c" x="42.0" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.615s">r</text>
+<text class="c" x="50.7" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.660s">l</text>
+<text class="c" x="59.4" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.705s">y</text>
+<text class="c" x="68.1" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.750s"> </text>
+<text class="c" x="76.8" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.795s">5</text>
+<text class="c" x="85.4" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.840s">,</text>
+<text class="c" x="94.1" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.885s">0</text>
+<text class="c" x="102.8" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.930s">0</text>
+<text class="c" x="111.5" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:6.975s">0</text>
+<text class="c" x="120.2" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.020s"> </text>
+<text class="c" x="128.8" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.065s">c</text>
+<text class="c" x="137.5" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.110s">o</text>
+<text class="c" x="146.2" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.155s">m</text>
+<text class="c" x="154.9" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.200s">m</text>
+<text class="c" x="163.6" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.245s">i</text>
+<text class="c" x="172.2" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.290s">t</text>
+<text class="c" x="180.9" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.335s">s</text>
+<text class="c" x="189.6" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.380s">,</text>
+<text class="c" x="198.3" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.425s"> </text>
+<text class="c" x="207.0" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.470s">h</text>
+<text class="c" x="215.6" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.515s">e</text>
+<text class="c" x="224.3" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.560s"> </text>
+<text class="c" x="233.0" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.605s">a</text>
+<text class="c" x="241.7" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.650s">c</text>
+<text class="c" x="250.4" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.695s">t</text>
+<text class="c" x="259.0" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.740s">i</text>
+<text class="c" x="267.7" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.785s">v</text>
+<text class="c" x="276.4" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.830s">e</text>
+<text class="c" x="285.1" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.875s">l</text>
+<text class="c" x="293.8" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.920s">y</text>
+<text class="c" x="302.4" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:7.965s"> </text>
+<text class="c" x="311.1" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.010s">c</text>
+<text class="c" x="319.8" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.055s">o</text>
+<text class="c" x="328.5" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.100s">n</text>
+<text class="c" x="337.2" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.145s">t</text>
+<text class="c" x="345.8" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.190s">r</text>
+<text class="c" x="354.5" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.235s">i</text>
+<text class="c" x="363.2" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.280s">b</text>
+<text class="c" x="371.9" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.325s">u</text>
+<text class="c" x="380.6" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.370s">t</text>
+<text class="c" x="389.2" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.415s">e</text>
+<text class="c" x="397.9" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.460s">s</text>
+<text class="c" x="406.6" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.505s"> </text>
+<text class="c" x="415.3" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.550s">t</text>
+<text class="c" x="424.0" y="98" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.595s">o</text>
+<text class="c" x="16.0" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.640s">v</text>
+<text class="c" x="24.7" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.685s">a</text>
+<text class="c" x="33.4" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.730s">r</text>
+<text class="c" x="42.0" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.775s">i</text>
+<text class="c" x="50.7" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.820s">o</text>
+<text class="c" x="59.4" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.865s">u</text>
+<text class="c" x="68.1" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.910s">s</text>
+<text class="c" x="76.8" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:8.955s"> </text>
+<text class="c" x="85.4" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.000s">p</text>
+<text class="c" x="94.1" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.045s">r</text>
+<text class="c" x="102.8" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.090s">o</text>
+<text class="c" x="111.5" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.135s">j</text>
+<text class="c" x="120.2" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.180s">e</text>
+<text class="c" x="128.8" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.225s">c</text>
+<text class="c" x="137.5" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.270s">t</text>
+<text class="c" x="146.2" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.315s">s</text>
+<text class="c" x="154.9" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.360s"> </text>
+<text class="c" x="163.6" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.405s">w</text>
+<text class="c" x="172.2" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.450s">h</text>
+<text class="c" x="180.9" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.495s">i</text>
+<text class="c" x="189.6" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.540s">l</text>
+<text class="c" x="198.3" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.585s">e</text>
+<text class="c" x="207.0" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.630s"> </text>
+<text class="c" x="215.6" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.675s">e</text>
+<text class="c" x="224.3" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.720s">x</text>
+<text class="c" x="233.0" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.765s">p</text>
+<text class="c" x="241.7" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.810s">l</text>
+<text class="c" x="250.4" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.855s">o</text>
+<text class="c" x="259.0" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.900s">r</text>
+<text class="c" x="267.7" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.945s">i</text>
+<text class="c" x="276.4" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:9.990s">n</text>
+<text class="c" x="285.1" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.035s">g</text>
+<text class="c" x="293.8" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.080s"> </text>
+<text class="c" x="302.4" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.125s">m</text>
+<text class="c" x="311.1" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.170s">a</text>
+<text class="c" x="319.8" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.215s">c</text>
+<text class="c" x="328.5" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.260s">h</text>
+<text class="c" x="337.2" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.305s">i</text>
+<text class="c" x="345.8" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.350s">n</text>
+<text class="c" x="354.5" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.395s">e</text>
+<text class="c" x="363.2" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.440s"> </text>
+<text class="c" x="371.9" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.485s">l</text>
+<text class="c" x="380.6" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.530s">e</text>
+<text class="c" x="389.2" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.575s">a</text>
+<text class="c" x="397.9" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.620s">r</text>
+<text class="c" x="406.6" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.665s">n</text>
+<text class="c" x="415.3" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.710s">i</text>
+<text class="c" x="424.0" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.755s">n</text>
+<text class="c" x="432.6" y="120" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.800s">g</text>
+<text class="c" x="16.0" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.845s">t</text>
+<text class="c" x="24.7" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.890s">h</text>
+<text class="c" x="33.4" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.935s">r</text>
+<text class="c" x="42.0" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:10.980s">o</text>
+<text class="c" x="50.7" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.025s">u</text>
+<text class="c" x="59.4" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.070s">g</text>
+<text class="c" x="68.1" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.115s">h</text>
+<text class="c" x="76.8" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.160s"> </text>
+<text class="c" x="85.4" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.205s">K</text>
+<text class="c" x="94.1" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.250s">a</text>
+<text class="c" x="102.8" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.295s">g</text>
+<text class="c" x="111.5" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.340s">g</text>
+<text class="c" x="120.2" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.385s">l</text>
+<text class="c" x="128.8" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.430s">e</text>
+<text class="c" x="137.5" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.475s"> </text>
+<text class="c" x="146.2" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.520s">c</text>
+<text class="c" x="154.9" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.565s">o</text>
+<text class="c" x="163.6" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.610s">m</text>
+<text class="c" x="172.2" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.655s">p</text>
+<text class="c" x="180.9" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.700s">e</text>
+<text class="c" x="189.6" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.745s">t</text>
+<text class="c" x="198.3" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.790s">i</text>
+<text class="c" x="207.0" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.835s">t</text>
+<text class="c" x="215.6" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.880s">i</text>
+<text class="c" x="224.3" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.925s">o</text>
+<text class="c" x="233.0" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:11.970s">n</text>
+<text class="c" x="241.7" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.015s">s</text>
+<text class="c" x="250.4" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.060s">,</text>
+<text class="c" x="259.0" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.105s"> </text>
+<text class="c" x="267.7" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.150s">f</text>
+<text class="c" x="276.4" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.195s">o</text>
+<text class="c" x="285.1" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.240s">c</text>
+<text class="c" x="293.8" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.285s">u</text>
+<text class="c" x="302.4" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.330s">s</text>
+<text class="c" x="311.1" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.375s">i</text>
+<text class="c" x="319.8" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.420s">n</text>
+<text class="c" x="328.5" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.465s">g</text>
+<text class="c" x="337.2" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.510s"> </text>
+<text class="c" x="345.8" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.555s">o</text>
+<text class="c" x="354.5" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.600s">n</text>
+<text class="c" x="363.2" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.645s"> </text>
+<text class="c" x="371.9" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.690s">m</text>
+<text class="c" x="380.6" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.735s">i</text>
+<text class="c" x="389.2" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.780s">t</text>
+<text class="c" x="397.9" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.825s">i</text>
+<text class="c" x="406.6" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.870s">g</text>
+<text class="c" x="415.3" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.915s">a</text>
+<text class="c" x="424.0" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:12.960s">t</text>
+<text class="c" x="432.6" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.005s">i</text>
+<text class="c" x="441.3" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.050s">n</text>
+<text class="c" x="450.0" y="142" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.095s">g</text>
+<text class="c" x="16.0" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.140s">p</text>
+<text class="c" x="24.7" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.185s">o</text>
+<text class="c" x="33.4" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.230s">p</text>
+<text class="c" x="42.0" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.275s">u</text>
+<text class="c" x="50.7" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.320s">l</text>
+<text class="c" x="59.4" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.365s">a</text>
+<text class="c" x="68.1" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.410s">r</text>
+<text class="c" x="76.8" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.455s">i</text>
+<text class="c" x="85.4" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.500s">t</text>
+<text class="c" x="94.1" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.545s">y</text>
+<text class="c" x="102.8" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.590s"> </text>
+<text class="c" x="111.5" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.635s">b</text>
+<text class="c" x="120.2" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.680s">i</text>
+<text class="c" x="128.8" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.725s">a</text>
+<text class="c" x="137.5" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.770s">s</text>
+<text class="c" x="146.2" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.815s"> </text>
+<text class="c" x="154.9" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.860s">i</text>
+<text class="c" x="163.6" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.905s">n</text>
+<text class="c" x="172.2" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.950s"> </text>
+<text class="c" x="180.9" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:13.995s">r</text>
+<text class="c" x="189.6" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.040s">e</text>
+<text class="c" x="198.3" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.085s">c</text>
+<text class="c" x="207.0" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.130s">o</text>
+<text class="c" x="215.6" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.175s">m</text>
+<text class="c" x="224.3" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.220s">m</text>
+<text class="c" x="233.0" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.265s">e</text>
+<text class="c" x="241.7" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.310s">n</text>
+<text class="c" x="250.4" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.355s">d</text>
+<text class="c" x="259.0" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.400s">e</text>
+<text class="c" x="267.7" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.445s">r</text>
+<text class="c" x="276.4" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.490s"> </text>
+<text class="c" x="285.1" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.535s">s</text>
+<text class="c" x="293.8" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.580s">y</text>
+<text class="c" x="302.4" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.625s">s</text>
+<text class="c" x="311.1" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.670s">t</text>
+<text class="c" x="319.8" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.715s">e</text>
+<text class="c" x="328.5" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.760s">m</text>
+<text class="c" x="337.2" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.805s">s</text>
+<text class="c" x="345.8" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.850s">.</text>
+<text class="c" x="354.5" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.895s"> </text>
+<text class="c" x="363.2" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.940s">H</text>
+<text class="c" x="371.9" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:14.985s">i</text>
+<text class="c" x="380.6" y="164" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.030s">s</text>
+<text class="c" x="16.0" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.075s">t</text>
+<text class="c" x="24.7" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.120s">e</text>
+<text class="c" x="33.4" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.165s">c</text>
+<text class="c" x="42.0" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.210s">h</text>
+<text class="c" x="50.7" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.255s">n</text>
+<text class="c" x="59.4" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.300s">i</text>
+<text class="c" x="68.1" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.345s">c</text>
+<text class="c" x="76.8" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.390s">a</text>
+<text class="c" x="85.4" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.435s">l</text>
+<text class="c" x="94.1" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.480s"> </text>
+<text class="c" x="102.8" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.525s">p</text>
+<text class="c" x="111.5" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.570s">r</text>
+<text class="c" x="120.2" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.615s">o</text>
+<text class="c" x="128.8" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.660s">f</text>
+<text class="c" x="137.5" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.705s">i</text>
+<text class="c" x="146.2" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.750s">c</text>
+<text class="c" x="154.9" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.795s">i</text>
+<text class="c" x="163.6" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.840s">e</text>
+<text class="c" x="172.2" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.885s">n</text>
+<text class="c" x="180.9" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.930s">c</text>
+<text class="c" x="189.6" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:15.975s">y</text>
+<text class="c" x="198.3" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.020s"> </text>
+<text class="c" x="207.0" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.065s">i</text>
+<text class="c" x="215.6" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.110s">n</text>
+<text class="c" x="224.3" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.155s">c</text>
+<text class="c" x="233.0" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.200s">l</text>
+<text class="c" x="241.7" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.245s">u</text>
+<text class="c" x="250.4" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.290s">d</text>
+<text class="c" x="259.0" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.335s">e</text>
+<text class="c" x="267.7" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.380s">s</text>
+<text class="c" x="276.4" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.425s"> </text>
+<text class="c" x="285.1" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.470s">R</text>
+<text class="c" x="293.8" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.515s">u</text>
+<text class="c" x="302.4" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.560s">b</text>
+<text class="c" x="311.1" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.605s">y</text>
+<text class="c" x="319.8" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.650s"> </text>
+<text class="c" x="328.5" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.695s">o</text>
+<text class="c" x="337.2" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.740s">n</text>
+<text class="c" x="345.8" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.785s"> </text>
+<text class="c" x="354.5" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.830s">R</text>
+<text class="c" x="363.2" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.875s">a</text>
+<text class="c" x="371.9" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.920s">i</text>
+<text class="c" x="380.6" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:16.965s">l</text>
+<text class="c" x="389.2" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.010s">s</text>
+<text class="c" x="397.9" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.055s">,</text>
+<text class="c" x="406.6" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.100s"> </text>
+<text class="c" x="415.3" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.145s">G</text>
+<text class="c" x="424.0" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.190s">o</text>
+<text class="c" x="432.6" y="186" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.235s">,</text>
+<text class="c" x="16.0" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.280s">T</text>
+<text class="c" x="24.7" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.325s">y</text>
+<text class="c" x="33.4" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.370s">p</text>
+<text class="c" x="42.0" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.415s">e</text>
+<text class="c" x="50.7" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.460s">S</text>
+<text class="c" x="59.4" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.505s">c</text>
+<text class="c" x="68.1" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.550s">r</text>
+<text class="c" x="76.8" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.595s">i</text>
+<text class="c" x="85.4" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.640s">p</text>
+<text class="c" x="94.1" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.685s">t</text>
+<text class="c" x="102.8" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.730s">,</text>
+<text class="c" x="111.5" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.775s"> </text>
+<text class="c" x="120.2" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.820s">a</text>
+<text class="c" x="128.8" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.865s">n</text>
+<text class="c" x="137.5" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.910s">d</text>
+<text class="c" x="146.2" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:17.955s"> </text>
+<text class="c" x="154.9" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.000s">P</text>
+<text class="c" x="163.6" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.045s">y</text>
+<text class="c" x="172.2" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.090s">t</text>
+<text class="c" x="180.9" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.135s">h</text>
+<text class="c" x="189.6" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.180s">o</text>
+<text class="c" x="198.3" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.225s">n</text>
+<text class="c" x="207.0" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.270s">,</text>
+<text class="c" x="215.6" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.315s"> </text>
+<text class="c" x="224.3" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.360s">c</text>
+<text class="c" x="233.0" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.405s">o</text>
+<text class="c" x="241.7" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.450s">m</text>
+<text class="c" x="250.4" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.495s">p</text>
+<text class="c" x="259.0" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.540s">l</text>
+<text class="c" x="267.7" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.585s">e</text>
+<text class="c" x="276.4" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.630s">m</text>
+<text class="c" x="285.1" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.675s">e</text>
+<text class="c" x="293.8" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.720s">n</text>
+<text class="c" x="302.4" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.765s">t</text>
+<text class="c" x="311.1" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.810s">e</text>
+<text class="c" x="319.8" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.855s">d</text>
+<text class="c" x="328.5" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.900s"> </text>
+<text class="c" x="337.2" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.945s">b</text>
+<text class="c" x="345.8" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:18.990s">y</text>
+<text class="c" x="354.5" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.035s"> </text>
+<text class="c" x="363.2" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.080s">e</text>
+<text class="c" x="371.9" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.125s">x</text>
+<text class="c" x="380.6" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.170s">p</text>
+<text class="c" x="389.2" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.215s">e</text>
+<text class="c" x="397.9" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.260s">r</text>
+<text class="c" x="406.6" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.305s">i</text>
+<text class="c" x="415.3" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.350s">e</text>
+<text class="c" x="424.0" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.395s">n</text>
+<text class="c" x="432.6" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.440s">c</text>
+<text class="c" x="441.3" y="208" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.485s">e</text>
+<text class="c" x="16.0" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.530s">i</text>
+<text class="c" x="24.7" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.575s">n</text>
+<text class="c" x="33.4" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.620s"> </text>
+<text class="c" x="42.0" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.665s">A</text>
+<text class="c" x="50.7" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.710s">W</text>
+<text class="c" x="59.4" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.755s">S</text>
+<text class="c" x="68.1" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.800s">,</text>
+<text class="c" x="76.8" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.845s"> </text>
+<text class="c" x="85.4" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.890s">T</text>
+<text class="c" x="94.1" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.935s">e</text>
+<text class="c" x="102.8" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:19.980s">r</text>
+<text class="c" x="111.5" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:20.025s">r</text>
+<text class="c" x="120.2" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:20.070s">a</text>
+<text class="c" x="128.8" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:20.115s">f</text>
+<text class="c" x="137.5" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:20.160s">o</text>
+<text class="c" x="146.2" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:20.205s">r</text>
+<text class="c" x="154.9" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:20.250s">m</text>
+<text class="c" x="163.6" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:20.295s">,</text>
+<text class="c" x="172.2" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:20.340s"> </text>
+<text class="c" x="180.9" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:20.385s">a</text>
+<text class="c" x="189.6" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:20.430s">n</text>
+<text class="c" x="198.3" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:20.475s">d</text>
+<text class="c" x="207.0" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:20.520s"> </text>
+<text class="c" x="215.6" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:20.565s">D</text>
+<text class="c" x="224.3" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:20.610s">o</text>
+<text class="c" x="233.0" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:20.655s">c</text>
+<text class="c" x="241.7" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:20.700s">k</text>
+<text class="c" x="250.4" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:20.745s">e</text>
+<text class="c" x="259.0" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:20.790s">r</text>
+<text class="c" x="267.7" y="230" fill="#24292f" font-size="14" font-family="'Geist Mono','SF Mono','Fira Code',monospace" style="animation-delay:20.835s">.</text>
+<rect class="cursor" x="16" y="18" width="2" height="18" rx="1"/>
+</svg>

@@ -303,7 +303,7 @@ function parseProfileConfig() {
 // ─── 10. AI-generated summary ──────────────────────────────────────
 async function generateAISummary(profileData) {
   const userProfile = parseProfileConfig();
-  const prompt = `You are writing a concise, professional, third-person profile summary in ENGLISH for a GitHub developer portfolio.
+  const prompt = `You are writing a concise, professional, third-person profile summary in ENGLISH for a GitHub developer profile.
 Write exactly 2-3 sentences. Be factual and specific based on the data below.
 Incorporate the developer's self-description naturally. Do NOT fabricate skills or claims not supported by the data.
 Do NOT use emoji.
@@ -629,7 +629,22 @@ ${pinnedRepos.map(r => `- ${r.name}: ${r.description || "No description"} (${r.p
   }
   if (reposOverview) console.log(`  "${reposOverview}"`);
 
-  console.log("\n13. Assembling output...");
+  console.log("\n13. Computing streak & daily stats...");
+  const allDays = yearlyData.flatMap(y => y.calendar).sort((a, b) => a.date.localeCompare(b.date));
+  let currentStreak = 0;
+  const today = new Date().toISOString().slice(0, 10);
+  for (let i = allDays.length - 1; i >= 0; i--) {
+    if (allDays[i].date > today) continue;
+    if (allDays[i].count > 0) currentStreak++;
+    else break;
+  }
+  const todayContribs = allDays.find(d => d.date === today)?.count || 0;
+  const bestDay = allDays.reduce((best, d) => d.count > best.count ? d : best, { count: 0, date: "" });
+  const totalDays = Math.floor((Date.now() - createdAt.getTime()) / (24 * 3600 * 1000));
+  const activeDays = allDays.filter(d => d.count > 0).length;
+  console.log(`  Streak: ${currentStreak} days, today: ${todayContribs}, best: ${bestDay.count} on ${bestDay.date}`);
+
+  console.log("\n14. Assembling output...");
   const totalStars = personalRepos.reduce((s, r) => s + r.stargazerCount, 0);
   const totalForks = personalRepos.reduce((s, r) => s + r.forkCount, 0);
   const totalReleases = personalRepos.reduce((s, r) => s + r.releases.totalCount, 0);
@@ -662,6 +677,7 @@ ${pinnedRepos.map(r => `- ${r.name}: ${r.description || "No description"} (${r.p
     copilot: copilotUsage,
     aiSummary,
     reposOverview,
+    streak: { current: currentStreak, todayContribs, bestDay: bestDay.count, bestDate: bestDay.date, totalDays, activeDays },
     userProfile: parseProfileConfig(),
     repoStats: {
       total: personalRepos.length + orgRepos.length,

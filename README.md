@@ -1,17 +1,25 @@
 ![](https://komarev.com/ghpvc/?username=soranjiro&color=blue) <img src="./output/assets/svg/ai-badge.svg" alt="AI Generated" height="20" />
 
-> Soranjiro is a backend engineer with a full-stack expertise in infrastructure and web application development. With over three years on GitHub and nearly 5,000 commits, he actively contributes to various projects while exploring machine learning through Kaggle competitions, focusing on mitigating popularity bias in recommender systems. His technical proficiency includes Ruby on Rails, Go, TypeScript, and Python, complemented by experience in AWS, Terraform, and Docker.
+<div align="center">
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/typing-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/typing-light.svg">
+  <img src="./output/assets/svg/typing-dark.svg" alt="Profile" width="480" />
+</picture>
+
+</div>
 
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/overview-dark.svg">
     <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/overview-light.svg">
-    <img src="./output/assets/svg/overview-dark.svg" alt="Overview" width="400" />
+    <img src="./output/assets/svg/overview-dark.svg" alt="Overview" width="410" />
   </picture>
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/copilot-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/copilot-light.svg">
-    <img src="./output/assets/svg/copilot-dark.svg" alt="AI Collaboration" width="400" />
+    <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/heatmap-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/heatmap-light.svg">
+    <img src="./output/assets/svg/heatmap-dark.svg" alt="Contributions" width="410" />
   </picture>
 </p>
 
@@ -20,17 +28,23 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./output/assets/svg/charts-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="./output/assets/svg/charts-light.svg">
-  <img src="./output/assets/svg/charts-dark.svg" alt="Dashboard Charts" width="840" />
+  <img src="./output/assets/svg/charts-dark.svg" alt="Charts" width="840" />
 </picture>
 
 </div>
 
+<div align="center">
+
+<br>
+
+[![Portfolio](https://img.shields.io/badge/Portfolio-soranjiro.github.io-blue?style=for-the-badge&logo=github)](https://soranjiro.github.io/soranjiro/)
+
 ---
 
-<div align="center">
-  <sub>
-    Auto-generated daily via <a href="https://github.com/soranjiro/soranjiro/actions">GitHub Actions</a>
-    · Powered by <strong>GitHub Copilot SDK</strong> &amp; GitHub GraphQL API
-    · Last updated: 2026-03-09
-  </sub>
+<sub>
+  Auto-generated daily via <a href="https://github.com/soranjiro/soranjiro/actions">GitHub Actions</a>
+  · Powered by <strong>GitHub Copilot SDK</strong> &amp; GitHub GraphQL API
+  · Last updated: 2026-03-09
+</sub>
+
 </div>
