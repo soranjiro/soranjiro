@@ -65,7 +65,7 @@ function generateOverviewSVG(theme, minH = 0) {
     return levels[lv];
   });
   const contribBar = weekColors.map((c, i) =>
-    `<rect x="${210 + i * 18}" y="22" width="14" height="14" rx="2" fill="${c}"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="${(i * 0.04).toFixed(2)}s" fill="freeze"/></rect>`
+    `<rect x="${210 + i * 18}" y="22" width="14" height="14" rx="2" fill="${c}"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="${(i * 0.08).toFixed(2)}s" fill="freeze"/></rect>`
   ).join("\n    ");
 
 
@@ -79,8 +79,8 @@ function generateOverviewSVG(theme, minH = 0) {
   }
 
   function statRow(x, y, icon, label, fillColor, delay = 0) {
-    const anim = delay > 0 ? ` opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="${delay.toFixed(2)}s" fill="freeze"/` : '';
-    return `<g${delay > 0 ? ` opacity="0"` : ''}>${delay > 0 ? `<animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="${delay.toFixed(2)}s" fill="freeze"/>` : ''}${iconPath(ICONS[icon], x, y - 10, fillColor)}<text x="${x + 16}" y="${y}" fill="${fillColor}" font-size="11" font-family="${font}">${label}</text></g>`;
+    const anim = delay > 0 ? ` opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="${delay.toFixed(2)}s" fill="freeze"/` : '';
+    return `<g${delay > 0 ? ` opacity="0"` : ''}>${delay > 0 ? `<animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="${delay.toFixed(2)}s" fill="freeze"/>` : ''}${iconPath(ICONS[icon], x, y - 10, fillColor)}<text x="${x + 16}" y="${y}" fill="${fillColor}" font-size="11" font-family="${font}">${label}</text></g>`;
   }
 
   function sectionHeader(x, y, icon, label) {
@@ -97,21 +97,21 @@ function generateOverviewSVG(theme, minH = 0) {
     <line x1="24" y1="92" x2="${W - 24}" y2="92" stroke="${border}" stroke-width="0.5"/>
 
     ${sectionHeader(24, 112, 'commit', 'Activity')}
-    ${statRow(24, 132, 'commit', `${activity.totalCommits.toLocaleString()} Commits`, muted, 0.15)}
-    ${statRow(24, 150, 'pr', `${activity.prs.toLocaleString()} Pull requests opened`, muted, 0.22)}
-    ${statRow(24, 168, 'review', `${activity.reviews.toLocaleString()} Pull requests reviewed`, muted, 0.29)}
-    ${statRow(24, 186, 'issue', `${activity.issues.toLocaleString()} Issues opened`, muted, 0.36)}
-    ${statRow(24, 204, 'contrib', `${(activity.issueComments + activity.prComments).toLocaleString()} Comments`, muted, 0.43)}
+    ${statRow(24, 132, 'commit', `${activity.totalCommits.toLocaleString()} Commits`, muted, 0.4)}
+    ${statRow(24, 150, 'pr', `${activity.prs.toLocaleString()} Pull requests opened`, muted, 0.6)}
+    ${statRow(24, 168, 'review', `${activity.reviews.toLocaleString()} Pull requests reviewed`, muted, 0.8)}
+    ${statRow(24, 186, 'issue', `${activity.issues.toLocaleString()} Issues opened`, muted, 1.0)}
+    ${statRow(24, 204, 'contrib', `${(activity.issueComments + activity.prComments).toLocaleString()} Comments`, muted, 1.2)}
 
     ${sectionHeader(260, 112, 'org', 'Community')}
-    ${statRow(260, 132, 'org', `Member of ${profile.organizations} organizations`, muted, 0.18)}
-    ${statRow(260, 150, 'star', `Starred ${repoStats.stars} repositories`, muted, 0.25)}
-    ${statRow(260, 168, 'copilot', `${fmtNum(copilot.premiumRequests || 0)} Copilot requests`, muted, 0.32)}
-    <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="0.39s" fill="freeze"/>
+    ${statRow(260, 132, 'org', `Member of ${profile.organizations} organizations`, muted, 0.5)}
+    ${statRow(260, 150, 'star', `Starred ${repoStats.stars} repositories`, muted, 0.7)}
+    ${statRow(260, 168, 'copilot', `${fmtNum(copilot.premiumRequests || 0)} Copilot requests`, muted, 0.9)}
+    <g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="1.1s" fill="freeze"/>
       ${iconPath(ICONS.clock, 260, 176, muted)}<text x="276" y="186" fill="${muted}" font-size="11" font-family="${font}">${streakData.current}-day streak</text>
       <circle cx="${276 + String(streakData.current).length * 6.5 + 72}" cy="182" r="3" fill="${green}"><animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/></circle>
     </g>
-    ${statRow(260, 204, 'star', `Best: ${streakData.bestDay}/day`, muted, 0.46)}
+    ${statRow(260, 204, 'star', `Best: ${streakData.bestDay}/day`, muted, 1.3)}
 
     <line x1="24" y1="218" x2="${W - 24}" y2="218" stroke="${border}" stroke-width="0.5"/>
 
@@ -163,7 +163,7 @@ function generateOverviewSVG(theme, minH = 0) {
     <text x="24" y="${pY0 - 6}" fill="${muted}" font-size="9" font-weight="600" letter-spacing="1" font-family="-apple-system,sans-serif">LAST 60 DAYS</text>
     <path d="${pArea}" fill="${isDark ? 'rgba(63,185,80,0.08)' : 'rgba(26,127,55,0.06)'}"/>
     <path d="${pPath}" fill="none" stroke="${green}" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="${pLen}" stroke-dashoffset="${pLen}" filter="url(#glow)">
-      <animate attributeName="stroke-dashoffset" from="${pLen}" to="0" dur="2s" fill="freeze" begin="0.3s"/>
+      <animate attributeName="stroke-dashoffset" from="${pLen}" to="0" dur="3.5s" fill="freeze" begin="0.8s"/>
     </path>
     <text x="${W - 24}" y="${pY0 + pH + 14}" text-anchor="end" fill="${muted}" font-size="9" font-family="-apple-system,sans-serif">peak: ${pMax}</text>
   `;
@@ -175,7 +175,7 @@ function generateOverviewSVG(theme, minH = 0) {
   let bx = 24;
   badgeList.forEach((b, i) => {
     const tw = b.label.length * 5.8 + badgePad * 2;
-    badgeSvg += `<g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="${(0.5 + i * 0.1).toFixed(2)}s" fill="freeze"/>`;
+    badgeSvg += `<g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="${(2.0 + i * 0.15).toFixed(2)}s" fill="freeze"/>`;
     badgeSvg += `<rect x="${bx}" y="${badgeY}" width="${tw}" height="${badgeH}" rx="10" fill="${b.color}" opacity="0.15"/>`;
     badgeSvg += `<rect x="${bx}" y="${badgeY}" width="${tw}" height="${badgeH}" rx="10" fill="none" stroke="${b.color}" stroke-width="1" opacity="0.4"/>`;
     badgeSvg += `<text x="${bx + tw / 2}" y="${badgeY + 13.5}" text-anchor="middle" fill="${b.color}" font-size="9" font-weight="600" font-family="${font}">${b.label}</text>`;
@@ -247,7 +247,7 @@ function generateHeatmapSVG(theme, minH = 0) {
     if (!months[monthKey]) months[monthKey] = x;
 
     cells += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="2" fill="${levels[lv]}">`;
-    cells += `<animate attributeName="opacity" from="0" to="1" dur="0.08s" begin="${(weekIdx * 0.015).toFixed(3)}s" fill="freeze"/>`;
+    cells += `<animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="${(weekIdx * 0.04).toFixed(3)}s" fill="freeze"/>`;
     cells += `</rect>\n`;
     d.setDate(d.getDate() + 1);
   }
@@ -302,7 +302,7 @@ function generateHeatmapSVG(theme, minH = 0) {
     const pct = ((dowCounts[i] / dowTotal) * 100).toFixed(1);
     dowBars += `<text x="44" y="${rowY + 9}" text-anchor="end" fill="${muted}" font-size="9" font-family="${font}">${lab}</text>`;
     dowBars += `<rect x="50" y="${rowY}" width="${barW}" height="${barH}" rx="3" fill="${barBg}"/>`;
-    dowBars += `<rect x="50" y="${rowY}" width="0" height="${barH}" rx="3" fill="url(#dowGrad)"><animate attributeName="width" from="0" to="${w.toFixed(1)}" dur="0.5s" begin="${(0.3 + i * 0.06).toFixed(2)}s" fill="freeze"/></rect>`;
+    dowBars += `<rect x="50" y="${rowY}" width="0" height="${barH}" rx="3" fill="url(#dowGrad)"><animate attributeName="width" from="0" to="${w.toFixed(1)}" dur="0.8s" begin="${(1.0 + i * 0.12).toFixed(2)}s" fill="freeze"/></rect>`;
     dowBars += `<text x="${50 + barW + 8}" y="${rowY + 9}" fill="${muted}" font-size="9" font-family="${font}">${dowCounts[i].toLocaleString()} <tspan fill="${isDark ? '#484f58' : '#afb8c1'}">(${pct}%)</tspan></text>\n`;
   });
 
@@ -318,7 +318,7 @@ function generateHeatmapSVG(theme, minH = 0) {
     const isPartial = i === yearly.length - 1;
     yoy += `<text x="64" y="${rowY2 + 9}" text-anchor="end" fill="${muted}" font-size="9" font-family="${font}">${y.yearLabel}${isPartial ? '*' : ''}</text>`;
     yoy += `<rect x="70" y="${rowY2}" width="${yBarMaxW}" height="${yBarH}" rx="3" fill="${barBg}"/>`;
-    yoy += `<rect x="70" y="${rowY2}" width="0" height="${yBarH}" rx="3" fill="${isPartial ? accent : green}"><animate attributeName="width" from="0" to="${w.toFixed(1)}" dur="0.4s" begin="${(0.6 + i * 0.08).toFixed(2)}s" fill="freeze"/></rect>`;
+    yoy += `<rect x="70" y="${rowY2}" width="0" height="${yBarH}" rx="3" fill="${isPartial ? accent : green}"><animate attributeName="width" from="0" to="${w.toFixed(1)}" dur="0.7s" begin="${(2.0 + i * 0.15).toFixed(2)}s" fill="freeze"/></rect>`;
     yoy += `<text x="${70 + yBarMaxW + 8}" y="${rowY2 + 9}" fill="${muted}" font-size="9" font-family="${font}">${y.stats.totalContributions.toLocaleString()}</text>`;
     if (i > 0) {
       const prev = yearly[i - 1].stats.totalContributions;
@@ -432,9 +432,9 @@ async function generateChartsSVG(theme) {
   const radarPoly = dPts.map(p => p.map(fx).join(',')).join(' ');
   const zeroPoly = Array.from({length: N}, () => `${rcx},${rcy}`).join(' ');
   radar += `<polygon points="${zeroPoly}" fill="var(--accent-fill)" stroke="var(--accent)" stroke-width="1.5" stroke-linejoin="round">
-    <animate attributeName="points" from="${zeroPoly}" to="${radarPoly}" dur="0.8s" fill="freeze" begin="0.2s" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+    <animate attributeName="points" from="${zeroPoly}" to="${radarPoly}" dur="1.5s" fill="freeze" begin="0.5s" calcMode="spline" keySplines="0.4 0 0.2 1"/>
   </polygon>\n`;
-  dPts.forEach((p, i) => { radar += `<circle cx="${fx(p[0])}" cy="${fx(p[1])}" r="3" fill="var(--accent)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.15s" begin="${(0.8 + i * 0.08).toFixed(2)}s" fill="freeze"/></circle>\n`; });
+  dPts.forEach((p, i) => { radar += `<circle cx="${fx(p[0])}" cy="${fx(p[1])}" r="3" fill="var(--accent)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="${(1.8 + i * 0.15).toFixed(2)}s" fill="freeze"/></circle>\n`; });
 
   const lCfg = [
     { dx: 0, dy: -16, a: 'middle' }, { dx: 10, dy: 0, a: 'start' },
@@ -477,11 +477,11 @@ async function generateChartsSVG(theme) {
     const v = (pMax * i) / 2, y = yP(v);
     mc += `<text x="${mcR + 5}" y="${fx(y + 3)}" text-anchor="start" style="fill:var(--sora);font-size:8px">${Math.round(v)}</text>\n`;
   }
-  mc += `<path d="${cArea}" fill="var(--matcha-fill)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="0.5s" fill="freeze"/></path>\n`;
+  mc += `<path d="${cArea}" fill="var(--matcha-fill)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="1.0s" begin="1.0s" fill="freeze"/></path>\n`;
   const drawLen = 3000;
-  mc += `<path d="${cLine}" fill="none" stroke="var(--matcha)" stroke-width="1.5" stroke-dasharray="${drawLen}" stroke-dashoffset="${drawLen}"><animate attributeName="stroke-dashoffset" from="${drawLen}" to="0" dur="1.2s" begin="0.3s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/></path>\n`;
-  mc += `<path d="${pLine}" fill="none" stroke="var(--sora)" stroke-width="1.5" stroke-dasharray="4,2" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="1s" fill="freeze"/></path>\n`;
-  mc += `<path d="${rvLine}" fill="none" stroke="var(--fuji)" stroke-width="1.5" stroke-dasharray="2,2" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="1.2s" fill="freeze"/></path>\n`;
+  mc += `<path d="${cLine}" fill="none" stroke="var(--matcha)" stroke-width="1.5" stroke-dasharray="${drawLen}" stroke-dashoffset="${drawLen}"><animate attributeName="stroke-dashoffset" from="${drawLen}" to="0" dur="2.5s" begin="0.5s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/></path>\n`;
+  mc += `<path d="${pLine}" fill="none" stroke="var(--sora)" stroke-width="1.5" stroke-dasharray="4,2" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="2.5s" fill="freeze"/></path>\n`;
+  mc += `<path d="${rvLine}" fill="none" stroke="var(--fuji)" stroke-width="1.5" stroke-dasharray="2,2" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="2.8s" fill="freeze"/></path>\n`;
   mLabels.forEach((m, i) => {
     if (i % 6 === 0) mc += `<text x="${fx(xS(i))}" y="${mcB + 14}" text-anchor="middle" style="fill:var(--muted);font-size:8px">${m.slice(2)}</text>\n`;
   });
@@ -499,8 +499,8 @@ async function generateChartsSVG(theme) {
   let cumDelay = 0;
   distLangs.forEach(l => {
     const w = (l.bytes / totalBytes) * bW;
-    dist += `<rect x="${fx(bX)}" y="${bY}" width="0" height="${bH}" fill="${l.color}"><animate attributeName="width" from="0" to="${fx(w)}" dur="0.5s" begin="${(0.3 + cumDelay).toFixed(2)}s" fill="freeze"/></rect>\n`;
-    cumDelay += 0.06;
+    dist += `<rect x="${fx(bX)}" y="${bY}" width="0" height="${bH}" fill="${l.color}"><animate attributeName="width" from="0" to="${fx(w)}" dur="0.9s" begin="${(0.5 + cumDelay).toFixed(2)}s" fill="freeze"/></rect>\n`;
+    cumDelay += 0.12;
     bX += w;
   });
   dist += `</g>\n`;
