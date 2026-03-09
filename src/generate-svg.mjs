@@ -239,7 +239,7 @@ function generateHeatmapSVG(theme, minH = 0) {
     const count = calMap[ds] || 0;
     totalContribs += count;
     dowCounts[dow] += count;
-    const lv = count === 0 ? 0 : Math.min(4, Math.ceil((count / maxCount) * 4));
+    const lv = count === 0 ? 0 : count <= 2 ? 1 : count <= 5 ? 2 : count <= 9 ? 3 : 4;
     const x = padL + weekIdx * total;
     const y = padT + dow * total;
 

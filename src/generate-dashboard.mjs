@@ -45,7 +45,8 @@ function renderContributionCalendar(data) {
       if (!day) return "";
       const x = wi * (cellSize + cellGap) + 32;
       const y = di * (cellSize + cellGap) + 18;
-      const opacity = day.count === 0 ? 0.08 : Math.min(0.2 + (day.count / 20) * 0.8, 1);
+      const lv = day.count === 0 ? 0 : day.count <= 2 ? 1 : day.count <= 5 ? 2 : day.count <= 9 ? 3 : 4;
+      const opacity = [0.08, 0.35, 0.55, 0.78, 1][lv];
       const fill = day.count === 0 ? "var(--text-dim)" : "var(--matcha)";
       return `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="2" fill="${fill}" opacity="${opacity}"><title>${day.date}: ${day.count} contributions</title></rect>`;
     }).join("");
