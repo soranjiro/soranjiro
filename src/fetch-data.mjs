@@ -712,4 +712,7 @@ ${pinnedRepos.map(r => `- ${r.name}: ${r.description || "No description"} (${r.p
   if (aiSummary) console.log(`AI Summary: ${aiSummary.slice(0, 100)}...`);
 }
 
-main().catch(console.error);
+main().catch(e => {
+  console.error(e);
+  process.exit(1);
+});
