@@ -691,9 +691,6 @@ ${pinnedRepos.map(r => `- ${r.name}: ${r.description || "No description"} (${r.p
       stats: y.stats,
       calendarDays: y.calendar.length,
       calendar: y.calendar,
-      topReposByCommits: y.commitsByRepo.filter(r => !r.isPrivate).sort((a, b) => b.commits - a.commits).slice(0, 15),
-      topReposByPRs: y.prsByRepo.sort((a, b) => b.prs - a.prs).slice(0, 10),
-      topReposByReviews: y.reviewsByRepo.sort((a, b) => b.reviews - a.reviews).slice(0, 10),
     })),
     allCalendar: yearlyData.flatMap(y => y.calendar),
     languageTrends,
@@ -706,16 +703,6 @@ ${pinnedRepos.map(r => `- ${r.name}: ${r.description || "No description"} (${r.p
       primaryLanguage: r.primaryLanguage,
       languages: r.languages.edges.map(e => ({ name: e.node.name, color: e.node.color, size: e.size })),
     })),
-    orgRepoPerPeriod: orgRepoPerPeriod.map(r => ({
-      org: r.org, name: r.name, nameWithOwner: r.nameWithOwner,
-      primaryLanguage: r.primaryLanguage, languages: r.languages, perPeriod: r.perPeriod,
-    })),
-    repoTimeline: personalRepos.filter(r => !r.isFork).map(r => ({
-      name: r.name, nameWithOwner: r.nameWithOwner, createdAt: r.createdAt, pushedAt: r.pushedAt,
-      isPrivate: r.isPrivate, isArchived: r.isArchived, primaryLanguage: r.primaryLanguage,
-      stars: r.stargazerCount,
-      languages: r.languages.edges.map(e => ({ name: e.node.name, color: e.node.color, size: e.size })),
-    })).sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt)),
   };
 
   writeFileSync(join(ROOT, "output/data.json"), JSON.stringify(result, null, 2));
