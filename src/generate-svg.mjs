@@ -225,7 +225,27 @@ function generateOverviewSVG(theme) {
     bx += tw + badgeGap;
   });
 
-  const totalH = badgeY + badgeH + 16;
+  const langs = (data.overallLanguages || []).slice(0, 7);
+  const langTotal = langs.reduce((s, l) => s + l.bytes, 0);
+  const langBarY = badgeY + badgeH + 10;
+  const langBarW = W - 48, langBarH = 4;
+  let langBar = `<clipPath id="lb"><rect x="24" y="${langBarY}" width="${langBarW}" height="${langBarH}" rx="2"/></clipPath>\n<g clip-path="url(#lb)">\n`;
+  let lx = 24;
+  langs.forEach(l => {
+    const w = (l.bytes / langTotal) * langBarW;
+    langBar += `<rect x="${lx.toFixed(1)}" y="${langBarY}" width="${w.toFixed(1)}" height="${langBarH}" fill="${l.color}"/>\n`;
+    lx += w;
+  });
+  langBar += `</g>\n`;
+  let llx = 24;
+  langs.slice(0, 5).forEach(l => {
+    const pct = ((l.bytes / langTotal) * 100).toFixed(0);
+    langBar += `<circle cx="${llx}" cy="${langBarY + 12}" r="2.5" fill="${l.color}"/>\n`;
+    langBar += `<text x="${llx + 6}" y="${langBarY + 15}" fill="${muted}" font-size="8" font-family="${font}">${l.name} ${pct}%</text>\n`;
+    llx += (l.name.length + pct.length + 2) * 5 + 14;
+  });
+
+  const totalH = langBarY + 24;
   const svgCSS = `text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}`;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${totalH}" viewBox="0 0 ${W} ${totalH}">
@@ -237,6 +257,7 @@ function generateOverviewSVG(theme) {
 ${sections}
 ${pulse}
 ${badgeSvg}
+${langBar}
 </svg>`;
 }
 
@@ -734,6 +755,13 @@ async function generateChartsSVG(theme) {
     if (dataURI) {
       const iconW = cat.items.length * (iconH + 12);
       sk += `<image x="105" y="${rowY}" width="${iconW}" height="${iconH}" href="${dataURI}"/>\n`;
+    } else {
+      let tx = 105;
+      cat.items.forEach(name => {
+        sk += `<rect x="${tx}" y="${rowY + 4}" width="${name.length * 6 + 10}" height="20" rx="4" fill="var(--bar-bg, #21262d)" stroke="var(--grid)" stroke-width="0.5"/>`;
+        sk += `<text x="${tx + 5}" y="${rowY + 17}" style="fill:var(--muted);font-size:9px">${esc(name)}</text>\n`;
+        tx += name.length * 6 + 16;
+      });
     }
     rowY += iconH + rowGap;
   }
