@@ -11,6 +11,7 @@ Build a GitHub profile that is **visually striking at first glance**, data-drive
 3. **Data Freshness**: All data updated daily via GitHub Actions. Show "today's date" prominently.
 4. **Novelty**: Typing animation for AI summary. Contribution streak counter. Dynamic greeting based on time.
 5. **Portfolio Link**: Direct link to interactive dashboard at https://soranjiro.github.io/soranjiro/
+6. **Data Security**: Never persist private/org repository names or language details in data.json. Sensitive data is computed in-memory only and written as aggregated stats without repo identifiers.
 
 ## Architecture
 

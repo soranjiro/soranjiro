@@ -70,3 +70,40 @@
 | Heatmap | ~1.4s | ~3.2s |
 | Charts | ~1.6s | ~3.7s |
 | Typing | ~15s (unchanged) | ~15s (unchanged) |
+
+## 2026-03-10: data.json Security Sanitization
+
+### Problem
+`output/data.json` contained private/org repository names and language details:
+- `orgRepoPerPeriod[]` — org repo names (e.g., `nagaseengineer/ice`, `nagaseitteam/man_salary`)
+- `repoTimeline[]` — all personal repos including private ones
+- `yearlyContributions[].topReposByCommits/PRs/Reviews` — org repo names
+
+The file was already in `.gitignore` but was **still tracked by git** (committed previously).
+
+### Key Finding
+Language data from org repos is computed in-memory by `computeLanguageTrends()`, `computeOverallLanguages()`, `computeContextBreakdown()` **before** writing to JSON. Their outputs contain only aggregated language stats (`{name: "Ruby", pct: 40.9}`) with **no repo names**. SVG/Dashboard generators only read these aggregated fields.
+
+### Changes
+1. `git rm --cached output/data.json output/full_history_data.json` — removed from git tracking
+2. Removed 3 fields from `fetch-data.mjs` result object:
+   - `orgRepoPerPeriod` (org repo names + languages)
+   - `repoTimeline` (private repo names)
+   - `topReposByCommits/PRs/Reviews` in `yearlyContributions` (org repo names)
+
+### Verification Results
+| Check | Result |
+|-------|--------|
+| `nagaseengineer/ice` in data.json | 0 matches |
+| `orgRepoPerPeriod` in data.json | 0 matches |
+| `repoTimeline` in data.json | 0 matches |
+| `topReposByCommits` in data.json | 0 matches |
+| `nameWithOwner` entries | 4 (pinned repos only, all `soranjiro/*`) |
+| Org repo names in dashboard.html | 0 matches |
+| SVG generation | OK (all 8 files) |
+| Dashboard generation | OK |
+| README generation | OK |
+| Language trends data intact | Yes (`languageTrends`, `overallLanguages`, `contextBreakdown` present) |
+
+### Remaining: git history cleanup
+Past commits still contain the old data.json with sensitive data. `git filter-repo` + force push needed on main branch after merge.
