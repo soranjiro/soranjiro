@@ -655,6 +655,7 @@ ${pinnedRepos.map(r => `- ${r.name}: ${r.description || "No description"} (${r.p
   const today = new Date().toISOString().slice(0, 10);
   for (let i = allDays.length - 1; i >= 0; i--) {
     if (allDays[i].date > today) continue;
+    if (allDays[i].date === today && allDays[i].count === 0) continue;
     if (allDays[i].count > 0) currentStreak++;
     else break;
   }
