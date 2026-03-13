@@ -75,6 +75,7 @@ function generateDashboard() {
   const data = JSON.parse(readFileSync(join(ROOT, "output/data.json"), "utf-8"));
   const today = new Date().toISOString().slice(0, 10);
   const desc = data.aiSummary || `${data.profile.login}'s GitHub Profile Dashboard`;
+  const pagesUrl = data.repository?.pagesUrl || `https://${data.profile.login}.github.io/${data.profile.login}/`;
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -87,7 +88,7 @@ function generateDashboard() {
   <meta property="og:description" content="${desc.replace(/"/g, '&quot;').slice(0, 160)}">
   <meta property="og:image" content="${data.profile.avatarUrl}">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://soranjiro.github.io/soranjiro/">
+  <meta property="og:url" content="${pagesUrl}">
   <meta name="twitter:card" content="summary">
   <link rel="icon" href="${data.profile.avatarUrl}" type="image/png">
   <script>

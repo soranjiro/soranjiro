@@ -7,10 +7,14 @@ const ROOT = join(__dirname, "..");
 const data = JSON.parse(readFileSync(join(ROOT, "output/data.json"), "utf-8"));
 
 const { profile } = data;
+const repository = data.repository || {};
 
 const today = new Date().toISOString().slice(0, 10);
+const dashboardUrl = repository.pagesUrl || `https://${profile.login}.github.io/${profile.login}/`;
+const dashboardLabel = dashboardUrl.replace(/^https?:\/\//, "").replace(/\/$/, "");
+const actionsRepo = repository.fullName || `${profile.login}/${profile.login}`;
 
-const readme = `![](https://komarev.com/ghpvc/?username=soranjiro&color=blue) <img src="./output/assets/svg/ai-badge.svg" alt="AI Generated" height="20" />
+const readme = `![](https://komarev.com/ghpvc/?username=${profile.login}&color=blue) <img src="./output/assets/svg/ai-badge.svg" alt="AI Generated" height="20" />
 
 <div align="center">
 
@@ -49,12 +53,12 @@ const readme = `![](https://komarev.com/ghpvc/?username=soranjiro&color=blue) <i
 
 <br>
 
-[![Dashboard](https://img.shields.io/badge/Dashboard-soranjiro.github.io-blue?style=for-the-badge&logo=github)](https://soranjiro.github.io/soranjiro/)
+[![Dashboard](https://img.shields.io/badge/Dashboard-${encodeURIComponent(dashboardLabel)}-blue?style=for-the-badge&logo=github)](${dashboardUrl})
 
 ---
 
 <sub>
-  Auto-generated daily via <a href="https://github.com/${profile.login}/${profile.login}/actions">GitHub Actions</a>
+  Auto-generated daily via <a href="https://github.com/${actionsRepo}/actions">GitHub Actions</a>
   · Powered by <strong>GitHub Copilot SDK</strong> &amp; GitHub GraphQL API
   · Last updated: ${today}
 </sub>

@@ -2,6 +2,8 @@ export function renderHeader(data) {
   const d = data.profile;
   const roles = data.userProfile?.roles || [];
   const rolesHtml = roles.map(r => `<span class="role-tag">${r}</span>`).join('');
+  const interests = (data.userProfile?.interests || []).slice(0, 3);
+  const interestsText = interests.length > 0 ? interests.join(' / ') : '';
 
   return `
     <header class="hero anim d1">
@@ -37,7 +39,7 @@ export function renderHeader(data) {
       <div class="summary-content">
         <p class="summary-label">Profile <span class="ai-badge">AI Generated</span></p>
         <p class="summary-text">${data.aiSummary || d.bio || ''}</p>
-        <p class="summary-research">His current research focuses on popularity bias in recommender systems, exploring how algorithmic recommendations can amplify visibility gaps between popular and long-tail items.</p>
+        ${interestsText ? `<p class="summary-research">Current interests: ${interestsText}</p>` : ''}
       </div>
     </div>
 
