@@ -32,7 +32,7 @@ export function renderTechStack(data) {
     { icon: 'github-original', label: 'GitHub', cat: 'Tools' },
     { icon: 'postgresql-plain', label: 'PostgreSQL', cat: 'Tools' },
     { icon: 'linux-plain', label: 'Linux', cat: 'Tools' },
-    { icon: 'kaggle-original', label: 'Kaggle', cat: 'ML/Data', link: 'https://www.kaggle.com/magixe' },
+    { icon: 'kaggle-original', label: 'Kaggle', cat: 'ML/Data' },
   ];
 
   const allIcons = [];

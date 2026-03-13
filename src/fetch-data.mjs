@@ -8,7 +8,21 @@ const ROOT = join(__dirname, "..");
 const TOKEN = process.env.GH_TOKEN || process.env.GITHUB_TOKEN || execSync("gh auth token").toString().trim();
 const GQL_HEADERS = { Authorization: `bearer ${TOKEN}`, "Content-Type": "application/json" };
 const REST_HEADERS = { Authorization: `token ${TOKEN}`, Accept: "application/vnd.github.v3+json" };
-const USER_ID = "U_kgDOB01CvA";
+const PROFILE_LOGIN_OVERRIDE = process.env.PROFILE_LOGIN?.trim();
+const PROFILE_USER_ID_OVERRIDE = process.env.PROFILE_USER_ID?.trim();
+const PROFILE_REPOSITORY = process.env.PROFILE_REPOSITORY?.trim() || process.env.GITHUB_REPOSITORY?.trim() || "";
+const PAGES_URL_OVERRIDE = process.env.PAGES_URL?.trim();
+
+function parseRepository(fullName) {
+  const [owner = "", name = ""] = fullName.split("/");
+  return { owner, name, fullName: owner && name ? `${owner}/${name}` : "" };
+}
+
+function buildPagesUrl(profileLogin, repository) {
+  if (PAGES_URL_OVERRIDE) return PAGES_URL_OVERRIDE;
+  if (repository.owner && repository.name) return `https://${repository.owner}.github.io/${repository.name}/`;
+  return `https://${profileLogin}.github.io/${profileLogin}/`;
+}
 
 async function gql(query, variables = {}) {
   const r = await fetch("https://api.github.com/graphql", {
@@ -34,7 +48,7 @@ async function searchCount(q) {
 async function fetchProfile() {
   const d = await gql(`{
     viewer {
-      login name avatarUrl createdAt bio
+      id login name avatarUrl createdAt bio
       followers { totalCount } following { totalCount }
       repositories(ownerAffiliations: OWNER) { totalCount }
       starredRepositories { totalCount }
@@ -108,7 +122,7 @@ async function fetchPersonalRepos() {
 }
 
 // ─── 4. Org repos ──────────────────────────────────────────────────
-async function fetchOrgRepos(orgNames) {
+async function fetchOrgRepos(orgNames, profileUserId) {
   const orgRepos = [];
   for (const orgLogin of orgNames) {
     let cursor = null, hasNext = true;
@@ -120,7 +134,7 @@ async function fetchOrgRepos(orgNames) {
             nodes {
               name nameWithOwner createdAt pushedAt
               defaultBranchRef { target { ... on Commit {
-                history(author: {id: "${USER_ID}"}, first: 1) { totalCount }
+                history(author: {id: "${profileUserId}"}, first: 1) { totalCount }
               }}}
               primaryLanguage { name color }
               languages(first: 20, orderBy: {field: SIZE, direction: DESC}) {
@@ -204,11 +218,11 @@ ${readme.slice(0, 1000)}
 }
 
 // ─── 6. Per-period org commits ──────────────────────────────────────
-async function fetchOrgRepoPerPeriod(orgRepos, periods) {
+async function fetchOrgRepoPerPeriod(orgRepos, periods, profileUserId) {
   const results = [];
   for (const repo of orgRepos) {
     const aliases = periods.map((p, i) =>
-      `y${i}: history(author: {id: "${USER_ID}"}, since: "${p.from}", until: "${p.to}") { totalCount }`
+      `y${i}: history(author: {id: "${profileUserId}"}, since: "${p.from}", until: "${p.to}") { totalCount }`
     ).join("\n");
     try {
       const d = await gql(`{
@@ -232,23 +246,23 @@ async function fetchOrgRepoPerPeriod(orgRepos, periods) {
 }
 
 // ─── 7. Search-based accurate counts ───────────────────────────────
-async function fetchSearchCounts(orgNames) {
+async function fetchSearchCounts(orgNames, profileLogin) {
   console.log("  Total PRs...");
-  const totalPRs = await searchCount("type:pr author:soranjiro");
+  const totalPRs = await searchCount(`type:pr author:${profileLogin}`);
   console.log("  Total reviews...");
-  const totalReviews = await searchCount("type:pr reviewed-by:soranjiro");
+  const totalReviews = await searchCount(`type:pr reviewed-by:${profileLogin}`);
   console.log("  Total issues...");
-  const totalIssues = await searchCount("type:issue author:soranjiro");
+  const totalIssues = await searchCount(`type:issue author:${profileLogin}`);
   console.log("  Total PR comments...");
-  const totalPRComments = await searchCount("type:pr commenter:soranjiro");
+  const totalPRComments = await searchCount(`type:pr commenter:${profileLogin}`);
 
   const perOrg = {};
   for (const org of orgNames) {
     console.log(`  Org ${org}...`);
     perOrg[org] = {
-      prs: await searchCount(`type:pr author:soranjiro org:${org}`),
-      reviews: await searchCount(`type:pr reviewed-by:soranjiro org:${org}`),
-      issues: await searchCount(`type:issue author:soranjiro org:${org}`),
+      prs: await searchCount(`type:pr author:${profileLogin} org:${org}`),
+      reviews: await searchCount(`type:pr reviewed-by:${profileLogin} org:${org}`),
+      issues: await searchCount(`type:issue author:${profileLogin} org:${org}`),
     };
   }
 
@@ -256,14 +270,14 @@ async function fetchSearchCounts(orgNames) {
 }
 
 // ─── 8. AI/Copilot usage detection ─────────────────────────────────
-async function fetchCopilotUsage() {
+async function fetchCopilotUsage(profileLogin) {
   const cloak = { ...REST_HEADERS, Accept: "application/vnd.github.cloak-preview+json" };
 
-  const r1 = await fetch("https://api.github.com/search/commits?q=author:soranjiro+copilot", { headers: cloak });
+  const r1 = await fetch(`https://api.github.com/search/commits?q=author:${profileLogin}+copilot`, { headers: cloak });
   const d1 = await r1.json();
   const copilotMentions = d1.total_count || 0;
 
-  const r2 = await fetch(encodeURI('https://api.github.com/search/commits?q=author:soranjiro "Co-authored-by"'), { headers: cloak });
+  const r2 = await fetch(encodeURI(`https://api.github.com/search/commits?q=author:${profileLogin} "Co-authored-by"`), { headers: cloak });
   const d2 = await r2.json();
   const coauthoredCommits = d2.total_count || 0;
 
@@ -361,7 +375,7 @@ function computeLanguageTrends(yearlyData, personalRepos, orgRepoPerPeriod, excl
     };
 
     for (const repo of personalRepos) {
-      const commits = activeRepoCommits[`soranjiro/${repo.name}`];
+      const commits = activeRepoCommits[repo.nameWithOwner];
       if (!commits) continue;
       const totalBytes = repo.languages.edges.reduce((s, e) => s + e.size, 0);
       if (!totalBytes) continue;
@@ -423,7 +437,7 @@ function computeOverallLanguages(personalRepos, orgRepos, excludeLangs) {
 }
 
 // ─── 11. Language breakdown by context ──────────────────────────────
-function computeContextBreakdown(yearlyData, personalRepos, orgRepoPerPeriod, excludeLangs) {
+function computeContextBreakdown(yearlyData, personalRepos, orgRepoPerPeriod, excludeLangs, profileLogin) {
   const yi = yearlyData.length >= 2 ? yearlyData.length - 2 : yearlyData.length - 1;
   const year = yearlyData[yi];
   const orgRepoNames = new Set(orgRepoPerPeriod.map(r => r.nameWithOwner));
@@ -436,7 +450,7 @@ function computeContextBreakdown(yearlyData, personalRepos, orgRepoPerPeriod, ex
   };
 
   for (const entry of year.topReposByCommits || []) {
-    const isOrg = orgRepoNames.has(entry.nameWithOwner) || !entry.nameWithOwner.startsWith("soranjiro/");
+    const isOrg = orgRepoNames.has(entry.nameWithOwner) || !entry.nameWithOwner.startsWith(`${profileLogin}/`);
     const repo = personalRepos.find(r => r.nameWithOwner === entry.nameWithOwner);
     const orgRepo = orgRepoPerPeriod.find(r => r.nameWithOwner === entry.nameWithOwner);
     const langs = repo?.languages?.edges?.map(e => ({ name: e.node.name, size: e.size })) || orgRepo?.languages || [];
@@ -490,6 +504,12 @@ async function main() {
 
   console.log("1. Fetching profile...");
   const profile = await fetchProfile();
+  const profileLogin = PROFILE_LOGIN_OVERRIDE || profile.login;
+  const profileUserId = PROFILE_USER_ID_OVERRIDE || profile.id;
+  const repository = parseRepository(PROFILE_REPOSITORY);
+  const repositoryOwner = repository.owner || profileLogin;
+  const repositoryName = repository.name || profileLogin;
+  const pagesUrl = buildPagesUrl(profileLogin, repository);
   const createdAt = new Date(profile.createdAt);
 
   const now = new Date();
@@ -550,7 +570,7 @@ async function main() {
 
   console.log("\n4. Fetching org repos...");
   const orgNames = profile.organizations.nodes.map(o => o.login);
-  const orgRepos = await fetchOrgRepos(orgNames);
+  const orgRepos = await fetchOrgRepos(orgNames, profileUserId);
   console.log(`  ${orgRepos.length} repos with commits`);
 
   console.log("\n5. Fetching pinned repos...");
@@ -558,15 +578,15 @@ async function main() {
   console.log(`  ${pinnedRepos.length} pinned`);
 
   console.log("\n6. Fetching per-period org commits...");
-  const orgRepoPerPeriod = await fetchOrgRepoPerPeriod(orgRepos, periods);
+  const orgRepoPerPeriod = await fetchOrgRepoPerPeriod(orgRepos, periods, profileUserId);
   console.log(`  ${orgRepoPerPeriod.length} repos with per-period data`);
 
   console.log("\n7. Fetching accurate counts via search API...");
-  const searchCounts = await fetchSearchCounts(orgNames);
+  const searchCounts = await fetchSearchCounts(orgNames, profileLogin);
   console.log(`  PRs: ${searchCounts.totalPRs}, Reviews: ${searchCounts.totalReviews}, Issues: ${searchCounts.totalIssues}`);
 
   console.log("\n8. Detecting AI/Copilot usage...");
-  const copilotUsage = await fetchCopilotUsage();
+  const copilotUsage = await fetchCopilotUsage(profileLogin);
   console.log(`  Copilot mentions: ${copilotUsage.copilotMentions}, Co-authored: ${copilotUsage.coauthoredCommits}`);
 
   console.log("\n9. Fetching supplemental data...");
@@ -577,7 +597,7 @@ async function main() {
   const excludeLangs = config.excludeLanguages;
   const languageTrends = computeLanguageTrends(yearlyData, personalRepos, orgRepoPerPeriod, excludeLangs);
   const overallLanguages = computeOverallLanguages(personalRepos, orgRepos, excludeLangs);
-  const contextBreakdown = computeContextBreakdown(yearlyData, personalRepos, orgRepoPerPeriod, excludeLangs);
+  const contextBreakdown = computeContextBreakdown(yearlyData, personalRepos, orgRepoPerPeriod, excludeLangs, profileLogin);
 
   console.log("\n11. Generating AI summary...");
   const latestTrend = languageTrends.at(-1) || languageTrends.at(-2);
@@ -587,7 +607,7 @@ async function main() {
   const joinedYears = Math.floor((Date.now() - createdAt.getTime()) / (365.25 * 24 * 3600 * 1000));
 
   const aiSummary = await generateAISummary({
-    login: profile.login,
+    login: profileLogin,
     joinedYears,
     totalCommits: totalCommitsAll + totalRestrictedAll,
     restricted: totalRestrictedAll,
@@ -655,8 +675,15 @@ ${pinnedRepos.map(r => `- ${r.name}: ${r.description || "No description"} (${r.p
   const result = {
     fetchedAt: new Date().toISOString(),
     config,
+    repository: {
+      owner: repositoryOwner,
+      name: repositoryName,
+      fullName: `${repositoryOwner}/${repositoryName}`,
+      pagesUrl,
+    },
     profile: {
-      login: profile.login, name: profile.name, avatarUrl: profile.avatarUrl,
+      id: profileUserId,
+      login: profileLogin, name: profile.name, avatarUrl: profile.avatarUrl,
       bio: profile.bio, createdAt: profile.createdAt, joinedYearsAgo: joinedYears,
       followers: profile.followers.totalCount, following: profile.following.totalCount,
       organizations: profile.organizations.totalCount,

@@ -24,6 +24,7 @@ jobs:
         run: node src/fetch-data.mjs
         env:
           GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          PROFILE_REPOSITORY: ${{ github.repository }}
 
       - name: Generate SVG cards
         run: node src/generate-svg.mjs
@@ -36,7 +37,7 @@ jobs:
 
       - name: Commit & Push
         run: |
-          git config user.name "soranjiro"
+          git config user.name "${GIT_COMMIT_NAME:-$GITHUB_REPOSITORY_OWNER}"
           git config user.email ${{ secrets.EMAIL }}
           git add -A .
           git diff --cached --quiet && echo "No changes" && exit 0
