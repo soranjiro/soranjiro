@@ -37,14 +37,14 @@
 
 <br>
 
-[![Dashboard](https://img.shields.io/badge/Dashboard-soranjiro.github.io-blue?style=for-the-badge&logo=github)](https://soranjiro.github.io/soranjiro/)
+[![Dashboard](https://img.shields.io/badge/Dashboard-soranjiro.github.io%2Fsoranjiro-blue?style=for-the-badge&logo=github)](https://soranjiro.github.io/soranjiro/)
 
 ---
 
 <sub>
   Auto-generated daily via <a href="https://github.com/soranjiro/soranjiro/actions">GitHub Actions</a>
   · Powered by <strong>GitHub Copilot SDK</strong> &amp; GitHub GraphQL API
-  · Last updated: 2026-03-13
+  · Last updated: 2026-03-14
 </sub>
 
 </div>
