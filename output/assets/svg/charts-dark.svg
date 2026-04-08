@@ -29,7 +29,7 @@ text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,san
 <circle cx="116.9" cy="200.8" r="3" fill="var(--accent)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="2.25s" fill="freeze"/></circle>
 <circle cx="91.4" cy="139.6" r="3" fill="var(--accent)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="2.40s" fill="freeze"/></circle>
 <text x="148.0" y="36.0" text-anchor="middle" style="fill:var(--muted);font-size:10px">Commits</text>
-<text x="148.0" y="49.0" text-anchor="middle" style="fill:var(--text);font-size:11px;font-weight:600">4,852</text>
+<text x="148.0" y="49.0" text-anchor="middle" style="fill:var(--text);font-size:11px;font-weight:600">4,853</text>
 <text x="258.8" y="125.2" text-anchor="start" style="fill:var(--muted);font-size:10px">PRs</text>
 <text x="258.8" y="138.2" text-anchor="start" style="fill:var(--text);font-size:11px;font-weight:600">614</text>
 <text x="218.3" y="257.8" text-anchor="start" style="fill:var(--muted);font-size:10px">Reviews</text>
@@ -76,20 +76,20 @@ text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,san
 <g>
 <clipPath id="bc"><rect x="26" y="306" width="788" height="6" rx="3"/></clipPath>
 <g clip-path="url(#bc)">
-<rect x="26.0" y="306" width="0" height="6" fill="#3572A5"><animate attributeName="width" from="0" to="341.4" dur="0.9s" begin="0.50s" fill="freeze"/></rect>
-<rect x="367.4" y="306" width="0" height="6" fill="#f1e05a"><animate attributeName="width" from="0" to="172.7" dur="0.9s" begin="0.62s" fill="freeze"/></rect>
-<rect x="540.1" y="306" width="0" height="6" fill="#00ADD8"><animate attributeName="width" from="0" to="85.6" dur="0.9s" begin="0.74s" fill="freeze"/></rect>
-<rect x="625.7" y="306" width="0" height="6" fill="#DA5B0B"><animate attributeName="width" from="0" to="67.6" dur="0.9s" begin="0.86s" fill="freeze"/></rect>
-<rect x="693.3" y="306" width="0" height="6" fill="#3178c6"><animate attributeName="width" from="0" to="55.0" dur="0.9s" begin="0.98s" fill="freeze"/></rect>
-<rect x="748.3" y="306" width="0" height="6" fill="#ffcc33"><animate attributeName="width" from="0" to="44.8" dur="0.9s" begin="1.10s" fill="freeze"/></rect>
-<rect x="793.1" y="306" width="0" height="6" fill="#ff3e00"><animate attributeName="width" from="0" to="20.9" dur="0.9s" begin="1.22s" fill="freeze"/></rect>
+<rect x="26.0" y="306" width="0" height="6" fill="#3572A5"><animate attributeName="width" from="0" to="342.3" dur="0.9s" begin="0.50s" fill="freeze"/></rect>
+<rect x="368.3" y="306" width="0" height="6" fill="#f1e05a"><animate attributeName="width" from="0" to="172.3" dur="0.9s" begin="0.62s" fill="freeze"/></rect>
+<rect x="540.5" y="306" width="0" height="6" fill="#00ADD8"><animate attributeName="width" from="0" to="85.4" dur="0.9s" begin="0.74s" fill="freeze"/></rect>
+<rect x="626.0" y="306" width="0" height="6" fill="#DA5B0B"><animate attributeName="width" from="0" to="67.4" dur="0.9s" begin="0.86s" fill="freeze"/></rect>
+<rect x="693.4" y="306" width="0" height="6" fill="#3178c6"><animate attributeName="width" from="0" to="55.0" dur="0.9s" begin="0.98s" fill="freeze"/></rect>
+<rect x="748.4" y="306" width="0" height="6" fill="#ffcc33"><animate attributeName="width" from="0" to="44.7" dur="0.9s" begin="1.10s" fill="freeze"/></rect>
+<rect x="793.0" y="306" width="0" height="6" fill="#ff3e00"><animate attributeName="width" from="0" to="21.0" dur="0.9s" begin="1.22s" fill="freeze"/></rect>
 </g>
 <circle cx="26" cy="322" r="3" fill="#3572A5"/>
-<text x="33" y="325" style="fill:var(--muted);font-size:8px">Python 43.3%</text>
+<text x="33" y="325" style="fill:var(--muted);font-size:8px">Python 43.4%</text>
 <circle cx="109.19999999999999" cy="322" r="3" fill="#f1e05a"/>
 <text x="116.19999999999999" y="325" style="fill:var(--muted);font-size:8px">JavaScript 21.9%</text>
 <circle cx="214.79999999999998" cy="322" r="3" fill="#00ADD8"/>
-<text x="221.79999999999998" y="325" style="fill:var(--muted);font-size:8px">Go 10.9%</text>
+<text x="221.79999999999998" y="325" style="fill:var(--muted);font-size:8px">Go 10.8%</text>
 <circle cx="275.59999999999997" cy="322" r="3" fill="#DA5B0B"/>
 <text x="282.59999999999997" y="325" style="fill:var(--muted);font-size:8px">Jupyter Notebook 8.6%</text>
 <circle cx="409.19999999999993" cy="322" r="3" fill="#3178c6"/>
