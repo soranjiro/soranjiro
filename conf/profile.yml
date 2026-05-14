@@ -3,25 +3,24 @@
 # Edit the fields below to reflect your actual background and interests.
 
 bio: |
-  Backend engineer working with infrastructure and frontend in a full-stack capacity.
-  Currently researching popularity bias in recommender systems and ways to mitigate it in his master's program.
-  Recently exploring machine learning and Kaggle competitions.
+  Researching on recommender systems such as popularity bias, simulation and how to evaluate it.
+  Working as a full-stack developer (mainly backend and infra)
 
 keywords:
+  - Researcher
+  - Recommendation
+  - fairness
   - backend engineer
   - full-stack
   - infrastructure
   - machine learning
-  - Kaggle
 
 roles:
-  - Backend Engineer
+  - Recommend Researcher
   - Full-Stack Developer
-  - Infrastructure Engineer
 
 interests:
-  - Machine Learning
-  - Kaggle
+  - Recommendation
   - DevOps / Infrastructure
   - Web Application Development
 
