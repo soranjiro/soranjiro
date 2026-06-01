@@ -165,7 +165,7 @@ async function fetchOrgRepos(orgNames, profileUserId) {
 }
 
 // ─── 5. Pinned repos ───────────────────────────────────────────────
-async function fetchPinnedRepos() {
+async function fetchPinnedRepos(enableAI = true) {
   const d = await gql(`{
     viewer { pinnedItems(first: 6, types: REPOSITORY) { nodes {
       ... on Repository {
@@ -183,7 +183,7 @@ async function fetchPinnedRepos() {
 
   const repos = d.viewer.pinnedItems.nodes;
 
-  console.log("  Generating AI summaries for pinned repos...");
+  if (enableAI) console.log("  Generating AI summaries for pinned repos...");
   for (const repo of repos) {
     const readme = repo.object?.text || "";
     const prompt = `You are an expert developer summarizing a GitHub repository.
@@ -196,18 +196,22 @@ README Excerpt:
 ${readme.slice(0, 1000)}
 `;
     try {
-      const r = await fetch("https://models.inference.ai.azure.com/chat/completions", {
-        method: "POST",
-        headers: { Authorization: `Bearer ${TOKEN}`, "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "gpt-4o-mini",
-          messages: [{ role: "user", content: prompt }],
-          max_tokens: 100,
-          temperature: 0.7,
-        }),
-      });
-      const res = await r.json();
-      repo.aiDescription = res.choices?.[0]?.message?.content?.trim() || repo.description;
+      if (enableAI) {
+        const r = await fetch("https://models.inference.ai.azure.com/chat/completions", {
+          method: "POST",
+          headers: { Authorization: `Bearer ${TOKEN}`, "Content-Type": "application/json" },
+          body: JSON.stringify({
+            model: "gpt-4o-mini",
+            messages: [{ role: "user", content: prompt }],
+            max_tokens: 100,
+            temperature: 0.7,
+          }),
+        });
+        const res = await r.json();
+        repo.aiDescription = res.choices?.[0]?.message?.content?.trim() || repo.description;
+      } else {
+        repo.aiDescription = repo.description;
+      }
     } catch (e) {
       console.warn(`  AI summary failed for ${repo.name}:`, e.message);
       repo.aiDescription = repo.description;
@@ -315,7 +319,7 @@ function parseProfileConfig() {
 }
 
 // ─── 10. AI-generated summary ──────────────────────────────────────
-async function generateAISummary(profileData) {
+async function generateAISummary(profileData, enableAI = true) {
   const userProfile = parseProfileConfig();
   const prompt = `You are writing a concise, professional, third-person profile summary in ENGLISH for a GitHub developer profile.
 Write exactly 2-3 sentences. Be factual and specific based on the data below.
@@ -340,6 +344,7 @@ GitHub Data:
 - Contributed to: ${profileData.contributedTo} repositories
 - Pinned repos: ${profileData.pinnedRepos.join(", ")}`;
 
+  if (!enableAI) return null;
   try {
     const r = await fetch("https://models.inference.ai.azure.com/chat/completions", {
       method: "POST",
@@ -485,7 +490,7 @@ function computeContextBreakdown(yearlyData, personalRepos, orgRepoPerPeriod, ex
 // ─── MAIN ───────────────────────────────────────────────────────────
 async function main() {
   // Load config
-  let config = { excludeLanguages: [], excludeSections: [], techStack: {} };
+  let config = { excludeLanguages: [], excludeSections: [], techStack: {}, enableAI: true };
   try {
     const yml = readFileSync(join(ROOT, "conf/display.yml"), "utf-8");
     const parseList = (key) => {
@@ -495,6 +500,14 @@ async function main() {
     };
     config.excludeLanguages = parseList("excludeLanguages");
     config.excludeSections = parseList("excludeSections");
+    // optional boolean flag in conf/display.yml: enableAI: true|false
+    const boolMatch = (key, def) => {
+      const m = yml.match(new RegExp(`^${key}:\\s*(.+)$`, "m"));
+      if (!m) return def;
+      const v = m[1].trim().toLowerCase();
+      return (v === 'true' || v === '1');
+    };
+    config.enableAI = boolMatch('enableAI', true);
   } catch (e) {
     console.log("  No config file found, using defaults");
   }
@@ -574,7 +587,7 @@ async function main() {
   console.log(`  ${orgRepos.length} repos with commits`);
 
   console.log("\n5. Fetching pinned repos...");
-  const pinnedRepos = await fetchPinnedRepos();
+  const pinnedRepos = await fetchPinnedRepos(config.enableAI);
   console.log(`  ${pinnedRepos.length} pinned`);
 
   console.log("\n6. Fetching per-period org commits...");
@@ -619,7 +632,7 @@ async function main() {
     orgCount: profile.organizations.totalCount,
     contributedTo,
     pinnedRepos: pinnedRepos.map(r => `${r.name}(${r.primaryLanguage?.name || "?"})`),
-  });
+  }, config.enableAI);
   if (aiSummary) console.log(`  "${aiSummary}"`);
 
   console.log("\n12. Generating repos overview...");
@@ -631,23 +644,27 @@ Repositories:
 ${pinnedRepos.map(r => `- ${r.name}: ${r.description || "No description"} (${r.primaryLanguage?.name || "Unknown"})`).join("\n")}
 `;
   let reposOverview = "";
-  try {
-    const ror = await fetch("https://models.inference.ai.azure.com/chat/completions", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${TOKEN}`, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [{ role: "user", content: reposOverviewPrompt }],
-        max_tokens: 100,
-        temperature: 0.7,
-      }),
-    });
-    const rod = await ror.json();
-    reposOverview = rod.choices?.[0]?.message?.content?.trim() || "";
-  } catch (e) {
-    console.warn("  Repos overview failed:", e.message);
+  if (config.enableAI) {
+    try {
+      const ror = await fetch("https://models.inference.ai.azure.com/chat/completions", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${TOKEN}`, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "gpt-4o-mini",
+          messages: [{ role: "user", content: reposOverviewPrompt }],
+          max_tokens: 100,
+          temperature: 0.7,
+        }),
+      });
+      const rod = await ror.json();
+      reposOverview = rod.choices?.[0]?.message?.content?.trim() || "";
+    } catch (e) {
+      console.warn("  Repos overview failed:", e.message);
+    }
+    if (reposOverview) console.log(`  "${reposOverview}"`);
+  } else {
+    console.log("  AI generation disabled (enableAI: false), skipping repos overview.");
   }
-  if (reposOverview) console.log(`  "${reposOverview}"`);
 
   console.log("\n13. Computing streak & daily stats...");
   const allDays = yearlyData.flatMap(y => y.calendar).sort((a, b) => a.date.localeCompare(b.date));
