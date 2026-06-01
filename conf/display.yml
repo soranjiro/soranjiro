@@ -8,6 +8,8 @@ excludeLanguages:
   - CSS
 
 excludeSections: []
+# Enable or disable AI-generated text (summaries/overviews). Set to false to stop GPT outputs.
+enableAI: false
 # Available sections to exclude:
 # - radar
 # - stacked-bar
