@@ -3,8 +3,8 @@
 # Edit the fields below to reflect your actual background and interests.
 
 bio: |
-  Researching on recommender systems such as popularity bias, simulation and how to evaluate it.
-  Working as a full-stack developer (mainly backend and infra)
+  Researcher focused on recommender systems, especially popularity bias, simulation, and evaluation.
+  Also working as a full-stack developer, mainly on backend and infrastructure.
 
 keywords:
   - Researcher
@@ -16,8 +16,9 @@ keywords:
   - machine learning
 
 roles:
-  - Recommend Researcher
+  - Researcher
   - Full-Stack Developer
+  - Backend Engineer
 
 interests:
   - Recommendation
