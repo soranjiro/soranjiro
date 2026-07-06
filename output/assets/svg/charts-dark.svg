@@ -21,23 +21,23 @@ text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,san
 <line x1="148" y1="158" x2="93.9" y2="232.4" stroke="var(--grid)" stroke-width="0.7"/>
 <line x1="148" y1="158" x2="60.5" y2="129.6" stroke="var(--grid)" stroke-width="0.7"/>
 <polygon points="148,158 148,158 148,158 148,158 148,158" fill="var(--accent-fill)" stroke="var(--accent)" stroke-width="1.5" stroke-linejoin="round">
-    <animate attributeName="points" from="148,158 148,158 148,158 148,158 148,158" to="148.0,72.2 210.3,137.8 179.0,200.6 116.6,201.2 89.3,138.9" dur="1.5s" fill="freeze" begin="0.5s" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+    <animate attributeName="points" from="148,158 148,158 148,158 148,158 148,158" to="148.0,72.1 210.3,137.8 179.0,200.7 116.6,201.2 89.2,138.9" dur="1.5s" fill="freeze" begin="0.5s" calcMode="spline" keySplines="0.4 0 0.2 1"/>
   </polygon>
-<circle cx="148.0" cy="72.2" r="3" fill="var(--accent)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="1.80s" fill="freeze"/></circle>
+<circle cx="148.0" cy="72.1" r="3" fill="var(--accent)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="1.80s" fill="freeze"/></circle>
 <circle cx="210.3" cy="137.8" r="3" fill="var(--accent)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="1.95s" fill="freeze"/></circle>
-<circle cx="179.0" cy="200.6" r="3" fill="var(--accent)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="2.10s" fill="freeze"/></circle>
+<circle cx="179.0" cy="200.7" r="3" fill="var(--accent)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="2.10s" fill="freeze"/></circle>
 <circle cx="116.6" cy="201.2" r="3" fill="var(--accent)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="2.25s" fill="freeze"/></circle>
-<circle cx="89.3" cy="138.9" r="3" fill="var(--accent)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="2.40s" fill="freeze"/></circle>
+<circle cx="89.2" cy="138.9" r="3" fill="var(--accent)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="2.40s" fill="freeze"/></circle>
 <text x="148.0" y="36.0" text-anchor="middle" style="fill:var(--muted);font-size:10px">Commits</text>
-<text x="148.0" y="49.0" text-anchor="middle" style="fill:var(--text);font-size:11px;font-weight:600">5,397</text>
+<text x="148.0" y="49.0" text-anchor="middle" style="fill:var(--text);font-size:11px;font-weight:600">5,412</text>
 <text x="258.8" y="125.2" text-anchor="start" style="fill:var(--muted);font-size:10px">PRs</text>
-<text x="258.8" y="138.2" text-anchor="start" style="fill:var(--text);font-size:11px;font-weight:600">703</text>
+<text x="258.8" y="138.2" text-anchor="start" style="fill:var(--text);font-size:11px;font-weight:600">705</text>
 <text x="218.3" y="257.8" text-anchor="start" style="fill:var(--muted);font-size:10px">Reviews</text>
-<text x="218.3" y="270.8" text-anchor="start" style="fill:var(--text);font-size:11px;font-weight:600">194</text>
+<text x="218.3" y="270.8" text-anchor="start" style="fill:var(--text);font-size:11px;font-weight:600">195</text>
 <text x="77.7" y="257.8" text-anchor="end" style="fill:var(--muted);font-size:10px">Issues</text>
 <text x="77.7" y="270.8" text-anchor="end" style="fill:var(--text);font-size:11px;font-weight:600">208</text>
 <text x="37.2" y="125.2" text-anchor="end" style="fill:var(--muted);font-size:10px">Comments</text>
-<text x="37.2" y="138.2" text-anchor="end" style="fill:var(--text);font-size:11px;font-weight:600">481</text>
+<text x="37.2" y="138.2" text-anchor="end" style="fill:var(--text);font-size:11px;font-weight:600">486</text>
 <text x="151" y="133.0" style="fill:var(--dim);font-size:7px">10</text>
 <text x="151" y="110.0" style="fill:var(--dim);font-size:7px">100</text>
 <text x="151" y="87.0" style="fill:var(--dim);font-size:7px">1k</text>
@@ -76,28 +76,28 @@ text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,san
 <g>
 <clipPath id="bc"><rect x="26" y="306" width="788" height="6" rx="3"/></clipPath>
 <g clip-path="url(#bc)">
-<rect x="26.0" y="306" width="0" height="6" fill="#3572A5"><animate attributeName="width" from="0" to="288.7" dur="0.9s" begin="0.50s" fill="freeze"/></rect>
-<rect x="314.7" y="306" width="0" height="6" fill="#00ADD8"><animate attributeName="width" from="0" to="157.6" dur="0.9s" begin="0.62s" fill="freeze"/></rect>
-<rect x="472.3" y="306" width="0" height="6" fill="#3178c6"><animate attributeName="width" from="0" to="131.0" dur="0.9s" begin="0.74s" fill="freeze"/></rect>
-<rect x="603.4" y="306" width="0" height="6" fill="#f1e05a"><animate attributeName="width" from="0" to="117.0" dur="0.9s" begin="0.86s" fill="freeze"/></rect>
-<rect x="720.4" y="306" width="0" height="6" fill="#DA5B0B"><animate attributeName="width" from="0" to="45.0" dur="0.9s" begin="0.98s" fill="freeze"/></rect>
-<rect x="765.4" y="306" width="0" height="6" fill="#ffcc33"><animate attributeName="width" from="0" to="29.8" dur="0.9s" begin="1.10s" fill="freeze"/></rect>
-<rect x="795.2" y="306" width="0" height="6" fill="#3D6117"><animate attributeName="width" from="0" to="18.8" dur="0.9s" begin="1.22s" fill="freeze"/></rect>
+<rect x="26.0" y="306" width="0" height="6" fill="#3572A5"><animate attributeName="width" from="0" to="275.8" dur="0.9s" begin="0.50s" fill="freeze"/></rect>
+<rect x="301.8" y="306" width="0" height="6" fill="#00ADD8"><animate attributeName="width" from="0" to="185.2" dur="0.9s" begin="0.62s" fill="freeze"/></rect>
+<rect x="487.0" y="306" width="0" height="6" fill="#3178c6"><animate attributeName="width" from="0" to="125.8" dur="0.9s" begin="0.74s" fill="freeze"/></rect>
+<rect x="612.8" y="306" width="0" height="6" fill="#f1e05a"><animate attributeName="width" from="0" to="111.8" dur="0.9s" begin="0.86s" fill="freeze"/></rect>
+<rect x="724.6" y="306" width="0" height="6" fill="#DA5B0B"><animate attributeName="width" from="0" to="43.0" dur="0.9s" begin="0.98s" fill="freeze"/></rect>
+<rect x="767.6" y="306" width="0" height="6" fill="#ffcc33"><animate attributeName="width" from="0" to="28.5" dur="0.9s" begin="1.10s" fill="freeze"/></rect>
+<rect x="796.0" y="306" width="0" height="6" fill="#3D6117"><animate attributeName="width" from="0" to="18.0" dur="0.9s" begin="1.22s" fill="freeze"/></rect>
 </g>
 <circle cx="26" cy="322" r="3" fill="#3572A5"/>
-<text x="33" y="325" style="fill:var(--muted);font-size:8px">Python 36.6%</text>
+<text x="33" y="325" style="fill:var(--muted);font-size:8px">Python 35.0%</text>
 <circle cx="109.19999999999999" cy="322" r="3" fill="#00ADD8"/>
-<text x="116.19999999999999" y="325" style="fill:var(--muted);font-size:8px">Go 20.0%</text>
+<text x="116.19999999999999" y="325" style="fill:var(--muted);font-size:8px">Go 23.5%</text>
 <circle cx="170" cy="322" r="3" fill="#3178c6"/>
-<text x="177" y="325" style="fill:var(--muted);font-size:8px">TypeScript 16.6%</text>
+<text x="177" y="325" style="fill:var(--muted);font-size:8px">TypeScript 16.0%</text>
 <circle cx="275.6" cy="322" r="3" fill="#f1e05a"/>
-<text x="282.6" y="325" style="fill:var(--muted);font-size:8px">JavaScript 14.9%</text>
+<text x="282.6" y="325" style="fill:var(--muted);font-size:8px">JavaScript 14.2%</text>
 <circle cx="381.20000000000005" cy="322" r="3" fill="#DA5B0B"/>
-<text x="388.20000000000005" y="325" style="fill:var(--muted);font-size:8px">Jupyter Notebook 5.7%</text>
+<text x="388.20000000000005" y="325" style="fill:var(--muted);font-size:8px">Jupyter Notebook 5.5%</text>
 <circle cx="514.8000000000001" cy="322" r="3" fill="#ffcc33"/>
-<text x="521.8000000000001" y="325" style="fill:var(--muted);font-size:8px">Fluent 3.8%</text>
+<text x="521.8000000000001" y="325" style="fill:var(--muted);font-size:8px">Fluent 3.6%</text>
 <circle cx="592.4000000000001" cy="322" r="3" fill="#3D6117"/>
-<text x="599.4000000000001" y="325" style="fill:var(--muted);font-size:8px">TeX 2.4%</text>
+<text x="599.4000000000001" y="325" style="fill:var(--muted);font-size:8px">TeX 2.3%</text>
 </g>
 <g>
 <line x1="26" y1="340" x2="795" y2="340" stroke="var(--grid)" stroke-width="0.5"/>
